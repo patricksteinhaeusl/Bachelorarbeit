@@ -1,0 +1,33 @@
+<div class="auth-menu">
+  <form class="auth-form" ng-submit="auth.login()" ng-if="auth.isAuthenticated() === false" >
+    <div class="form-group">
+      <input class="form-control" type="text" ng-model="auth.data.login.user.username" name="username" placeholder="Username" required />
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="password" ng-model="auth.data.login.user.password" name="password" placeholder="Password" required />
+    </div>
+    <p>Not yet an account? <a href="#!/auth/register">Register</a></p>
+    <div class="form-group">
+      <button class="btn btn-outline-primary">
+        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login
+      </button>
+    </div>
+  </form>
+  <form class="auth-form" ng-submit="auth.logout()" ng-if="auth.isAuthenticated() === true">
+    <ul>
+      <li><a href="#!/account">My Account</a></li>
+      <ul>
+        <li><a href="#!/creditcards">Credit Cards</a></li>
+        <li><a href="#!/deliveryaddresses">Delivery Addresses</a></li>
+      </ul>
+      <li><a href="#!/orders">My Orders</a></li>
+      <li><a href="#!/community">Community</a></li>
+      <li><a href="#!/retailer">Retailers Area</a></li>
+    </ul>
+    <div class="form-group">
+      <button class="btn btn-outline-primary">
+        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout
+      </button>
+    </div>
+  </form>
+</div>

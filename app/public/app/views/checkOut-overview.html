@@ -1,0 +1,60 @@
+<div class="content-view">
+  <h1>Order - Overview</h1>
+  <h2>{{ order.data.order._id }}</h2>
+  <div class="wizard">
+    <hr>
+    <div class="icon-wrapper col col-xs-4">
+      <div class="icon active">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+      </div>
+    </div>
+    <div class="icon-wrapper col col-xs-4">
+      <div class="icon">
+        <span class="glyphicon glyphicon-send"></span>
+      </div>
+    </div>
+    <div class="icon-wrapper col col-xs-4">
+      <div class="icon">
+        <span class="glyphicon glyphicon-euro"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Overview</h3>
+    </div>
+    <div class="panel-body">
+      <table>
+        <thead>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        </thead>
+        <tbody ng-repeat="item in order.data.order.items" ng-show="order.data.order.items.length > 0">
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.product.category.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.product.price * item.quantity }} CHF</td>
+        </tbody>
+        <tbody ng-show="order.data.order.items.length === 0">
+        <td colspan="4">No items in cart</td>
+        </tbody>
+        <tfoot ng-show="order.data.order.items.length > 0">
+        <td>Sum:</td>
+        <td></td>
+        <td></td>
+        <td>{{ order.data.order.totalPrice }} CHF</td>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <a type="button" class="btn btn-outline-primary back" ng-href="#!/shop">
+    <span class="glyphicon glyphicon glyphicon-backward" aria-hidden="true"></span> Back
+  </a>
+  <button type="button" class="btn btn-outline-primary next" ng-click="order.goToAddress()" ng-disabled="order.data.order.items.length === 0">
+    <span class="glyphicon glyphicon glyphicon-forward" aria-hidden="true"></span> Next
+  </button>
+</div>

@@ -1,0 +1,27 @@
+<div class="content-view" ng-controller="CreditCardController as creditCard">
+
+  <div ng-repeat="validation in creditCard.insert.validations">
+    <div class="alert alert-warning"><strong>{{ validation }}</strong></div>
+  </div>
+
+  <form class="creditCard-form" ng-submit="creditCard.insert()">
+    <h1>Insert your credit card</h1>
+    <div ng-if="creditCard.data.creditCard.formSubmitFailed" class="alert alert-danger"><strong>Credit card failed!</strong></div>
+    <div class="form-group">
+      <label class="label">Number:</label>
+      <input class="form-control" type="number" ng-model="creditCard.data.creditCard.number" name="number" placeholder="Number" required />
+    </div>
+    <div class="form-group">
+      <label class="label">Type:</label>
+      <select class="form-control" ng-model="creditCard.data.creditCard.type" required name="type">
+        <option value="Mastercard">Mastercard</option>
+        <option value="Visa">Visa</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-outline-primary">
+        <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
+      </button>
+    </div>
+  </form>
+</div>
