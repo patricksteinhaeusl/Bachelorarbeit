@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let creditCardSchema = new Schema({
-  number: { type: Number, required: [true, 'Number is required'] },
-  type: { type: String, required: [true, 'Type is required'], unique: true },
+  number: { type: Number, required: [true, 'Number is required'], unique: true },
+  type: { type: String, required: [true, 'Type is required']},
   _account: { type: Schema.Types.ObjectId, ref: 'Account'}
 }, {
   timestamps: {}

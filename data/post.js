@@ -30,7 +30,6 @@ let data = {
   create: function(callback) {
 
 // Post 0
-
     new Post({
       title: 'Awesome product',
       text: 'This is one of the best bells.',
@@ -38,10 +37,9 @@ let data = {
     })
     .save(function(err) {
       if(err) LogUtil.writeError(err);
-      LogUtil.writeInfo('Post saved');
+      LogUtil.writeInfo('Post 0 saved');
 
 // Post 1
-
       new Post({
         title: 'Just genius',
         text: 'This bell is genius. My cows love this bell!',
@@ -49,10 +47,9 @@ let data = {
       })
       .save(function(err) {
         if(err) LogUtil.writeError(err);
-        LogUtil.writeInfo('Post saved');
+        LogUtil.writeInfo('Post 1 saved');
 
 // Post 2
-
         new Post({
           title: 'Individual bells',
           text: 'I ordered my individual bell!',
@@ -60,7 +57,7 @@ let data = {
         })
         .save(function(err) {
           if(err) LogUtil.writeError(err);
-          LogUtil.writeInfo('Post saved');
+          LogUtil.writeInfo('Post 2 saved');
           return callback();
         });
       });

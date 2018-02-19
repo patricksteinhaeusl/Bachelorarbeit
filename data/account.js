@@ -25,7 +25,7 @@ let data = {
 
 // Account0
     new Account({
-      _id: '59e7ffc364b7f1faf7a3348e',
+      //_id: '59e7ffc364b7f1faf7a3348e',
       username: 'customer0',
       password: 'compass0',
       firstname: 'Juliane',
@@ -34,7 +34,7 @@ let data = {
     })
     .save(function(err, account0) {
       if(err) LogUtil.writeError(err);
-      LogUtil.writeInfo('Account saved');
+      LogUtil.writeInfo('Account 0 saved');
 
       new CreditCard({
         number: '5404000000000001',
@@ -58,7 +58,7 @@ let data = {
 
 // Account1
           new Account({
-            _id: '59e7ffc364b7f1faf7a3348f',
+            //_id: '59e7ffc364b7f1faf7a3348f',
             username: 'customer1',
             password: 'compass1',
             firstname: 'Peter',
@@ -67,7 +67,7 @@ let data = {
           })
           .save(function(err, account1) {
             if(err) LogUtil.writeError(err);
-            LogUtil.writeInfo('Account saved');
+            LogUtil.writeInfo('Account 1 saved');
 
             new CreditCard({
               number: '4900000000000086',
@@ -99,7 +99,7 @@ let data = {
                 })
                 .save(function(err, account2) {
                   if(err) LogUtil.writeError(err);
-                  LogUtil.writeInfo('Account saved');
+                  LogUtil.writeInfo('Account 2 saved');
 
                   new CreditCard({
                     number: '5404000000000002',
@@ -131,7 +131,7 @@ let data = {
                       })
                       .save(function(err, account3) {
                         if(err) LogUtil.writeError(err);
-                        LogUtil.writeInfo('Account saved');
+                        LogUtil.writeInfo('Account 3 saved');
 
                         new CreditCard({
                           number: '5404000000000003',
@@ -164,7 +164,7 @@ let data = {
                             })
                             .save(function(err, account4) {
                               if(err) LogUtil.writeError(err);
-                              LogUtil.writeInfo('Account saved');
+                              LogUtil.writeInfo('Account 4 saved');
 
                               new CreditCard({
                                 number: '5404000000000004',
@@ -187,7 +187,6 @@ let data = {
                                   LogUtil.writeInfo('DeliveryAddress saved');
 
 // Account 5
-
                                   new Account({
                                     username: 'customer5',
                                     password: 'compass5',
@@ -197,7 +196,7 @@ let data = {
                                   })
                                   .save(function(err, account5) {
                                     if(err) LogUtil.writeError(err);
-                                    LogUtil.writeInfo('Account saved');
+                                    LogUtil.writeInfo('Account 5 saved');
 
                                     new CreditCard({
                                       number: '5404000000000005',
@@ -220,7 +219,6 @@ let data = {
                                         LogUtil.writeInfo('DeliveryAddress saved');
 
 // Account 6
-
                                         new Account({
                                           username: 'customer6',
                                           password: 'compass6',
@@ -230,7 +228,7 @@ let data = {
                                         })
                                         .save(function(err, account6) {
                                           if(err) LogUtil.writeError(err);
-                                          LogUtil.writeInfo('Account saved');
+                                          LogUtil.writeInfo('Account 6 saved');
 
                                           new CreditCard({
                                             number: '5404000000000006',
@@ -253,7 +251,6 @@ let data = {
                                               LogUtil.writeInfo('DeliveryAddress saved');
 
 // Account 7
-
                                               new Account({
                                                 username: 'customer7',
                                                 password: 'compass7',
@@ -263,7 +260,7 @@ let data = {
                                               })
                                               .save(function(err, account7) {
                                                 if(err) LogUtil.writeError(err);
-                                                LogUtil.writeInfo('Account saved');
+                                                LogUtil.writeInfo('Account 7 saved');
 
                                                 new CreditCard({
                                                   number: '5404000000000007',
@@ -286,7 +283,6 @@ let data = {
                                                     LogUtil.writeInfo('DeliveryAddress saved');
 
 // Account 8
-
                                                     new Account({
                                                       username: 'customer8',
                                                       password: 'compass8',
@@ -296,7 +292,7 @@ let data = {
                                                     })
                                                     .save(function(err, account8) {
                                                       if(err) LogUtil.writeError(err);
-                                                      LogUtil.writeInfo('Account saved');
+                                                      LogUtil.writeInfo('Account 8 saved');
 
                                                       new CreditCard({
                                                         number: '5404000000000008',
@@ -319,7 +315,6 @@ let data = {
                                                           LogUtil.writeInfo('DeliveryAddress saved');
 
 // Account 9
-
                                                           new Account({
                                                             username: 'customer9',
                                                             password: 'compass9',
@@ -329,7 +324,7 @@ let data = {
                                                           })
                                                           .save(function(err, account9) {
                                                             if(err) LogUtil.writeError(err);
-                                                            LogUtil.writeInfo('Account saved');
+                                                            LogUtil.writeInfo('Account 9 saved');
 
                                                             new CreditCard({
                                                               number: '5404000000000009',
@@ -352,7 +347,6 @@ let data = {
                                                                 LogUtil.writeInfo('DeliveryAddress saved');
 
 // Account 10
-
                                                                 new Account({
                                                                   username: 'customer10',
                                                                   password: 'compass10',
@@ -362,7 +356,7 @@ let data = {
                                                                 })
                                                                 .save(function(err, account10) {
                                                                   if(err) LogUtil.writeError(err);
-                                                                  LogUtil.writeInfo('Account saved');
+                                                                  LogUtil.writeInfo('Account 10 saved');
 
                                                                   new CreditCard({
                                                                     number: '5404000000000010',
@@ -385,7 +379,6 @@ let data = {
                                                                       LogUtil.writeInfo('DeliveryAddress saved');
 
 // Account 11
-
                                                                       new Account({
                                                                         username: 'customer11',
                                                                         password: 'compass11',
@@ -395,7 +388,7 @@ let data = {
                                                                       })
                                                                       .save(function(err, account11) {
                                                                         if(err) LogUtil.writeError(err);
-                                                                        LogUtil.writeInfo('Account saved');
+                                                                        LogUtil.writeInfo('Account 11 saved');
 
                                                                         new CreditCard({
                                                                           number: '5404000000000011',
