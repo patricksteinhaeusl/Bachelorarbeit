@@ -1,4 +1,4 @@
-.idea/**
-node_modules/**
-bower_components/**
-logs/**
+.idea/
+node_modules/
+bower_components/
+logs/log.txt
