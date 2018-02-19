@@ -1,0 +1,60 @@
+<div class="content-view">
+  <form class="product-filter-form">
+    <div class="col col-xs-6">
+      <label>Filter:</label>
+      <select class="form-control" ng-model="shop.data.filterSelected" ng-change="shop.filter.change()">
+        <option ng-value="shop.data.filter.name.query">{{ shop.data.filter.name.label }}</option>
+        <option ng-value="shop.data.filter.category.query">{{ shop.data.filter.category.label }}</option>
+        <option ng-value="shop.data.filter.price.query">{{ shop.data.filter.price.label }}</option>
+        <option ng-value="shop.data.filter.size.query">{{ shop.data.filter.size.label }}</option>
+        <option ng-value="shop.data.filter.rating.query">{{ shop.data.filter.rating.label }}</option>
+      </select>
+    </div>
+    <div class="col col-xs-6">
+      <label>Orientation:</label>
+      <button class="btn btn-default" ng-click="shop.changeOrientation('wide')" ng-class="shop.productOrientation === 'wide' ? 'active' : ''">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+      </button>
+      <button class="btn btn-default" ng-click="shop.changeOrientation('small')" ng-class="shop.productOrientation === 'small' ? 'active' : ''">
+        <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+      </button>
+    </div>
+  </form>
+  <div class="products" ng-repeat="product in shop.data.products | toArray: false | orderBy: shop.data.filterSelected track by $index" ng-class="shop.productOrientation">
+    <div class="product-container">
+      <div class="product">
+        <div class="col col-xs-3"><img class="product-image" ng-src="http://localhost:3000/product-images/{{ product.image }}" /></div>
+        <div class="col col-xs-4">
+          <p class="product-name">{{ product.name }}</p>
+          <p class="product-category">{{ product.category.name }}</p>
+          <p class="product-value">{{ product.size }} cm</p>
+          <p class="product-price">{{ product.price }} CHF</p>
+        </div>
+        <div class="col col-xs-5">
+          <div class="product-rating">
+            <span class="rating-average">&empty; {{ product.rating.value }}</span>
+            <jk-rating-stars max-rating="5" rating="product.rating.value" read-only="true"></jk-rating-stars>
+          </div>
+          <div class="product-menu">
+            <span class="glyphicon glyphicon-star" aria-hidden="true" ng-click="shop.collapseRatingForm($index)" ng-if="auth.isAuthenticated() === true"></span>
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" ng-click="cart.insert(product)"></span>
+          </div>
+        </div>
+        <div ng-if="auth.isAuthenticated() === true">
+          <form ng-attr-id="{{ 'shop-form-rating-' + $index }}" class="shop-form-rating" ng-submit="shop.rateProduct(product)">
+            <div ng-if="product.formSubmitFailed" class="alert alert-danger"><strong>Rating failed!</strong></div>
+            <div class="form-group">
+              <jk-rating-stars max-rating="5" rating="0" read-only="false" on-rating="shop.changeInputRatingValue(product, rating)"></jk-rating-stars>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="comment" ng-model="product.rating.comment" placeholder="Comment" required></textarea>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-outline-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

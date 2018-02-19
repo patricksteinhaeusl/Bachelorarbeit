@@ -1,0 +1,33 @@
+<div class="content-view" ng-controller="AccountController as account">
+
+  <div ng-if="account.update.messages.success" class="alert alert-success"><strong>{{ account.update.messages.success }}</strong></div>
+  <div ng-if="account.update.messages.warning" class="alert alert-warning"><strong>{{ account.update.messages.warning }}</strong></div>
+
+  <div ng-repeat="validation in account.update.validations">
+    <div class="alert alert-warning"><strong>{{ validation }}</strong></div>
+  </div>
+
+  <form class="auth-form-account" ng-submit="account.update()">
+    <h1>Your account</h1>
+    <div ng-if="auth.data.account.formSubmitFailed" class="alert alert-danger"><strong>Update failed!</strong></div>
+    <div class="form-group">
+      <label class="label">Firstname:</label>
+      <input class="form-control" type="text" ng-model="account.data.account.firstname" name="firstname" placeholder="Firstname" />
+    </div>
+    <div class="form-group">
+      <label class="label">Lastname:</label>
+      <input class="form-control" type="text" ng-model="account.data.account.lastname" name="lastname" placeholder="Lastname" />
+    </div>
+    <div class="form-group">
+      <label class="label">Email:</label>
+      <input class="form-control" type="email" ng-model="account.data.account.email" name="email" placeholder="Email" />
+    </div>
+    <div class="form-group">
+      <label class="label">Username:</label>
+      <input class="form-control" type="text" ng-model="account.data.account.username" name="username" placeholder="Username" disabled/>
+    </div>
+    <button class="btn btn-outline-primary">
+      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Update
+    </button>
+  </form>
+</div>
