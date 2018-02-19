@@ -1,0 +1,49 @@
+{
+  "name": "jssor-slider",
+  "description": "Responsive Javascript Image/Content Slider/Slideshow/Carousel/Gallery/Banner/HTML5 AD",
+  "version": "26.5.2",
+  "homepage": "https://www.jssor.com",
+  "keywords": [
+    "javascript",
+    "slider",
+    "carousel",
+    "slideshow",
+    "gallery",
+    "html5 ad",
+    "banner",
+    "photo",
+    "image",
+    "picture",
+    "content",
+    "text",
+    "js",
+    "mobile",
+    "responsive",
+    "front-end",
+    "touch",
+    "swipe",
+    "web",
+    "website",
+    "web page"
+  ],
+  "license": "MIT",
+  "main": [
+    "js/jssor.slider.min.js"
+  ],
+  "ignore": [
+    "demos/",
+    "examples/",
+    "transitions/",
+    "img/"
+  ],
+  "dependencies": {},
+  "_release": "26.5.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "26.5.2",
+    "commit": "8ec09785d1dc168a6f5158e0a28229a457d12db4"
+  },
+  "_source": "https://github.com/jssor/jquery-slider.git",
+  "_target": "26.5.2",
+  "_originalSource": "jssor-slider"
+}
