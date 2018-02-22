@@ -10,9 +10,12 @@ branches:
 dist: trusty
 sudo: required
 
-addons:
-  sonarcloud:
-    organization: "rustaska-github"
+  addons:
+    sonarcloud:
+      organization: "rustaska-github"
+      branches:
+        - master
+        - dev
 
-script:
-  - sonar-scanner
+  script:
+    - sonar-scanner
