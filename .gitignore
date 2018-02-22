@@ -1,6 +1,5 @@
 .idea/
 node_modules/
 bower_components/
-logs/log.txt
 coverage/
 .nyc_output/
