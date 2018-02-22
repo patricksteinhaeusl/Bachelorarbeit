@@ -2,6 +2,11 @@ language: node_js
 node_js:
   - "lts/*"
 
+branches:
+  only:
+  - master
+  - dev
+
 dist: trusty
 sudo: required
 
