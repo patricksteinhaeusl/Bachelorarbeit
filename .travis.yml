@@ -1,4 +1,21 @@
 language: node_js
 node_js:
-  - "iojs"
-  - "7"
+  - "lts/*"
+
+branches:
+  only:
+  - master
+  - dev
+
+dist: trusty
+sudo: required
+
+addons:
+  sonarcloud:
+    organization: "rustaska-github"
+    branches:
+      - master
+      - dev
+
+script:
+  - sonar-scanner
