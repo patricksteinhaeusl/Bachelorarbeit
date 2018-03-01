@@ -18,7 +18,7 @@ function getAll(callback) {
   CreditCard.find({}, function(error, result) {
     if(error) return callback(ResponseUtil.createNotFoundResponse(error));
     if(!result) return callback(ResponseUtil.createNotFoundResponse());
-    result = { 'creditCards' : result};
+    result = { 'creditCards' : result };
     return callback(null, ResponseUtil.createSuccessResponse(result));
   });
 }
@@ -28,7 +28,7 @@ function getByAccountId(accountId, callback) {
   CreditCard.find({ '_account' : accountId }, function(error, result) {
     if(error) return callback(ResponseUtil.createNotFoundResponse(error));
     if(!result) return callback(ResponseUtil.createNotFoundResponse());
-    result = { 'creditCards' : result};
+    result = { 'creditCards' : result };
     return callback(null, ResponseUtil.createSuccessResponse(result));
   });
 }
@@ -44,7 +44,7 @@ function update(creditCard, callback) {
       return callback(ResponseUtil.createErrorResponse(error));
     }
     if(!result) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to update.'));
-    result = { 'creditCard' : result};
+    result = { 'creditCard' : result };
     return callback(null, ResponseUtil.createSuccessResponse(result, 'Credit card successfully updated.'));
   });
 }
@@ -60,7 +60,7 @@ function insert(creditCard, callback) {
       return callback(ResponseUtil.createErrorResponse(error));
     }
     if(!result) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to create'));
-    result = { 'creditCard' : result};
+    result = { 'creditCard' : result };
     return callback(null, ResponseUtil.createSuccessResponse(result, 'Credit card successfully created.'));
   });
 }

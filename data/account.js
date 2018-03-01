@@ -25,7 +25,6 @@ let data = {
 
 // Account0
     new Account({
-      //_id: '59e7ffc364b7f1faf7a3348e',
       username: 'customer0',
       password: 'compass0',
       firstname: 'Juliane',
@@ -58,7 +57,6 @@ let data = {
 
 // Account1
           new Account({
-            //_id: '59e7ffc364b7f1faf7a3348f',
             username: 'customer1',
             password: 'compass1',
             firstname: 'Peter',

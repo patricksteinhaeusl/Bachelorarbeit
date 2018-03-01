@@ -1065,3 +1065,62 @@ Date: Thu Feb 22 2018 10:11:27 GMT+0100 (CET)	 Type: Info	 Message: Post 1 saved
 Date: Thu Feb 22 2018 10:11:27 GMT+0100 (CET)	 Type: Info	 Message: Post 2 saved
 Date: Thu Feb 22 2018 10:11:27 GMT+0100 (CET)	 Type: Info	 Message: Collections created
 Date: Thu Feb 22 2018 10:11:27 GMT+0100 (CET)	 Type: Info	 Message: Database prepared
+Date: Thu Mar 01 2018 10:38:44 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Database connection successfully
+Date: Thu Mar 01 2018 10:38:44 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Order removed
+Date: Thu Mar 01 2018 10:38:44 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account removed
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard removed
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress removed
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Product removed
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Collections dropped
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Post removed
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 0 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 1 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 2 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 3 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 4 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 5 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 6 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 7 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 8 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 9 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 10 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Account 11 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: CreditCard saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: DeliveryAddress saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Category 0 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Product saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Product saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Product saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Category 1 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Product 3 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Product 4 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Category 2 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Product 5 saved
+Date: Thu Mar 01 2018 10:38:45 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Product 6 saved
+Date: Thu Mar 01 2018 10:38:46 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Post 0 saved
+Date: Thu Mar 01 2018 10:38:46 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Post 1 saved
+Date: Thu Mar 01 2018 10:38:46 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Post 2 saved
+Date: Thu Mar 01 2018 10:38:46 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Collections created
+Date: Thu Mar 01 2018 10:38:46 GMT+0100 (W. Europe Standard Time)	 Type: Info	 Message: Database prepared
