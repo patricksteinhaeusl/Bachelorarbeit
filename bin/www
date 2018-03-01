@@ -31,7 +31,7 @@ server.listen(port, host, function() {
   let address = server.address();
   let host = address.address;
   let port = address.port;
-  console.log('Server started: http://' + host + ':' + port);
+  console.log('Server started: http://' + host + ':' + port + ' in ' + app.get('env') + ' mode');
 });
 
 server.on('error', onError);

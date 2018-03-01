@@ -5,11 +5,11 @@ const Schema = mongoose.Schema;
 const cryptoUtil = require('../utils/crypt');
 
 let accountSchema = new Schema({
-  username: { type: String, required: [true, 'Username is required'] },
+  username: { type: String, required: [true, 'Username is required'], unique: true},
   password: { type: String, required: [true, 'Password is required'] },
   firstname: { type: String, required: [true, 'Firstname is required'] },
   lastname: { type: String, required: [true, 'Lastname is required'] },
-  email: { type: String, required: [true, 'Email is required'] }
+  email: { type: String, required: [true, 'Email is required'], unique: true}
 }, {
   timestamps: {}
 });
