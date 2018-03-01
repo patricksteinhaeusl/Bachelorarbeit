@@ -17,7 +17,6 @@ function get(accountId, callback) {
 
 function update(account, callback) {
   let accountObj = new Account(account);
-  if(!accountObj) return callback(ResponseUtil.createNotFoundResponse());
   Account.findByIdAndUpdate(accountObj._id, accountObj, { new: true, runValidators: true }, function(error, result) {
     if(error) {
       if(error.errors) {

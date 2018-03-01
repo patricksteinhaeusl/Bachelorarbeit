@@ -3,9 +3,8 @@
 appServices.factory('AuthService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
   return {
     login: function(user, callback) {
-      let data = user;
       $http
-        .post('http://localhost:3000/api/auth/login', data)
+        .post('http://localhost:3000/api/auth/login', user)
         .then(function(response) {
           let statusCode = response.data.statusCode;
           let data = response.data.data;
@@ -28,9 +27,8 @@ appServices.factory('AuthService', ['$http', '$q', 'localStorageService', functi
         });
     },
     register: function(account, callback) {
-      let data = account;
       $http
-        .post('http://localhost:3000/api/auth/register', data)
+        .post('http://localhost:3000/api/auth/register', account)
         .then(function(response) {
           let statusCode = response.data.statusCode;
           let data = response.data.data;
@@ -59,11 +57,7 @@ appServices.factory('AuthService', ['$http', '$q', 'localStorageService', functi
       return callback(null, true, 'Logout successfully');
     },
     isAuthenticated: function() {
-      if(localStorageService.get('token') && localStorageService.get('user')) {
-        return true;
-      } else {
-        return false;
-      }
+        return !!(localStorageService.get('token') && localStorageService.get('user') !== null);
     },
     getUser: function() {
       if (localStorageService.get('token')) {

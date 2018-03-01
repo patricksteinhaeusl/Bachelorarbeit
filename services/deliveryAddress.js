@@ -26,7 +26,6 @@ function getByAccountId(accountId, callback) {
 
 function update(deliveryAddress, callback) {
   let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
-  if(!deliveryAddressObj) return callback(ResponseUtil.createNotFoundResponse());
   DeliveryAddress.findByIdAndUpdate(deliveryAddressObj._id, deliveryAddressObj, { new: true, runValidators: true },function(error, result) {
     if(error) {
       if(error.errors) {
@@ -42,7 +41,6 @@ function update(deliveryAddress, callback) {
 
 function insert(deliveryAddress, callback) {
   let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
-  if(!deliveryAddressObj) return callback(ResponseUtil.createNotFoundResponse());
   deliveryAddressObj.save(function(error, result) {
     if(error) {
       if(error.errors) {
@@ -59,7 +57,6 @@ function insert(deliveryAddress, callback) {
 function insertByAccount(account, deliveryAddress, callback) {
   let accountObj = new Account(account);
   let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
-  if(!deliveryAddressObj || !accountObj) return callback(ResponseUtil.createNotFoundResponse());
   Account.findById(accountObj._id, function(error, result) {
     if(error) return callback(ResponseUtil.createErrorResponse(error));
     if(!result) return callback(ResponseUtil.createNotFoundResponse());

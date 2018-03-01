@@ -51,7 +51,7 @@ function register(account, callback) {
     return callback(null, ResponseUtil.createNotFoundResponse('No Data'));
   }
 
-  let newAccount = new Account(account)
+  new Account(account)
     .save(function(error, result) {
       if(error) {
         if(error.errors) {

@@ -14,7 +14,6 @@ function getAll(callback) {
 
 function insert(post, callback) {
   let postObj = new Post(post);
-  if(!postObj) return callback(ResponseUtil.createNotFoundResponse());
   postObj.save(function(error, result) {
     if(error) return callback(ResponseUtil.createErrorResponse(error));
     if(!result) return callback(ResponseUtil.createNotFoundResponse());

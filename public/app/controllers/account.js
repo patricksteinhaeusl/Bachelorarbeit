@@ -18,7 +18,7 @@ appControllers.controller('AccountController', ['$scope', '$timeout', 'AccountSe
       if(!data) self.update.messages.warning = message;
       if(data) {
         self.data.account = data.user;
-        self.update.messages.success = message;;
+        self.update.messages.success = message;
       }
 
       $timeout(function() {

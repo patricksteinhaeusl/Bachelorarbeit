@@ -35,7 +35,6 @@ function getByAccountId(accountId, callback) {
 
 function update(creditCard, callback) {
   let creditCardObj = new CreditCard(creditCard);
-  if(!creditCardObj) return callback(ResponseUtil.createNotFoundResponse());
   CreditCard.findByIdAndUpdate(creditCardObj._id, creditCardObj, { new: true, runValidators: true }, function(error, result) {
     if(error) {
       if(error.errors) {
@@ -51,7 +50,6 @@ function update(creditCard, callback) {
 
 function insert(creditCard, callback) {
   let creditCardObj = new CreditCard(creditCard);
-  if(!creditCardObj) return callback(ResponseUtil.createNotFoundResponse());
   creditCardObj.save(function(error, result) {
     if(error) {
       if(error.errors) {
@@ -68,7 +66,6 @@ function insert(creditCard, callback) {
 function insertByAccount(account, creditCard, callback) {
   let accountObj = new Account(account);
   let creditCardObj = new CreditCard(creditCard);
-  if(!creditCardObj || !accountObj) return callback(ResponseUtil.createNotFoundResponse());
   Account.findById(accountObj._id, function(error, result) {
     if(error) return callback(ResponseUtil.createErrorResponse(error));
     if(!result) return callback(ResponseUtil.createNotFoundResponse());

@@ -27,8 +27,8 @@ appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', 
       if(!data) $rootScope.messages.warning = message;
       if(data) {
         self.data.creditCard = {};
-        self.update.messages.success = message;
-        $location.update('/deliveryaddresses');
+        $rootScope.messages.success = message;
+        $location.path('/deliveryaddresses');
       }
 
       $timeout(function() {
