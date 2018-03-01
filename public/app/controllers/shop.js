@@ -11,8 +11,8 @@ appControllers.controller('ShopController', ['$scope', '$routeParams', '$locatio
   self.data.searchValue = null;
   self.data.searchValues = [];
   self.data.rating = {};
-  self.filter = {};
-  self.data.filter = {
+  self.sort = {};
+  self.data.sort = {
     name: {
       label: 'Name',
       query: '+name'
@@ -34,7 +34,7 @@ appControllers.controller('ShopController', ['$scope', '$routeParams', '$locatio
       query: '-rating.value'
     }
   };
-  self.data.filterSelected = self.data.filter.name.query;
+  self.data.sortSelected = self.data.sort.name.query;
   self.productOrientation = 'wide';
 
   self.init = function() {
