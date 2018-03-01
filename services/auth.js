@@ -51,23 +51,22 @@ function register(account, callback) {
     return callback(null, ResponseUtil.createNotFoundResponse('No Data'));
   }
 
-  let newAccount = new Account(account)
-    .save(function(error, result) {
-      if(error) {
-        if(error.errors) {
-          return callback(ResponseUtil.createValidationResponse(error.errors));
-        }
-        return callback(ResponseUtil.createErrorResponse(error));
+  new Account(account).save(function(error, result) {
+    if(error) {
+      if(error.errors) {
+        return callback(ResponseUtil.createValidationResponse(error.errors));
       }
-      if(!result) return callback(ResponseUtil.createNotFoundResponse('Registration failed'));
-      let {_id, username, firstname, lastname, email} = result;
-      let user = {_id, username, firstname, lastname, email};
-      CryptoUtil.createToken(user, GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
-        if(error) return callback(ResponseUtil.createErrorResponse(error));
-        let result = { 'user': user, 'token': token };
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Registration successfully'));
-      });
+      return callback(ResponseUtil.createErrorResponse(error));
+    }
+    if(!result) return callback(ResponseUtil.createNotFoundResponse('Registration failed'));
+    let {_id, username, firstname, lastname, email} = result;
+    let user = {_id, username, firstname, lastname, email};
+    CryptoUtil.createToken(user, GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
+      if(error) return callback(ResponseUtil.createErrorResponse(error));
+      let result = { 'user': user, 'token': token };
+      return callback(null, ResponseUtil.createSuccessResponse(result, 'Registration successfully'));
     });
+  });
 }
 
 module.exports = {

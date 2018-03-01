@@ -28,7 +28,6 @@ function getByAccountId(accountId, callback) {
 
 function update(order, callback) {
   let orderObj = new Order(order);
-  if(!orderObj) return callback(ResponseUtil.createNotFoundResponse());
   Order.findByIdAndUpdate(orderObj._id, orderObj, {new: true}, function(error, result) {
     if(error) return callback(ResponseUtil.createErrorResponse(error));
     if(!result) return callback(ResponseUtil.createNotFoundResponse());
@@ -39,7 +38,6 @@ function update(order, callback) {
 
 function insert(order, callback) {
   let orderObj = new Order(order);
-  if(!orderObj) return callback(ResponseUtil.createNotFoundResponse());
   orderObj.save(function(error, result) {
     if(error) return callback(ResponseUtil.createErrorResponse(error));
     if(!result) return callback(ResponseUtil.createNotFoundResponse());
