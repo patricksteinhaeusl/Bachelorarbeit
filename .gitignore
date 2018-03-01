@@ -1,6 +1,17 @@
+# don’t ignore keep files
+!.keep
+!.gitkeep
+
+# Exclude Idea
 .idea/
-node_modules/
-bower_components/
+
+# Exclude CI
 coverage/
 .nyc_output/
-logs/
+
+# Exclude Webapp
+logs/logs.txt
+node_modules/
+
+# Exclude Yarn
+yarn-error.log

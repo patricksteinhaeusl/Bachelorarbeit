@@ -30,7 +30,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '/views'));
 
 app.use(express.static(__dirname + '/public/app'));
-app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/product-images', express.static(__dirname + '/assets/product-images'));
 app.use('/post-images', express.static(__dirname + '/assets/post-images'));
 app.use('/slider-images', express.static(__dirname + '/assets/slider-images'));
