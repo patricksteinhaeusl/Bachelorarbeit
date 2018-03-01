@@ -11,8 +11,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta content="favicon.ico" itemprop="image">
   <link href="favicon.ico" rel="shortcut icon">
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="bower_components/angular-jk-rating-stars/dist/jk-rating-stars.css">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/node_modules/angular-jk-rating-stars/dist/jk-rating-stars.min.css">
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -27,27 +27,27 @@
                   <li class="logo-item glyphicon glyphicon-bell" aria-hidden="true"></li>
                 </div>
                 <div class="col col-xs-6">
-                  <div ng-include src="'views/navbar-navigation.html'"></div>
+                  <div ng-include src="'/views/navbar-navigation.html'"></div>
                 </div>
                 <div class="col col-xs-3">
-                  <div ng-include src="'views/navbar-menu.html'"></div>
+                  <div ng-include src="'/views/navbar-menu.html'"></div>
                 </div>
               </div>
 
               <div class="content">
                 <div class="sidebar-left col col-xs-3">
-                  <div ng-include src="'views/sidebar-menu.html'"></div>
+                  <div ng-include src="'/views/sidebar-menu.html'"></div>
                 </div>
                 <div class="content-content col col-xs-6">
-                  <div ng-include src="'views/alerts.html'"></div>
-                  <div ng-include src="'views/product-search.html'"></div>
+                  <div ng-include src="'/views/alerts.html'"></div>
+                  <div ng-include src="'/views/product-search.html'"></div>
                   <div ng-view></div>
                 </div>
                 <div class="sidebar-right col col-xs-3">
-                  <div ng-include src="'views/auth-menu.html'"></div>
-                  <div ng-include src="'views/cart-menu.html'"></div>
-                  <div ng-include src="'views/topRatedProduct.html'"></div>
-                  <div ng-include src="'views/latestProduct.html'"></div>
+                  <div ng-include src="'/views/auth-menu.html'"></div>
+                  <div ng-include src="'/views/cart-menu.html'"></div>
+                  <div ng-include src="'/views/topRatedProduct.html'"></div>
+                  <div ng-include src="'/views/latestProduct.html'"></div>
                 </div>
               </div>
             </div>
@@ -57,46 +57,46 @@
     </div>
   </div>
 
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-  <script src="bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
-  <script src="bower_components/angular-route/angular-route.min.js"></script>
-  <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
-  <script src="bower_components/angular-jk-rating-stars/dist/jk-rating-stars.min.js"></script>
-  <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/jssor-slider/js/jssor.slider.min.js"></script>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/angular/angular.js"></script>
+  <script src="/node_modules/angular-sanitize/angular-sanitize.js"></script>
+  <script src="/node_modules/angular-toArrayFilter/toArrayFilter.js"></script>
+  <script src="/node_modules/angular-route/angular-route.min.js"></script>
+  <script src="/node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+  <script src="/node_modules/angular-jk-rating-stars/dist/jk-rating-stars.min.js"></script>
+  <script src="/node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/node_modules/jssor-slider/js/jssor.slider.min.js"></script>
 
-  <script src="app.js"></script>
+  <script src="/app.js"></script>
 
-  <script src="services/auth.js"></script>
-  <script src="services/shop.js"></script>
-  <script src="services/cart.js"></script>
-  <script src="services/account.js"></script>
-  <script src="services/order.js"></script>
-  <script src="services/orders.js"></script>
-  <script src="services/creditCard.js"></script>
-  <script src="services/creditCards.js"></script>
-  <script src="services/deliveryAddress.js"></script>
-  <script src="services/deliveryAddresses.js"></script>
-  <script src="services/post.js"></script>
-  <script src="services/community.js"></script>
+  <script src="/services/auth.js"></script>
+  <script src="/services/shop.js"></script>
+  <script src="/services/cart.js"></script>
+  <script src="/services/account.js"></script>
+  <script src="/services/order.js"></script>
+  <script src="/services/orders.js"></script>
+  <script src="/services/creditCard.js"></script>
+  <script src="/services/creditCards.js"></script>
+  <script src="/services/deliveryAddress.js"></script>
+  <script src="/services/deliveryAddresses.js"></script>
+  <script src="/services/post.js"></script>
+  <script src="/services/community.js"></script>
 
-  <script src="controllers/auth.js"></script>
-  <script src="controllers/shop.js"></script>
-  <script src="controllers/cart.js"></script>
-  <script src="controllers/account.js"></script>
-  <script src="controllers/order.js"></script>
-  <script src="controllers/orders.js"></script>
-  <script src="controllers/creditCard.js"></script>
-  <script src="controllers/creditCards.js"></script>
-  <script src="controllers/deliveryAddress.js"></script>
-  <script src="controllers/deliveryAddresses.js"></script>
-  <script src="controllers/community.js"></script>
-  <script src="controllers/home.js"></script>
-  <script src="controllers/aboutUs.js"></script>
-  <script src="controllers/contact.js"></script>
-  <script src="controllers/nav.js"></script>
+  <script src="/controllers/auth.js"></script>
+  <script src="/controllers/shop.js"></script>
+  <script src="/controllers/cart.js"></script>
+  <script src="/controllers/account.js"></script>
+  <script src="/controllers/order.js"></script>
+  <script src="/controllers/orders.js"></script>
+  <script src="/controllers/creditCard.js"></script>
+  <script src="/controllers/creditCards.js"></script>
+  <script src="/controllers/deliveryAddress.js"></script>
+  <script src="/controllers/deliveryAddresses.js"></script>
+  <script src="/controllers/community.js"></script>
+  <script src="/controllers/home.js"></script>
+  <script src="/controllers/aboutUs.js"></script>
+  <script src="/controllers/contact.js"></script>
+  <script src="/controllers/nav.js"></script>
 </body>
 </html>
