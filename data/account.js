@@ -118,7 +118,6 @@ let data = {
                     .save(function(err) {
                       if (err) LogUtil.writeError(err);
                       LogUtil.writeInfo('DeliveryAddress saved');
-                      
 // Account 3
                       new Account({
                         username: 'customer3',
@@ -150,8 +149,7 @@ let data = {
                           .save(function(err) {
                             if (err) LogUtil.writeError(err);
                             LogUtil.writeInfo('DeliveryAddress saved');
-                            
-// Account 4                            
+// Account 4
 
                             new Account({
                               username: 'customer4',
