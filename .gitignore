@@ -10,7 +10,7 @@ coverage/
 .nyc_output/
 
 # Exclude Webapp
-logs/
+logs/logs.txt
 node_modules/
 
 # Exclude Yarn
