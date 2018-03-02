@@ -26,14 +26,10 @@ function update(deliveryAddress, callback) {
     let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
     DeliveryAddress.findByIdAndUpdate(deliveryAddressObj._id, deliveryAddressObj, {
         new: true,
-        runValidators: true
+        runValidators: true,
+        context: 'query'
     }, function (error, result) {
-        if (error) {
-            if (error.errors) {
-                return callback(ResponseUtil.createValidationResponse(error.errors));
-            }
-            return callback(ResponseUtil.createErrorResponse(error));
-        }
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to update.'));
         result = {'deliveryAddress': result};
         return callback(null, ResponseUtil.createSuccessResponse(result, 'Delivery address successfully updated.'));
@@ -42,31 +38,32 @@ function update(deliveryAddress, callback) {
 
 function insert(deliveryAddress, callback) {
     let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
-    deliveryAddressObj.save(function (error, result) {
-        if (error) {
-            if (error.errors) {
-                return callback(ResponseUtil.createValidationResponse(error.errors));
-            }
-            return callback(ResponseUtil.createErrorResponse(error));
-        }
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to create.'));
-        result = {'deliveryAddress': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Delivery address successfully created.'));
+    deliveryAddressObj.validate(function (error) {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        deliveryAddressObj.save(function (error, result) {
+            if (error) return callback(ResponseUtil.createErrorResponse(error));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to create.'));
+            result = {'deliveryAddress': result};
+            return callback(null, ResponseUtil.createSuccessResponse(result, 'Delivery address successfully created.'));
+        });
     });
 }
 
 function insertByAccount(account, deliveryAddress, callback) {
     let accountObj = new Account(account);
     let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
-    Account.findById(accountObj._id, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
-        deliveryAddressObj.owner = result._id;
-        deliveryAddressObj.save(function (error, result) {
+    deliveryAddressObj.validate(function (error) {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        Account.findById(accountObj._id, function (error, result) {
             if (error) return callback(ResponseUtil.createErrorResponse(error));
             if (!result) return callback(ResponseUtil.createNotFoundResponse());
-            result = {'deliveryAddress': result};
-            return callback(null, ResponseUtil.createSuccessResponse(result));
+            deliveryAddressObj.owner = result._id;
+            deliveryAddressObj.save(function (error, result) {
+                if (error) return callback(ResponseUtil.createErrorResponse(error));
+                if (!result) return callback(ResponseUtil.createNotFoundResponse());
+                result = {'deliveryAddress': result};
+                return callback(null, ResponseUtil.createSuccessResponse(result));
+            });
         });
     });
 }

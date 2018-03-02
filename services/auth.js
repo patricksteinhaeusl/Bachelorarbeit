@@ -47,14 +47,11 @@ function login(username, password, callback) {
 }
 
 function register(account, callback) {
-    new Account(account)
-        .save(function (error, result) {
-            if (error) {
-                if (error.errors) {
-                    return callback(ResponseUtil.createValidationResponse(error.errors));
-                }
-                return callback(ResponseUtil.createErrorResponse(error));
-            }
+    let accountObj = new Account(account);
+    accountObj.validate(function (error) {
+        if(error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        accountObj.save(function (error, result) {
+            if (error) return callback(ResponseUtil.createErrorResponse(error));
             if (!result) return callback(ResponseUtil.createNotFoundResponse('Registration failed'));
             let {_id, username, firstname, lastname, email} = result;
             let user = {_id, username, firstname, lastname, email};
@@ -64,6 +61,7 @@ function register(account, callback) {
                 return callback(null, ResponseUtil.createSuccessResponse(result, 'Registration successfully'));
             });
         });
+    });
 }
 
 module.exports = {

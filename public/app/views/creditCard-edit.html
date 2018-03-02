@@ -1,7 +1,10 @@
 <div class="content-view" ng-controller="CreditCardController as creditCard">
 
-    <div ng-repeat="validation in creditCard.update.validations">
-        <div class="alert alert-warning"><strong>{{ validation }}</strong></div>
+    <div class="alert alert-warning" ng-show="creditCard.update.validations.length > 0">
+        <h4>Validation Error:</h4>
+        <ul ng-repeat="validation in creditCard.update.validations">
+            <li>- {{validation}}</li>
+        </ul>
     </div>
 
     <form class="creditCard-form" ng-submit="creditCard.update()">
@@ -10,7 +13,7 @@
             failed!</strong></div>
         <div class="form-group">
             <label class="label">Number:</label>
-            <input class="form-control" type="number" ng-model="creditCard.data.creditCard.number" name="number"
+            <input class="form-control" type="text" ng-model="creditCard.data.creditCard.number" name="number"
                    placeholder="Number" required/>
         </div>
         <div class="form-group">

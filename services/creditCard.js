@@ -35,14 +35,10 @@ function update(creditCard, callback) {
     let creditCardObj = new CreditCard(creditCard);
     CreditCard.findByIdAndUpdate(creditCardObj._id, creditCardObj, {
         new: true,
-        runValidators: true
+        runValidators: true,
+        context: 'query'
     }, function (error, result) {
-        if (error) {
-            if (error.errors) {
-                return callback(ResponseUtil.createValidationResponse(error.errors));
-            }
-            return callback(ResponseUtil.createErrorResponse(error));
-        }
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to update.'));
         result = {'creditCard': result};
         return callback(null, ResponseUtil.createSuccessResponse(result, 'Credit card successfully updated.'));
@@ -51,16 +47,15 @@ function update(creditCard, callback) {
 
 function insert(creditCard, callback) {
     let creditCardObj = new CreditCard(creditCard);
-    creditCardObj.save(function (error, result) {
-        if (error) {
-            if (error.errors) {
-                return callback(ResponseUtil.createValidationResponse(error.errors));
-            }
-            return callback(ResponseUtil.createErrorResponse(error));
-        }
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to create'));
-        result = {'creditCard': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Credit card successfully created.'));
+
+    creditCardObj.validate(function (error) {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        creditCardObj.save(function (error, result) {
+            if (error) return callback(ResponseUtil.createErrorResponse(error));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to create'));
+            result = {'creditCard': result};
+            return callback(null, ResponseUtil.createSuccessResponse(result, 'Credit card successfully created.'));
+        });
     });
 }
 
@@ -71,11 +66,14 @@ function insertByAccount(account, creditCard, callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         creditCardObj.owner = result._id;
-        creditCardObj.save(function (error, result) {
-            if (error) return callback(ResponseUtil.createNotFoundResponse(error));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse());
-            result = {'creditCard': result};
-            return callback(null, ResponseUtil.createSuccessResponse(result));
+        creditCardObj.validate(function (error) {
+            if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+            creditCardObj.save(function (error, result) {
+                if (error) return callback(ResponseUtil.createNotFoundResponse(error));
+                if (!result) return callback(ResponseUtil.createNotFoundResponse());
+                result = {'creditCard': result};
+                return callback(null, ResponseUtil.createSuccessResponse(result));
+            });
         });
     });
 }
