@@ -1,9 +1,11 @@
 <div class="navbar-menu">
-    <li ng-if="auth.isAuthenticated()" class="menu-item-username">{{ auth.getUser().firstname + " " +
-        auth.getUser().lastname }}
-    </li>
-    <li ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')" class="menu-item glyphicon glyphicon-user"
-        aria-hidden="true"></li>
-    <li ng-click="nav.collapseNavigation('.cart-menu', '.auth-menu')"
-        class="menu-item glyphicon glyphicon-shopping-cart" aria-hidden="true"></li>
+    <ul class="list-unstyled">
+        <li ng-if="auth.isAuthenticated()" class="menu-item-username">{{ auth.getUser().firstname + " " +
+            auth.getUser().lastname }}
+        </li>
+        <li ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')" class="menu-item glyphicon glyphicon-user"
+            aria-hidden="true"></li>
+        <li ng-click="nav.collapseNavigation('.cart-menu', '.auth-menu')"
+            class="menu-item glyphicon glyphicon-shopping-cart" aria-hidden="true"></li>
+    </ul>
 </div>

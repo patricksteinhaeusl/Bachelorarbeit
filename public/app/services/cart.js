@@ -37,7 +37,6 @@ appServices.service('CartService', ['$http', '$q', 'localStorageService', functi
             if (element.product._id === item.product._id) {
                 found = true;
                 element.quantity++;
-                break;
             }
         });
 
