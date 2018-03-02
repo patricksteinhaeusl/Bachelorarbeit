@@ -1,54 +1,56 @@
 <div class="content-view" ng-controller="DeliveryAddressesController as deliveryAddresses">
-  <h1>Order - Address</h1>
-  <h2>{{ order.data.order._id }}</h2>
-  <div class="wizard">
-    <hr>
-    <div class="icon-wrapper col col-xs-4">
-      <div class="icon">
-        <span class="glyphicon glyphicon-shopping-cart"></span>
-      </div>
+    <h1>Order - Address</h1>
+    <h2>{{ order.data.order._id }}</h2>
+    <div class="wizard">
+        <hr>
+        <div class="icon-wrapper col col-xs-4">
+            <div class="icon">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+            </div>
+        </div>
+        <div class="icon-wrapper col col-xs-4">
+            <div class="icon active">
+                <span class="glyphicon glyphicon-send"></span>
+            </div>
+        </div>
+        <div class="icon-wrapper col col-xs-4">
+            <div class="icon">
+                <span class="glyphicon glyphicon-euro"></span>
+            </div>
+        </div>
     </div>
-    <div class="icon-wrapper col col-xs-4">
-      <div class="icon active">
-        <span class="glyphicon glyphicon-send"></span>
-      </div>
-    </div>
-    <div class="icon-wrapper col col-xs-4">
-      <div class="icon">
-        <span class="glyphicon glyphicon-euro"></span>
-      </div>
-    </div>
-  </div>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Delivery Address</h3>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Delivery Address</h3>
+        </div>
+        <div class="panel-body">
+            <table class="checkout-table">
+                <thead>
+                <th></th>
+                <th>Delivery address</th>
+                </thead>
+                <tbody ng-repeat="deliveryAddress in deliveryAddresses.data.deliveryAddresses">
+                <td>
+                    <input type="radio" name="deliveryAddress" ng-model="order.data.order.deliveryAddress"
+                           value="{{ deliveryAddress }}" ng-value="deliveryAddress" id="{{ deliveryAddress._id }}">
+                </td>
+                <td>
+                    <p><label>Street:</label>{{ deliveryAddress.street }}</p>
+                    <p><label>Zip:</label>{{ deliveryAddress.zip }}</p>
+                    <p><label>City:</label>{{ deliveryAddress.city }}</p>
+                    <p><label>Country:</label>{{ deliveryAddress.country }}</p>
+                </td>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="panel-body">
-      <table class="checkout-table">
-        <thead>
-        <th></th>
-        <th>Delivery address</th>
-        </thead>
-        <tbody ng-repeat="deliveryAddress in deliveryAddresses.data.deliveryAddresses">
-        <td>
-          <input type="radio" name="deliveryAddress" ng-model="order.data.order.deliveryAddress" value="{{ deliveryAddress }}" ng-value="deliveryAddress" id="{{ deliveryAddress._id }}">
-        </td>
-        <td>
-          <p><label>Street:</label>{{ deliveryAddress.street }}</p>
-          <p><label>Zip:</label>{{ deliveryAddress.zip }}</p>
-          <p><label>City:</label>{{ deliveryAddress.city }}</p>
-          <p><label>Country:</label>{{ deliveryAddress.country }}</p>
-        </td>
-        </tbody>
-      </table>
-    </div>
-  </div>
 
-  <a type="button" class="btn btn-outline-primary back" href="#!/checkout/overview">
-    <span class="glyphicon glyphicon glyphicon-backward" aria-hidden="true"></span> Back
-  </a>
-  <button type="button" class="btn btn-outline-primary next" ng-click="order.goToPayment()" ng-disabled="order.data.order.items.length === 0 || !order.data.order.deliveryAddress">
-    <span class="glyphicon glyphicon glyphicon-forward" aria-hidden="true"></span> Next
-  </button>
+    <a type="button" class="btn btn-outline-primary back" href="#!/checkout/overview">
+        <span class="glyphicon glyphicon glyphicon-backward" aria-hidden="true"></span> Back
+    </a>
+    <button type="button" class="btn btn-outline-primary next" ng-click="order.goToPayment()"
+            ng-disabled="order.data.order.items.length === 0 || !order.data.order.deliveryAddress">
+        <span class="glyphicon glyphicon glyphicon-forward" aria-hidden="true"></span> Next
+    </button>
 </div>

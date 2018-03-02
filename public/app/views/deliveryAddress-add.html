@@ -1,31 +1,35 @@
 <div class="content-view" ng-controller="DeliveryAddressController as deliveryAddress">
 
-  <div ng-repeat="validation in deliveryAddress.insert.validations">
-    <div class="alert alert-warning"><strong>{{ validation }}</strong></div>
-  </div>
+    <div ng-repeat="validation in deliveryAddress.insert.validations">
+        <div class="alert alert-warning"><strong>{{ validation }}</strong></div>
+    </div>
 
-  <form class="creditCard-form" ng-submit="deliveryAddress.insert()">
-    <h1>Insert your delivery address</h1>
-    <div class="form-group">
-      <label class="label">Street:</label>
-      <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.street" name="street" placeholder="Street" required />
-    </div>
-    <div class="form-group">
-      <label class="label">Zip:</label>
-      <input class="form-control" type="number" ng-model="deliveryAddress.data.deliveryAddress.zip" name="zip" placeholder="Zip" required />
-    </div>
-    <div class="form-group">
-      <label class="label">City:</label>
-      <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.city" name="city" placeholder="City" required />
-    </div>
-    <div class="form-group">
-      <label class="label">Country:</label>
-      <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.country" name="country" placeholder="Country" required />
-    </div>
-    <div class="form-group">
-      <button class="btn btn-outline-primary">
-        <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
-      </button>
-    </div>
-  </form>
+    <form class="creditCard-form" ng-submit="deliveryAddress.insert()">
+        <h1>Insert your delivery address</h1>
+        <div class="form-group">
+            <label class="label">Street:</label>
+            <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.street" name="street"
+                   placeholder="Street" required/>
+        </div>
+        <div class="form-group">
+            <label class="label">Zip:</label>
+            <input class="form-control" type="number" ng-model="deliveryAddress.data.deliveryAddress.zip" name="zip"
+                   placeholder="Zip" required/>
+        </div>
+        <div class="form-group">
+            <label class="label">City:</label>
+            <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.city" name="city"
+                   placeholder="City" required/>
+        </div>
+        <div class="form-group">
+            <label class="label">Country:</label>
+            <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.country"
+                   name="country" placeholder="Country" required/>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-outline-primary">
+                <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
+            </button>
+        </div>
+    </form>
 </div>
