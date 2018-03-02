@@ -1,25 +1,27 @@
 <div class="content-view" ng-controller="CreditCardsController as creditCards">
-  <h1>Your credit cards</h1>
-  <button class="btn btn-outline-primary" ng-disabled="creditCards.data.creditCards.length > 2" ng-click="creditCards.goToCreditCardAdd()">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
-  </button>
-  <table>
-    <thead>
-      <th>Number</th>
-      <th>Type</th>
-      <th>Action</th>
-    </thead>
-    <tbody ng-repeat="creditCard in creditCards.data.creditCards">
-      <td>{{ creditCard.number }}</td>
-      <td>{{ creditCard.type }}</td>
-      <td>
-        <button class="btn btn-outline-primary" ng-click="creditCards.remove($index)" ng-disabled="creditCards.data.creditCards.length <= 1">
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
-        </button>
-        <a class="btn btn-outline-primary" ng-href="#!/creditcard/{{ creditCard.number }}">
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
-        </a>
-      </td>
-    </tbody>
-  </table>
+    <h1>Your credit cards</h1>
+    <button class="btn btn-outline-primary" ng-disabled="creditCards.data.creditCards.length > 2"
+            ng-click="creditCards.goToCreditCardAdd()">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+    </button>
+    <table>
+        <thead>
+        <th>Number</th>
+        <th>Type</th>
+        <th>Action</th>
+        </thead>
+        <tbody ng-repeat="creditCard in creditCards.data.creditCards">
+        <td>{{ creditCard.number }}</td>
+        <td>{{ creditCard.type }}</td>
+        <td>
+            <button class="btn btn-outline-primary" ng-click="creditCards.remove($index)"
+                    ng-disabled="creditCards.data.creditCards.length <= 1">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
+            </button>
+            <a class="btn btn-outline-primary" ng-href="#!/creditcard/{{ creditCard.number }}">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+            </a>
+        </td>
+        </tbody>
+    </table>
 </div>
