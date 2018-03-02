@@ -1,31 +1,32 @@
 <div class="cart-menu">
-  <table>
-    <thead>
-      <th>Name</th>
-      <th>Quantity</th>
-      <th>Price</th>
-    </thead>
-    <tbody ng-repeat="item in cart.data.items" ng-show="cart.data.items.length > 0">
-      <td>{{ item.product.name }}</td>
-      <td>{{ item.quantity }}</td>
-      <td>{{ item.product.price * item.quantity }} CHF</td>
-      <td>
-        <button class="btn btn-outline-primary btn-xs" ng-click="cart.remove($index)">
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        </button>
-      </td>
-    </tbody>
-    <tbody ng-show="cart.data.items.length === 0">
-      <td colspan="4">No items in cart</td>
-    </tbody>
-    <tfoot ng-show="cart.data.items.length > 0">
-      <td>Sum:</td>
-      <td></td>
-      <td>{{ cart.data.totalPrice }} CHF</td>
-      <td></td>
-    </tfoot>
-  </table>
-  <button type="button" class="btn btn-outline-primary" ng-if="auth.isAuthenticated() === true && cart.data.items.length > 0" ng-click="order.createOrder()">
-    <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Check out
-  </button>
+    <table>
+        <thead>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        </thead>
+        <tbody ng-repeat="item in cart.data.items" ng-show="cart.data.items.length > 0">
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.product.price * item.quantity }} CHF</td>
+        <td>
+            <button class="btn btn-outline-primary btn-xs" ng-click="cart.remove($index)">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </td>
+        </tbody>
+        <tbody ng-show="cart.data.items.length === 0">
+        <td colspan="4">No items in cart</td>
+        </tbody>
+        <tfoot ng-show="cart.data.items.length > 0">
+        <td>Sum:</td>
+        <td></td>
+        <td>{{ cart.data.totalPrice }} CHF</td>
+        <td></td>
+        </tfoot>
+    </table>
+    <button type="button" class="btn btn-outline-primary"
+            ng-if="auth.isAuthenticated() === true && cart.data.items.length > 0" ng-click="order.createOrder()">
+        <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Check out
+    </button>
 </div>

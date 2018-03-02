@@ -1,20 +1,22 @@
 <div class="sidebar-topRatedProduct">
-  <h3>Latest product</h3>
-  <div class="topRatedProduct-wrapper" ng-repeat="latestProduct in shop.data.latestProducts | toArray: false | orderBy: '-createdAt' | limitTo: 1">
-  <h4>{{ latestProduct.name }} - {{ latestProduct.category.name }}</h4>
-    <div class="image-wrapper">
-      <img ng-src="http://localhost:3000/product-images/{{ latestProduct.image }}">
+    <h3>Latest product</h3>
+    <div class="topRatedProduct-wrapper"
+         ng-repeat="latestProduct in shop.data.latestProducts | toArray: false | orderBy: '-createdAt' | limitTo: 1">
+        <h4>{{ latestProduct.name }} - {{ latestProduct.category.name }}</h4>
+        <div class="image-wrapper">
+            <img ng-src="http://localhost:3000/product-images/{{ latestProduct.image }}">
+        </div>
+        <div class="rating-average-wrapper">
+            <span class="rating-average">&empty; {{ latestProduct.rating.value }}</span>
+            <jk-rating-stars max-rating="5" rating="latestProduct.rating.value" read-only="true"></jk-rating-stars>
+        </div>
+        <div class="rating-wrapper"
+             ng-repeat="latestProductRating in latestProduct.ratings | toArray: false | orderBy: '-createdAt' | limitTo: 1">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+            <!-- Injection Code Start - XSS -->
+            <div ng-bind-html="latestProductRating.comment | trustAsHTML"></div>
+            <!-- Injection Code End -->
+            <span class="rating-date">{{ latestProductRating.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0100' }}</span>
+        </div>
     </div>
-    <div class="rating-average-wrapper">
-      <span class="rating-average">&empty; {{ latestProduct.rating.value }}</span>
-      <jk-rating-stars max-rating="5" rating="latestProduct.rating.value" read-only="true"></jk-rating-stars>
-    </div>
-    <div class="rating-wrapper" ng-repeat="latestProductRating in latestProduct.ratings | toArray: false | orderBy: '-createdAt' | limitTo: 1">
-      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-      <!-- Injection Code Start - XSS -->
-      <div ng-bind-html="latestProductRating.comment | trustAsHTML"></div>
-      <!-- Injection Code End -->
-      <span class="rating-date">{{ latestProductRating.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0100' }}</span>
-    </div>
-  </div>
 </div>
