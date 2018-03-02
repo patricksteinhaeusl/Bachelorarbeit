@@ -16,13 +16,12 @@ function get(accountId, callback) {
 
 function update(account, callback) {
     let accountObj = new Account(account);
-    Account.findByIdAndUpdate(accountObj._id, accountObj, {new: true, runValidators: true}, function (error, result) {
-        if (error) {
-            if (error.errors) {
-                return callback(ResponseUtil.createValidationResponse(error.errors));
-            }
-            return callback(ResponseUtil.createErrorResponse(error));
-        }
+    Account.findByIdAndUpdate(accountObj._id, accountObj, {
+        new: true,
+        runValidators: true,
+        context: 'query'
+    }, function (error, result) {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('Account failed to create'));
         let {_id, username, firstname, lastname, email} = result;
         let user = {_id, username, firstname, lastname, email};
@@ -31,7 +30,6 @@ function update(account, callback) {
             result = {'user': user, 'token': token};
             return callback(null, ResponseUtil.createSuccessResponse(result, 'Account successfully created.'));
         });
-        return false;
     });
 }
 

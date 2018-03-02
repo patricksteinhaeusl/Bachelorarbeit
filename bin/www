@@ -27,11 +27,11 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, host, function () {
-    let address = server.address();
-    let host = address.address;
-    let port = address.port;
-    console.log('Server started: http://' + host + ':' + port);
+server.listen(port, host, function() {
+  let address = server.address();
+  let host = address.address;
+  let port = address.port;
+  console.log('Server started: http://' + host + ':' + port + ' in ' + app.get('env') + ' mode');
 });
 
 server.on('error', onError);
