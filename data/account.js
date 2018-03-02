@@ -30,8 +30,7 @@ let data = {
             firstname: 'Juliane',
             lastname: 'Schulze',
             email: 'Juliane.Schulze@gmail.com'
-        })
-            .save(function (err, account0) {
+        }).save(function (err, account0) {
                 if (err) LogUtil.writeError(err);
                 LogUtil.writeInfo('Account 0 saved');
 
