@@ -81,7 +81,7 @@ function insertByAccount(account, creditCard, callback) {
 function remove(creditCardId, callback) {
     CreditCard.findByIdAndRemove(creditCardId, function (error) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
-        return callback(null, ResponseUtil.createSuccessResponse({}));
+        return callback(null, ResponseUtil.createSuccessResponse(null, 'Creditcard successfully deleted.'));
     });
 }
 

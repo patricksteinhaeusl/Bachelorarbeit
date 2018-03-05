@@ -71,7 +71,7 @@ function insertByAccount(account, deliveryAddress, callback) {
 function remove(deliveryAddressId, callback) {
     DeliveryAddress.findByIdAndRemove(deliveryAddressId, function (error) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
-        return callback(null, ResponseUtil.createSuccessResponse({}));
+        return callback(null, ResponseUtil.createSuccessResponse(null, 'Deliveryaddress successfully deleted.'));
     });
 }
 

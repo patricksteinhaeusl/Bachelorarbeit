@@ -1,12 +1,5 @@
 <div class="content-view" ng-controller="DeliveryAddressController as deliveryAddress">
 
-    <div class="alert alert-warning" ng-show="deliveryAddress.insert.validations.length > 0">
-        <h4>Validation Error:</h4>
-        <ul ng-repeat="validation in deliveryAddress.insert.validations">
-            <li>- {{validation}}</li>
-        </ul>
-    </div>
-
     <form class="creditCard-form" ng-submit="deliveryAddress.insert()">
         <h1>Insert your delivery address</h1>
         <div class="form-group">

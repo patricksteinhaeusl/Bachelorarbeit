@@ -11,7 +11,7 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
         $rootScope.messages = {};
         authService.login(user, function (error, data, message, validations) {
             if (error) $rootScope.messages.error = error;
-            if (validations) self.login.validations = validations;
+            if (validations) $rootScope.messages.validation = validations;
             if (!data) $rootScope.messages.warning = message;
             if (data) {
                 $rootScope.messages.success = message;
@@ -20,7 +20,6 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
 
             $timeout(function () {
                 $rootScope.messages = {};
-                self.login.validations = {};
             }, 5000);
         });
     };
@@ -30,8 +29,8 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
         $rootScope.messages = {};
         authService.register(account, function (error, data, message, validations) {
             if (error) $rootScope.messages.error = error;
-            if (validations) self.register.validations = validations;
-            if (!data) $rootScope.warning = message;
+            if (validations) $rootScope.messages.validation = validations;
+            if (!data) $rootScope.messages.warning = message;
             if (data) {
                 self.data.register.account = {};
                 $rootScope.messages.success = message;
@@ -40,7 +39,6 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
 
             $timeout(function () {
                 $rootScope.messages = {};
-                self.login.validations = {};
             }, 5000);
         });
     };

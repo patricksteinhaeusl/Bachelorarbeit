@@ -1,4 +1,29 @@
 <div class="alert-container">
-    <div ng-if="messages.success" class="alert alert-success"><strong>{{ messages.success }}</strong></div>
-    <div ng-if="messages.warning" class="alert alert-warning"><strong>{{ messages.warning }}</strong></div>
+    <div class="alert alert-success" ng-if="messages.success">
+        <h4>Success-Message:</h4>
+        <ul>
+            <li>- {{ messages.success }}</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-danger" ng-if="messages.error">
+        <h4>Error-Message:</h4>
+        <ul>
+            <li>- {{ messages.error }}</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-warning" ng-if="messages.warning">
+        <h4>Warning-Message:</h4>
+        <ul>
+            <li>- {{ messages.warning }}</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-warning" ng-if="messages.validation">
+        <h4>Validation-Messages:</h4>
+        <ul ng-repeat="validationMessage in messages.validation">
+            <li>- {{validationMessage}}</li>
+        </ul>
+    </div>
 </div>

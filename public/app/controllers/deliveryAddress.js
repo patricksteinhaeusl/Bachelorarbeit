@@ -24,7 +24,7 @@ appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', 
             $rootScope.messages = {};
             deliveryAddressService.update(deliveryAddress, function (error, data, message, validations) {
                 if (error) self.update.messages.error = error;
-                if (validations) self.update.validations = validations;
+                if (validations) self.update.validation = validations;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     self.data.creditCard = {};
@@ -45,7 +45,7 @@ appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', 
             $rootScope.messages = {};
             deliveryAddressService.insert(deliveryAddress, function (error, data, message, validations) {
                 if (error) $rootScope.messages.error = error;
-                if (validations) self.insert.validations = validations;
+                if (validations) $rootScope.messages.validation = validations;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     self.data.creditCard = {};
@@ -55,7 +55,6 @@ appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', 
 
                 $timeout(function () {
                     $rootScope.messages = {};
-                    self.insert.validations = {};
                 }, 5000);
             });
         };

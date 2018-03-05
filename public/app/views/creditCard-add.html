@@ -1,12 +1,5 @@
 <div class="content-view" ng-controller="CreditCardController as creditCard">
 
-    <div class="alert alert-warning" ng-show="creditCard.insert.validations.length > 0">
-        <h4>Validation Error:</h4>
-        <ul ng-repeat="validation in creditCard.insert.validations">
-            <li>- {{validation}}</li>
-        </ul>
-    </div>
-
     <form class="creditCard-form" ng-submit="creditCard.insert()">
         <h1>Insert your credit card</h1>
         <div ng-if="creditCard.data.creditCard.formSubmitFailed" class="alert alert-danger"><strong>Credit card

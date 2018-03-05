@@ -24,7 +24,7 @@ appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$loc
             $rootScope.messages = {};
             creditCardService.update(creditCard, function (error, data, message, validations) {
                 if (error) $rootScope.messages.error = error;
-                if (validations) self.update.validations = validations;
+                if (validations) $rootScope.messages.validation = validations;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     self.data.creditCard = {};
@@ -34,7 +34,6 @@ appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$loc
 
                 $timeout(function () {
                     $rootScope.messages = {};
-                    self.update.validations = {};
                 }, 5000);
             });
         };
@@ -45,7 +44,7 @@ appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$loc
             $rootScope.messages = {};
             creditCardService.insert(creditCard, function (error, data, message, validations) {
                 if (error) $rootScope.messages.error = error;
-                if (validations) self.insert.validations = validations;
+                if (validations) $rootScope.messages.validation = validations;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     self.data.creditCard = {};
@@ -54,8 +53,7 @@ appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$loc
                 }
 
                 $timeout(function () {
-                    $rootScope.message = {};
-                    self.insert.validations = {};
+                    $rootScope.messages = {};
                 }, 5000);
             });
         };
