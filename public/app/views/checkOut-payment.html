@@ -19,6 +19,7 @@
             </div>
         </div>
     </div>
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <input type="radio" name="type" ng-model="order.data.order.payment.type" value="bill"
@@ -26,24 +27,28 @@
             <h3 class="panel-title">Bill</h3>
         </div>
         <div class="panel-heading">
-            <input type="radio" name="type" ng-model="order.data.order.payment.type" value="creditCard">
+            <input type="radio" name="type" ng-model="order.data.order.payment.type" value="creditCard" ng-if="creditCards.data.creditCards.length > 0">
             <h3 class="panel-title">Credit card</h3>
         </div>
-        <div class="panel-body" ng-if="order.data.order.payment.type === 'creditCard'">
+        <div class="panel-body" ng-if="creditCards.data.creditCards.length === 0">
+            <h1>No credit card found</h1>
+            <p>Please follow this <a href="#!/creditcards">link</a> to add a credit card.</p>
+        </div>
+        <div class="panel-body" ng-if="creditCards.data.creditCards.length > 0">
             <table class="checkout-table">
                 <thead>
-                <th></th>
-                <th>Credit card</th>
+                    <th></th>
+                    <th>Credit card</th>
                 </thead>
                 <tbody ng-repeat="creditCard in creditCards.data.creditCards">
-                <td>
-                    <input type="radio" name="creditCard" ng-model="order.data.order.payment.creditCard"
-                           ng-value="creditCard">
-                </td>
-                <td>
-                    <p><label>Number:</label>{{ creditCard.number }}</p>
-                    <p><label>Type:</label>{{ creditCard.type }}</p>
-                </td>
+                    <td>
+                        <input type="radio" name="creditCard" ng-model="order.data.order.payment.creditCard"
+                               ng-value="creditCard">
+                    </td>
+                    <td>
+                        <p><label>Number:</label>{{ creditCard.number }}</p>
+                        <p><label>Type:</label>{{ creditCard.type }}</p>
+                    </td>
                 </tbody>
             </table>
         </div>
@@ -53,7 +58,9 @@
         <span class="glyphicon glyphicon glyphicon-backward" aria-hidden="true"></span> Back
     </a>
     <button type="button" class="btn btn-outline-primary next" ng-click="order.save()"
-            ng-disabled="order.data.order.items.length === 0 || !order.data.order.deliveryAddress || (!order.data.order.payment.creditCard && !order.data.order.payment.type === 'bill')">
+        ng-disabled="order.data.order.items.length === 0 || !order.data.order.deliveryAddress || !order.data.order.payment || !(order.data.order.payment.type === 'bill' && !order.data.order.payment.creditCard) && !(order.data.order.payment.type === 'creditCard' && order.data.order.payment.creditCard)">
         <span class="glyphicon glyphicon glyphicon-forward" aria-hidden="true"></span> Finish
     </button>
 </div>
+
+<!-- !(order.data.order.payment.type === 'creditCard' && order.data.order.payment.creditCard) -->

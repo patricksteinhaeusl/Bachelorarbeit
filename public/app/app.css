@@ -64,6 +64,14 @@ table tfoot td:first-child {
     font-weight: bold;
 }
 
+table tfoot td:last-child {
+    font-weight: bold;
+}
+
+.tblOrders tr:first-child {
+    font-weight: bold;
+}
+
 ul > ul {
     padding: 0 0 0 15px;;
     margin: 0;

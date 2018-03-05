@@ -6,22 +6,22 @@
     </button>
     <table>
         <thead>
-        <th>Number</th>
-        <th>Type</th>
-        <th>Action</th>
+            <th>Number</th>
+            <th>Type</th>
+            <th>Action</th>
         </thead>
         <tbody ng-repeat="creditCard in creditCards.data.creditCards">
-        <td>{{ creditCard.number }}</td>
-        <td>{{ creditCard.type }}</td>
-        <td>
-            <button class="btn btn-outline-primary" ng-click="creditCards.remove($index)"
-                    ng-disabled="creditCards.data.creditCards.length <= 1">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
-            </button>
-            <a class="btn btn-outline-primary" ng-href="#!/creditcard/{{ creditCard.number }}">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
-            </a>
-        </td>
+            <td>{{ creditCard.number }}</td>
+            <td>{{ creditCard.type }}</td>
+            <td>
+                <button class="btn btn-outline-primary" ng-click="creditCards.remove($index)"
+                        ng-disabled="creditCards.data.creditCards.length <= 1">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
+                </button>
+                <a class="btn btn-outline-primary" ng-href="#!/creditcard/{{ creditCard.number }}">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+                </a>
+            </td>
         </tbody>
     </table>
 </div>

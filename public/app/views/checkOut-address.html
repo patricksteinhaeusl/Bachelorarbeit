@@ -19,12 +19,15 @@
             </div>
         </div>
     </div>
-
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Delivery Address</h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" ng-if="deliveryAddresses.data.deliveryAddresses.length === 0">
+            <h1>No delivery address found</h1>
+            <p>Please follow this <a href="#!/deliveryaddresses">link</a> to add a delivery address.</p>
+        </div>
+        <div class="panel-body" ng-if="deliveryAddresses.data.deliveryAddresses.length > 0">
             <table class="checkout-table">
                 <thead>
                 <th></th>
@@ -45,7 +48,6 @@
             </table>
         </div>
     </div>
-
     <a type="button" class="btn btn-outline-primary back" href="#!/checkout/overview">
         <span class="glyphicon glyphicon glyphicon-backward" aria-hidden="true"></span> Back
     </a>

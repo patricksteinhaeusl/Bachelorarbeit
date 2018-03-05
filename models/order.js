@@ -4,14 +4,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const itemSchema = require('../models/item').itemSchema;
 const deliveryAddressSchema = require('../models/deliveryAddress').deliveryAddressSchema;
-const creditCardSchema = require('../models/creditCard').creditCardSchema;
+const creditCardNotUniqueSchema = require('../models/creditCardNotUnique').creditCardNotUniqueSchema;
 
 let orderSchema = new Schema({
     items: [itemSchema],
     deliveryAddress: deliveryAddressSchema,
     payment: {
         type: {type: String, required: true},
-        creditCard: creditCardSchema,
+        creditCard: creditCardNotUniqueSchema,
     },
     status: {type: String, required: true},
     totalPrice: {type: Number, required: true},

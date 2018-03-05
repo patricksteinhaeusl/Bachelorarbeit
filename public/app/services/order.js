@@ -16,7 +16,18 @@ appServices.factory('OrderService', ['$http', '$q', function ($http, $q) {
             $http
                 .post('http://localhost:3000/api/order', data)
                 .then(function (response) {
-                    return callback(null, response.data.data.order);
+                    let statusCode = response.data.statusCode;
+                    let data = response.data.data.order;
+                    let message = response.data.message;
+                    let validations = response.data.validations;
+                    if (statusCode === 200) {
+                        let creditCard = data.creditCard;
+                        let responseData = {creditCard: creditCard};
+                        return callback(null, responseData, message, null);
+                    } else if (statusCode === 405) {
+                        return callback(null, null, null, validations);
+                    }
+                    return callback(null, null, message, null);
                 }, function (error) {
                     return callback(error);
                 });

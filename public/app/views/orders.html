@@ -1,6 +1,6 @@
 <div class="content-view" ng-controller="OrdersController as orders">
     <h1>My Orders</h1>
-    <table>
+    <table class="tblOrders">
         <thead>
         <th>Created</th>
         <th>Order</th>
@@ -8,20 +8,20 @@
         <th>Total Price</th>
         </thead>
         <tbody ng-repeat="ord in orders.data.orders">
-        <tr>
-            <td>{{ ord.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0100' }}</td>
-            <td>{{ ord._id }}</td>
-            <td>{{ ord.status }}</td>
-            <td>{{ ord.totalPrice }} CHF</td>
-        </tr>
-        <tr ng-repeat="item in ord.items">
-            <td colspan="3">
-                <ul>
-                    <li>{{ item.quantity }} x {{ item.product.name }} - {{ item.product.category.name }}</li>
-                </ul>
-            </td>
-            <td>{{ item.product.price * item.quantity }} CHF</td>
-        </tr>
+            <tr>
+                <td>{{ ord.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0100' }}</td>
+                <td>{{ ord._id }}</td>
+                <td>{{ ord.status }}</td>
+                <td>{{ ord.totalPrice }} CHF</td>
+            </tr>
+            <tr ng-repeat="item in ord.items">
+                <td colspan="3">
+                    <ul>
+                        <li>{{ item.quantity }} x {{ item.product.name }} - {{ item.product.category.name }}</li>
+                    </ul>
+                </td>
+                <td>{{ item.product.price * item.quantity }} CHF</td>
+            </tr>
         </tbody>
     </table>
 </div>

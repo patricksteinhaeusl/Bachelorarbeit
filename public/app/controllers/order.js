@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('OrderController', ['$scope', '$location', 'OrderService', 'AuthService', 'CartService',
-    function ($scope, $location, orderService, authService, cartService) {
+appControllers.controller('OrderController', ['$rootScope', '$scope', '$location', '$timeout', 'OrderService', 'AuthService', 'CartService',
+    function ($rootScope, $scope, $location, $timeout, orderService, authService, cartService) {
         const self = this;
 
         self.data = {};
@@ -21,7 +21,6 @@ appControllers.controller('OrderController', ['$scope', '$location', 'OrderServi
                 if (self.data.order._id) {
                     return $location.path('/checkout/overview');
                 }
-                return false;
             });
         };
 
@@ -51,12 +50,21 @@ appControllers.controller('OrderController', ['$scope', '$location', 'OrderServi
             } else if (self.data.order.payment.type === 'creditCard') {
                 self.data.order.status = 'ready for delivery';
             }
+            $rootScope.messages = {};
+            orderService.save(self.data.order, function (error, data, message, validations) {
+                if (error) $rootScope.messages.error = error;
+                if (validations) $rootScope.messages.validation = validations;
+                if (!data) $rootScope.messages.warning = message;
+                if (data) {
+                    cartService.clear();
+                    self.data.order = {};
+                    $rootScope.messages.success = message;
+                    $location.path('/orders');
+                }
 
-            orderService.save(self.data.order, function (error, order) {
-                if (error) return console.log(error);
-                cartService.clear();
-                self.data.order = {};
-                return $location.path('/orders');
+                $timeout(function () {
+                    $rootScope.messages = {};
+                }, 5000);
             });
         };
 

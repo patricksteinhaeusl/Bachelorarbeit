@@ -6,25 +6,25 @@
     </button>
     <table>
         <thead>
-        <th>Delivery address</th>
-        <th>Action</th>
+            <th>Delivery address</th>
+            <th>Action</th>
         </thead>
         <tbody ng-repeat="deliveryAddress in deliveryAddresses.data.deliveryAddresses">
-        <td>
-            <p><label>Street:</label>{{ deliveryAddress.street }}</p>
-            <p><label>Zip:</label>{{ deliveryAddress.zip }}</p>
-            <p><label>City:</label>{{ deliveryAddress.city }}</p>
-            <p><label>Country:</label>{{ deliveryAddress.country }}</p>
-        </td>
-        <td>
-            <button class="btn btn-outline-primary" ng-click="deliveryAddresses.remove($index)"
-                    ng-disabled="deliveryAddresses.data.deliveryAddresses.length <= 1">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
-            </button>
-            <a class="btn btn-outline-primary" ng-href="#!/deliveryaddress/{{ deliveryAddress._id }}">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
-            </a>
-        </td>
+            <td>
+                <p><label>Street:</label>{{ deliveryAddress.street }}</p>
+                <p><label>Zip:</label>{{ deliveryAddress.zip }}</p>
+                <p><label>City:</label>{{ deliveryAddress.city }}</p>
+                <p><label>Country:</label>{{ deliveryAddress.country }}</p>
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" ng-click="deliveryAddresses.remove($index)"
+                        ng-disabled="deliveryAddresses.data.deliveryAddresses.length <= 1">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
+                </button>
+                <a class="btn btn-outline-primary" ng-href="#!/deliveryaddress/{{ deliveryAddress._id }}">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+                </a>
+            </td>
         </tbody>
     </table>
 </div>
