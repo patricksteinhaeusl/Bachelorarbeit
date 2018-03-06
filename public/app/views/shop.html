@@ -45,7 +45,7 @@
                         <span class="glyphicon glyphicon-star" aria-hidden="true"
                               ng-click="shop.collapseRatingForm($index)" ng-if="auth.isAuthenticated() === true"></span>
                         <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"
-                              ng-click="cart.insert(product)"></span>
+                              ng-click="cart.insert(product); nav.collapseCartNavigation('.cart-menu', '.auth-menu')"></span>
                     </div>
                 </div>
                 <div ng-init="ratingLength = (product.ratings | filter: {_account: auth.getUser()._id}).length">

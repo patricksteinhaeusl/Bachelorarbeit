@@ -26,7 +26,7 @@ appServices.service('CartService', ['$http', '$q', 'localStorageService', functi
         return self.items;
     };
 
-    self.insert = function (product) {
+    self.insert = function (product, callback) {
         let found = false;
         let item = {
             quantity: 1,
@@ -45,6 +45,8 @@ appServices.service('CartService', ['$http', '$q', 'localStorageService', functi
         }
 
         localStorageService.set('items', JSON.stringify(self.items));
+
+        return callback(null, 'Item successfully added to cart.');
     };
 
     self.remove = function (itemIndex) {

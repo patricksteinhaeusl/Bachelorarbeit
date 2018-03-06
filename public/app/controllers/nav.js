@@ -13,4 +13,13 @@ appControllers.controller('NavController', function ($scope) {
             }
         });
     };
+
+    self.collapseCartNavigation = function (elementClassToSlide, elementClassToFooter) {
+        $(function () {
+            $(elementClassToFooter).css('display', 'none');
+            if (!$(elementClassToSlide).is(':visible')) {
+                $scope.$slider = $(elementClassToSlide).slideDown();
+            }
+        });
+    };
 });

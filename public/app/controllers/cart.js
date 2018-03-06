@@ -1,6 +1,6 @@
 'use strict';
 
-appControllers.controller('CartController', ['$scope', 'CartService', function ($scope, cartService) {
+appControllers.controller('CartController', ['$rootScope', '$scope', '$timeout', 'CartService', function ($rootScope, $scope, $timeout, cartService) {
     const self = this;
 
     self.data = {};
@@ -8,7 +8,18 @@ appControllers.controller('CartController', ['$scope', 'CartService', function (
     self.data.totalPrice = cartService.getTotalPrice();
 
     self.insert = function (product) {
-        cartService.insert(product);
+        $rootScope.messages = {};
+        cartService.insert(product, function (error, message) {
+            if(error) {
+                $rootScope.messages.error = 'Adding the Item to the shopping cart failed!';
+            } else {
+                $rootScope.messages.success = message;
+            }
+
+            $timeout(function () {
+                $rootScope.messages = {};
+            }, 5000);
+        });
     };
 
     self.remove = function (itemIndex) {
