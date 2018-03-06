@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('ShopController', ['$scope', '$routeParams', '$location', 'AuthService', 'ShopService', '$sce',
-    function ($scope, $routeParams, $location, authService, shopService, $sce) {
+appControllers.controller('ShopController', ['$scope', '$routeParams', '$location', 'AuthService', 'ShopService',
+    function ($scope, $routeParams, $location, authService, shopService) {
         const self = this;
         self.data = {};
         self.data.products = {};
@@ -153,9 +153,9 @@ appControllers.controller('ShopController', ['$scope', '$routeParams', '$locatio
     };
 })
 // Injection Code Start - XSS
-    .filter('trustAsHTML', ['$sce', function ($sce) {
-        return function (comment) {
-            return $sce.trustAs($sce.HTML, comment);
-        };
-    }]);
+.filter('trustAsHTML', ['$sce', function ($sce) {
+    return function (comment) {
+        return $sce.trustAs($sce.HTML, comment);
+    };
+}]);
 // Injection Code End

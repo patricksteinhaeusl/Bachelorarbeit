@@ -624,8 +624,8 @@ table tr td li {
 }
 
 svg {
-    height: 150px;
-    max-height: 150px;
+    height: 100%;
+    width: 100%;
 }
 
 .post-createdAt {

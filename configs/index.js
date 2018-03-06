@@ -49,12 +49,6 @@ const config = {
             ]
         }
     },
-    cors: {
-        corsOptions: {
-            origin: 'http://localhost:8000',
-            optionsSuccessStatus: 200
-        }
-    },
     postImages: {
         directory: './assets/post-images/',
         defaultImages: ['default.png', 'default.svg', 'schelbert-froschmaultreicheln.jpg', 'steiner-innenschweiz.jpg', 'zurfluh-bissen.jpg']

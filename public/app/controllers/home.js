@@ -47,16 +47,8 @@ appControllers.controller('HomeController', ['$scope', 'PostService', function (
 
     self.init();
 }])
-// Injection Code Start - SVG Injection
-    .filter('trustAsResourceUrl', ['$sce', function ($sce) {
-        return function (postImage) {
-            let serverUrl = 'http://localhost:3000/post-images/';
-            return $sce.trustAs($sce.RESOURCE_URL, serverUrl + postImage);
-        };
-    }])
-    // Injection Code End
-    .filter('extension', function () {
-        return function (input) {
-            return input.split('.').pop();
-        };
-    });
+.filter('extension', function () {
+    return function (input) {
+        return input.split('.').pop();
+    };
+});
