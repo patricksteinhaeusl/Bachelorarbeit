@@ -11,7 +11,6 @@ appControllers.controller('ShopController', ['$scope', '$routeParams', '$locatio
         self.data.categoryId = null;
         self.data.searchValue = null;
         self.data.searchValues = [];
-        self.data.rating = {};
         self.sort = {};
         self.data.sort = {
             name: {
@@ -47,10 +46,6 @@ appControllers.controller('ShopController', ['$scope', '$routeParams', '$locatio
             self.data.categoryId = null;
             shopService.getProducts(function (products) {
                 self.data.products = products;
-                for (let productIndex = 0; productIndex < self.data.products.length; productIndex++) {
-                    self.data.products[productIndex].rating = {};
-                    self.data.products[productIndex].rating.value = self.calculateProductRatingValue(productIndex);
-                }
             });
         };
 
@@ -58,30 +53,18 @@ appControllers.controller('ShopController', ['$scope', '$routeParams', '$locatio
             self.data.categoryId = categoryId;
             shopService.getProductsByCategory(categoryId, function (products) {
                 self.data.products = products;
-                for (let productIndex = 0; productIndex < self.data.products.length; productIndex++) {
-                    self.data.products[productIndex].rating = {};
-                    self.data.products[productIndex].rating.value = self.calculateProductRatingValue(productIndex);
-                }
             });
         };
 
         self.getProductsTopRated = function () {
             shopService.getProductsTopRated(function (products) {
                 self.data.topRatedProducts = products;
-                for (let productIndex = 0; productIndex < self.data.topRatedProducts.length; productIndex++) {
-                    self.data.topRatedProducts[productIndex].rating = {};
-                    self.data.topRatedProducts[productIndex].rating.value = self.calculateProductRatingValue(productIndex);
-                }
             });
         };
 
         self.getProductsLatest = function () {
             shopService.getProductsLatest(function (products) {
                 self.data.latestProducts = products;
-                for (let productIndex = 0; productIndex < self.data.latestProducts.length; productIndex++) {
-                    self.data.latestProducts[productIndex].rating = {};
-                    self.data.latestProducts[productIndex].rating.value = self.calculateProductRatingValue(productIndex);
-                }
             });
         };
 
@@ -90,10 +73,6 @@ appControllers.controller('ShopController', ['$scope', '$routeParams', '$locatio
             self.data.categoryId = null;
             shopService.getProductsBySearchValue(searchValue, function (products) {
                 self.data.products = products;
-                for (let productIndex = 0; productIndex < self.data.products.length; productIndex++) {
-                    self.data.products[productIndex].rating = {};
-                    self.data.products[productIndex].rating.value = self.calculateProductRatingValue(productIndex);
-                }
             });
         };
 
@@ -103,31 +82,10 @@ appControllers.controller('ShopController', ['$scope', '$routeParams', '$locatio
             });
         };
 
-        self.calculateProductRatingValue = function (productIndex) {
-            try {
-                let ratings = self.data.products[productIndex].ratings;
-                if (ratings.length !== 0) {
-                    let value = 0;
-                    for (let rating of ratings) {
-                        value += rating.value;
-                    }
-                    return value / ratings.length;
-                } else {
-                    return 0;
-                }
-            } catch (exception) {
-                return 0;
-            }
-        };
-
-        self.rateProduct = function (product) {
-            let comment = product.rating.comment;
-            let user = authService.getUser();
-            let value = product.rating.value;
-            let rating = {'comment': comment, 'value': value, '_account': user._id};
+        self.rateProduct = function (product, rating) {
+            rating._account = authService.getUser()._id;
 
             shopService.rateProduct(product, rating, function (result) {
-                product.rating = {};
                 if (result) {
                     product.formSubmitFailed = false;
                     self.getProducts();

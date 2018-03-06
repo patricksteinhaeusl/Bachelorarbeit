@@ -592,6 +592,7 @@ table tr td li {
 
 .posts-container {
     display: table;
+    width: 100%;
 }
 
 .posts {

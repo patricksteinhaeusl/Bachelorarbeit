@@ -11,7 +11,7 @@
             <jk-rating-stars max-rating="5" rating="topRatedProduct.rating.value" read-only="true"></jk-rating-stars>
         </div>
         <div class="rating-wrapper"
-             ng-repeat="topRatedProductRating in topRatedProduct.ratings | toArray: false | orderBy: '-createdAt' | limitTo: 1">
+             ng-repeat="topRatedProductRating in topRatedProduct.ratings | toArray: false | orderBy: '-updatedAt' | limitTo: 1">
             <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
             <!-- Injection Code Start - XSS -->
             <div ng-bind-html="topRatedProductRating.comment | trustAsHTML"></div>

@@ -47,10 +47,10 @@ function getBySearchValue(req, res) {
     });
 }
 
-function insertRating(req, res) {
+function updateRatings(req, res) {
     let product = req.body.product;
     let rating = req.body.rating;
-    ProductService.insertRating(product, rating, (error, result) => {
+    ProductService.updateRatings(product, rating, (error, result) => {
         if (error) return res.json(error);
         return res.json(result);
     });
@@ -70,6 +70,6 @@ module.exports = {
     getBySearchValue,
     getTopRated,
     getLatest,
-    insertRating,
+    updateRatings,
     getCategories
 };

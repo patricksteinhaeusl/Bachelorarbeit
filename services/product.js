@@ -63,7 +63,9 @@ function getBySearchValue(searchValue, callback) {
     });
 }
 
-function insertRating(product, rating, callback) {
+function updateRatings(product, rating, callback) {
+    console.log(product);
+    console.log(rating);
     Product.findOneAndUpdate(
         {_id: product._id, 'ratings._account': rating._account},
         {$set: {'ratings.$.comment': rating.comment, 'ratings.$.value': rating.value}},
@@ -71,21 +73,27 @@ function insertRating(product, rating, callback) {
         function (error, result) {
             if (error) return callback(ResponseUtil.createErrorResponse(error));
             if (result) {
-                result = {'product': result};
-                return callback(null, ResponseUtil.createSuccessResponse(result));
+                result.rating.value = calculateTotalRating(result.ratings);
+                result.save(function(error, result) {
+                    result = {'product': result};
+                    return callback(null, ResponseUtil.createSuccessResponse(result));
+                });
             } else {
                 Product.findOneAndUpdate(
                     {_id: product._id},
-                    {
-                        $push: {ratings: rating}
-                    }, function (error, result) {
+                    {$push: {ratings: rating}},
+                    {new: true},
+                    function (error, result) {
                         if (error) return callback(ResponseUtil.createErrorResponse(error));
                         if (!result) return callback(ResponseUtil.createNotFoundResponse());
-                        result = {'product': result};
-                        return callback(null, ResponseUtil.createSuccessResponse(result));
+                        result.rating.value = calculateTotalRating(result.ratings);
+                        result.save(function(error, result) {
+                            result = {'product': result};
+                            return callback(null, ResponseUtil.createSuccessResponse(result));
+                        });
                     });
             }
-        });
+    });
 }
 
 function getCategories(callback) {
@@ -107,6 +115,18 @@ function getCategories(callback) {
         });
 }
 
+function calculateTotalRating(ratings) {
+    if (ratings.length !== 0) {
+        let value = 0;
+        for (let rating of ratings) {
+            value += rating.value;
+        }
+        return value / ratings.length;
+    } else {
+        return 0;
+    }
+}
+
 module.exports = {
     get,
     getById,
@@ -114,6 +134,6 @@ module.exports = {
     getBySearchValue,
     getTopRated,
     getLatest,
-    insertRating,
+    updateRatings,
     getCategories
 };

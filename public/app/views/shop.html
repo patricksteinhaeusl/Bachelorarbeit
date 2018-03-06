@@ -48,23 +48,47 @@
                               ng-click="cart.insert(product)"></span>
                     </div>
                 </div>
-                <div ng-if="auth.isAuthenticated() === true">
-                    <form ng-attr-id="{{ 'shop-form-rating-' + $index }}" class="shop-form-rating"
-                          ng-submit="shop.rateProduct(product)">
-                        <div ng-if="product.formSubmitFailed" class="alert alert-danger"><strong>Rating failed!</strong>
-                        </div>
-                        <div class="form-group">
-                            <jk-rating-stars max-rating="5" rating="0" read-only="false"
-                                             on-rating="shop.changeInputRatingValue(product, rating)"></jk-rating-stars>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="comment" ng-model="product.rating.comment"
+                <div ng-init="ratingLength = (product.ratings | filter: {_account: auth.getUser()._id}).length">
+                    <div ng-if="auth.isAuthenticated() === true && ratingLength > 0">
+                        <div ng-repeat="ratingByAccount in product.ratings | filter: {_account: auth.getUser()._id}">
+                            <form ng-attr-id="{{ 'shop-form-rating-' + $index }}" class="shop-form-rating"
+                                  ng-submit="shop.rateProduct(product, ratingByAccount)">
+                                <div ng-if="product.formSubmitFailed" class="alert alert-danger"><strong>Rating failed!</strong>
+                                </div>
+                                <div class="form-group">
+                                    <jk-rating-stars max-rating="5" rating="ratingByAccount.value" read-only="false"
+                                                     on-rating="shop.changeInputRatingValue(product, ratingByAccount.value)"></jk-rating-stars>
+                                </div>
+                                <div class="form-group">
+                            <textarea class="form-control" name="comment" ng-model="ratingByAccount.comment"
                                       placeholder="Comment" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-outline-primary">Save</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <button class="btn btn-outline-primary">Save</button>
+                    </div>
+                    <div ng-if="auth.isAuthenticated() === true && ratingLength === 0">
+                        <div ng-init="ratingEmptyByAccount = { value: 0, comment: ''}">
+                            <form ng-attr-id="{{ 'shop-form-rating-' + $index }}" class="shop-form-rating"
+                                  ng-submit="shop.rateProduct(product, ratingEmptyByAccount)">
+                                <div ng-if="product.formSubmitFailed" class="alert alert-danger"><strong>Rating failed!</strong>
+                                </div>
+                                <div class="form-group">
+                                    <jk-rating-stars max-rating="5" rating="ratingEmptyByAccount.value" read-only="false"
+                                                     on-rating="shop.changeInputRatingValue(product, ratingEmptyByAccount.value)"></jk-rating-stars>
+                                </div>
+                                <div class="form-group">
+                        <textarea class="form-control" name="comment" ng-model="ratingEmptyByAccount.comment"
+                                  placeholder="Comment" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-outline-primary">Save</button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -3,13 +3,18 @@
 const LogUtil = require('../utils/log');
 const Category = require('../models/category').Category;
 const Product = require('../models/product').Product;
+const Rating = require('../models/rating').Rating;
 
 let data = {
     drop: function (callback) {
         Product.remove({}, function (err) {
             if (err) LogUtil.writeError(err);
             LogUtil.writeInfo('Product removed');
-            return callback();
+            Rating.remove({}, function (err) {
+                if (err) LogUtil.writeError(err);
+                LogUtil.writeInfo('Rating removed');
+                return callback();
+            });
         });
     },
     create: function (callback) {
