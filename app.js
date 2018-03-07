@@ -4,7 +4,6 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const expressJwt = require('express-jwt');
-const path = require('path');
 
 const GlobalConfig = require('./configs/index');
 require('./utils/mongo');
@@ -22,9 +21,6 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json({'strict': true}));
-
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, '/views'));
 
 app.use(express.static(__dirname + '/public/app'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
