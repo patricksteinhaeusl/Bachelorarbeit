@@ -4,7 +4,8 @@ const DeliveryAddressService = require('../services/deliveryAddress');
 
 function get(req, res) {
     let deliveryAddressId = req.params.deliveryAddressId;
-    DeliveryAddressService.get(deliveryAddressId, (error, result) => {
+    let accountId = req.params.accountId;
+    DeliveryAddressService.get(deliveryAddressId, accountId, (error, result) => {
         if (error) return res.json(error);
         return res.json(result);
     });

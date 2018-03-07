@@ -2,16 +2,17 @@
 
 appServices.factory('DeliveryAddressService', ['$http', function ($http) {
     return {
-        getById: function (deliveryAddressId, callback) {
+        getById: function (deliveryAddressId, accountId, callback) {
             $http
-                .get('http://localhost:3000/api/deliveryaddress/' + deliveryAddressId)
+                .get('http://localhost:3000/api/deliveryaddress/' + deliveryAddressId + '/account/' + accountId)
                 .then(function (response) {
-                    let deliveryAddress = response.data.data.deliveryAddress;
-                    if (deliveryAddress) {
-                        return callback(deliveryAddress);
+                    let deliveryAddress;
+                    if(response.data.data === null) {
+                        deliveryAddress = null;
                     } else {
-                        return callback(false);
+                        deliveryAddress = response.data.data.deliveryAddress;
                     }
+                    return callback(deliveryAddress);
                 }, function (response) {
                     return callback(false);
                 });

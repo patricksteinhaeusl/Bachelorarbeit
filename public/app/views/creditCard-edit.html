@@ -1,26 +1,31 @@
 <div class="content-view" ng-controller="CreditCardController as creditCard">
-
-    <form class="creditCard-form" ng-submit="creditCard.update()">
-        <h1>Update your credit card</h1>
-        <div ng-if="creditCard.data.creditCard.formSubmitFailed" class="alert alert-danger"><strong>Credit card
-            failed!</strong></div>
-        <div class="form-group">
-            <label class="label">Number:</label>
-            <input class="form-control" type="text" ng-model="creditCard.data.creditCard.number" name="number"
-                   placeholder="Number" required/>
-        </div>
-        <div class="form-group">
-            <label class="label">Type:</label>
-            <select class="form-control" ng-model="creditCard.data.creditCard.type" required name="type"
-                    placeholder="Type">
-                <option value="Mastercard">Mastercard</option>
-                <option value="Visa">Visa</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-outline-primary">
-                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Update
-            </button>
-        </div>
-    </form>
+    <div ng-if="!creditCard.data.creditCard">
+        <h1>Error</h1>
+        <p>No credit card found with this credit card number.</p>
+    </div>
+    <div ng-if="creditCard.data.creditCard">
+        <form class="creditCard-form" ng-submit="creditCard.update()">
+            <h1>Update your credit card</h1>
+            <div ng-if="creditCard.data.creditCard.formSubmitFailed" class="alert alert-danger"><strong>Credit card
+                failed!</strong></div>
+            <div class="form-group">
+                <label class="label">Number:</label>
+                <input class="form-control" type="text" ng-model="creditCard.data.creditCard.number" name="number"
+                       placeholder="Number" required/>
+            </div>
+            <div class="form-group">
+                <label class="label">Type:</label>
+                <select class="form-control" ng-model="creditCard.data.creditCard.type" required name="type"
+                        placeholder="Type">
+                    <option value="Mastercard">Mastercard</option>
+                    <option value="Visa">Visa</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-outline-primary">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Update
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

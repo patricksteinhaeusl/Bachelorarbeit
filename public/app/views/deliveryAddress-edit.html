@@ -1,33 +1,38 @@
 <div class="content-view" ng-controller="DeliveryAddressController as deliveryAddress">
-
-    <form class="creditCard-form" ng-submit="deliveryAddress.update()">
-        <h1>Update your delivery address</h1>
-        <div ng-if="deliveryAddress.data.deliveryAddress.formSubmitFailed" class="alert alert-danger"><strong>Credit
-            card failed!</strong></div>
-        <div class="form-group">
-            <label class="label">Street:</label>
-            <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.street" name="street"
-                   placeholder="Street" required/>
-        </div>
-        <div class="form-group">
-            <label class="label">Zip:</label>
-            <input class="form-control" type="number" ng-model="deliveryAddress.data.deliveryAddress.zip" name="zip"
-                   placeholder="Zip" required/>
-        </div>
-        <div class="form-group">
-            <label class="label">City:</label>
-            <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.city" name="city"
-                   placeholder="City" required/>
-        </div>
-        <div class="form-group">
-            <label class="label">Country:</label>
-            <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.country"
-                   name="country" placeholder="Country" required/>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-outline-primary">
-                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Update
-            </button>
-        </div>
-    </form>
+    <div ng-if="!deliveryAddress.data.deliveryAddress">
+        <h1>Error</h1>
+        <p>No delivery address found with this ID.</p>
+    </div>
+    <div ng-if="deliveryAddress.data.deliveryAddress">
+        <form class="creditCard-form" ng-submit="deliveryAddress.update()">
+            <h1>Update your delivery address</h1>
+            <div ng-if="deliveryAddress.data.deliveryAddress.formSubmitFailed" class="alert alert-danger"><strong>Credit
+                card failed!</strong></div>
+            <div class="form-group">
+                <label class="label">Street:</label>
+                <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.street" name="street"
+                       placeholder="Street" required/>
+            </div>
+            <div class="form-group">
+                <label class="label">Zip:</label>
+                <input class="form-control" type="number" ng-model="deliveryAddress.data.deliveryAddress.zip" name="zip"
+                       placeholder="Zip" required/>
+            </div>
+            <div class="form-group">
+                <label class="label">City:</label>
+                <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.city" name="city"
+                       placeholder="City" required/>
+            </div>
+            <div class="form-group">
+                <label class="label">Country:</label>
+                <input class="form-control" type="text" ng-model="deliveryAddress.data.deliveryAddress.country"
+                       name="country" placeholder="Country" required/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-outline-primary">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Update
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

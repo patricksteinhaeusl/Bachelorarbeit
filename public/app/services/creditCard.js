@@ -6,12 +6,13 @@ appServices.factory('CreditCardService', ['$http', function ($http) {
             $http
                 .get('http://localhost:3000/api/creditcard/' + creditCardNumber)
                 .then(function (response) {
-                    let creditCard = response.data.data.creditCard;
-                    if (creditCard) {
-                        return callback(creditCard);
+                    let creditCard;
+                    if(response.data.data === null) {
+                        creditCard = null;
                     } else {
-                        return callback(false);
+                        creditCard = response.data.data.creditCard;
                     }
+                    return callback(creditCard);
                 }, function (response) {
                     return callback(false);
                 });

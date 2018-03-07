@@ -4,8 +4,8 @@ const Account = require('../models/account');
 const DeliveryAddress = require('../models/deliveryAddress').DeliveryAddress;
 const ResponseUtil = require('../utils/response');
 
-function get(deliveryAddressId, callback) {
-    DeliveryAddress.findById(deliveryAddressId, function (error, result) {
+function get(deliveryAddressId, accountId, callback) {
+    DeliveryAddress.findOne({_id: deliveryAddressId, _account: accountId}, function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         result = {'deliveryAddress': result};
@@ -14,7 +14,7 @@ function get(deliveryAddressId, callback) {
 }
 
 function getByAccountId(accountId, callback) {
-    DeliveryAddress.find({'_account': accountId}, function (error, result) {
+    DeliveryAddress.find({_account: accountId}, function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         result = {'deliveryAddresses': result};

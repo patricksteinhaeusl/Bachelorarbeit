@@ -12,8 +12,9 @@ appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', 
 
         self.getById = function () {
             let deliveryAddressId = $routeParams.deliveryAddressId;
+            let accountId = authService.getUser()._id;
             if (deliveryAddressId) {
-                deliveryAddressService.getById(deliveryAddressId, function (data) {
+                deliveryAddressService.getById(deliveryAddressId, accountId, function (data) {
                     self.data.deliveryAddress = data;
                 });
             }
