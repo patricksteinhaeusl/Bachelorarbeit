@@ -29,8 +29,12 @@
     "multer": "^1.3.0"
   },
   "scripts": {
-    "start": "node ./bin/www",
-    "prestart": "yarn"
+    "preconfigure": "start mongod --noauth",
+    "configure": "mongo < ./data/configure.js",
+    "import": "mongorestore --archive=./data/webshop.08032018.archive --db webshop",
+    "postimport": "mongo < ./data/shutdown.js && start mongod --auth",
+    "prestart": "npm run configure && npm run import",
+    "start": "node ./bin/www"
   },
   "jshintConfig": {
     "esversion": 6,

@@ -13,13 +13,14 @@ const config = {
         secret: 'kslafjop2)/)*(ZOJKN*K*JL*IU%*IO%JH'
     },
     mongo: {
-        //username: 'emil_admin',
-        //password: 'password1234',
+        username: 'webshopEditor',
+        password: '1234',
         host: 'localhost',
         port: 27017,
         name: 'webshop',
         connectionString: function () {
-            return 'mongodb://' + this.host + ':' + this.port + '/' + this.name;
+            return 'mongodb://' + this.username + ':' + this.password + '@' +this.host + ':' + this.port + '/' + this.name;
+            //return 'mongodb://' + this.host + ':' + this.port + '/' + this.name;
         }
     },
     jwt: {

@@ -2,7 +2,6 @@
 
 const LogUtil = require('../utils/log');
 const GlobalConfig = require('../configs/index');
-const Data = require('../data/index');
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
@@ -24,14 +23,6 @@ util.on('connected', function () {
 
 util.on('connecting', function () {
     LogUtil.writeError('Database connecting...');
-});
-
-util.once('open', function() {
-    Data.drop(function () {
-        Data.create(function () {
-            LogUtil.writeInfo('Database prepared');
-        });
-    });
 });
 
 module.exports = util;
