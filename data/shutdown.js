@@ -1,3 +1,3 @@
-let conn = new Mongo('localhost:27017');
+let conn = new Mongo();
 db = conn.getDB('admin');
 db.shutdownServer();

@@ -29,11 +29,12 @@
     "multer": "^1.3.0"
   },
   "scripts": {
-    "preconfigure": "start mongod --noauth",
+    "startMongoNoAuth": "start mongod --noauth",
+    "startMongoAuth": "start mongod --auth",
+    "stopMongo": "mongo < ./data/shutdown.js",
     "configure": "mongo < ./data/configure.js",
     "import": "mongorestore --archive=./data/webshop.08032018.archive --db webshop",
-    "postimport": "mongo < ./data/shutdown.js && start mongod --auth",
-    "prestart": "npm run configure && npm run import",
+    "prestart": "npm run startMongoNoAuth && npm run configure && npm run import && npm run stopMongo && npm run startMongoAuth",
     "start": "node ./bin/www"
   },
   "jshintConfig": {
