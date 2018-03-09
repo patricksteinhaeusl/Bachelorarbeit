@@ -20,7 +20,6 @@ const config = {
         name: 'webshop',
         connectionString: function () {
             return 'mongodb://' + this.username + ':' + this.password + '@' +this.host + ':' + this.port + '/' + this.name;
-            //return 'mongodb://' + this.host + ':' + this.port + '/' + this.name;
         }
     },
     jwt: {

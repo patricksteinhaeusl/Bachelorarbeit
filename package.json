@@ -29,18 +29,7 @@
     "multer": "^1.3.0"
   },
   "scripts": {
-    "startMongoNoAuth": "start mongod --noauth",
-    "startMongoAuth": "start mongod --auth",
-    "stopMongo": "mongo < ./data/shutdown.js",
-    "configure": "mongo < ./data/configure.js",
-    "importAccounts": "mongoimport --db webshop --collection accounts --file ./data/dump/accounts.json --jsonArray",
-    "importCategories": "mongoimport --db webshop --collection categories --file ./data/dump/categories.json --jsonArray",
-    "importCreditCards": "mongoimport --db webshop --collection creditcards --file ./data/dump/creditcards.json --jsonArray",
-    "importDeliveryAddresses": "mongoimport --db webshop --collection deliveryaddresses --file ./data/dump/deliveryaddresses.json --jsonArray",
-    "importPosts": "mongoimport --db webshop --collection posts --file ./data/dump/posts.json --jsonArray",
-    "importProducts": "mongoimport --db webshop --collection products --file ./data/dump/products.json --jsonArray",
-    "import": "npm run importAccounts && npm run importCategories && npm run importCreditCards && npm run importDeliveryAddresses && npm run importPosts && npm run importProducts",
-    "prestart": "npm run startMongoNoAuth && npm run configure && npm run import && npm run stopMongo && npm run startMongoAuth",
+    "prestart": "yarn install",
     "start": "node ./bin/www"
   },
   "jshintConfig": {
