@@ -2,11 +2,11 @@
 
 const express = require('express');
 const router = express.Router();
-const GlobalConfig = require('../configs/index');
 const PostController = require('../controllers/post');
 const crypto = require('crypto');
 const multer = require('multer');
 const mime = require('mime');
+const GlobalConfig = require('../configs/index');
 
 let storage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -14,7 +14,7 @@ let storage = multer.diskStorage({
     },
     filename: function (req, file, callback) {
         crypto.pseudoRandomBytes(16, function (err, raw) {
-            return callback(null, raw.toString('hex') + Date.now() + '.' + mime.extension(file.mimetype));
+            return callback(null, raw.toString('hex') + Date.now() + '.' + mime.getExtension(file.mimetype));
         });
     }
 });

@@ -3,7 +3,7 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const expressJwt = require('express-jwt');
+const jwt = require('express-jwt');
 
 const GlobalConfig = require('./configs/index');
 require('./utils/mongo');
@@ -28,42 +28,39 @@ app.use('/product-images', express.static(__dirname + '/assets/product-images'))
 app.use('/post-images', express.static(__dirname + '/assets/post-images'));
 app.use('/slider-images', express.static(__dirname + '/assets/slider-images'));
 app.use('/favicon.ico', express.static(__dirname + '/assets/favicon.ico'));
+
+app.all('/api', jwt(GlobalConfig.auth.validateOptions));
+
 app.use('/api/auth', auth);
-// Injection Code Start - Unprotected REST API
-app.use('/api/retailer', retailer);
-// Injection Code End
-
-app.use(expressJwt(GlobalConfig.auth.validateOptions).unless(GlobalConfig.auth.unprotectedRoutes));
-
 app.use('/api/account', account);
 app.use('/api/creditCard', creditCard);
 app.use('/api/deliveryAddress', deliveryAddress);
 app.use('/api/order', order);
 app.use('/api/product', product);
 app.use('/api/post', post);
-
-app.use(function (err, req, res) {
-    if (err.name === 'UnauthorizedError') {
-        res.status(401).send('No valid token!');
-    }
-});
+app.use('/api/retailer', retailer);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     let err = new Error('Not Found');
     err.status = 404;
+
+    if(req.app.get('env') === 'production') {
+        res.redirect('/#!/shop');
+    }
+
     next(err);
 });
 
 // error handler
 app.use(function (err, req, res) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
+    if(req.app.get('env') === 'development') {
+        res.locals.message = err.message;
+        res.status(err.status || 500);
+        res.send(err.message);
+    }
+    res.status(500);
+    res.send('An error occurred!');
 });
 
 module.exports = app;

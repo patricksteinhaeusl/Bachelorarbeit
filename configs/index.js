@@ -1,7 +1,6 @@
 'use strict';
 
-let authSecret = '6a5d1f68as189c1asd31c98ad74f$ä¨ü123^01230dfasdklöfj asjfklö ä$das-füadfc$äsdä-$ad maklfjolu89ujpoadfädüafcnadszucfbhjk9m vkldf mlökl';
-
+const authSecret = '6a5d1f68as189c1asd31c98ad74f$ä¨ü123^01230dfasdklöfj asjfklö ä$das-füadfc$äsdä-$ad maklfjolu89ujpoadfädüafcnadszucfbhjk9m vkldf mlökl';
 
 const config = {
     server: {
@@ -29,24 +28,12 @@ const config = {
         signOptions: {
             expiresIn: '1d',
             audience: 'self',
-            issuer: 'shop'
+            issuer: 'webshop'
         },
         validateOptions: {
             secret: authSecret,
             audience: 'self',
-            issuer: 'shop'
-        },
-        unprotectedRoutes: {
-            path: [
-                '/api/product',
-                '/api/product/category',
-                '/api/product/toprated',
-                '/api/product/latest',
-                new RegExp('/api\/product\/category\/.*', 'i'),
-                new RegExp('/api\/product\/searchvalue\/.*', 'i'),
-                '/api/post',
-                '/api/creditcard'
-            ]
+            issuer: 'webshop'
         }
     },
     postImages: {

@@ -12,8 +12,7 @@ let util = {
             .digest('hex');
     },
     createToken: function (user, secret, options, next) {
-        jwt
-            .sign(user, secret, options, (err, token) => next(err, token));
+        jwt.sign(user, secret, options, (err, token) => next(err, token));
     }
 };
 
