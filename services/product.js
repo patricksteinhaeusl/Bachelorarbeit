@@ -64,8 +64,6 @@ function getBySearchValue(searchValue, callback) {
 }
 
 function updateRatings(product, rating, callback) {
-    console.log(product);
-    console.log(rating);
     Product.findOneAndUpdate(
         {_id: product._id, 'ratings._account': rating._account},
         {$set: {'ratings.$.comment': rating.comment, 'ratings.$.value': rating.value}},

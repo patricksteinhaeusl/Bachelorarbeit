@@ -23,7 +23,7 @@
         </div>
     </form>
     <div class="products"
-         ng-repeat="product in shop.data.products | toArray: false | orderBy: shop.data.sortSelected track by $index"
+         ng-repeat="product in shop.data.products | toArray: false | orderBy: shop.data.sortSelected track by product._id"
          ng-class="shop.productOrientation">
         <div class="product-container">
             <div class="product">
@@ -43,15 +43,15 @@
                     </div>
                     <div class="product-menu">
                         <span class="glyphicon glyphicon-star" aria-hidden="true"
-                              ng-click="shop.collapseRatingForm($index)" ng-if="auth.isAuthenticated() === true"></span>
+                              ng-click="shop.collapseRatingForm(product._id)" ng-if="auth.isAuthenticated() === true"></span>
                         <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"
                               ng-click="cart.insert(product); nav.collapseCartNavigation('.cart-menu', '.auth-menu')"></span>
                     </div>
                 </div>
                 <div ng-init="ratingLength = (product.ratings | filter: {_account: auth.getUser()._id}).length">
                     <div ng-if="auth.isAuthenticated() === true && ratingLength > 0">
-                        <div ng-repeat="ratingByAccount in product.ratings | filter: {_account: auth.getUser()._id}">
-                            <form ng-attr-id="{{ 'shop-form-rating-' + $index }}" class="shop-form-rating"
+                        <div ng-repeat="ratingByAccount in product.ratings | filter: {_account: auth.getUser()._id} track by ratingByAccount._id">
+                            <form ng-attr-id="{{ 'shop-form-rating-' + product._id }}" class="shop-form-rating"
                                   ng-submit="shop.rateProduct(product, ratingByAccount)">
                                 <div ng-if="product.formSubmitFailed" class="alert alert-danger"><strong>Rating failed!</strong>
                                 </div>
@@ -60,8 +60,8 @@
                                                      on-rating="shop.changeInputRatingValue(product, ratingByAccount.value)"></jk-rating-stars>
                                 </div>
                                 <div class="form-group">
-                            <textarea class="form-control" name="comment" ng-model="ratingByAccount.comment"
-                                      placeholder="Comment" required></textarea>
+                                    <textarea class="form-control" name="comment" ng-model="ratingByAccount.comment"
+                                              placeholder="Comment" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-outline-primary">Save</button>
@@ -71,7 +71,7 @@
                     </div>
                     <div ng-if="auth.isAuthenticated() === true && ratingLength === 0">
                         <div ng-init="ratingEmptyByAccount = { value: 0, comment: ''}">
-                            <form ng-attr-id="{{ 'shop-form-rating-' + $index }}" class="shop-form-rating"
+                            <form ng-attr-id="{{ 'shop-form-rating-' + product._id }}" class="shop-form-rating"
                                   ng-submit="shop.rateProduct(product, ratingEmptyByAccount)">
                                 <div ng-if="product.formSubmitFailed" class="alert alert-danger"><strong>Rating failed!</strong>
                                 </div>
@@ -80,8 +80,8 @@
                                                      on-rating="shop.changeInputRatingValue(product, ratingEmptyByAccount.value)"></jk-rating-stars>
                                 </div>
                                 <div class="form-group">
-                        <textarea class="form-control" name="comment" ng-model="ratingEmptyByAccount.comment"
-                                  placeholder="Comment" required></textarea>
+                                    <textarea class="form-control" name="comment" ng-model="ratingEmptyByAccount.comment"
+                                              placeholder="Comment" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-outline-primary">Save</button>

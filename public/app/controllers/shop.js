@@ -102,6 +102,7 @@ appControllers.controller('ShopController', ['$scope', '$routeParams', '$locatio
 
         self.collapseRatingForm = function (productIndex) {
             let div = $('#shop-form-rating-' + productIndex);
+            console.log(div);
             if (div.is(':visible')) {
                 div.slideUp();
             } else {
