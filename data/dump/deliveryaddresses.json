@@ -1,0 +1,229 @@
+[{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439785b"
+	},
+	"street": "Im Sandbüel 93",
+	"zip": 1700,
+	"city": "Fribourg",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397859"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.541Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.541Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439786d"
+	},
+	"street": "Im Sandbüel 93",
+	"zip": 1700,
+	"city": "Fribourg",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d439786b"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.577Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.577Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397867"
+	},
+	"street": "Obere Haltenstrasse 28",
+	"zip": 8426,
+	"city": "Lufingen",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397865"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.566Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.566Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439786a"
+	},
+	"street": "Bösch 82",
+	"zip": 1588,
+	"city": "Cudrefin",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397868"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.572Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.572Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397870"
+	},
+	"street": "Untere Aegerten 134",
+	"zip": 2016,
+	"city": "Cortaillod",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d439786e"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.582Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.582Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397864"
+	},
+	"street": "Via Schliffras 114",
+	"zip": 5637,
+	"city": "Geltwil",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397862"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.560Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.560Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397879"
+	},
+	"street": "Bahnhofstrasse 19",
+	"zip": 1196,
+	"city": "Gland",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397877"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.596Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.596Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439785e"
+	},
+	"street": "Sonnenbergstr 114",
+	"zip": 1897,
+	"city": "Bouveret",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d439785c"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.548Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.548Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397873"
+	},
+	"street": "Lichtmattstrasse 22",
+	"zip": 3402,
+	"city": "Burgdorf",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397871"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.587Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.587Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397861"
+	},
+	"street": "Bösch 21",
+	"zip": 7142,
+	"city": "Cumbel",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d439785f"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.554Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.554Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439787c"
+	},
+	"street": "Piazza Rezzonico 33",
+	"zip": 2057,
+	"city": "Villiers",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d439787a"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.600Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.600Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397876"
+	},
+	"street": "Kronwiesenweg 63",
+	"zip": 4581,
+	"city": "Küttigkofen",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397874"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.592Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.592Z"
+	},
+	"__v": 0
+}]
+

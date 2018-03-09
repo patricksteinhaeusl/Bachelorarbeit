@@ -1,0 +1,46 @@
+[{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397889"
+	},
+	"title": "Individual bells",
+	"text": "I ordered my individual bell!",
+	"image": "steiner-innenschweiz.jpg",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.628Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.628Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397888"
+	},
+	"title": "Just genius",
+	"text": "This bell is genius. My cows love this bell!",
+	"image": "zurfluh-bissen.jpg",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.627Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.627Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397887"
+	},
+	"title": "Awesome product",
+	"text": "This is one of the best bells.",
+	"image": "schelbert-froschmaultreicheln.jpg",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.626Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.626Z"
+	},
+	"__v": 0
+}]
+

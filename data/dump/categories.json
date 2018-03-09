@@ -1,0 +1,118 @@
+[{
+	"_id": {
+		"$oid": "5a9d9708ce4c640a9054ae34"
+	},
+	"updatedAt": {
+		"$date": "2018-03-05T19:14:16.730Z"
+	},
+	"createdAt": {
+		"$date": "2018-03-05T19:14:16.730Z"
+	},
+	"name": "Steiner, Wynigen",
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5a9d9708ce4c640a9054ae31"
+	},
+	"updatedAt": {
+		"$date": "2018-03-05T19:14:16.726Z"
+	},
+	"createdAt": {
+		"$date": "2018-03-05T19:14:16.726Z"
+	},
+	"name": "Zurfluh",
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397881"
+	},
+	"name": "Zurfluh",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.619Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.619Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5a9d9708ce4c640a9054ae2d"
+	},
+	"updatedAt": {
+		"$date": "2018-03-05T19:14:16.678Z"
+	},
+	"createdAt": {
+		"$date": "2018-03-05T19:14:16.678Z"
+	},
+	"name": "Schelbert",
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397884"
+	},
+	"name": "Steiner, Wynigen",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.622Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.622Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5a9d99ebcec22904e4cafd78"
+	},
+	"updatedAt": {
+		"$date": "2018-03-05T19:26:35.720Z"
+	},
+	"createdAt": {
+		"$date": "2018-03-05T19:26:35.720Z"
+	},
+	"name": "Schelbert",
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5a9d99ebcec22904e4cafd7f"
+	},
+	"updatedAt": {
+		"$date": "2018-03-05T19:26:35.736Z"
+	},
+	"createdAt": {
+		"$date": "2018-03-05T19:26:35.736Z"
+	},
+	"name": "Steiner, Wynigen",
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5a9d99ebcec22904e4cafd7c"
+	},
+	"updatedAt": {
+		"$date": "2018-03-05T19:26:35.731Z"
+	},
+	"createdAt": {
+		"$date": "2018-03-05T19:26:35.731Z"
+	},
+	"name": "Zurfluh",
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439787d"
+	},
+	"name": "Schelbert",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.603Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.603Z"
+	},
+	"__v": 0
+}]
+

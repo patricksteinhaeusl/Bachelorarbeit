@@ -1,0 +1,232 @@
+[{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397886"
+	},
+	"rating": {
+		"value": 0
+	},
+	"name": "Modell Innenschweiz",
+	"category": {
+		"name": "Steiner, Wynigen",
+		"_id": {
+			"$oid": "5aa0481e876d9d39d4397884"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.622Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.622Z"
+		},
+		"__v": 0
+	},
+	"size": 25,
+	"price": 400,
+	"image": "steiner-innenschweiz.jpg",
+	"ratings": [],
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.625Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.625Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439787e"
+	},
+	"rating": {
+		"value": 0
+	},
+	"name": "Froschmaultreicheln",
+	"category": {
+		"name": "Schelbert",
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439787d"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.603Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.603Z"
+		},
+		"__v": 0
+	},
+	"size": 15,
+	"price": 250,
+	"image": "schelbert-froschmaultreicheln.jpg",
+	"ratings": [],
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.614Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.614Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439787f"
+	},
+	"rating": {
+		"value": 0
+	},
+	"name": "Prageltreicheln",
+	"category": {
+		"name": "Schelbert",
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439787d"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.603Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.603Z"
+		},
+		"__v": 0
+	},
+	"size": 10,
+	"price": 200,
+	"image": "schelbert-prageltreicheln.jpg",
+	"ratings": [],
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.616Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.616Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397883"
+	},
+	"rating": {
+		"value": 0
+	},
+	"name": "Bissen",
+	"category": {
+		"name": "Zurfluh",
+		"_id": {
+			"$oid": "5aa0481e876d9d39d4397881"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.619Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.619Z"
+		},
+		"__v": 0
+	},
+	"size": 15,
+	"price": 235,
+	"image": "zurfluh-bissen.jpg",
+	"ratings": [],
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.621Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.621Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397882"
+	},
+	"rating": {
+		"value": 0
+	},
+	"name": "Treicheln",
+	"category": {
+		"name": "Zurfluh",
+		"_id": {
+			"$oid": "5aa0481e876d9d39d4397881"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.619Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.619Z"
+		},
+		"__v": 0
+	},
+	"size": 25,
+	"price": 325,
+	"image": "zurfluh-treicheln.jpg",
+	"ratings": [],
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.620Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.620Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397885"
+	},
+	"rating": {
+		"value": 0
+	},
+	"name": "Berner Treicheln",
+	"category": {
+		"name": "Steiner, Wynigen",
+		"_id": {
+			"$oid": "5aa0481e876d9d39d4397884"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.622Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.622Z"
+		},
+		"__v": 0
+	},
+	"size": 10,
+	"price": 125.25,
+	"image": "steiner-treicheln.jpg",
+	"ratings": [],
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.623Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.623Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397880"
+	},
+	"rating": {
+		"value": 0
+	},
+	"name": "Gotthardtreicheln",
+	"category": {
+		"name": "Schelbert",
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439787d"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.603Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.603Z"
+		},
+		"__v": 0
+	},
+	"size": 10,
+	"price": 180.9,
+	"image": "schelbert-gotthardtreicheln.jpg",
+	"ratings": [],
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.618Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.618Z"
+	},
+	"__v": 0
+}]
+

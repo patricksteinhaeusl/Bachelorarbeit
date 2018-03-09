@@ -1,0 +1,205 @@
+[{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397874"
+	},
+	"username": "customer9",
+	"password": "5c9f4ab08ef58106a0b1eea2e9e9cb257abd9140739fe535fa90c856a829d915",
+	"firstname": "Mike",
+	"lastname": "Kunze",
+	"email": "Mike.Kunze@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.589Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.589Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397862"
+	},
+	"username": "customer3",
+	"password": "ef9e54e2cbbe3e09f33898055dabb4cf16321df1456adfebbdebdf43702f5d28",
+	"firstname": "Swen",
+	"lastname": "Dresner",
+	"email": "Swen.Dresner@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.556Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.556Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439786e"
+	},
+	"username": "customer7",
+	"password": "d1d2e3b4d42a81dd06b18c3487924f0f8b3c51db199a2c08d8662cec391639e1",
+	"firstname": "Ines",
+	"lastname": "Schiffer",
+	"email": "Ines.Schiffer@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.579Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.579Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439785f"
+	},
+	"username": "customer2",
+	"password": "826b3c8982bbce8dde386a4ad4b16dba88045cb028cb9f836f1f82f2ec635d0e",
+	"firstname": "Jennifer",
+	"lastname": "Baumgartner",
+	"email": "Jennifer.Baumgartner@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.550Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.550Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439787a"
+	},
+	"username": "customer11",
+	"password": "0a10f55c666c4788009424cf9391f32152ec11fdbadac88429bdc99099aad757",
+	"firstname": "Jessica",
+	"lastname": "Krueger",
+	"email": "Jessica.Krueger@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.598Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.598Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439786b"
+	},
+	"username": "customer6",
+	"password": "9686a4458a92c9203a3748225d5863671dc559330c1e2f1414a16f2abd4cd5ad",
+	"firstname": "Lena",
+	"lastname": "Lowe",
+	"email": "Lena.Lowe@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.574Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.574Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397859"
+	},
+	"username": "customer0",
+	"password": "5c181d6269a3d059cc5d3781d355b9792d3c1207b3d405c71bd27ac4dc506c0d",
+	"firstname": "Juliane",
+	"lastname": "Schulze",
+	"email": "Juliane.Schulze@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.532Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.532Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d439785c"
+	},
+	"username": "customer1",
+	"password": "b84016d11f524fb20cf7a8754c9a50ec3bae9997fc5bde30d1ecbff4e337e8dc",
+	"firstname": "Peter",
+	"lastname": "Holzmann",
+	"email": "Peter.Holzmann@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.544Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.544Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397871"
+	},
+	"username": "customer8",
+	"password": "1eecce89619e23af4c92031c94c74aefe74ce1e59d478fbd912a6a4d64807229",
+	"firstname": "Anne",
+	"lastname": "Schulz",
+	"email": "Anne.Schulz@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.584Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.584Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397865"
+	},
+	"username": "customer4",
+	"password": "1f1cbac73cb5c32f629277785ea004e181e2c1a1b6cf84b778d6b427b13b0f02",
+	"firstname": "Markus",
+	"lastname": "Wechsler",
+	"email": "Markus.Wechsler@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.562Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.562Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397877"
+	},
+	"username": "customer10",
+	"password": "9f6947d03508b0a94610ea51a2c7f82b179481137629f922a40bef05ed0e9976",
+	"firstname": "Bernd",
+	"lastname": "Zimmer",
+	"email": "Bernd.Zimmer@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.594Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.594Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5aa0481e876d9d39d4397868"
+	},
+	"username": "customer5",
+	"password": "17c5437142236f9ad12c60b10b04eb7a5bf856c7a64743e68ab4afd6acf18379",
+	"firstname": "Karolin",
+	"lastname": "Boehm",
+	"email": "Karolin.Boehm@gmail.com",
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.568Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.568Z"
+	},
+	"__v": 0
+}]
+
