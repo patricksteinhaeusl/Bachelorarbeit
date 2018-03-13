@@ -1,0 +1,5 @@
+#!/bin/ash
+DBPath="/data/db"
+MongoLogPath="/var/log/mongodb/mongo.log"
+
+mongod --dbpath $DBPath --fork --logpath $MongoLogPath --auth
