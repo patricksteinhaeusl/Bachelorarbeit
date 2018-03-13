@@ -5,14 +5,13 @@ MongoLogPath="/var/log/mongodb/mongo.log"
 DBName="webshop"
 
 #Create MongoDB User and Roles
-mongod --dbpath $DBPath --fork --logpath $MongoLogPath --noauth
-mongo < /app/configure.js
+mongod --dbpath $DBPath --fork --logpath $MongoLogPath --noauth && \
+mongo < /app/configure.js  && \
 
 #Import all JSON Files
 ls $DataFilePath/*.json | xargs -n1 basename | sed 's/.json$//' | while read col; do
     mongoimport -d $DBName -c $col --file $DataFilePath/$col.json --jsonArray;
-done
+done && \
 
-#Start MongoDB in Auth Mode
-mongod --shutdown && \
-mongod --dbpath $DBPath --fork --logpath $MongoLogPath --auth
+#Shutdown clean
+mongod --shutdown

@@ -27,7 +27,7 @@ COPY docker_config/mongodb_import /utils/scripts/
 COPY docker_config/mongodb /utils/services/
 COPY docker_config/node /utils/services/
 RUN chmod -R 755 /utils && /utils/scripts/mongodb_import
-RUN rm -f /data/db/journal/WiredTigerPreplog*
+RUN rm -rf /data/db/journal/
 
 # ---- Release ----
 FROM node:alpine AS final
