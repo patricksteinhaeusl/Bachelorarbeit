@@ -1,4 +1,4 @@
-'use strict';
+ö'use strict';
 
 describe('Auth', function() {
     describe('Login', function() {
