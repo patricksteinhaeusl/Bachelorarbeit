@@ -36,7 +36,7 @@ describe('Auth', function() {
     });
 
     describe('Logout', function() {
-        it('should successfully', function() {
+        it('should success', function() {
             browser.get('http://localhost:3000/').then(function () {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
@@ -85,8 +85,17 @@ describe('Auth', function() {
             });
         });
 
-        it('should fail', function() {
+        it('with same user should fail', function() {
             browser.get('http://localhost:3000/').then(function () {
+                //Open Auth Menu
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Submit form
+                element(by.buttonText('Logout')).click();
+                browser.sleep(250);
+                //Check
+                expect(element.all(by.css('.menu-item-username')).count()).toBe(0);
+                browser.sleep(250);
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
