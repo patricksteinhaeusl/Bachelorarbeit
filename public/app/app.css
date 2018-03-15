@@ -388,13 +388,43 @@ table tr td li {
     text-decoration: none;
 }
 
+.cart-menu table {
+    table-layout: fixed;
+}
+
 .cart-menu table thead {
     border-bottom: solid 1px white;
 }
 
+.cart-menu table th:nth-child(2) {
+    width: 65px;
+    text-align: center;
+}
+
+.cart-menu table th:nth-child(3) {
+    width: 75px;
+}
+
+.cart-menu table th:nth-child(4) {
+    width: 25px;
+}
+
 .cart-menu table th,
 .cart-menu table td {
-    padding: 5px;
+    padding: 5px 0 5px 0;
+}
+
+.cart-menu table td {
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.cart-menu table tr td:nth-child(2) {
+    text-align: center;
+}
+
+.cart-menu table td .btn {
+    width: auto;
 }
 
 .checkOut-overview table tfoot {
