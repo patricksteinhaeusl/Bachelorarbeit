@@ -1,5 +1,6 @@
 <div class="sidebar-menu">
     <h3>Categories</h3>
+    <ul class="categories"><li class="sidebar-item"><a ng-click="shop.getProducts()" ng-href="#!/shop">All</a></li></ul>
     <ul class="categories" ng-repeat="category in shop.data.categories">
         <li class="sidebar-item" ng-class="shop.data.categoryId === category._id ? 'selected' : ''"><a
                 ng-click="shop.getProductsByCategory(category._id)" ng-href="#!/shop">{{ category.name }}</a></li>
