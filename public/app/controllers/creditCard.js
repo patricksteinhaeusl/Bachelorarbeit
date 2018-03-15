@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$location', '$timeout', '$routeParams', 'CreditCardService', 'AuthService',
-    function ($rootScope, $scope, $location, $timeout, $routeParams, creditCardService, authService) {
+appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$location', '$routeParams', 'CreditCardService', 'AuthService',
+    function ($rootScope, $scope, $location, $routeParams, creditCardService, authService) {
         const self = this;
         self.data = {};
         self.data.creditCard = {};
@@ -31,10 +31,6 @@ appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$loc
                     $rootScope.messages.success = message;
                     $location.path('/creditcards');
                 }
-
-                $timeout(function () {
-                    $rootScope.messages = {};
-                }, 5000);
             });
         };
 
@@ -51,10 +47,6 @@ appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$loc
                     $rootScope.messages.success = message;
                     $location.path('/creditcards');
                 }
-
-                $timeout(function () {
-                    $rootScope.messages = {};
-                }, 5000);
             });
         };
 

@@ -639,6 +639,12 @@ table tr td li {
     max-height: 150px;
 }
 
+.post-element .actions {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
 svg {
     height: 100%;
     width: 100%;

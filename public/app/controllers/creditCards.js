@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('CreditCardsController', ['$rootScope', '$scope', '$location', '$timeout', 'CreditCardsService', 'AuthService',
-    function ($rootScope, $scope, $location, $timeout, creditCardsService, authService) {
+appControllers.controller('CreditCardsController', ['$rootScope', '$scope', '$location', 'CreditCardsService', 'AuthService',
+    function ($rootScope, $scope, $location, creditCardsService, authService) {
         const self = this;
         self.data = {};
         self.data.account = {};
@@ -26,10 +26,6 @@ appControllers.controller('CreditCardsController', ['$rootScope', '$scope', '$lo
                 if (error) $rootScope.messages.error = error;
                 $rootScope.messages.success = message;
                 self.data.creditCards.splice(index, 1);
-
-                $timeout(function () {
-                    $rootScope.message = {};
-                }, 5000);
             });
         };
 

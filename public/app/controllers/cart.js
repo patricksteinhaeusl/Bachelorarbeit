@@ -1,6 +1,6 @@
 'use strict';
 
-appControllers.controller('CartController', ['$rootScope', '$scope', '$timeout', 'CartService', function ($rootScope, $scope, $timeout, cartService) {
+appControllers.controller('CartController', ['$rootScope', '$scope', 'CartService', function ($rootScope, $scope, cartService) {
     const self = this;
 
     self.data = {};
@@ -15,10 +15,6 @@ appControllers.controller('CartController', ['$rootScope', '$scope', '$timeout',
             } else {
                 $rootScope.messages.success = message;
             }
-
-            $timeout(function () {
-                $rootScope.messages = {};
-            }, 5000);
         });
     };
 

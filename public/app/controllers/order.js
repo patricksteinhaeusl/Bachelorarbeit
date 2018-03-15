@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('OrderController', ['$rootScope', '$scope', '$location', '$timeout', 'OrderService', 'AuthService', 'CartService',
-    function ($rootScope, $scope, $location, $timeout, orderService, authService, cartService) {
+appControllers.controller('OrderController', ['$rootScope', '$scope', '$location', 'OrderService', 'AuthService', 'CartService',
+    function ($rootScope, $scope, $location, orderService, authService, cartService) {
         const self = this;
 
         self.data = {};
@@ -61,10 +61,6 @@ appControllers.controller('OrderController', ['$rootScope', '$scope', '$location
                     $rootScope.messages.success = message;
                     $location.path('/orders');
                 }
-
-                $timeout(function () {
-                    $rootScope.messages = {};
-                }, 5000);
             });
         };
 

@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('DeliveryAddressesController', ['$rootScope', '$scope', '$location', '$timeout', 'DeliveryAddressesService', 'AuthService',
-    function ($rootScope, $scope, $location, $timeout, deliveryAddressesService, authService) {
+appControllers.controller('DeliveryAddressesController', ['$rootScope', '$scope', '$location', 'DeliveryAddressesService', 'AuthService',
+    function ($rootScope, $scope, $location, deliveryAddressesService, authService) {
         const self = this;
         self.data = {};
         self.data.account = {};
@@ -26,10 +26,6 @@ appControllers.controller('DeliveryAddressesController', ['$rootScope', '$scope'
                 if (error) $rootScope.messages.error = error;
                 $rootScope.messages.success = message;
                 self.data.deliveryAddresses.splice(index, 1);
-
-                $timeout(function () {
-                    $rootScope.message = {};
-                }, 5000);
             });
         };
 
