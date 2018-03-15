@@ -281,6 +281,10 @@ table tr td li {
     color: white;
 }
 
+.sidebar-right .sidebar-topRatedProduct .rating-wrapper {
+    overflow-wrap: break-word;
+}
+
 .sidebar-right .sidebar-topRatedProduct .rating-wrapper .glyphicon {
     font-size: 25px;
     color: black;
