@@ -360,7 +360,7 @@ table tr td li {
     border-radius: 10px;
     border: solid 1px lightgray;
     box-shadow: 5px 5px 2px lightgray;
-    margin: 0 15px 0 15px;
+    margin: 15px 15px 0 15px;
 }
 
 .auth-menu .btn-outline-primary,
