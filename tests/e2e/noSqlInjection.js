@@ -1,7 +1,6 @@
 'use strict';
 
-describe('NoSQL Injection', function() {
-
+describe('Auth - NoSQL Injection', function() {
     afterEach(function() {
         browser.get('http://localhost:3000/').then(function () {
             //Open Auth Menu

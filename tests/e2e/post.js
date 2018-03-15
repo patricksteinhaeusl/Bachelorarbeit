@@ -3,7 +3,7 @@
 const path = require('path');
 
 describe('Post', function() {
-    beforeEach(function () {
+    beforeAll(function () {
         browser.get('http://localhost:3000/').then(function () {
             //Open Auth Menu
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
@@ -16,8 +16,8 @@ describe('Post', function() {
             browser.sleep(250);
         });
     });
-    
-    afterEach(function () {
+
+    afterAll(function () {
         browser.get('http://localhost:3000/').then(function () {
             //Open Auth Menu
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
@@ -36,13 +36,14 @@ describe('Post', function() {
                 browser.sleep(250);
                 //Link
                 element(by.linkText('Community')).click();
+                browser.sleep(250);
                 //Fill form
                 let pathToFile = '../../assets/post-images/default.png';
                 let absolutePathToFile = path.resolve(__dirname, pathToFile);
                 element(by.model('community.data.post.title')).sendKeys('Ein perfektes Produkt');
                 element(by.model('community.data.post.text')).sendKeys('Ein perfektes Produkt zum verlieben.');
                 browser.sleep(250);
-                element.all(by.model('community.data.postImage')).get(1).sendKeys(absolutePathToFile);
+                element.all(by.model('community.data.postImage')).get(0).sendKeys(absolutePathToFile);
                 //Check
                 expect(element.all(by.css('.thumbnail')).get(0).isDisplayed()).toBe(true);
                 //Submit form
@@ -55,8 +56,6 @@ describe('Post', function() {
     describe('View', function() {
         it('should success', function() {
             browser.get('http://localhost:3000/').then(function () {
-                //Link
-                element(by.linkText('Home')).click();
                 let posts = element.all(by.repeater('post in home.data.posts'));
                 //Check
                 expect(posts.last().getText()).toContain('Ein perfektes Produkt\n');
@@ -67,6 +66,21 @@ describe('Post', function() {
             });
         });
     });
-});
 
-//TODO NO DATA TEST
+    describe('Delete', function() {
+        it('should success', function() {
+            browser.get('http://localhost:3000/').then(function () {
+                //Link
+                element(by.linkText('Home')).click();
+                browser.sleep(250);
+                let posts = element.all(by.repeater('post in home.data.posts'));
+                element.all(by.repeater('post in home.data.posts')).count().then(function(preCount) {
+                    posts.last().all(by.css('.glyphicon-trash')).get(0).click();
+                    let postCount = element.all(by.repeater('post in home.data.posts')).count();
+                    //Check
+                    expect(preCount - 1).toBe(postCount);
+                });
+            });
+        });
+    });
+});
