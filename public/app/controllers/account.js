@@ -1,6 +1,6 @@
 'use strict';
 
-appControllers.controller('AccountController', ['$scope', '$timeout', 'AccountService', 'AuthService', function ($scope, $timeout, accountService, authService) {
+appControllers.controller('AccountController', ['$scope', 'AccountService', 'AuthService', function ($scope, accountService, authService) {
     const self = this;
     self.data = {};
     self.data.account = {};
@@ -20,11 +20,6 @@ appControllers.controller('AccountController', ['$scope', '$timeout', 'AccountSe
                 self.data.account = data.user;
                 self.update.messages.success = message;
             }
-
-            $timeout(function () {
-                self.update.messages = {};
-                self.update.validations = {};
-            }, 5000);
         });
     };
 

@@ -18,7 +18,16 @@ function insert(req, res) {
     });
 }
 
+function remove(req, res) {
+    let postId = req.params.postId;
+    PostService.remove(postId, (error, result) => {
+        if (error) return res.json(error);
+        return res.json(result);
+    });
+}
+
 module.exports = {
     getAll,
-    insert
+    insert,
+    remove
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-appControllers.controller('HomeController', ['$scope', 'PostService', function ($scope, postService) {
+appControllers.controller('HomeController', ['$rootScope', '$scope', 'PostService', function ($rootScope, $scope, PostService) {
     const self = this;
     self.data = {};
     self.data.posts = [];
@@ -40,8 +40,18 @@ appControllers.controller('HomeController', ['$scope', 'PostService', function (
     }
 
     self.getPosts = function () {
-        postService.getAll(function (data) {
+        PostService.getAll(function (data) {
             self.data.posts = data;
+        });
+    };
+
+    self.remove = function (index) {
+        let postId = self.data.posts[index]._id;
+        $rootScope.messages = {};
+        PostService.remove(postId, function (error, data, message) {
+            if (error) $rootScope.messages.error = error;
+            $rootScope.messages.success = message;
+            self.data.posts.splice(index, 1);
         });
     };
 

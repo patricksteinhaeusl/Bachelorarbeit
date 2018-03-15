@@ -37,6 +37,9 @@
                 <div class="row">
                     <p>{{ post.text }}</p>
                 </div>
+                <div class="actions" ng-if="post._account === auth.getUser()._id">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="home.remove($index)"></span>
+                </div>
             </div>
         </div>
     </div>

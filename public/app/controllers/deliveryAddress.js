@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', '$location', '$timeout', '$routeParams', 'DeliveryAddressService', 'AuthService',
-    function ($rootScope, $scope, $location, $timeout, $routeParams, deliveryAddressService, authService) {
+appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', '$location', '$routeParams', 'DeliveryAddressService', 'AuthService',
+    function ($rootScope, $scope, $location, $routeParams, deliveryAddressService, authService) {
         const self = this;
         self.data = {};
         self.data.deliveryAddress = {};
@@ -32,11 +32,6 @@ appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', 
                     $rootScope.messages.success = message;
                     $location.path('/deliveryaddresses');
                 }
-
-                $timeout(function () {
-                    $rootScope.messages = {};
-                    self.update.validations = {};
-                }, 5000);
             });
         };
 
@@ -53,10 +48,6 @@ appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', 
                     $rootScope.messages.success = message;
                     $location.path('/deliveryaddresses');
                 }
-
-                $timeout(function () {
-                    $rootScope.messages = {};
-                }, 5000);
             });
         };
 

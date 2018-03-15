@@ -1,29 +1,32 @@
-<div class="alert-container">
-    <div class="alert alert-success" ng-if="messages.success">
-        <h4>Success-Message:</h4>
-        <ul>
-            <li>- {{ messages.success }}</li>
-        </ul>
+<div class="alert-container" ng-controller="AlertsController as alerts">
+    <div class="alert alert-success alert-dismissible" role="alert" ng-if="messages.success">
+        <strong>Success:</strong> {{ messages.success }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 
-    <div class="alert alert-danger" ng-if="messages.error">
-        <h4>Error-Message:</h4>
-        <ul>
-            <li>- {{ messages.error }}</li>
-        </ul>
+    <div class="alert alert-danger alert-dismissible" role="alert" ng-if="messages.error">
+        <strong>Error:</strong> {{ messages.error }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 
-    <div class="alert alert-warning" ng-if="messages.warning">
-        <h4>Warning-Message:</h4>
-        <ul>
-            <li>- {{ messages.warning }}</li>
-        </ul>
+    <div class="alert alert-warning alert-dismissible" role="alert" ng-if="messages.warning">
+        <strong>Warning:</strong> {{ messages.warning }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 
-    <div class="alert alert-warning" ng-if="messages.validation">
-        <h4>Validation-Messages:</h4>
+    <div class="alert alert-warning alert-dismissible" role="alert" ng-if="messages.validation">
+        <strong>Validation:</strong>
         <ul ng-repeat="validationMessage in messages.validation">
             <li>- {{validationMessage}}</li>
         </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 </div>
