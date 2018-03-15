@@ -2,11 +2,12 @@ let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 exports.config = {
     framework: 'jasmine',
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['./tests/e2e/search.js'],
+    specs: ['./tests/e2e/*'],
     capabilities: {
         browserName: 'chrome'
     },
     jasmineNodeOpts: {
+        //Don't show protractors . output
         print: function() {}
     },
     onPrepare: function () {
