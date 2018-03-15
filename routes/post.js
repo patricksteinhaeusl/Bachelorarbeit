@@ -7,6 +7,7 @@ const crypto = require('crypto');
 const multer = require('multer');
 const mime = require('mime');
 const GlobalConfig = require('../configs/index');
+const jwt = require('express-jwt');
 
 let storage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -22,6 +23,7 @@ let storage = multer.diskStorage({
 const upload = multer({storage: storage}).single('postImage');
 
 router.get('/', PostController.getAll);
-router.post('/', upload, PostController.insert);
+router.post('/', jwt(GlobalConfig.auth.validateOptions), upload, PostController.insert);
+router.delete('/:postId', jwt(GlobalConfig.auth.validateOptions), PostController.remove);
 
 module.exports = router;

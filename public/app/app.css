@@ -254,6 +254,10 @@ table tr td li {
     border-radius: 5px;
 }
 
+.sidebar-right .topRatedProduct-wrapper h4 {
+    overflow-wrap: break-word;
+}
+
 .sidebar-right .sidebar-topRatedProduct .image-wrapper {
     display: inline-block;
     width: 100%;
@@ -279,6 +283,10 @@ table tr td li {
     -moz-border-radius: 5px;
     border-radius: 5px;
     color: white;
+}
+
+.sidebar-right .sidebar-topRatedProduct .comment-wrapper {
+    overflow-wrap: break-word;
 }
 
 .sidebar-right .sidebar-topRatedProduct .rating-wrapper .glyphicon {
@@ -352,7 +360,7 @@ table tr td li {
     border-radius: 10px;
     border: solid 1px lightgray;
     box-shadow: 5px 5px 2px lightgray;
-    margin: 0 15px 0 15px;
+    margin: 15px 15px 0 15px;
 }
 
 .auth-menu .btn-outline-primary,
@@ -629,6 +637,12 @@ table tr td li {
     margin: 25px auto;
     max-width: 150px;
     max-height: 150px;
+}
+
+.post-element .actions {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
 }
 
 svg {

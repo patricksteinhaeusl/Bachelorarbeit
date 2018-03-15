@@ -1,6 +1,6 @@
 'use strict';
 
-appControllers.controller('AuthController', ['$rootScope', '$scope', '$location', '$timeout', 'AuthService', function ($rootScope, $scope, $location, $timeout, authService) {
+appControllers.controller('AuthController', ['$rootScope', '$scope', '$location', 'AuthService', function ($rootScope, $scope, $location, authService) {
     let self = this;
     self.data = {};
     self.data.login = {};
@@ -17,10 +17,6 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
                 $rootScope.messages.success = message;
                 self.data.login.user = {};
             }
-
-            $timeout(function () {
-                $rootScope.messages = {};
-            }, 5000);
         });
     };
 
@@ -36,10 +32,6 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
                 $rootScope.messages.success = message;
                 $location.path('/shop');
             }
-
-            $timeout(function () {
-                $rootScope.messages = {};
-            }, 5000);
         });
     };
 
@@ -52,10 +44,6 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
                 $rootScope.messages.success = message;
                 $location.path('/home');
             }
-
-            $timeout(function () {
-                $rootScope.messages = {};
-            }, 5000);
         });
     };
 
