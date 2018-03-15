@@ -36,7 +36,7 @@ describe('Auth', function() {
     });
 
     describe('Logout', function() {
-        it('should successfully', function() {
+        it('should success', function() {
             browser.get('http://localhost:3000/').then(function () {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();

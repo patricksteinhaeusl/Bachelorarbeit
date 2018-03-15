@@ -135,7 +135,7 @@ describe('Account', function() {
         });
 
         describe('add', function() {
-            it('should be successfully', function () {
+            it('should success', function () {
                 browser.get('http://localhost:3000/').then(function () {
                     //Open Auth Menu
                     element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
@@ -176,7 +176,7 @@ describe('Account', function() {
         });
 
         describe('delete', function() {
-            it('should be successfully', function () {
+            it('should success', function () {
                 browser.get('http://localhost:3000/').then(function () {
                     //Open Auth Menu
                     element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
