@@ -52,8 +52,8 @@ function getByCategoryId(categoryId, callback) {
 function getBySearchValue(searchValue, callback) {
     Product.find({
         $or: [
-            {name: new RegExp(searchValue, "i")},
-            {'category.name': new RegExp(searchValue, "i")}
+            {name: new RegExp(searchValue.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}\[\]\\\/]/g, ""), "i")},
+            {'category.name': new RegExp(searchValue.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}\[\]\\\/]/g, ""), "i")}
         ]
     }, function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
