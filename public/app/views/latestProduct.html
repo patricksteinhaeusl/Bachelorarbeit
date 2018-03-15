@@ -14,7 +14,7 @@
              ng-repeat="latestProductRating in latestProduct.ratings | toArray: false | orderBy: '-createdAt' | limitTo: 1">
             <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
             <!-- Injection Code Start - XSS -->
-            <div ng-bind-html="latestProductRating.comment | trustAsHTML"></div>
+            <div class="comment-wrapper" ng-bind-html="latestProductRating.comment | trustAsHTML"></div>
             <!-- Injection Code End -->
             <span class="rating-date">{{ latestProductRating.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0100' }}</span>
         </div>
