@@ -85,7 +85,7 @@ describe('Auth', function() {
             });
         });
 
-        it('should fail', function() {
+        it('with same user should fail', function() {
             browser.get('http://localhost:3000/').then(function () {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
