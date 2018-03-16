@@ -35,7 +35,7 @@
   },
   "scripts": {
     "prestart": "yarn install",
-    "test": "protractor conf.js",
+    "test": "protractor tests/protractorConf.js",
     "start": "node ./bin/www"
   },
   "jshintConfig": {
