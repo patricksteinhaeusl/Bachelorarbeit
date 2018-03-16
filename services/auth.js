@@ -30,16 +30,14 @@ function login(username, password, callback) {
     Account.findOne({
         username: usernameObj,
         password: hashedPassword,
-    }, function (error, resAccount) {
+    }, { password: false, createdAt: false, updatedAt: false, __v: false }, function (error, resAccount) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!resAccount) {
             return callback(null, ResponseUtil.createNotFoundResponse('Username or Password incorrect'));
         } else {
-            let {_id, username, firstname, lastname, email} = resAccount;
-            let user = {_id, username, firstname, lastname, email};
-            CryptoUtil.createToken(user, GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
+            CryptoUtil.createToken(resAccount.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
                 if (error) return callback(ResponseUtil.createErrorResponse(error));
-                let result = {'user': user, 'token': token};
+                let result = {'user': resAccount, 'token': token};
                 return callback(null, ResponseUtil.createSuccessResponse(result, 'Login successfully'));
             });
         }
@@ -53,12 +51,14 @@ function register(account, callback) {
         accountObj.save(function (error, result) {
             if (error) return callback(ResponseUtil.createErrorResponse(error));
             if (!result) return callback(ResponseUtil.createNotFoundResponse('Registration failed'));
-            let {_id, username, firstname, lastname, email} = result;
-            let user = {_id, username, firstname, lastname, email};
-            CryptoUtil.createToken(user, GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
+            Account.findOne(result, { password: false, createdAt: false, updatedAt: false, __v: false }, function (error, resAccount) {
                 if (error) return callback(ResponseUtil.createErrorResponse(error));
-                let result = {'user': user, 'token': token};
-                return callback(null, ResponseUtil.createSuccessResponse(result, 'Registration successfully'));
+                if (!result) return callback(ResponseUtil.createNotFoundResponse('Registration failed'));
+                CryptoUtil.createToken(resAccount.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
+                    if (error) return callback(ResponseUtil.createErrorResponse(error));
+                    let result = {'user': resAccount, 'token': token};
+                    return callback(null, ResponseUtil.createSuccessResponse(result, 'Registration successfully'));
+                });
             });
         });
     });
