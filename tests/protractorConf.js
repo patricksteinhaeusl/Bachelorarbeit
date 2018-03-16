@@ -2,10 +2,14 @@ let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 exports.config = {
     framework: 'jasmine',
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['./e2e/svgInjection.js'],
+    specs: ['./e2e/orderProcess.js'],
     capabilities: {
-        'browserName': 'chrome'
+        'browserName': 'chrome',
+        chromeOptions: {
+            args: ['--window-size=1000,1000']
+        }
     },
+
     jasmineNodeOpts: {
         //Don't show protractors . output
         print: function() {}

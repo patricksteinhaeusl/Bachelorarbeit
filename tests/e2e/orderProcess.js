@@ -1,35 +1,27 @@
 'use strict';
+const HelperFunctions = require('./helperFunctions.js')
 
 describe('Order and Cart Processes', function () {
     beforeAll(function () {
         browser.get('http://localhost:3000/').then(function () {
-            //Open Auth Menu
-            element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
-            browser.sleep(250);
-            //Fill form
-            element(by.model('auth.data.login.user.username')).sendKeys('customer0');
-            element(by.model('auth.data.login.user.password')).sendKeys('compass0');
-            //Submit form
-            element(by.buttonText('Login')).click();
-            browser.sleep(250);
+            HelperFunctions.login();
         });
     });
 
     afterAll(function () {
         browser.get('http://localhost:3000/').then(function () {
-            //Open Auth Menu
-            element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
-            browser.sleep(250);
-            //Submit form
-            element(by.buttonText('Logout')).click();
-            browser.sleep(250);
+            HelperFunctions.logout();
         });
     });
 
     describe('Cart Operations', function () {
-        it('should be possible to add items to cart', function () {
+        it('should be possible to add items to cart and display cart', function () {
             browser.get('http://localhost:3000/#!/shop').then(function () {
-
+                browser.sleep(5000);
+                element.all(by.repeater('product in shop.data.products')).then(function(products) {
+                    products[0].element(by.css('.glyphicon.glyphicon-shopping-cart')).get(0).click();
+                });
+                expect(element(by.className('cart-menu').getCssValue('display')).toBe('block'));
             });
         });
 

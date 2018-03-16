@@ -1,28 +1,16 @@
 'use strict';
+const HelperFunctions = require('./helperFunctions.js')
 
 describe('Account', function() {
-    beforeAll(function() {
+    beforeAll(function () {
         browser.get('http://localhost:3000/').then(function () {
-            //Open Auth Menu
-            element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
-            browser.sleep(250);
-            //Fill form
-            element(by.model('auth.data.login.user.username')).sendKeys('customer0');
-            element(by.model('auth.data.login.user.password')).sendKeys('compass0');
-            //Submit form
-            element(by.buttonText('Login')).click();
-            browser.sleep(2000);
+            HelperFunctions.login();
         });
     });
 
-    afterAll(function() {
+    afterAll(function () {
         browser.get('http://localhost:3000/').then(function () {
-            //Open Auth Menu
-            element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
-            browser.sleep(250);
-            //Submit form
-            element(by.buttonText('Logout')).click();
-            browser.sleep(250);
+            HelperFunctions.logout();
         });
     });
 
