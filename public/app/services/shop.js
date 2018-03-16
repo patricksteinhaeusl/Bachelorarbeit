@@ -68,9 +68,17 @@ appServices.factory('ShopService', ['$http', '$q', function ($http, $q) {
             $http
                 .post('http://localhost:3000/api/product/rating', data)
                 .then(function (response) {
-                    return callback(true);
-                }, function (response) {
-                    return callback(false);
+                    let statusCode = response.data.statusCode;
+                    let message = response.data.message;
+                    let validations = response.data.validations;
+                    if (statusCode === 200) {
+                        return callback(null, null, message, null);
+                    } else if (statusCode === 405) {
+                        return callback(null, null, null, validations);
+                    }
+                    return callback(null, null, message, null);
+                }, function (error) {
+                    return callback(error);
                 });
         }
     };

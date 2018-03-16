@@ -16,11 +16,14 @@ function getAll(callback) {
 
 function insert(post, callback) {
     let postObj = new Post(post);
-    postObj.save(function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
-        result = {'post': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Post successfully created.'));
+    postObj.validate(function (error) {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        postObj.save(function (error, result) {
+            if (error) return callback(ResponseUtil.createErrorResponse(error));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse());
+            result = {'post': result};
+            return callback(null, ResponseUtil.createSuccessResponse(result, 'Post successfully created.'));
+        });
     });
 }
 

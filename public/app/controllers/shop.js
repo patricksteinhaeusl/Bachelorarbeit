@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('ShopController', ['$scope', '$routeParams', '$location', 'AuthService', 'ShopService',
-    function ($scope, $routeParams, $location, authService, shopService) {
+appControllers.controller('ShopController', ['$rootScope', '$scope', '$routeParams', '$location', 'AuthService', 'ShopService',
+    function ($rootScope, $scope, $routeParams, $location, authService, shopService) {
         const self = this;
         self.data = {};
         self.data.products = {};
@@ -43,6 +43,7 @@ appControllers.controller('ShopController', ['$scope', '$routeParams', '$locatio
         };
 
         self.getProducts = function () {
+            console.log("getProducts");
             self.data.categoryId = null;
             shopService.getProducts(function (products) {
                 self.data.products = products;
@@ -84,28 +85,26 @@ appControllers.controller('ShopController', ['$scope', '$routeParams', '$locatio
 
         self.rateProduct = function (product, rating) {
             rating._account = authService.getUser()._id;
-
-            shopService.rateProduct(product, rating, function (result) {
-                if (result) {
-                    product.formSubmitFailed = false;
-                    self.getProducts();
-                    $('.shop-form-rating').slideUp();
-                } else {
-                    product.formSubmitFailed = true;
+            $rootScope.messages = {};
+            shopService.rateProduct(product, rating, function (error, data, message, validations) {
+                if (error) $rootScope.messages.error = error;
+                if (validations) {
+                    $rootScope.messages.validation = validations;
+                    self.ratingByAccount = {};
+                    self.ratingEmptyByAccount = {};
                 }
+                $rootScope.messages.success = message;
+                $('.shop-form-rating').slideUp();
+                self.getProducts();
             });
-        };
-
-        self.changeInputRatingValue = function (product, ratingValue) {
-            product.rating.value = ratingValue;
         };
 
         self.collapseRatingForm = function (productIndex) {
             let div = $('#shop-form-rating-' + productIndex);
-            console.log(div);
             if (div.is(':visible')) {
-                div.slideUp();
+                $('.shop-form-rating').slideUp();
             } else {
+                $('.shop-form-rating').slideUp();
                 div.slideDown();
                 div.css('display', 'inline-block');
             }

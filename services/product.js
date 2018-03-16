@@ -1,7 +1,10 @@
 'use strict';
 
 const Product = require('../models/product').Product;
+const Rating = require('../models/rating').Rating;
 const ResponseUtil = require('../utils/response');
+
+let ObjectId = require('mongoose').Types.ObjectId;
 
 function get(callback) {
     Product.find({}, function (error, result) {
@@ -64,33 +67,37 @@ function getBySearchValue(searchValue, callback) {
 }
 
 function updateRatings(product, rating, callback) {
-    Product.findOneAndUpdate(
-        {_id: product._id, 'ratings._account': rating._account},
-        {$set: {'ratings.$.comment': rating.comment, 'ratings.$.value': rating.value}},
-        {new: true},
-        function (error, result) {
-            if (error) return callback(ResponseUtil.createErrorResponse(error));
-            if (result) {
-                result.rating.value = calculateTotalRating(result.ratings);
-                result.save(function(error, result) {
-                    result = {'product': result};
-                    return callback(null, ResponseUtil.createSuccessResponse(result));
-                });
-            } else {
-                Product.findOneAndUpdate(
-                    {_id: product._id},
-                    {$push: {ratings: rating}},
-                    {new: true},
-                    function (error, result) {
-                        if (error) return callback(ResponseUtil.createErrorResponse(error));
-                        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+    let ratingObj = new Rating(rating);
+    ratingObj.validate(function (error) {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+            Product.findOneAndUpdate(
+                {_id: product._id, 'ratings._account': rating._account},
+                {$set: {'ratings.$.comment': rating.comment, 'ratings.$.value': rating.value}},
+                {new: true},
+                function (error, result) {
+                    if (error) return callback(ResponseUtil.createErrorResponse(error));
+                    if (result) {
                         result.rating.value = calculateTotalRating(result.ratings);
                         result.save(function(error, result) {
                             result = {'product': result};
-                            return callback(null, ResponseUtil.createSuccessResponse(result));
+                            return callback(null, ResponseUtil.createSuccessResponse(result, 'Rating updated successfully.'));
                         });
-                    });
-            }
+                    } else {
+                        Product.findOneAndUpdate(
+                            {_id: product._id},
+                            {$push: {ratings: rating}},
+                            {new: true},
+                            function (error, result) {
+                                if (error) return callback(ResponseUtil.createErrorResponse(error));
+                                if (!result) return callback(ResponseUtil.createNotFoundResponse());
+                                result.rating.value = calculateTotalRating(result.ratings);
+                                result.save(function(error, result) {
+                                    result = {'product': result};
+                                    return callback(null, ResponseUtil.createSuccessResponse(result, 'Rating saved successfully.'));
+                                });
+                            });
+                    }
+            });
     });
 }
 
