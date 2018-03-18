@@ -117,7 +117,7 @@ describe('Account', function() {
                     //Repeater
                     let deliveryAddresses = element.all(by.repeater('deliveryAddress in deliveryAddresses.data.deliveryAddresses'));
                     expect(deliveryAddresses.count()).toBe(1);
-                    expect(deliveryAddresses.get(0).getText()).toContain('');
+                    expect(deliveryAddresses.get(0).getText()).toContain('Street:Im Sandbüel 93\nZip:1700\nCity:Fribourg\nCountry:Schweiz\n');
                 });
             });
         });
