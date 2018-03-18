@@ -5,7 +5,6 @@ describe('Comment and Rating', function() {
     beforeAll(function() {
         browser.get('http://localhost:3000/').then(function () {
             HelperFunctions.login();
-
             //Add a Comment
             element(by.linkText('Shop')).click();
             //Get first product
@@ -113,5 +112,55 @@ describe('Comment and Rating', function() {
             });
         });
 
+    });
+
+    describe('Comments from multiple Users', function() {
+        it('User B should not see User A comment in comment field', function() {
+            HelperFunctions.logout();
+            //Fill form
+            element.all(by.model('auth.data.login.user.username')).get(1).sendKeys('customer1');
+            element.all(by.model('auth.data.login.user.password')).get(1).sendKeys('compass1');
+            //Submit form
+            element.all(by.buttonText('Login')).get(1).click();
+            browser.sleep(250);
+            //Goto Shop
+            element(by.linkText('Shop')).click();
+            //Check if Comment in Comment Field
+            element.all(by.repeater('product in shop.data.products')).then(function(products) {
+                expect(products[0].element(by.name('comment')).getAttribute('value')).toEqual('');
+            });
+        });
+
+        it('User B should be able to comment on same product like User A', function() {
+            //Get first product
+            element.all(by.repeater('product in shop.data.products')).then(function (products) {
+                let firstProduct = products[0];
+                //Open Comment
+                firstProduct.element(by.css('.glyphicon.glyphicon-star')).click();
+                browser.sleep(250);
+                //Check if Comment is empty
+                expect(products[0].element(by.name('comment')).getAttribute('value')).toEqual('');
+                //Reset Stars and then Set them
+                firstProduct.all(by.css('.form-group .jk-rating-stars-container .button')).first().click();
+                firstProduct.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();
+                //Fill form
+                let commentField = products[0].element(by.name('comment'));
+                commentField.clear().then(function () {
+                    commentField.sendKeys('Cool Product');
+                });
+                //Submit form
+                firstProduct.element(by.buttonText('Save')).click();
+                //Check if Comment in Comment Field
+                expect(products[0].element(by.name('comment')).getAttribute('value')).toEqual('Cool Product');
+            });
+
+        });
+
+        it('multiple ratings on one product should have right average ', function() {
+            element.all(by.repeater('topRatedProduct in shop.data.topRatedProducts')).then(function(topRated) {
+                let topRatedValue = topRated[0].element(by.binding('topRatedProduct.rating.value'));
+                expect(topRatedValue.getText()).toBe('∅ 4');
+            });
+        });
     });
 });
