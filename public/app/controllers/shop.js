@@ -43,7 +43,6 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
         };
 
         self.getProducts = function () {
-            console.log("getProducts");
             self.data.categoryId = null;
             shopService.getProducts(function (products) {
                 self.data.products = products;
