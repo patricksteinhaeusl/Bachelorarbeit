@@ -1,0 +1,19 @@
+#!/bin/ash
+#set pipefail so piped commands exit with errorcode of previous command
+set -o pipefail
+
+LOG="/var/log/all"
+
+touch $LOG
+
+for a in /utils/services/*
+do
+    printf "---------\nstarting $a \n" 2>&1 | tee -a $LOG
+    $a 2>&1 | tee -a $LOG
+    status=$?
+    wait
+	if [ $status -ne 0 ]; then
+	  printf  "Failed to start $a with code: $status\n" 2>&1 | tee -a $LOG
+	  exit $status
+	fi
+done
