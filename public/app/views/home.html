@@ -17,6 +17,19 @@
         </div>
     </div>
 
+    <div ng-controller="SocketsController as socket">
+        <label>Please enter your name: </label>
+        <input ng-model="socket.data.currentCustomer.name"/>
+        <button ng-click="socket.join()">Join</button>
+        <br/>
+
+        <h1>New Customers: </h1>
+        <ul>
+            <li ng-repeat="customer in socket.data.newCustomers">{{customer.name}}</li>
+        </ul>
+    </div>
+
+
     <div class="posts-container">
         <div class="posts col col-xs-6" ng-repeat="post in home.data.posts">
             <div class="post-element">
