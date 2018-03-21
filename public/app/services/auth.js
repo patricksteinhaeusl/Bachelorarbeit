@@ -64,6 +64,12 @@ appServices.factory('AuthService', ['$http', '$q', 'localStorageService', functi
                 return localStorageService.get('user');
             }
             return null;
+        },
+        getToken: function () {
+            if (localStorageService.get('token')) {
+                return localStorageService.get('token');
+            }
+            return null;
         }
     };
 }]);

@@ -1,54 +1,64 @@
 'use strict';
 
-appControllers.controller('AuthController', ['$rootScope', '$scope', '$location', 'AuthService', function ($rootScope, $scope, $location, authService) {
-    let self = this;
-    self.data = {};
-    self.data.login = {};
-    self.data.register = {};
+appControllers.controller('AuthController', ['$rootScope', '$scope', '$location', '$cookies', 'AuthService', 'WebSocketService',
+    function ($rootScope, $scope, $location, $cookies, authService, webSocketService) {
+        let self = this;
+        self.data = {};
+        self.data.login = {};
+        self.data.register = {};
 
-    self.login = function () {
-        let user = self.data.login.user;
-        $rootScope.messages = {};
-        authService.login(user, function (error, data, message, validations) {
-            if (error) $rootScope.messages.error = error;
-            if (validations) $rootScope.messages.validation = validations;
-            if (!data) $rootScope.messages.warning = message;
-            if (data) {
-                $rootScope.messages.success = message;
-                self.data.login.user = {};
-            }
-        });
-    };
+        self.login = function () {
+            let user = self.data.login.user;
+            $rootScope.messages = {};
+            authService.login(user, function (error, data, message, validations) {
+                if (error) $rootScope.messages.error = error;
+                if (validations) $rootScope.messages.validation = validations;
+                if (!data) $rootScope.messages.warning = message;
+                if (data) {
+                    $cookies.put('socketId', data.user._id);
+                    $cookies.put('userName', data.user.username);
+                    webSocketService.emit('register');
+                    $rootScope.messages.success = message;
+                    self.data.login.user = {};
+                }
+            });
+        };
 
-    self.register = function () {
-        let account = self.data.register.account;
-        $rootScope.messages = {};
-        authService.register(account, function (error, data, message, validations) {
-            if (error) $rootScope.messages.error = error;
-            if (validations) $rootScope.messages.validation = validations;
-            if (!data) $rootScope.messages.warning = message;
-            if (data) {
-                self.data.register.account = {};
-                $rootScope.messages.success = message;
-                $location.path('/shop');
-            }
-        });
-    };
+        self.register = function () {
+            let account = self.data.register.account;
+            $rootScope.messages = {};
+            authService.register(account, function (error, data, message, validations) {
+                if (error) $rootScope.messages.error = error;
+                if (validations) $rootScope.messages.validation = validations;
+                if (!data) $rootScope.messages.warning = message;
+                if (data) {
+                    $cookies.put('socketId', data.user._id);
+                    $cookies.put('userName', data.user.username);
+                    webSocketService.emit('register');
+                    self.data.register.account = {};
+                    $rootScope.messages.success = message;
+                    $location.path('/shop');
+                }
+            });
+        };
 
-    self.logout = function () {
-        $rootScope.messages = {};
-        authService.logout(function (error, data, message) {
-            if (error) $rootScope.messages.error = error;
-            if (!data) $rootScope.messages.warning = message;
-            if (data) {
-                $rootScope.messages.success = message;
-                $location.path('/home');
-            }
-        });
-    };
+        self.logout = function () {
+            $rootScope.messages = {};
+            authService.logout(function (error, data, message) {
+                if (error) $rootScope.messages.error = error;
+                if (!data) $rootScope.messages.warning = message;
+                if (data) {
+                    webSocketService.emit('logout');
+                    $cookies.remove('socketId');
+                    $cookies.remove('userName');
+                    $rootScope.messages.success = message;
+                    $location.path('/home');
+                }
+            });
+        };
 
-    self.isAuthenticated = authService.isAuthenticated;
+        self.isAuthenticated = authService.isAuthenticated;
 
-    self.getUser = authService.getUser;
+        self.getUser = authService.getUser;
 
 }]);

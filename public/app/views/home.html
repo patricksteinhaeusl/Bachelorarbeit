@@ -17,16 +17,42 @@
         </div>
     </div>
 
-    <div ng-controller="SocketsController as socket">
-        <label>Please enter your name: </label>
-        <input ng-model="socket.data.currentCustomer.name"/>
-        <button ng-click="socket.join()">Join</button>
-        <br/>
+    <div ng-if="auth.isAuthenticated()">
+        <div class="row">
+            <div class="col-md-4 user-list">
+                <h2>List of Users</h2>
+                <ul class="list-group">
+                    {{ websocket.userList | filter: { id : '!' + websocket.socketId }
+                    <li class="list-group-item"
+                        ng-repeat="user in websocket.userList | filter: { socketId : '!' + websocket.socketId }"
+                        ng-class="{ 'active' : user.id === websocket.selectedUser}"
+                        ng-click="websocket.selectedUser(user.socketId);"
+                        ng-style="{'cursor': 'pointer'}">
+                        <span>{{ user.userName }}</span>
+                    </li>
+                </ul>
 
-        <h1>New Customers: </h1>
-        <ul>
-            <li ng-repeat="customer in socket.data.newCustomers">{{customer.name}}</li>
-        </ul>
+            </div>
+            <div class="col-md-8 message-box">
+                <h2>Messages sent by users</h2>
+                <div class="message-container">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="message in websocket.messages">
+                            {{ message.name }} says: {{ message.msg }}
+                        </li>
+                    </ul>
+                    <div class="alert alert-warning" ng-show='messages.length == 0'>
+                        No messages for you.
+                    </div>
+                </div>
+                <div class="message-sender">
+                    <form>
+                        <textarea class="form-control" ng-model='websocket.message'></textarea>
+                        <input type="submit" value="Send" ng-click="websocket.sendMsg()">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -50,7 +76,7 @@
                 <div class="row">
                     <p>{{ post.text }}</p>
                 </div>
-                <div class="actions" ng-if="post._account === auth.getUser()._id">
+                <div class="actions" ng-if="auth.getUser() && post._account === auth.getUser()._id">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="home.remove($index)"></span>
                 </div>
             </div>
