@@ -16,8 +16,7 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     $cookies.put('socketId', data.user._id);
-                    $cookies.put('userName', data.user.username);
-                    webSocketService.emit('register');
+                    webSocketService.emit('register', data.user);
                     $rootScope.messages.success = message;
                     self.data.login.user = {};
                 }
@@ -33,8 +32,7 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     $cookies.put('socketId', data.user._id);
-                    $cookies.put('userName', data.user.username);
-                    webSocketService.emit('register');
+                    webSocketService.emit('register', data.user);
                     self.data.register.account = {};
                     $rootScope.messages.success = message;
                     $location.path('/shop');
@@ -48,9 +46,8 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
                 if (error) $rootScope.messages.error = error;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
-                    webSocketService.emit('logout');
+                    webSocketService.emit('logout', data);
                     $cookies.remove('socketId');
-                    $cookies.remove('userName');
                     $rootScope.messages.success = message;
                     $location.path('/home');
                 }

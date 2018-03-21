@@ -25,7 +25,6 @@ appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebS
     });
 
     webSocketService.on('userList', function (userList) {
-        console.log(userList);
         self.userList = userList;
     });
 

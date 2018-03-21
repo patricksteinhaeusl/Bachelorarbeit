@@ -102,8 +102,6 @@ function onListening() {
 
 const io = require('socket.io')(server);
 
-let users = [];
-
 io.engine.generateId = function (req) {
     if(req.headers.cookie) {
         let cookies = cookie.parse(req.headers.cookie);
@@ -114,38 +112,39 @@ io.engine.generateId = function (req) {
     return crypto.randomBytes(8).toString("hex");
 };
 
+let users = [];
+
 io.on('connection', function(socket) {
-    let cookies = cookie.parse(socket.handshake.headers.cookie);
-    let userName = cookies.userName;
+    socket.on('register', function (data) {
+        if(data && data._id && data.username && socket.id) {
+            let user = {
+                id : data._id,
+                socketId: socket.id,
+                userName: data.username
+            };
 
-    socket.emit('userList', users);
+            if(existsUser()) {
+                users.push(user);
+            } else {
+                deleteUser(user);
+                users.push(user);
+            }
 
-    socket.on('register', function () {
-        console.log('register');
-        let user = {
-            id : socket.id,
-            socketId: socket.id,
-            userName: userName
-        };
-
-        if(!existsUser()) {
-            users.push(user);
+            socket.emit('user', user);
+            io.emit('userList', users);
         }
-
-        socket.emit('user', user);
-        socket.emit('userList', users);
     });
 
     socket.on('getMsg', function (data) {
-        LogUtil.writeSocketLog("From: " + socket.id + " To: " + data.toId);
         socket.to(data.toId).emit('sendMsg', { msg: data.msg, name: data.name });
     });
 
-    socket.on('logout', function () {
-        console.log('logout');
-        deleteUser();
-        socket.emit('userList', users);
+    socket.on('logout', function (data) {
+        deleteUser(data);
+        io.emit('userList', users);
     });
+
+    io.emit('userList', users);
 
     function existsUser() {
         for(let i = 0; i < users.length; i++) {
@@ -156,10 +155,9 @@ io.on('connection', function(socket) {
         return false;
     }
 
-    function deleteUser() {
+    function deleteUser(user) {
         for(let i = 0; i < users.length; i++) {
-            if(users[i].id === socket.id) {
-                console.log("user deleted");
+            if(users[i].id === user.id) {
                 users.slice(i, 1);
                 return true;
             }

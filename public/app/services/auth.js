@@ -51,10 +51,11 @@ appServices.factory('AuthService', ['$http', '$q', 'localStorageService', functi
                 });
         },
         logout: function (callback) {
+            let user = localStorageService.get('user');
             localStorageService.remove('token');
             localStorageService.remove('user');
             $http.defaults.headers.common.Authorization = '';
-            return callback(null, true, 'Logout successfully');
+            return callback(null, user, 'Logout successfully');
         },
         isAuthenticated: function () {
             return !!(localStorageService.get('token') && localStorageService.get('user') !== null);

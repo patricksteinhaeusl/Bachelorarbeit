@@ -22,13 +22,14 @@
             <div class="col-md-4 user-list">
                 <h2>List of Users</h2>
                 <ul class="list-group">
-                    {{ websocket.userList | filter: { id : '!' + websocket.socketId }
                     <li class="list-group-item"
-                        ng-repeat="user in websocket.userList | filter: { socketId : '!' + websocket.socketId }"
+                        ng-repeat="user in websocket.userList | filter: { id : '!' + websocket.id }"
                         ng-class="{ 'active' : user.id === websocket.selectedUser}"
                         ng-click="websocket.selectedUser(user.socketId);"
                         ng-style="{'cursor': 'pointer'}">
-                        <span>{{ user.userName }}</span>
+                        <span>userId: {{ user.id }} {{ websocket.id }}</span>
+                        <span>socketId: {{ user.socketId }} {{ websocket.socketId }}</span>
+                        <span>userName: {{ user.userName }} {{ websocket.userName }}</span>
                     </li>
                 </ul>
 
