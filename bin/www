@@ -130,7 +130,7 @@ io.on('connection', function(socket) {
     });
 
     socket.on('getMsg', function (data) {
-        socket.to(data.to).emit('sendMsg', { msg: data.msg, from: data.name });
+        socket.to(data.to).emit('sendMsg', { msg: data.msg, from: data.from });
     });
 
     socket.on('disconnect', function (data) {

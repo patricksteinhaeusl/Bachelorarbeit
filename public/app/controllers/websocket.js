@@ -46,6 +46,7 @@ appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebS
 
 
     webSocketService.on('sendMsg', function (data) {
+        console.log(data);
         self.messages.push(data);
     });
 }]);
