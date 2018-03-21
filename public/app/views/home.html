@@ -23,13 +23,11 @@
                 <h2>List of Users</h2>
                 <ul class="list-group">
                     <li class="list-group-item"
-                        ng-repeat="user in websocket.userList | filter: { id : '!' + websocket.id }"
-                        ng-class="{ 'active' : user.id === websocket.selectedUser}"
-                        ng-click="websocket.selectedUser(user.socketId);"
+                        ng-repeat="user in websocket.userList | filter: { _id : '!' + websocket.user._id }"
+                        ng-class="{ 'active' : user._id === websocket.selectedUser._id}"
+                        ng-click="websocket.selectedUser(user);"
                         ng-style="{'cursor': 'pointer'}">
-                        <span>userId: {{ user.id }} {{ websocket.id }}</span>
-                        <span>socketId: {{ user.socketId }} {{ websocket.socketId }}</span>
-                        <span>userName: {{ user.userName }} {{ websocket.userName }}</span>
+                        <span>{{ user.username }}</span>
                     </li>
                 </ul>
 
@@ -39,7 +37,7 @@
                 <div class="message-container">
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="message in websocket.messages">
-                            {{ message.name }} says: {{ message.msg }}
+                            {{ message.from }} says: {{ message.msg }}
                         </li>
                     </ul>
                     <div class="alert alert-warning" ng-show='messages.length == 0'>

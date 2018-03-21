@@ -1,6 +1,6 @@
 'use strict';
 
-appServices.factory('WebSocketService', ['$rootScope', 'AuthService', function($rootScope, authService) {
+appServices.factory('WebSocketService', ['$rootScope', function($rootScope) {
     let socket = io.connect();
 
     return {
@@ -21,6 +21,12 @@ appServices.factory('WebSocketService', ['$rootScope', 'AuthService', function($
                     }
                 });
             })
+        },
+        join: function(user) {
+            this.emit('join', user);
+        },
+        leave: function(user) {
+            this.emit('leave', user);
         }
     };
 }]);

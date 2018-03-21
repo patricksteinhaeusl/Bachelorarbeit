@@ -2,43 +2,50 @@
 
 appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebSocketService', function ($scope, authService, webSocketService) {
     const self = this;
-    self.id = null;
-    self.socketId = null;
-    self.userName = null;
-    self.selectedUser = null;
+
+    self.user = null;
+    self.message = null;
     self.messages = [];
-    self.msgData = null;
     self.userList = [];
+
+    self.selectedUser = null;
 
     self.selectedUser = function (selectedUser) {
         self.selectedUser = selectedUser;
     };
 
+    self.sendMsg = function () {
+        webSocketService.emit('getMsg',{
+            to : self.selectedUser._id,
+            msg : self.message,
+            from : self.user.username
+        });
+        self.message = null;
+    };
+
     if(authService.isAuthenticated()) {
-        webSocketService.emit('register', authService.getUser().username);
+        self.user = {
+            _id: authService.getUser()._id,
+            username: authService.getUser().username
+        };
+
+        webSocketService.join(self.user);
     }
 
-    webSocketService.on('user', function (data) {
-        self.id = data.id;
-        self.socketId = data.socketId;
-        self.userName = data.userName;
+    webSocketService.on('join', function (user) {
+        self.user = user;
+    });
+
+    webSocketService.on('leave', function () {
+        self.user = null;
     });
 
     webSocketService.on('userList', function (userList) {
         self.userList = userList;
     });
 
-    self.sendMsg = function () {
-        webSocketService.emit('getMsg',{
-            toId : self.selectedUser,
-            msg : self.message,
-            name : self.userName
-        });
-        self.message = null;
-    };
 
     webSocketService.on('sendMsg', function (data) {
         self.messages.push(data);
-        console.log(self.messages);
     });
 }]);

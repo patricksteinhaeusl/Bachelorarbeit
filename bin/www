@@ -100,55 +100,50 @@ function onListening() {
     debug('Listening on ' + bind);
 }
 
-const io = require('socket.io')(server);
-
-io.engine.generateId = function (req) {
-    if(req.headers.cookie) {
-        let cookies = cookie.parse(req.headers.cookie);
-        if(cookies.socketId) {
-            return cookies.socketId;
-        }
-    }
-    return crypto.randomBytes(8).toString("hex");
-};
+const io = require('socket.io')(server, {
+    cookie: 'socketId'
+});
 
 let users = [];
 
 io.on('connection', function(socket) {
-    socket.on('register', function (data) {
-        if(data && data._id && data.username && socket.id) {
-            let user = {
-                id : data._id,
-                socketId: socket.id,
-                userName: data.username
-            };
 
-            if(existsUser()) {
-                users.push(user);
-            } else {
-                deleteUser(user);
-                users.push(user);
-            }
+    socket.on('join', function (data) {
+        let user = {
+            _id: data._id,
+            username: data.username
+        };
 
-            socket.emit('user', user);
-            io.emit('userList', users);
+        if(!existsUser(user)) {
+            users.push(user);
         }
+
+        socket.join(user._id);
+        socket.emit('join', user);
+        io.emit('userList', users);
+    });
+
+    socket.on('leave', function (data) {
+        deleteUser(data);
+        socket.emit('leave');
+        io.emit('userList', users);
     });
 
     socket.on('getMsg', function (data) {
-        socket.to(data.toId).emit('sendMsg', { msg: data.msg, name: data.name });
+        socket.to(data.to).emit('sendMsg', { msg: data.msg, from: data.name });
     });
 
-    socket.on('logout', function (data) {
+    socket.on('disconnect', function (data) {
         deleteUser(data);
+        socket.emit('leave');
         io.emit('userList', users);
     });
 
     io.emit('userList', users);
 
-    function existsUser() {
+    function existsUser(user) {
         for(let i = 0; i < users.length; i++) {
-            if(users[i].id === socket.id) {
+            if(users[i]._id === user._id) {
                 return true;
             }
         }
@@ -156,13 +151,14 @@ io.on('connection', function(socket) {
     }
 
     function deleteUser(user) {
+        let isDeleted = false;
         for(let i = 0; i < users.length; i++) {
-            if(users[i].id === user.id) {
+            if(users[i]._id === user._id) {
+                isDeleted = true;
                 users.slice(i, 1);
-                return true;
             }
         }
-        return false;
+        return isDeleted;
     }
 
 });
