@@ -9,7 +9,6 @@ const debug = require('debug')('server:server');
 const http = require('http');
 const GlobalConfig = require('../configs/index');
 const cookie = require('cookie');
-const crypto = require('crypto');
 
 /**
  * Get port from environment and store in Express.
@@ -131,20 +130,14 @@ io.on('connection', function(socket) {
         }
     });
 
-    socket.on('leave', function (user) {
-        deleteUser(user);
+    socket.on('leave', function (data) {
+        deleteUser(data);
         socket.emit('leave');
         io.emit('userList', users);
     });
 
     socket.on('getMsg', function (data) {
         socket.to(data.to).emit('sendMsg', { msg: data.msg, from: data.from });
-    });
-
-    socket.on('disconnect', function (data) {
-        deleteUser(data);
-        socket.emit('leave');
-        io.emit('userList', users);
     });
 
     io.emit('userList', users);
@@ -183,14 +176,10 @@ io.on('connection', function(socket) {
     }
 
     function deleteUser(user) {
-        let isDeleted = false;
         for(let i = 0; i < users.length; i++) {
             if(users[i]._id === user._id) {
-                isDeleted = true;
-                users.slice(i, 1);
+                users.splice(i, 1);
             }
         }
-        return isDeleted;
     }
-
 });
