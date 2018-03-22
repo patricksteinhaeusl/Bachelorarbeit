@@ -10,7 +10,7 @@ appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebS
 
     self.selectedUser = null;
 
-    self.selectedUser = function (selectedUser) {
+    self.selectUser = function (selectedUser) {
         self.selectedUser = selectedUser;
     };
 
@@ -24,12 +24,12 @@ appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebS
     };
 
     if(authService.isAuthenticated()) {
-        self.user = {
+        let authUser = {
             _id: authService.getUser()._id,
             username: authService.getUser().username
         };
 
-        webSocketService.join(self.user);
+        webSocketService.reJoin(authUser);
     }
 
     webSocketService.on('join', function (user) {
@@ -44,9 +44,7 @@ appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebS
         self.userList = userList;
     });
 
-
     webSocketService.on('sendMsg', function (data) {
-        console.log(data);
         self.messages.push(data);
     });
 }]);

@@ -65,31 +65,6 @@ appServices.factory('AuthService', ['$http', '$q', 'localStorageService', functi
                 return localStorageService.get('user');
             }
             return null;
-        },
-        getToken: function () {
-            if (localStorageService.get('token')) {
-                return localStorageService.get('token');
-            }
-            return null;
         }
     };
 }]);
-
-function handleUserResponse(response, callback) {
-    let statusCode = response.data.statusCode;
-    let data = response.data.data;
-    let message = response.data.message;
-    let validations = response.data.validations;
-    if (statusCode === 200) {
-        let user = data.user;
-        let token = data.token;
-        localStorageService.set('user', user);
-        localStorageService.set('token', token);
-        $http.defaults.headers.common.Authorization = 'Bearer ' + token;
-        let responseData = {user: user, token: token};
-        return callback(null, responseData, message, null);
-    } else if (statusCode === 405) {
-        return callback(null, null, null, validations);
-    }
-    return callback(null, null, message, null);
-}

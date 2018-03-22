@@ -1,4 +1,4 @@
-<div class="chat">
+<div class="chat" ng-controller="WebSocketController as websocket">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Support Chat</h3>
@@ -10,8 +10,8 @@
                         <li class="list-group-item"
                             ng-repeat="user in websocket.userList | filter: { _id : '!' + websocket.user._id }"
                             ng-class="{ 'active' : user._id === websocket.selectedUser._id}"
-                            ng-click="websocket.selectedUser(user);"
-                            ng-style="{'cursor': 'pointer'}">
+                            ng-click="websocket.selectUser(user);"
+                            ng-style="{'cursor': 'pointer'}" id="user.id">
                             {{ user.username }}
                         </li>
                     </ul>
@@ -39,11 +39,4 @@
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="chat-button" ng-if="auth.isAuthenticated()">
-    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="nav.collapseChat('.chat')">
-        <span class="glyphicon glyphicon glyphicon-modal-window" aria-hidden="true"></span> Chat
-    </button>
 </div>

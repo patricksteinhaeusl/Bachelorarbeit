@@ -15,7 +15,7 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
                 if (validations) $rootScope.messages.validation = validations;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
-                    $cookies.put('socketId', data.user._id);
+                    $cookies.put('room', data.user._id);
                     webSocketService.join(data.user);
                     $rootScope.messages.success = message;
                     self.data.login.user = {};
@@ -31,7 +31,7 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
                 if (validations) $rootScope.messages.validation = validations;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
-                    $cookies.put('socketId', data.user._id);
+                    $cookies.put('room', data.user._id);
                     webSocketService.join(data.user);
                     self.data.register.account = {};
                     $rootScope.messages.success = message;
@@ -47,7 +47,7 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     webSocketService.leave(data);
-                    $cookies.remove('socketId');
+                    $cookies.remove('room');
                     $rootScope.messages.success = message;
                     $location.path('/home');
                 }

@@ -8,7 +8,6 @@ const app = require('../app');
 const debug = require('debug')('server:server');
 const http = require('http');
 const GlobalConfig = require('../configs/index');
-const LogUtil = require('../utils/log');
 const cookie = require('cookie');
 const crypto = require('crypto');
 
@@ -100,31 +99,40 @@ function onListening() {
     debug('Listening on ' + bind);
 }
 
-const io = require('socket.io')(server, {
-    cookie: 'socketId'
-});
+const io = require('socket.io')(server);
 
 let users = [];
 
 io.on('connection', function(socket) {
-
-    socket.on('join', function (data) {
-        let user = {
-            _id: data._id,
-            username: data.username
-        };
-
-        if(!existsUser(user)) {
-            users.push(user);
+    let room = null;
+    if(socket.request.headers.cookie) {
+        let cookies = cookie.parse(socket.request.headers.cookie);
+        room = cookies.room;
+        if(room) {
+            socket.join(room);
         }
+    }
 
+    socket.on('join', function (user) {
+        join(user);
         socket.join(user._id);
-        socket.emit('join', user);
-        io.emit('userList', users);
     });
 
-    socket.on('leave', function (data) {
-        deleteUser(data);
+    socket.on('reJoin', function (user) {
+        let updatedUser = updateUser(user);
+
+        if(updatedUser) {
+            socket.emit('join', updatedUser);
+            io.emit('userList', users);
+            socket.join(updatedUser._id);
+        } else {
+            join(user);
+            socket.join(user._id);
+        }
+    });
+
+    socket.on('leave', function (user) {
+        deleteUser(user);
         socket.emit('leave');
         io.emit('userList', users);
     });
@@ -141,6 +149,20 @@ io.on('connection', function(socket) {
 
     io.emit('userList', users);
 
+    function join(user) {
+        let newUser = {
+            _id: user._id,
+            username: user.username
+        };
+
+        if(!existsUser(newUser)) {
+            users.push(newUser);
+        }
+
+        socket.emit('join', newUser);
+        io.emit('userList', users);
+    }
+
     function existsUser(user) {
         for(let i = 0; i < users.length; i++) {
             if(users[i]._id === user._id) {
@@ -148,6 +170,16 @@ io.on('connection', function(socket) {
             }
         }
         return false;
+    }
+
+    function updateUser(user) {
+        for(let i = 0; i < users.length; i++) {
+            if(users[i]._id === user._id) {
+                users[i].username = user.username;
+                return users[i];
+            }
+        }
+        return null;
     }
 
     function deleteUser(user) {
