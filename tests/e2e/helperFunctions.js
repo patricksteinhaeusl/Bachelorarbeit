@@ -14,7 +14,7 @@ exports.login = function (browser, username, password) {
     });
 };
 
-exports.logout = function logout (browser) {
+exports.logout = function logout(browser) {
     browser.get('http://localhost:3000/').then(function () {
         //Open Auth Menu
         browser.element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();

@@ -171,24 +171,24 @@ describe('Order and Cart Processes', function () {
             expect(element(by.className('alert alert-success alert-dismissible')).isDisplayed()).toBe(true);
             element.all(by.repeater('ord in orders.data.orders')).then(function (order) {
                 element.all(by.binding('ord._id')).get(0).getText().then(function (firstID) {
-                    orderID.then(function(secondID) {
+                    orderID.then(function (secondID) {
                         expect(firstID).toBe(secondID);
                     });
                 });
                 order[0].all(by.repeater('item in ord.items')).then(function (item) {
                     item[0].all(by.binding('item.quantity')).getText().then(function (element) {
-                        product1Name.then(function(text) {
+                        product1Name.then(function (text) {
                             expect(element.toString()).toContain(text);
                         });
-                        product1Price.then(function(text) {
+                        product1Price.then(function (text) {
                             expect(element).toContain(text);
                         });
                     });
                     item[1].all(by.binding('item.quantity')).getText().then(function (element) {
-                        product2Name.then(function(text) {
+                        product2Name.then(function (text) {
                             expect(element.toString()).toContain(text);
                         });
-                        sumPrice.then(function(text) {
+                        sumPrice.then(function (text) {
                             expect(element).toContain(text);
                         });
                     });
