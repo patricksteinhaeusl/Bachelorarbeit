@@ -1,18 +1,14 @@
 'use strict';
-const HelperFunctions = require('./helperFunctions.js')
+const HelperFunctions = require('./helperFunctions.js');
 const path = require('path');
 
 describe('Post', function() {
     beforeAll(function () {
-        browser.get('http://localhost:3000/').then(function () {
-            HelperFunctions.login();
-        });
+        HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
     afterAll(function () {
-        browser.get('http://localhost:3000/').then(function () {
-            HelperFunctions.logout();
-        });
+        HelperFunctions.logout(browser);
     });
 
     describe('Add with data', function() {

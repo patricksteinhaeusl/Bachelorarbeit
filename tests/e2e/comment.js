@@ -1,10 +1,10 @@
 'use strict';
-const HelperFunctions = require('./helperFunctions.js')
+const HelperFunctions = require('./helperFunctions.js');
 
 describe('Comment and Rating', function() {
     beforeAll(function() {
-        browser.get('http://localhost:3000/').then(function () {
-            HelperFunctions.login();
+        HelperFunctions.login(browser, 'customer0', 'compass0');
+        browser.get('http://localhost:3000/').then(function () { //todo
             //Add a Comment
             element(by.linkText('Shop')).click();
             //Get first product
@@ -28,9 +28,7 @@ describe('Comment and Rating', function() {
     });
 
     afterAll(function() {
-        browser.get('http://localhost:3000/').then(function () {
-            HelperFunctions.logout();
-        });
+        HelperFunctions.logout(browser);
     });
 
     describe('Adding a comment', function() {
@@ -82,7 +80,7 @@ describe('Comment and Rating', function() {
                         commentField.sendKeys('Not so nice Product');
                     });
                     //Submit form
-                    firstProduct.element(by.buttonText('Save')).click();
+                    firstProduct.element(by.buttonText('Update')).click();
                 });
             });
         });
@@ -116,13 +114,8 @@ describe('Comment and Rating', function() {
 
     describe('Comments from multiple Users', function() {
         it('User B should not see User A comment in comment field', function() {
-            HelperFunctions.logout();
-            //Fill form
-            element.all(by.model('auth.data.login.user.username')).get(1).sendKeys('customer1');
-            element.all(by.model('auth.data.login.user.password')).get(1).sendKeys('compass1');
-            //Submit form
-            element.all(by.buttonText('Login')).get(1).click();
-            browser.sleep(250);
+            HelperFunctions.logout(browser);
+            HelperFunctions.login(browser, 'customer1', 'compass1');
             //Goto Shop
             element(by.linkText('Shop')).click();
             //Check if Comment in Comment Field
