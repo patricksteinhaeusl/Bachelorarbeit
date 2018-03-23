@@ -77,6 +77,7 @@ let routes = {
 
 let app = angular.module('app', [
     'ngRoute',
+    'ngCookies',
     'ngSanitize',
     'LocalStorageModule',
     'ngFileUpload',

@@ -6,7 +6,7 @@ exports.config = {
     capabilities: {
         'browserName': 'chrome',
         chromeOptions: {
-            args: ['--window-size=1000,1000']
+            args: ['--window-size=1500,1500']
         }
     },
 

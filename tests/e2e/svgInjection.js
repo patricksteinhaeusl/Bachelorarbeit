@@ -1,23 +1,18 @@
 'use strict';
-const HelperFunctions = require('./helperFunctions.js')
-
+const HelperFunctions = require('./helperFunctions.js');
 const path = require('path');
 
-describe('Post - SVG Injection', function() {
+describe('Post - SVG Injection', function () {
     beforeAll(function () {
-        browser.get('http://localhost:3000/').then(function () {
-            HelperFunctions.login();
-        });
+        HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
     afterAll(function () {
-        browser.get('http://localhost:3000/').then(function () {
-            HelperFunctions.logout();
-        });
+        HelperFunctions.logout(browser);
     });
 
-    describe('Add with data', function() {
-        it('should success', function() {
+    describe('Add with data', function () {
+        it('should success', function () {
             browser.get('http://localhost:3000/').then(function () {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
@@ -41,9 +36,9 @@ describe('Post - SVG Injection', function() {
         });
     });
 
-    describe('View', function() {
-        it('should success', function() {
-            browser.get('http://localhost:3000/').catch(function() {
+    describe('View', function () {
+        it('should success', function () {
+            browser.get('http://localhost:3000/').catch(function () {
                 let alertDialog = browser.switchTo().alert();
                 expect(alertDialog.getText()).toBe('!SVGs are dangerous!');
                 alertDialog.accept();
@@ -68,13 +63,13 @@ describe('Post - SVG Injection', function() {
         });
     });
 
-    describe('Delete', function() {
-        it('should success', function() {
-            browser.get('http://localhost:3000/').then(function() {
+    describe('Delete', function () {
+        it('should success', function () {
+            browser.get('http://localhost:3000/').then(function () {
                 element(by.linkText('Home')).click();
                 browser.sleep(250);
                 let posts = element.all(by.repeater('post in home.data.posts'));
-                element.all(by.repeater('post in home.data.posts')).count().then(function(preCount) {
+                element.all(by.repeater('post in home.data.posts')).count().then(function (preCount) {
                     posts.last().all(by.css('.glyphicon-trash')).get(0).click();
                     let postCount = element.all(by.repeater('post in home.data.posts')).count();
                     //Check
@@ -90,7 +85,7 @@ describe('Post - SVG Injection', function() {
 
                 let posts = element.all(by.repeater('post in home.data.posts'));
 
-                element.all(by.repeater('post in home.data.posts')).count().then(function(preCount) {
+                element.all(by.repeater('post in home.data.posts')).count().then(function (preCount) {
                     posts.last().all(by.css('.glyphicon-trash')).get(0).click();
                     let postCount = element.all(by.repeater('post in home.data.posts')).count();
                     //Check

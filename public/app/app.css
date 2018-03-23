@@ -763,3 +763,58 @@ object {
 .jssorb031 .i.idn {
     opacity: .3;
 }
+
+.chat {
+    display: none;
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    width: 500px;
+    height: 350px;
+}
+
+.chat .panel {
+    height: 310px;
+    margin: 0;
+}
+
+.chat .panel-heading {
+    background-color: #4d91ff;
+    color: white;
+}
+
+.chat .panel-body {
+    height: 70%;
+    padding: 0;
+}
+
+.chat .row,
+.chat .user-list,
+.chat .message-container {
+    height: 100%;
+}
+
+.chat .user-list,
+.chat .message-container {
+    padding: 10px 5px 10px 5px;
+}
+
+.chat .panel-body .user-list {
+    border-right: solid 1px gray;
+}
+
+.chat .panel-body ul {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.chat .panel-body li {
+    font-size: small;
+}
+
+.chat-button {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+}
