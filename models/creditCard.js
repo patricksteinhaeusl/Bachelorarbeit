@@ -21,9 +21,18 @@ let typeValidator = [
     })
 ];
 
+let cvvValidator = [
+    validate({
+        validator: 'matches',
+        arguments: ['^[0-9]{3,4}$'],
+        message: 'cvv: {VALUE} is not valid! Must contain 3 or 4 digits.'
+    })
+];
+
 let creditCardSchema = new Schema({
     number: {type: String, required: [true, 'Number is required'], validate: numberValidator, unique: true},
     type: {type: String, required: [true, 'Type is required'], validate: typeValidator},
+    cvv: {type: String, required: [true, 'CVV is required'], validate: cvvValidator},
     _account: {type: Schema.Types.ObjectId, ref: 'Account'}
 }, {
     timestamps: {}
