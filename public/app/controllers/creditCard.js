@@ -6,8 +6,20 @@ appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$loc
         self.data = {};
         self.data.creditCard = {};
 
+        self.months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        self.years = [];
+
+        self.generateYears = function () {
+            let minYear = new Date().getFullYear();
+            for(let i = 0; i <= 3; i++) {
+                self.years.push(minYear + i);
+            }
+            return self.years;
+        };
+
         self.init = function () {
             self.getByNumber();
+            self.generateYears();
         };
 
         self.getByNumber = function () {

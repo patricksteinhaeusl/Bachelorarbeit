@@ -22,6 +22,14 @@
                    placeholder="CVV" required/>
         </div>
         <div class="form-group">
+            <label class="label">Month:</label>
+            <select class="form-control" ng-options="month for month in creditCard.months" ng-model="creditCard.data.creditCard.month"></select>
+        </div>
+        <div class="form-group">
+            <label class="label">Year:</label>
+            <select class="form-control" ng-options="year for year in creditCard.years" ng-model="creditCard.data.creditCard.year"></select>
+        </div>
+        <div class="form-group">
             <button class="btn btn-outline-primary">
                 <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
             </button>
