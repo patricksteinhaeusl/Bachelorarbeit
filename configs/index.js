@@ -1,11 +1,19 @@
 'use strict';
 
 const authSecret = '6a5d1f68as189c1asd31c98ad74f$ä¨ü123^01230dfasdklöfj asjfklö ä$das-füadfc$äsdä-$ad maklfjolu89ujpoadfädüafcnadszucfbhjk9m vkldf mlökl';
+const fs = require('fs');
+const key = fs.readFileSync('encryption/localhost.key');
+const cert = fs.readFileSync( 'encryption/localhost.crt' );
 
 const config = {
     server: {
         host: '0.0.0.0',
-        port: '3000'
+        port: '3000',
+        sslPort: '3443'
+    },
+    sslOptions: {
+        key: key,
+        cert: cert
     },
     crypt: {
         hash: 'sha256',
