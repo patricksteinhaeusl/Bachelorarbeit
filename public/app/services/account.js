@@ -5,7 +5,7 @@ appServices.factory('AccountService', ['$http', '$q', 'localStorageService', fun
         update: function (account, callback) {
             let data = {account: account};
             $http
-                .put('http://localhost:3000/api/account', data)
+                .put('/api/account', data)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     let data = response.data.data;

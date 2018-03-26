@@ -4,7 +4,7 @@ appServices.factory('DeliveryAddressService', ['$http', function ($http) {
     return {
         getById: function (deliveryAddressId, accountId, callback) {
             $http
-                .get('http://localhost:3000/api/deliveryaddress/' + deliveryAddressId + '/account/' + accountId)
+                .get('/api/deliveryaddress/' + deliveryAddressId + '/account/' + accountId)
                 .then(function (response) {
                     let deliveryAddress;
                     if(response.data.data === null) {
@@ -20,7 +20,7 @@ appServices.factory('DeliveryAddressService', ['$http', function ($http) {
         update: function (deliveryAddress, callback) {
             let data = {deliveryAddress: deliveryAddress};
             $http
-                .put('http://localhost:3000/api/deliveryaddress/', data)
+                .put('/api/deliveryaddress/', data)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     let data = response.data.data;
@@ -41,7 +41,7 @@ appServices.factory('DeliveryAddressService', ['$http', function ($http) {
         insert: function (deliveryAddress, callback) {
             let data = {deliveryAddress: deliveryAddress};
             $http
-                .post('http://localhost:3000/api/deliveryaddress/', data)
+                .post('/api/deliveryaddress/', data)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     let data = response.data.data;
