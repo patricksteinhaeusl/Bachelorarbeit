@@ -4,7 +4,7 @@ appServices.factory('PostService', ['$http', 'Upload', function ($http, Upload) 
     return {
         getAll: function (callback) {
             $http
-                .get('http://localhost:3000/api/post')
+                .get('/api/post')
                 .then(function (response) {
                     let posts = response.data.data.posts;
 
@@ -20,7 +20,7 @@ appServices.factory('PostService', ['$http', 'Upload', function ($http, Upload) 
         insert: function (post, postImage, callback, callbackEvent) {
             let data = {postImage: postImage, post: post};
             Upload.upload({
-                url: 'http://localhost:3000/api/post',
+                url: '/api/post',
                 data: data,
             }).then(function (response) {
                 let statusCode = response.data.statusCode;
@@ -44,7 +44,7 @@ appServices.factory('PostService', ['$http', 'Upload', function ($http, Upload) 
         },
         remove: function (postId, callback) {
             $http
-                .delete('http://localhost:3000/api/post/' + postId)
+                .delete('/api/post/' + postId)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     let data = response.data.data;
