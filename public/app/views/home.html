@@ -27,7 +27,7 @@
                 <div class="row">
                     <!-- Injection Code Start - SVG Injection -->
                     <img class="post-image" ng-src="http://localhost:3000/post-images/{{post.image}}"
-                         ng-if="(post.image | extension) !== 'svg'" alt="SVG"/>
+                         ng-if="(post.image | extension) !== 'svg'" alt="Image"/>
                     <object ng-attr-id="post-image-{{ $index }}"
                             ng-attr-data="http://localhost:3000/post-images/{{post.image}}"
                             type="image/svg+xml"
