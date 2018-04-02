@@ -29,12 +29,15 @@ let cvvValidator = [
     })
 ];
 
+let minYear = new Date().getFullYear();
+let maxYear = minYear + 3;
+
 let creditCardSchema = new Schema({
     number: {type: String, required: [true, 'Number is required'], validate: numberValidator, unique: true},
     type: {type: String, required: [true, 'Type is required'], validate: typeValidator},
     cvv: {type: String, required: [true, 'CVV is required'], validate: cvvValidator},
-    year: {type: Number, required: [true, 'Year is required']},
-    month: {type: Number, required: [true, 'Month is required']},
+    year: {type: Number, required: [true, 'Year is required'], min: [minYear, 'Year: {VALUE} is not valid. Must be between ' + minYear + ' and ' + maxYear], max: [maxYear, 'Year: {VALUE} is not valid. Must be between ' + minYear + ' and ' + maxYear]},
+    month: {type: Number, required: [true, 'Month is required'], min: [1, 'Month: {VALUE} is not valid. Must be between 1 and 12'], max: [12, 'Month: {VALUE} is not valid. Must be between 1 and 12']},
     _account: {type: Schema.Types.ObjectId, ref: 'Account'}
 }, {
     timestamps: {}
@@ -43,6 +46,13 @@ let creditCardSchema = new Schema({
 creditCardSchema.plugin(uniqueValidator, { message: '{PATH}: already exists!' });
 
 let CreditCard = mongoose.model('CreditCard', creditCardSchema);
+
+CreditCard.find({}, function(error, docs) {
+    docs.forEach(function(doc) {
+        doc.year = minYear + Math.floor(Math.random() * 3);
+        doc.save();
+    });
+});
 
 module.exports = {
     CreditCard,

@@ -48,6 +48,8 @@ describe('Account', function() {
                     element(by.model('creditCard.data.creditCard.number')).sendKeys('5404000000000033');
                     element(by.model('creditCard.data.creditCard.type')).sendKeys('Mastercard');
                     element(by.model('creditCard.data.creditCard.cvv')).sendKeys('989');
+                    element(by.model('creditCard.data.creditCard.month')).sendKeys(4);
+                    element(by.model('creditCard.data.creditCard.year')).sendKeys(new Date().getFullYear());
                     //Submit form
                     element(by.buttonText('Save')).click();
                     browser.sleep(250);
