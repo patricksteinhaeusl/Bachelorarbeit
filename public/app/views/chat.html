@@ -5,7 +5,15 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-xs-3 user-list">
+                <div class="col col-xs-3">
+                    Users
+                </div>
+                <div class="col col-xs-9">
+                    Messages
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-xs-3 user-list">
                     <ul class="list-group">
                         <li class="list-group-item"
                             ng-repeat="user in websocket.userList | filter: { _id : '!' + websocket.user._id }"
@@ -16,7 +24,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-xs-9 message-box">
+                <div class="col col-xs-9 message-box">
                     <div class="message-container">
                         <ul class="list-group">
                             <li class="list-group-item" ng-repeat="message in websocket.messages">

@@ -46,6 +46,7 @@ function update(creditCard, callback) {
 }
 
 function insert(creditCard, callback) {
+    console.log(creditCard);
     let creditCardObj = new CreditCard(creditCard);
 
     creditCardObj.validate(function (error) {

@@ -45,6 +45,11 @@ describe('Account', function () {
                 //Fill form
                 element(by.model('creditCard.data.creditCard.number')).sendKeys('5404000000000033');
                 element(by.model('creditCard.data.creditCard.type')).sendKeys('Mastercard');
+                element(by.model('creditCard.data.creditCard.cvv')).sendKeys('999');
+                HelperFunctions.selectDropDown(element(by.model('creditCard.data.creditCard.month')), 2);
+                HelperFunctions.selectDropDown(element(by.model('creditCard.data.creditCard.year')), 2);
+
+                browser.sleep(2000);
                 //Submit form
                 element(by.buttonText('Save')).click();
                 browser.sleep(250);

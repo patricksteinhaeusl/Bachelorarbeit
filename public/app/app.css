@@ -788,10 +788,34 @@ object {
     padding: 0;
 }
 
-.chat .row,
+.chat .row:nth-child(1) {
+    height: 10%;
+    background-color: #4753e9;
+}
+
+.chat .row:nth-child(1) .col {
+    height: 100%;
+    color: white;
+}
+
+.chat .row:nth-child(1) .col:first-child {
+    border-right: solid 1px white;
+}
+
+.chat .row:nth-child(2) {
+    height: 90%;
+}
+
 .chat .user-list,
 .chat .message-container {
     height: 100%;
+}
+
+.chat .user-list,
+.chat .message-box {
+    overflow: auto;
+    height: 100%;
+    padding-bottom: 5px;
 }
 
 .chat .user-list,
@@ -811,6 +835,8 @@ object {
 
 .chat .panel-body li {
     font-size: small;
+    margin-bottom: 5px;
+    padding: 5px;
 }
 
 .chat-button {

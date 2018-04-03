@@ -4,7 +4,7 @@ appServices.factory('AuthService', ['$http', '$q', 'localStorageService', functi
     return {
         login: function (user, callback) {
             $http
-                .post('http://localhost:3000/api/auth/login', user)
+                .post('/api/auth/login', user)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     let data = response.data.data;
@@ -28,7 +28,7 @@ appServices.factory('AuthService', ['$http', '$q', 'localStorageService', functi
         },
         register: function (account, callback) {
             $http
-                .post('http://localhost:3000/api/auth/register', account)
+                .post('/api/auth/register', account)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     let data = response.data.data;
