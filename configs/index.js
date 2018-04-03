@@ -2,8 +2,8 @@
 
 const authSecret = '6a5d1f68as189c1asd31c98ad74f$ä¨ü123^01230dfasdklöfj asjfklö ä$das-füadfc$äsdä-$ad maklfjolu89ujpoadfädüafcnadszucfbhjk9m vkldf mlökl';
 const fs = require('fs');
-const sslKey = fs.readFileSync('encryption/localhost.key');
-const sslCert = fs.readFileSync( 'encryption/localhost.crt' );
+const sslKey = fs.readFileSync('encryption/key.pem');
+const sslCert = fs.readFileSync( 'encryption/cert.pem' );
 
 const config = {
     server: {
