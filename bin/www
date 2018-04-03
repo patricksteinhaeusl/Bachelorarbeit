@@ -7,35 +7,54 @@
 const app = require('../app');
 const debug = require('debug')('server:server');
 const http = require('http');
+const https = require('https');
 const GlobalConfig = require('../configs/index');
 
 /**
- * Get port from environment and store in Express.
+ * Get port and store in Express.
  */
 
-const port = GlobalConfig.server.port;
+const port = normalizePort(GlobalConfig.server.port);
+const sslPort = normalizePort(GlobalConfig.server.sslPort);
 const host = GlobalConfig.server.host;
-app.set('port', port);
 
 /**
- * Create HTTP server.
+ * ForceSSL Options
+ */
+app.set('forceSSLOptions', {
+    httpsPort: sslPort
+});
+
+/**
+ * Create HTTP(S) server.
  */
 
 const server = http.createServer(app);
+const secureServer = https.createServer(GlobalConfig.sslOptions, app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port, host, function() {
-  let address = server.address();
-  let host = address.address;
-  let port = address.port;
-  console.log('Server started: http://' + host + ':' + port + ' in ' + app.get('env') + ' mode');
+    let address = server.address();
+    let host = address.address;
+    let port = address.port;
+    console.log('Server started: http://' + host + ':' + port + ' in ' + app.get('env') + ' mode');
 });
 
-server.on('error', onError);
-server.on('listening', onListening);
+server.on('error', (error) => onError(error, port));
+server.on('listening', () => onListening(server));
+
+secureServer.listen(sslPort, host, function() {
+    let address = secureServer.address();
+    let host = address.address;
+    let port = address.port;
+    console.log('Server started: https://' + host + ':' + port + ' in ' + app.get('env') + ' mode');
+});
+
+secureServer.on('error', (error) => onError(error, sslPort));
+secureServer.on('listening', () => onListening(secureServer));
 
 /**
  * Normalize a port into a number, string, or false.
@@ -61,11 +80,10 @@ function normalizePort(val) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+function onError(error, port) {
     if (error.syscall !== 'listen') {
         throw error;
     }
-
     let bind = typeof port === 'string'
         ? 'Pipe ' + port
         : 'Port ' + port;
@@ -89,7 +107,7 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
+function onListening(server) {
     let addr = server.address();
     let bind = typeof addr === 'string'
         ? 'pipe ' + addr
@@ -97,4 +115,4 @@ function onListening() {
     debug('Listening on ' + bind);
 }
 
-require('../utils/websocket')(server);
+require('../utils/websocket')(secureServer);
