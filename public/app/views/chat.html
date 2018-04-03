@@ -1,0 +1,39 @@
+<div class="chat" ng-controller="WebSocketController as websocket" ng-if="auth.isAuthenticated()">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Community Chat</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-3 user-list">
+                    <ul class="list-group">
+                        <li class="list-group-item"
+                            ng-repeat="user in websocket.userList | filter: { _id : '!' + websocket.user._id }"
+                            ng-class="{ 'active' : user._id === websocket.selectedUser._id}"
+                            ng-click="websocket.selectUser(user);"
+                            ng-style="{'cursor': 'pointer'}" id="user.id">
+                            {{ user.username }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-9 message-box">
+                    <div class="message-container">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="message in websocket.messages">
+                                {{ message.from }} says: {{ message.msg }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="input-group">
+                <input class="form-control" ng-model='websocket.message'>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="websocket.sendMsg()">Send...</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

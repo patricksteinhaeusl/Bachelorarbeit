@@ -1,27 +1,23 @@
 'use strict';
-const HelperFunctions = require('./helperFunctions.js')
+const HelperFunctions = require('./helperFunctions.js');
 let ccSettings, addressSettings, sumPrice, orderID, product1Name, product1Price, product2Name,
     product2Price, product3Name, product3Price, quantity = 7;
 
 describe('Order and Cart Processes', function () {
     beforeAll(function () {
-        browser.get('http://localhost:3000/').then(function () {
-            HelperFunctions.login();
-            //Save Address for later
-            element(by.linkText('Delivery Addresses')).click();
-            browser.sleep(250);
-            addressSettings = element.all(by.repeater('deliveryAddress in deliveryAddresses.data.deliveryAddresses')).get(0);
-            //Save CC for later
-            element(by.linkText('Delivery Addresses')).click();
-            browser.sleep(250);
-            ccSettings = element.all(by.repeater('creditCard in creditCards.data.creditCards')).get(0);
-        });
+        HelperFunctions.login(browser, 'customer0', 'compass0');
+        //Save Address for later
+        element(by.linkText('Delivery Addresses')).click();
+        browser.sleep(250);
+        addressSettings = element.all(by.repeater('deliveryAddress in deliveryAddresses.data.deliveryAddresses')).get(0);
+        //Save CC for later
+        element(by.linkText('Delivery Addresses')).click();
+        browser.sleep(250);
+        ccSettings = element.all(by.repeater('creditCard in creditCards.data.creditCards')).get(0);
     });
 
     afterAll(function () {
-        browser.get('http://localhost:3000/').then(function () {
-            HelperFunctions.logout();
-        });
+        HelperFunctions.logout(browser);
     });
 
     describe('Cart Operations', function () {
@@ -175,24 +171,24 @@ describe('Order and Cart Processes', function () {
             expect(element(by.className('alert alert-success alert-dismissible')).isDisplayed()).toBe(true);
             element.all(by.repeater('ord in orders.data.orders')).then(function (order) {
                 element.all(by.binding('ord._id')).get(0).getText().then(function (firstID) {
-                    orderID.then(function(secondID) {
+                    orderID.then(function (secondID) {
                         expect(firstID).toBe(secondID);
                     });
                 });
                 order[0].all(by.repeater('item in ord.items')).then(function (item) {
                     item[0].all(by.binding('item.quantity')).getText().then(function (element) {
-                        product1Name.then(function(text) {
+                        product1Name.then(function (text) {
                             expect(element.toString()).toContain(text);
                         });
-                        product1Price.then(function(text) {
+                        product1Price.then(function (text) {
                             expect(element).toContain(text);
                         });
                     });
                     item[1].all(by.binding('item.quantity')).getText().then(function (element) {
-                        product2Name.then(function(text) {
+                        product2Name.then(function (text) {
                             expect(element.toString()).toContain(text);
                         });
-                        sumPrice.then(function(text) {
+                        sumPrice.then(function (text) {
                             expect(element).toContain(text);
                         });
                     });
