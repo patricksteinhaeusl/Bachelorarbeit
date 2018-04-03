@@ -19,6 +19,13 @@ const sslPort = normalizePort(GlobalConfig.server.sslPort);
 const host = GlobalConfig.server.host;
 
 /**
+ * ForceSSL Options
+ */
+app.set('forceSSLOptions', {
+    httpsPort: sslPort
+});
+
+/**
  * Create HTTP(S) server.
  */
 
