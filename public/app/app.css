@@ -129,6 +129,7 @@ a:hover {
 .navbar .logo-item {
     padding-top: 15px;
     font-size: 40px;
+    color: white;
 }
 
 .navbar-navigation ul {
