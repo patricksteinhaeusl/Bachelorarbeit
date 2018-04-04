@@ -12,5 +12,6 @@ router.put('/', jwt(GlobalConfig.auth.validateOptions), orderController.update);
 router.post('/', jwt(GlobalConfig.auth.validateOptions), orderController.insert);
 router.delete('/:orderId', jwt(GlobalConfig.auth.validateOptions), orderController.remove);
 router.get('/:orderId', jwt(GlobalConfig.auth.validateOptions), orderController.get);
+router.get('/from/:from/to/:to', jwt(GlobalConfig.auth.validateOptions), orderController.getFromTo);
 
 module.exports = router;

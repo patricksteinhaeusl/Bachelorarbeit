@@ -49,11 +49,18 @@ function remove(req, res) {
     });
 }
 
+function getFromTo(req, res) {
+    OrderService.getFromTo(req.params.from, req.params.to, (result) => {
+        return res.json(result);
+    });
+}
+
 module.exports = {
     get,
     getByAccountId,
     update,
     insert,
     create,
-    remove
+    remove,
+    getFromTo
 };

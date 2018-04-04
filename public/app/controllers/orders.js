@@ -19,7 +19,7 @@ appControllers.controller('OrdersController', ['$scope', '$filter', 'OrdersServi
         });
     };
 
-    function buildTableBody() {
+    function buildTableBody(from, to) {
         let body = [];
 
         let header = [
@@ -33,7 +33,7 @@ appControllers.controller('OrdersController', ['$scope', '$filter', 'OrdersServi
 
         let counter = 1;
         self.data.orders.forEach(function(order) {
-            if(counter >= self.export.from && counter <= self.export.to) {
+            if(counter >= from && counter <= to) {
                 let createdAt = $filter('date')(order.createdAt, 'dd.MM.yyyy HH:mm:ss', '+0100');
                 let totalPrice = order.totalPrice + ' CHF';
 
@@ -48,32 +48,34 @@ appControllers.controller('OrdersController', ['$scope', '$filter', 'OrdersServi
     }
 
     self.downloadPDF = function() {
-        let docDefinition = {
-            pageOrientation: 'landscape',
-            pageMargins: [ 40, 60, 40, 60 ],
+        ordersService.getFromTo(self.export.from, self.export.to, function (result) {
+            let docDefinition = {
+                pageOrientation: 'landscape',
+                pageMargins: [ 40, 60, 40, 60 ],
 
-            header: { text: 'Order output as pdf', margin: [25, 10, 25, 10] },
+                header: { text: 'Order output as pdf', margin: [25, 10, 25, 10] },
 
-            footer: {
-                columns: [
-                    { text: $filter('date')(new Date(), 'dd.MM.yyyy HH:mm:ss', '+0100'), alignment: 'left', margin: [25, 10, 25, 10]}
-                ]
-            },
+                footer: {
+                    columns: [
+                        { text: $filter('date')(new Date(), 'dd.MM.yyyy HH:mm:ss', '+0100'), alignment: 'left', margin: [25, 10, 25, 10]}
+                    ]
+                },
 
-            content: [
-                { text: 'Orders', fontSize: 17, margin: [0, 0, 0, 25] },
-                {
-                    table: {
-                        headerRows: 1,
-                        widths: [ '*', '*', '*', '*' ],
+                content: [
+                    { text: 'Orders', fontSize: 17, margin: [0, 0, 0, 25] },
+                    {
+                        table: {
+                            headerRows: 1,
+                            widths: [ '*', '*', '*', '*' ],
 
-                        body: buildTableBody()
+                            body: buildTableBody(result.from, result.to)
+                        }
                     }
-                }
-            ]
-        };
+                ]
+            };
 
-        pdfMake.createPdf(docDefinition).download();
+            pdfMake.createPdf(docDefinition).download();
+        });
     };
 
     self.init();

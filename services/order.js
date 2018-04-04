@@ -57,11 +57,19 @@ function remove(orderId, callback) {
     });
 }
 
+function getFromTo(from, to, callback) {
+    let fromResult = eval(from);
+    let toResult = eval(to);
+    let result = { from: fromResult, to: toResult };
+    callback(result);
+}
+
 module.exports = {
     get,
     getByAccountId,
     update,
     insert,
     create,
-    remove
+    remove,
+    getFromTo
 };
