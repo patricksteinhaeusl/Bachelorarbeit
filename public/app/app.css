@@ -504,12 +504,11 @@ table tr td li {
 .product-rating {
     text-align: right;
     width: 100%;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .rating-average {
-    font-weight: bold;
-    padding: 2px 15px 2px 0;
+    padding: 0 15px 0 0;
 }
 
 .product-menu {
@@ -544,16 +543,25 @@ table tr td li {
     color: white;
 }
 
+.jk-rating-stars-container[read-only=true] a,
+.jk-rating-stars-container[read-only=true] .glyphicon,
+.jk-rating-stars-container[read-only=true] .material-icons {
+    cursor: default !important;
+    pointer-events: none;
+}
+
+.jk-rating-stars-container[read-only=true] a:hover,
+.jk-rating-stars-container[read-only=true] .glyphicon:hover,
+.jk-rating-stars-container[read-only=true] .material-icons:hover {
+    color: #ddd;
+}
+
+.jk-rating-stars-container .star-button {
+    text-shadow: none;
+}
+
 .material-icons {
-    font-size: 17px !important;
-}
-
-.wide .material-icons {
-    font-size: 17px !important;
-}
-
-.small .material-icons {
-    font-size: 14px !important;
+    font-size: 15px !important;
 }
 
 .glyphicon, .material-icons, a {
