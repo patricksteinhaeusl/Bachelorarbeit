@@ -9,7 +9,8 @@ const config = {
     server: {
         host: '0.0.0.0',
         port: '3000',
-        sslPort: '3443'
+        sslPort: '3443',
+        SSRFPort: '8765'
     },
     sslOptions: {
         key: sslKey,
