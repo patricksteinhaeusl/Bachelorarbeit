@@ -4,6 +4,7 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const jwt = require('express-jwt');
+//const cors = require('cors');
 
 const GlobalConfig = require('./configs/index');
 require('./utils/mongo');
@@ -19,6 +20,12 @@ const retailer = require('./routes/retailer');
 
 const app = express();
 
+/*const corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));*/
 app.use(logger('dev'));
 app.use(bodyParser.json({'strict': true}));
 

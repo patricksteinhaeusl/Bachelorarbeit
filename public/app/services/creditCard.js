@@ -4,7 +4,7 @@ appServices.factory('CreditCardService', ['$http', function ($http) {
     return {
         getByNumber: function (creditCardNumber, callback) {
             $http
-                .get('http://localhost:3000/api/creditcard/' + creditCardNumber)
+                .get('/api/creditcard/' + creditCardNumber)
                 .then(function (response) {
                     let creditCard;
                     if(response.data.data === null) {
@@ -20,7 +20,7 @@ appServices.factory('CreditCardService', ['$http', function ($http) {
         update: function (creditCard, callback) {
             let data = {creditCard: creditCard};
             $http
-                .put('http://localhost:3000/api/creditcard/', data)
+                .put('/api/creditcard/', data)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     let data = response.data.data;
@@ -41,7 +41,7 @@ appServices.factory('CreditCardService', ['$http', function ($http) {
         insert: function (creditCard, callback) {
             let data = {creditCard: creditCard};
             $http
-                .post('http://localhost:3000/api/creditcard/', data)
+                .post('/api/creditcard/', data)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     let data = response.data.data;

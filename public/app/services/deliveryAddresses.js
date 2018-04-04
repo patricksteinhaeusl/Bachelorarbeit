@@ -4,7 +4,7 @@ appServices.factory('DeliveryAddressesService', ['$http', function ($http) {
     return {
         getAllByAccount: function (account, callback) {
             $http
-                .get('http://localhost:3000/api/deliveryaddress/account/' + account._id)
+                .get('/api/deliveryaddress/account/' + account._id)
                 .then(function (response) {
                     let deliveryAddresses = response.data.data.deliveryAddresses;
                     if (deliveryAddresses) {
@@ -18,7 +18,7 @@ appServices.factory('DeliveryAddressesService', ['$http', function ($http) {
         },
         remove: function (deliveryAddressId, callback) {
             $http
-                .delete('http://localhost:3000/api/deliveryaddress/' + deliveryAddressId)
+                .delete('/api/deliveryaddress/' + deliveryAddressId)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     let message = response.data.message;

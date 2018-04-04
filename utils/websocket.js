@@ -3,10 +3,14 @@
 const cookie = require('cookie');
 
 module.exports = function(server) {
-    const io = require('socket.io')(server);
+    const io = require('socket.io')(server, {
+        transports: ['websocket']
+    });
+
     let users = [];
 
     io.on('connection', function(socket) {
+
         let room = null;
         if(socket.request.headers.cookie) {
             let cookies = cookie.parse(socket.request.headers.cookie);

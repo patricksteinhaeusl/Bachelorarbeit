@@ -230,10 +230,14 @@ table tr td li {
 }
 
 .sidebar-right {
-    padding: 0;
+    padding: 15px 0;
 }
 
-.sidebar-right > div > div {
+.sidebar-right > div > div > div {
+    padding: 15px;
+}
+
+.sidebar-topRatedProduct-wrapper {
     padding: 15px;
 }
 
@@ -243,7 +247,6 @@ table tr td li {
     border-radius: 10px;
     border: solid 1px lightgray;
     box-shadow: 5px 5px 2px lightgray;
-    margin: 15px
 }
 
 .sidebar-right .topRatedProduct-wrapper {
@@ -272,7 +275,7 @@ table tr td li {
 }
 
 .sidebar-right .sidebar-topRatedProduct .rating-average-wrapper {
-    padding: 10px 15px 10px 0;
+    padding: 10px 0 10px 0;
     text-align: right;
 }
 
@@ -360,7 +363,7 @@ table tr td li {
     border-radius: 10px;
     border: solid 1px lightgray;
     box-shadow: 5px 5px 2px lightgray;
-    margin: 15px 15px 0 15px;
+    margin: 0 15px;
 }
 
 .auth-menu .btn-outline-primary,

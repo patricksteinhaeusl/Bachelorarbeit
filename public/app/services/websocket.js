@@ -2,7 +2,9 @@
 
 appServices.factory('WebSocketService', ['$rootScope', function($rootScope) {
     let self = this;
-    self.socket = io.connect();
+    self.socket = io.connect({
+        transports: ['websocket']
+    });
 
     return {
         on: function (eventName, callback) {

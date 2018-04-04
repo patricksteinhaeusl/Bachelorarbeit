@@ -4,7 +4,7 @@ appServices.factory('OrderService', ['$http', '$q', function ($http, $q) {
     return {
         create: function (callback) {
             $http
-                .post('http://localhost:3000/api/order/create', null)
+                .post('/api/order/create', null)
                 .then(function (response) {
                     callback(null, response.data.data.order);
                 }, function (error) {
@@ -14,7 +14,7 @@ appServices.factory('OrderService', ['$http', '$q', function ($http, $q) {
         save: function (order, callback) {
             let data = {'order': order};
             $http
-                .post('http://localhost:3000/api/order', data)
+                .post('/api/order', data)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     let data = response.data.data.order;

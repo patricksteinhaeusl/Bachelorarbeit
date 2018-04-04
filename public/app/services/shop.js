@@ -4,7 +4,7 @@ appServices.factory('ShopService', ['$http', '$q', function ($http, $q) {
     return {
         getProducts: function (callback) {
             $http
-                .get('http://localhost:3000/api/product')
+                .get('/api/product')
                 .then(function (response) {
                     let products = response.data.data.products;
                     return callback(products);
@@ -14,7 +14,7 @@ appServices.factory('ShopService', ['$http', '$q', function ($http, $q) {
         },
         getProductsByCategory: function (categoryId, callback) {
             $http
-                .get('http://localhost:3000/api/product/category/' + categoryId)
+                .get('/api/product/category/' + categoryId)
                 .then(function (response) {
                     let products = response.data.data.products;
                     return callback(products);
@@ -24,7 +24,7 @@ appServices.factory('ShopService', ['$http', '$q', function ($http, $q) {
         },
         getProductsTopRated: function (callback) {
             $http
-                .get('http://localhost:3000/api/product/toprated')
+                .get('/api/product/toprated')
                 .then(function (response) {
                     let products = response.data.data.products;
                     return callback(products);
@@ -34,7 +34,7 @@ appServices.factory('ShopService', ['$http', '$q', function ($http, $q) {
         },
         getProductsLatest: function (callback) {
             $http
-                .get('http://localhost:3000/api/product/latest')
+                .get('/api/product/latest')
                 .then(function (response) {
                     let products = response.data.data.products;
                     return callback(products);
@@ -45,7 +45,7 @@ appServices.factory('ShopService', ['$http', '$q', function ($http, $q) {
         getProductsBySearchValue: function (searchValue, callback) {
             let escapedSearchValue = searchValue.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}\[\]\\\/]/g, '');
             $http
-                .get('http://localhost:3000/api/product/searchValue/' + escapedSearchValue)
+                .get('/api/product/searchValue/' + escapedSearchValue)
                 .then(function (response) {
                     let products = response.data.data.products;
                     return callback(products);
@@ -55,7 +55,7 @@ appServices.factory('ShopService', ['$http', '$q', function ($http, $q) {
         },
         getProductCategories: function (callback) {
             $http
-                .get('http://localhost:3000/api/product/category')
+                .get('/api/product/category')
                 .then(function (response) {
                     let categories = response.data.data.categories;
                     return callback(categories);
@@ -66,7 +66,7 @@ appServices.factory('ShopService', ['$http', '$q', function ($http, $q) {
         rateProduct: function (product, rating, callback) {
             let data = {'product': product, 'rating': rating};
             $http
-                .post('http://localhost:3000/api/product/rating', data)
+                .post('/api/product/rating', data)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     let message = response.data.message;
