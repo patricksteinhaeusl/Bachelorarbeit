@@ -4,7 +4,7 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const jwt = require('express-jwt');
-//const cors = require('cors');
+var forceSSL = require('express-force-ssl');
 
 const GlobalConfig = require('./configs/index');
 require('./utils/mongo');
@@ -20,12 +20,7 @@ const retailer = require('./routes/retailer');
 
 const app = express();
 
-/*const corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));*/
+app.use(forceSSL);
 app.use(logger('dev'));
 app.use(bodyParser.json({'strict': true}));
 
