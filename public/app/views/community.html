@@ -28,11 +28,11 @@
         <label aria-label="Add picture from URL">Add picture from URL</label>
         <input type="radio" name="fileUpload" ng-model="type" ng-value="1"/>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="community.data.post.text" name="url"
-                      placeholder="URL" required ng-disabled="type != 1"></input>
+            <input class="form-control" type="text" name="url"
+                      placeholder="URL" required ng-disabled="type != 1">
         </div>
         <div class="form-group">
-            <button class="btn btn-outline-primary">
+            <button class="btn btn-outline-primary" ng-disabled="type != 1 && type != 0">
                 <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
             </button>
         </div>
