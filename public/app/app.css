@@ -214,7 +214,7 @@ table td:last-child button,
 table td:last-child a {
     display: inline-block;
     width: 100%;
-    margin: 5px 0 5px 0;
+    margin: 2px 0 2px 0;
 }
 
 table td p label {
@@ -854,4 +854,28 @@ object {
     position: fixed;
     right: 15px;
     bottom: 15px;
+}
+
+.form-export {
+    display: inline-block;
+    width: 100%;
+}
+
+.form-export .form-group {
+    display: inline-block;
+    padding: 0;
+    margin: 0 15px 0 0;
+}
+
+.form-export .form-control {
+    display: inline-block;
+    width: 60%;
+    margin: 0;
+}
+
+.form-export label {
+    display: inline-block;
+    width: 30%;
+    line-height: 33.99px;
+    margin: 0;
 }

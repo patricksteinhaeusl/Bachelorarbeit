@@ -2,17 +2,19 @@
     <h1>My Orders</h1>
     <table class="tblOrders">
         <thead>
+        <th>#</th>
         <th>Created</th>
         <th>Order</th>
         <th>Status</th>
-        <th>Total Price</th>
+        <th>Total price</th>
         </thead>
-        <tbody ng-repeat="ord in orders.data.orders">
+        <tbody ng-repeat="order in orders.data.orders">
             <tr>
-                <td>{{ ord.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0100' }}</td>
-                <td>{{ ord._id }}</td>
-                <td>{{ ord.status }}</td>
-                <td>{{ ord.totalPrice }} CHF</td>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ order.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0100' }}</td>
+                <td>{{ order._id }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.totalPrice }} CHF</td>
             </tr>
             <tr ng-repeat="item in ord.items">
                 <td colspan="3">
@@ -24,4 +26,17 @@
             </tr>
         </tbody>
     </table>
+    <form class="form-export" ng-submit="orders.downloadPDF()">
+        <div class="form-group col-md-3">
+            <label>From</label>
+            <input class="form-control" type="text" ng-model="orders.export.from">
+        </div>
+        <div class="form-group col-md-3">
+            <label>To</label>
+            <input class="form-control" type="text" ng-model="orders.export.to">
+        </div>
+        <div class="form-group col-md-1">
+            <input class="btn btn-primary" type="submit" value="Export pdf">
+        </div>
+    </form>
 </div>
