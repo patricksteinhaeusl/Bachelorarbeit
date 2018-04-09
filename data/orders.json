@@ -1,0 +1,2020 @@
+[{
+	"_id": {
+		"$oid": "5acb4b7bd9520729d8638be4"
+	},
+	"payment": {
+		"creditCard": {
+			"_id": {
+				"$oid": "5aa0481e876d9d39d439785a"
+			},
+			"number": "5404000000000001",
+			"type": "Mastercard",
+			"cvv": "343",
+			"month": 1,
+			"_account": {
+				"$oid": "5aa0481e876d9d39d4397859"
+			},
+			"createdAt": {
+				"$date": "2018-03-07T20:14:22.539Z"
+			},
+			"updatedAt": {
+				"$date": "2018-03-07T20:14:22.539Z"
+			},
+			"__v": 0,
+			"year": 2018
+		},
+		"type": "creditCard"
+	},
+	"items": [
+		{
+			"_id": {
+				"$oid": "5acb4b84d9520729d8638bef"
+			},
+			"quantity": 3,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397885"
+				},
+				"ratings": [],
+				"name": "Berner Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 125.25,
+				"image": "steiner-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:16:20.639Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:16:20.639Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4b84d9520729d8638bec"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397880"
+				},
+				"ratings": [],
+				"name": "Gotthardtreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 180.9,
+				"image": "schelbert-gotthardtreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.618Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.618Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:16:20.640Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:16:20.640Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4b84d9520729d8638be9"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d439787f"
+				},
+				"ratings": [],
+				"name": "Prageltreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 200,
+				"image": "schelbert-prageltreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:16:20.640Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:16:20.640Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4b84d9520729d8638be6"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397882"
+				},
+				"ratings": [],
+				"name": "Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397881"
+					},
+					"name": "Zurfluh",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 325,
+				"image": "zurfluh-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:16:20.640Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:16:20.640Z"
+			}
+		}
+	],
+	"totalPrice": 1262.55,
+	"deliveryAddress": {
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439785b"
+		},
+		"street": "Im Sandbüel 93",
+		"zip": 1700,
+		"city": "Fribourg",
+		"country": "Schweiz",
+		"_account": {
+			"$oid": "5aa0481e876d9d39d4397859"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.541Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.541Z"
+		},
+		"__v": 0
+	},
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397859"
+	},
+	"status": "ready for delivery",
+	"createdAt": {
+		"$date": "2018-04-09T11:16:20.640Z"
+	},
+	"updatedAt": {
+		"$date": "2018-04-09T11:16:20.640Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5acb4b94d9520729d8638c05"
+	},
+	"payment": {
+		"type": "bill"
+	},
+	"items": [
+		{
+			"_id": {
+				"$oid": "5acb4b9cd9520729d8638c13"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397883"
+				},
+				"ratings": [],
+				"name": "Bissen",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397881"
+					},
+					"name": "Zurfluh",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"__v": 0
+				},
+				"size": 15,
+				"price": 235,
+				"image": "zurfluh-bissen.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.621Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.621Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:16:44.364Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:16:44.364Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4b9cd9520729d8638c10"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397885"
+				},
+				"ratings": [],
+				"name": "Berner Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 125.25,
+				"image": "steiner-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:16:44.364Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:16:44.364Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4b9cd9520729d8638c0d"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397886"
+				},
+				"ratings": [],
+				"name": "Modell Innenschweiz",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 400,
+				"image": "steiner-innenschweiz.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:16:44.364Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:16:44.364Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4b9cd9520729d8638c0a"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d439787f"
+				},
+				"ratings": [],
+				"name": "Prageltreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 200,
+				"image": "schelbert-prageltreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:16:44.364Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:16:44.364Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4b9cd9520729d8638c07"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397882"
+				},
+				"ratings": [],
+				"name": "Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397881"
+					},
+					"name": "Zurfluh",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 325,
+				"image": "zurfluh-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:16:44.364Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:16:44.364Z"
+			}
+		}
+	],
+	"totalPrice": 1285.25,
+	"deliveryAddress": {
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439785b"
+		},
+		"street": "Im Sandbüel 93",
+		"zip": 1700,
+		"city": "Fribourg",
+		"country": "Schweiz",
+		"_account": {
+			"$oid": "5aa0481e876d9d39d4397859"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.541Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.541Z"
+		},
+		"__v": 0
+	},
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397859"
+	},
+	"status": "ready for payment",
+	"createdAt": {
+		"$date": "2018-04-09T11:16:44.364Z"
+	},
+	"updatedAt": {
+		"$date": "2018-04-09T11:16:44.364Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5acb4bc1d9520729d8638c33"
+	},
+	"payment": {
+		"type": "creditCard",
+		"creditCard": {
+			"_id": {
+				"$oid": "5aa0481e876d9d39d439785a"
+			},
+			"number": "5404000000000001",
+			"type": "Mastercard",
+			"cvv": "343",
+			"month": 1,
+			"_account": {
+				"$oid": "5aa0481e876d9d39d4397859"
+			},
+			"createdAt": {
+				"$date": "2018-03-07T20:14:22.539Z"
+			},
+			"updatedAt": {
+				"$date": "2018-03-07T20:14:22.539Z"
+			},
+			"__v": 0,
+			"year": 2018
+		}
+	},
+	"items": [
+		{
+			"_id": {
+				"$oid": "5acb4bcad9520729d8638c3e"
+			},
+			"quantity": 3,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397883"
+				},
+				"ratings": [],
+				"name": "Bissen",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397881"
+					},
+					"name": "Zurfluh",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"__v": 0
+				},
+				"size": 15,
+				"price": 235,
+				"image": "zurfluh-bissen.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.621Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.621Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:17:30.667Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:17:30.667Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4bcad9520729d8638c3b"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397880"
+				},
+				"ratings": [],
+				"name": "Gotthardtreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 180.9,
+				"image": "schelbert-gotthardtreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.618Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.618Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:17:30.667Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:17:30.667Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4bcad9520729d8638c38"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d439787f"
+				},
+				"ratings": [],
+				"name": "Prageltreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 200,
+				"image": "schelbert-prageltreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:17:30.667Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:17:30.667Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4bcad9520729d8638c35"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397886"
+				},
+				"ratings": [],
+				"name": "Modell Innenschweiz",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 400,
+				"image": "steiner-innenschweiz.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:17:30.667Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:17:30.667Z"
+			}
+		}
+	],
+	"totalPrice": 1485.9,
+	"deliveryAddress": {
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439785b"
+		},
+		"street": "Im Sandbüel 93",
+		"zip": 1700,
+		"city": "Fribourg",
+		"country": "Schweiz",
+		"_account": {
+			"$oid": "5aa0481e876d9d39d4397859"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.541Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.541Z"
+		},
+		"__v": 0
+	},
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397859"
+	},
+	"status": "ready for delivery",
+	"createdAt": {
+		"$date": "2018-04-09T11:17:30.667Z"
+	},
+	"updatedAt": {
+		"$date": "2018-04-09T11:17:30.667Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5acb4bd7d9520729d8638c69"
+	},
+	"payment": {
+		"type": "creditCard",
+		"creditCard": {
+			"_id": {
+				"$oid": "5aa0481e876d9d39d439785a"
+			},
+			"number": "5404000000000001",
+			"type": "Mastercard",
+			"cvv": "343",
+			"month": 1,
+			"_account": {
+				"$oid": "5aa0481e876d9d39d4397859"
+			},
+			"createdAt": {
+				"$date": "2018-03-07T20:14:22.539Z"
+			},
+			"updatedAt": {
+				"$date": "2018-03-07T20:14:22.539Z"
+			},
+			"__v": 0,
+			"year": 2018
+		}
+	},
+	"items": [
+		{
+			"_id": {
+				"$oid": "5acb4bddd9520729d8638c6b"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397885"
+				},
+				"ratings": [],
+				"name": "Berner Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 125.25,
+				"image": "steiner-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:17:49.896Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:17:49.896Z"
+			}
+		}
+	],
+	"totalPrice": 125.25,
+	"deliveryAddress": {
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439785b"
+		},
+		"street": "Im Sandbüel 93",
+		"zip": 1700,
+		"city": "Fribourg",
+		"country": "Schweiz",
+		"_account": {
+			"$oid": "5aa0481e876d9d39d4397859"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.541Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.541Z"
+		},
+		"__v": 0
+	},
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397859"
+	},
+	"status": "ready for delivery",
+	"createdAt": {
+		"$date": "2018-04-09T11:17:49.896Z"
+	},
+	"updatedAt": {
+		"$date": "2018-04-09T11:17:49.896Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5acb4be9d9520729d8638c9a"
+	},
+	"payment": {
+		"type": "bill"
+	},
+	"items": [
+		{
+			"_id": {
+				"$oid": "5acb4befd9520729d8638c9f"
+			},
+			"quantity": 5,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d439787f"
+				},
+				"ratings": [],
+				"name": "Prageltreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 200,
+				"image": "schelbert-prageltreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:18:07.823Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:18:07.823Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4befd9520729d8638c9c"
+			},
+			"quantity": 6,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397882"
+				},
+				"ratings": [],
+				"name": "Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397881"
+					},
+					"name": "Zurfluh",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 325,
+				"image": "zurfluh-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:18:07.823Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:18:07.823Z"
+			}
+		}
+	],
+	"totalPrice": 2950,
+	"deliveryAddress": {
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439785b"
+		},
+		"street": "Im Sandbüel 93",
+		"zip": 1700,
+		"city": "Fribourg",
+		"country": "Schweiz",
+		"_account": {
+			"$oid": "5aa0481e876d9d39d4397859"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.541Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.541Z"
+		},
+		"__v": 0
+	},
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397859"
+	},
+	"status": "ready for payment",
+	"createdAt": {
+		"$date": "2018-04-09T11:18:07.823Z"
+	},
+	"updatedAt": {
+		"$date": "2018-04-09T11:18:07.823Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5acb4c5fd9520729d8638cd2"
+	},
+	"payment": {
+		"type": "creditCard",
+		"creditCard": {
+			"_id": {
+				"$oid": "5aa0481e876d9d39d439785d"
+			},
+			"number": "4900000000000086",
+			"type": "Visa",
+			"cvv": "117",
+			"month": 4,
+			"_account": {
+				"$oid": "5aa0481e876d9d39d439785c"
+			},
+			"createdAt": {
+				"$date": "2018-03-07T20:14:22.546Z"
+			},
+			"updatedAt": {
+				"$date": "2018-03-07T20:14:22.546Z"
+			},
+			"__v": 0,
+			"year": 2018
+		}
+	},
+	"items": [
+		{
+			"_id": {
+				"$oid": "5acb4c66d9520729d8638cdd"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397885"
+				},
+				"ratings": [],
+				"name": "Berner Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 125.25,
+				"image": "steiner-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:06.951Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:06.951Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c66d9520729d8638cda"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d439787e"
+				},
+				"ratings": [],
+				"name": "Froschmaultreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 15,
+				"price": 250,
+				"image": "schelbert-froschmaultreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.614Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.614Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:06.951Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:06.951Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c66d9520729d8638cd7"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397886"
+				},
+				"ratings": [],
+				"name": "Modell Innenschweiz",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 400,
+				"image": "steiner-innenschweiz.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:06.951Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:06.951Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c66d9520729d8638cd4"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397882"
+				},
+				"ratings": [],
+				"name": "Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397881"
+					},
+					"name": "Zurfluh",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 325,
+				"image": "zurfluh-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:06.951Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:06.951Z"
+			}
+		}
+	],
+	"totalPrice": 2200.5,
+	"deliveryAddress": {
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439785e"
+		},
+		"street": "Sonnenbergstr 114",
+		"zip": 1897,
+		"city": "Bouveret",
+		"country": "Schweiz",
+		"_account": {
+			"$oid": "5aa0481e876d9d39d439785c"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.548Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.548Z"
+		},
+		"__v": 0
+	},
+	"_account": {
+		"$oid": "5aa0481e876d9d39d439785c"
+	},
+	"status": "ready for delivery",
+	"createdAt": {
+		"$date": "2018-04-09T11:20:06.951Z"
+	},
+	"updatedAt": {
+		"$date": "2018-04-09T11:20:06.951Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5acb4c74d9520729d8638cf3"
+	},
+	"payment": {
+		"type": "creditCard",
+		"creditCard": {
+			"_id": {
+				"$oid": "5aa0481e876d9d39d439785d"
+			},
+			"number": "4900000000000086",
+			"type": "Visa",
+			"cvv": "117",
+			"month": 4,
+			"_account": {
+				"$oid": "5aa0481e876d9d39d439785c"
+			},
+			"createdAt": {
+				"$date": "2018-03-07T20:14:22.546Z"
+			},
+			"updatedAt": {
+				"$date": "2018-03-07T20:14:22.546Z"
+			},
+			"__v": 0,
+			"year": 2018
+		}
+	},
+	"items": [
+		{
+			"_id": {
+				"$oid": "5acb4c7cd9520729d8638cfe"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397885"
+				},
+				"ratings": [],
+				"name": "Berner Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 125.25,
+				"image": "steiner-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:28.303Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:28.303Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c7cd9520729d8638cfb"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d439787e"
+				},
+				"ratings": [],
+				"name": "Froschmaultreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 15,
+				"price": 250,
+				"image": "schelbert-froschmaultreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.614Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.614Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:28.303Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:28.303Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c7cd9520729d8638cf8"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397886"
+				},
+				"ratings": [],
+				"name": "Modell Innenschweiz",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 400,
+				"image": "steiner-innenschweiz.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:28.303Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:28.303Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c7cd9520729d8638cf5"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397882"
+				},
+				"ratings": [],
+				"name": "Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397881"
+					},
+					"name": "Zurfluh",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 325,
+				"image": "zurfluh-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:28.303Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:28.303Z"
+			}
+		}
+	],
+	"totalPrice": 2200.5,
+	"deliveryAddress": {
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439785e"
+		},
+		"street": "Sonnenbergstr 114",
+		"zip": 1897,
+		"city": "Bouveret",
+		"country": "Schweiz",
+		"_account": {
+			"$oid": "5aa0481e876d9d39d439785c"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.548Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.548Z"
+		},
+		"__v": 0
+	},
+	"_account": {
+		"$oid": "5aa0481e876d9d39d439785c"
+	},
+	"status": "ready for delivery",
+	"createdAt": {
+		"$date": "2018-04-09T11:20:28.303Z"
+	},
+	"updatedAt": {
+		"$date": "2018-04-09T11:20:28.303Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5acb4c8fd9520729d8638d1e"
+	},
+	"payment": {
+		"type": "bill"
+	},
+	"items": [
+		{
+			"_id": {
+				"$oid": "5acb4c95d9520729d8638d32"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397885"
+				},
+				"ratings": [],
+				"name": "Berner Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 125.25,
+				"image": "steiner-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.623Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c95d9520729d8638d2f"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397883"
+				},
+				"ratings": [],
+				"name": "Bissen",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397881"
+					},
+					"name": "Zurfluh",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"__v": 0
+				},
+				"size": 15,
+				"price": 235,
+				"image": "zurfluh-bissen.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.621Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.621Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c95d9520729d8638d2c"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d439787e"
+				},
+				"ratings": [],
+				"name": "Froschmaultreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 15,
+				"price": 250,
+				"image": "schelbert-froschmaultreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.614Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.614Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c95d9520729d8638d29"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397880"
+				},
+				"ratings": [],
+				"name": "Gotthardtreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 180.9,
+				"image": "schelbert-gotthardtreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.618Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.618Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c95d9520729d8638d26"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397886"
+				},
+				"ratings": [],
+				"name": "Modell Innenschweiz",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 400,
+				"image": "steiner-innenschweiz.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c95d9520729d8638d23"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d439787f"
+				},
+				"ratings": [],
+				"name": "Prageltreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 200,
+				"image": "schelbert-prageltreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4c95d9520729d8638d20"
+			},
+			"quantity": 2,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397882"
+				},
+				"ratings": [],
+				"name": "Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397881"
+					},
+					"name": "Zurfluh",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 325,
+				"image": "zurfluh-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:20:53.512Z"
+			}
+		}
+	],
+	"totalPrice": 2816.4,
+	"deliveryAddress": {
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439785e"
+		},
+		"street": "Sonnenbergstr 114",
+		"zip": 1897,
+		"city": "Bouveret",
+		"country": "Schweiz",
+		"_account": {
+			"$oid": "5aa0481e876d9d39d439785c"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.548Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.548Z"
+		},
+		"__v": 0
+	},
+	"_account": {
+		"$oid": "5aa0481e876d9d39d439785c"
+	},
+	"status": "ready for payment",
+	"createdAt": {
+		"$date": "2018-04-09T11:20:53.512Z"
+	},
+	"updatedAt": {
+		"$date": "2018-04-09T11:20:53.512Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5acb4c9fd9520729d8638d60"
+	},
+	"payment": {
+		"type": "creditCard",
+		"creditCard": {
+			"_id": {
+				"$oid": "5aa0481e876d9d39d439785d"
+			},
+			"number": "4900000000000086",
+			"type": "Visa",
+			"cvv": "117",
+			"month": 4,
+			"_account": {
+				"$oid": "5aa0481e876d9d39d439785c"
+			},
+			"createdAt": {
+				"$date": "2018-03-07T20:14:22.546Z"
+			},
+			"updatedAt": {
+				"$date": "2018-03-07T20:14:22.546Z"
+			},
+			"__v": 0,
+			"year": 2018
+		}
+	},
+	"items": [
+		{
+			"_id": {
+				"$oid": "5acb4ca7d9520729d8638d68"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397882"
+				},
+				"ratings": [],
+				"name": "Treicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397881"
+					},
+					"name": "Zurfluh",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.619Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 325,
+				"image": "zurfluh-treicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.620Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:21:11.904Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:21:11.904Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4ca7d9520729d8638d65"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d439787f"
+				},
+				"ratings": [],
+				"name": "Prageltreicheln",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d439787d"
+					},
+					"name": "Schelbert",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.603Z"
+					},
+					"__v": 0
+				},
+				"size": 10,
+				"price": 200,
+				"image": "schelbert-prageltreicheln.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.616Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:21:11.904Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:21:11.904Z"
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5acb4ca7d9520729d8638d62"
+			},
+			"quantity": 1,
+			"product": {
+				"rating": {
+					"value": 0
+				},
+				"_id": {
+					"$oid": "5aa0481e876d9d39d4397886"
+				},
+				"ratings": [],
+				"name": "Modell Innenschweiz",
+				"category": {
+					"_id": {
+						"$oid": "5aa0481e876d9d39d4397884"
+					},
+					"name": "Steiner, Wynigen",
+					"createdAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"updatedAt": {
+						"$date": "2018-03-07T20:14:22.622Z"
+					},
+					"__v": 0
+				},
+				"size": 25,
+				"price": 400,
+				"image": "steiner-innenschweiz.jpg",
+				"createdAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"updatedAt": {
+					"$date": "2018-03-07T20:14:22.625Z"
+				},
+				"__v": 0
+			},
+			"createdAt": {
+				"$date": "2018-04-09T11:21:11.904Z"
+			},
+			"updatedAt": {
+				"$date": "2018-04-09T11:21:11.904Z"
+			}
+		}
+	],
+	"totalPrice": 925,
+	"deliveryAddress": {
+		"_id": {
+			"$oid": "5aa0481e876d9d39d439785e"
+		},
+		"street": "Sonnenbergstr 114",
+		"zip": 1897,
+		"city": "Bouveret",
+		"country": "Schweiz",
+		"_account": {
+			"$oid": "5aa0481e876d9d39d439785c"
+		},
+		"createdAt": {
+			"$date": "2018-03-07T20:14:22.548Z"
+		},
+		"updatedAt": {
+			"$date": "2018-03-07T20:14:22.548Z"
+		},
+		"__v": 0
+	},
+	"_account": {
+		"$oid": "5aa0481e876d9d39d439785c"
+	},
+	"status": "ready for delivery",
+	"createdAt": {
+		"$date": "2018-04-09T11:21:11.904Z"
+	},
+	"updatedAt": {
+		"$date": "2018-04-09T11:21:11.904Z"
+	},
+	"__v": 0
+}]
+
