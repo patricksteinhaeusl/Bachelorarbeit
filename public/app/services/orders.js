@@ -16,13 +16,13 @@ appServices.factory('OrdersService', ['$http', '$q', function ($http, $q) {
                     return callback(false);
                 });
         },
-        getFromTo: function (from, to, callback) {
+        getFromTo: function (from, range, callback) {
             $http
-                .get('/api/order/from/' + from + '/to/' + to)
+                .get('/api/order/from/' + from + '/range/' + range)
                 .then(function (response) {
                     let from = response.data.from;
                     let to = response.data.to;
-                    let result = { "from": from.toString(), "to": to.toString() };
+                    let result = { "from": from, "to": to };
                     if (result) {
                         return callback(result);
                     } else {

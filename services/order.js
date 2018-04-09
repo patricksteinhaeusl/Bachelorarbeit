@@ -57,9 +57,10 @@ function remove(orderId, callback) {
     });
 }
 
-function getFromTo(from, to, callback) {
-    let fromResult = eval(from);
-    let toResult = eval(to);
+function getFromTo(from, range, callback) {
+    let fromResult = from;
+    let toResult = eval(from + " + " + range);
+
     let result = { from: fromResult, to: toResult };
     callback(result);
 }

@@ -29,11 +29,11 @@
     <form class="form-export" ng-submit="orders.downloadPDF()">
         <div class="form-group col-md-3">
             <label>From</label>
-            <input class="form-control" type="text" ng-model="orders.export.from">
+            <input class="form-control" type="text" placeholder="From" ng-model="orders.export.from">
         </div>
         <div class="form-group col-md-3">
-            <label>To</label>
-            <input class="form-control" type="text" ng-model="orders.export.to">
+            <label>Range</label>
+            <input class="form-control" type="text" placeholder="Range" ng-model="orders.export.range">
         </div>
         <div class="form-group col-md-1">
             <input class="btn btn-primary" type="submit" value="Export pdf">

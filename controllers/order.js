@@ -50,7 +50,7 @@ function remove(req, res) {
 }
 
 function getFromTo(req, res) {
-    OrderService.getFromTo(req.params.from, req.params.to, (result) => {
+    OrderService.getFromTo(req.params.from, req.params.range, (result) => {
         return res.json(result);
     });
 }

@@ -6,8 +6,8 @@ appControllers.controller('OrdersController', ['$scope', '$filter', 'OrdersServi
     self.data = {};
     self.data.orders = {};
     self.export = {};
-    self.export.from = 0;
-    self.export.to = 0;
+    self.export.from = null;
+    self.export.range = null;
 
     self.init = function () {
         self.getAllByAccount();
@@ -48,7 +48,7 @@ appControllers.controller('OrdersController', ['$scope', '$filter', 'OrdersServi
     }
 
     self.downloadPDF = function() {
-        ordersService.getFromTo(self.export.from, self.export.to, function (result) {
+        ordersService.getFromTo(self.export.from, self.export.range, function (result) {
             let docDefinition = {
                 pageOrientation: 'landscape',
                 pageMargins: [ 40, 60, 40, 60 ],
@@ -75,6 +75,8 @@ appControllers.controller('OrdersController', ['$scope', '$filter', 'OrdersServi
             };
 
             pdfMake.createPdf(docDefinition).download();
+            self.export.from = null;
+            self.export.range = null;
         });
     };
 
