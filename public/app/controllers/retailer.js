@@ -6,7 +6,6 @@ appControllers.controller('RetailerController', ['$rootScope', '$scope',
 
         self.request = function() {
             $rootScope.messages = {};
-            $rootScope.messages.warning = 'This function is actually disabled.';
+            $rootScope.messages.warning = 'This function is disabled.';
         }
-
     }]);

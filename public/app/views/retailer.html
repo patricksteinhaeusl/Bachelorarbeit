@@ -1,13 +1,7 @@
 <div class="content-view" ng-controller="RetailerController as retailer">
-    <div ng-if="auth.getUser().isRetailer">
-        <h1>Retailer Area</h1>
-        <p>In the api you can find a detailed description how you can use the special retailer offer.</p>
-    </div>
-    <div ng-if="!auth.getUser().isRetailer">
-        <h1>Retailer Area</h1>
-        <p>This area is just for retailers.</p>
-        <p>You wanna upgrade your account so just send us a request.</p>
-        <p>In the api you can find a detailed description how you can use the special retailer offer.</p>
-        <button class="btn btn-primary" ng-click="retailer.request()">Send request</button>
-    </div>
+    <h1>Retailer Area</h1>
+    <p>This area is just for retailers.</p>
+    <p>You wanna upgrade your account so just send us a request.</p>
+    <p>In the API you can find a detailed description how you can use the special retailer discount.</p>
+    <button class="btn btn-primary" ng-click="retailer.request()">Send request</button>
 </div>
