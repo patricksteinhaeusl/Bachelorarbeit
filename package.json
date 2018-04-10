@@ -32,6 +32,7 @@
     "multer": "^1.3.0",
     "ng-file-upload": "^12.2.13",
     "pdfmake": "^0.1.36",
+    "pug": "^2.0.3",
     "socket.io": "^2.0.4"
   },
   "devDependencies": {

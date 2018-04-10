@@ -2,19 +2,14 @@
 
 const RetailerService = require('../services/retailer');
 
-function index(req, res) {
-    res.render('retailer', {title: 'Hey', message: 'Hello there!'})
-}
-
 function change(req, res) {
     let orderId = req.params.orderId;
-    RetailerService.change(orderId, (error, result) => {
-        if (error) return res.json(error);
-        return res.json(result);
+    RetailerService.change(orderId, function (error, result) {
+        if (error) return res.render('feedback', { feedback: error });
+        return res.render('feedback', {feedback: result });
     });
 }
 
 module.exports = {
-    index,
     change,
 };

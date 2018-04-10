@@ -4,6 +4,7 @@ const Order = require('../models/order');
 const ResponseUtil = require('../utils/response');
 
 function change(orderId, callback) {
+    //TODO validate if User is a retailer
     Order.findById(orderId, function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
@@ -14,6 +15,8 @@ function change(orderId, callback) {
                 item.product.price = round(item.product.price * 0.5, 0.05);
             });
             result.save();
+        } else {
+            return callback(ResponseUtil.createErrorResponse('Expected payment type: bill'));
         }
 
         result = {'order': result};
