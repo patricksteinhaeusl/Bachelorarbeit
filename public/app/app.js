@@ -75,6 +75,9 @@ let routes = {
     }
 };
 
+let appControllers = angular.module('app.controllers', []);
+let appServices = angular.module('app.services', []);
+
 let app = angular.module('app', [
     'ngRoute',
     'ngCookies',
@@ -86,38 +89,54 @@ let app = angular.module('app', [
     'app.controllers',
     'app.services'
 ])
-    .config(['$locationProvider', '$routeProvider', '$compileProvider', 'localStorageServiceProvider',
-        function ($locationProvider, $routeProvider, $compileProvider, localStorageServiceProvider) {
-            $locationProvider.hashPrefix('!');
-
-            for (let path in routes) {
-                $routeProvider.when(path, routes[path]);
+.factory('AuthHttpResponseInterceptor', ['$q', '$location', 'localStorageService', function ($q, $location, localStorageService) {
+    return {
+        response: function (response){
+            return response || $q.when(response);
+        },
+        responseError: function (rejection) {
+            if (rejection.status === 401) {
+                localStorageService.remove('token');
+                localStorageService.remove('user');
+                $location.path('/home');
             }
+            return $q.reject(rejection);
+        }
+    }
+}])
+.config(['$httpProvider', '$locationProvider', '$routeProvider', '$compileProvider', 'localStorageServiceProvider',
+    function ($httpProvider, $locationProvider, $routeProvider, $compileProvider, localStorageServiceProvider) {
+        $httpProvider.interceptors.push('AuthHttpResponseInterceptor');
+        $locationProvider.hashPrefix('!');
 
-            $routeProvider.otherwise({redirectTo: '/home'});
-
-            localStorageServiceProvider
-                .setPrefix('')
-                .setStorageType('localStorage');
-
-            $compileProvider.debugInfoEnabled(true);
-        }]).run(['$rootScope', '$http', '$location', 'localStorageService', 'AuthService', function ($rootScope, $http, $location, localStorageService, authService) {
-        if (!localStorageService.get('items')) localStorageService.set('items', '[]');
-        if (localStorageService.get('token')) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + localStorageService.get('token');
+        for (let path in routes) {
+            $routeProvider.when(path, routes[path]);
         }
 
-        $rootScope.$on("$locationChangeStart", function (event, next, current) {
-            for (let path in routes) {
-                if (next.indexOf(path) !== -1) {
-                    if (routes[path].requireLogin && !authService.isAuthenticated()) {
-                        event.preventDefault();
-                        $location.path('/home');
-                    }
+        $routeProvider.otherwise({redirectTo: '/home'});
+
+        localStorageServiceProvider
+            .setPrefix('')
+            .setStorageType('localStorage');
+
+        $compileProvider.debugInfoEnabled(true);
+}]).run(['$rootScope', '$http', '$location', 'localStorageService', 'AuthService', function ($rootScope, $http, $location, localStorageService, authService) {
+    if (!localStorageService.get('items')) {
+        localStorageService.set('items', '[]');
+    }
+
+    if (localStorageService.get('token')) {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + localStorageService.get('token');
+    }
+
+    $rootScope.$on("$locationChangeStart", function (event, next, current) {
+        for (let path in routes) {
+            if (next.indexOf(path) !== -1) {
+                if (routes[path].requireLogin && !authService.isAuthenticated()) {
+                    event.preventDefault();
+                    $location.path('/home');
                 }
             }
-        });
-    }]);
-
-let appControllers = angular.module('app.controllers', []);
-let appServices = angular.module('app.services', []);
+        }
+    });
+}]);

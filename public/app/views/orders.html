@@ -16,13 +16,21 @@
                 <td>{{ order.status }}</td>
                 <td>{{ order.totalPrice }} CHF</td>
             </tr>
-            <tr ng-repeat="item in ord.items">
-                <td colspan="3">
-                    <ul>
-                        <li>{{ item.quantity }} x {{ item.product.name }} - {{ item.product.category.name }}</li>
-                    </ul>
+            <tr>
+                <td colspan="5">
+                    <table>
+                        <tbody>
+                        <tr ng-repeat="item in order.items">
+                            <td colspan="4">
+                                <ul>
+                                    <li>{{ item.quantity }} x {{ item.product.name }} - {{ item.product.category.name }}</li>
+                                </ul>
+                            </td>
+                            <td>{{ item.product.price * item.quantity }} CHF</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </td>
-                <td>{{ item.product.price * item.quantity }} CHF</td>
             </tr>
         </tbody>
     </table>

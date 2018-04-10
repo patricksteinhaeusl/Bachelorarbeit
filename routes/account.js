@@ -6,7 +6,7 @@ const accountController = require('../controllers/account');
 const GlobalConfig = require('../configs/index');
 const jwt = require('express-jwt');
 
-router.get('/:accountId', accountController.get);
+router.get('/:accountId', jwt(GlobalConfig.auth.validateOptions), accountController.get);
 router.put('/', jwt(GlobalConfig.auth.validateOptions), accountController.update);
 
 module.exports = router;
