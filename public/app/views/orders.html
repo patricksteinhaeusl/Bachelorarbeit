@@ -1,5 +1,18 @@
 <div class="content-view" ng-controller="OrdersController as orders">
     <h1>My Orders</h1>
+    <form class="form-export" ng-submit="orders.downloadPDF()">
+        <div class="form-group col-md-3">
+            <label>From</label>
+            <input class="form-control" type="text" placeholder="From" ng-model="orders.export.from" required>
+        </div>
+        <div class="form-group col-md-3">
+            <label>Range</label>
+            <input class="form-control" type="text" placeholder="Range" ng-model="orders.export.range" required>
+        </div>
+        <div class="form-group col-md-1">
+            <input class="btn btn-primary" type="submit" value="Export pdf">
+        </div>
+    </form>
     <table class="tblOrders">
         <thead>
         <th>#</th>
@@ -26,7 +39,7 @@
                                     <li>{{ item.quantity }} x {{ item.product.name }} - {{ item.product.category.name }}</li>
                                 </ul>
                             </td>
-                            <td>{{ item.product.price * item.quantity }} CHF</td>
+                            <td>{{ (item.product.price * item.quantity).toFixed(2) }} CHF</td>
                         </tr>
                         </tbody>
                     </table>
@@ -34,17 +47,4 @@
             </tr>
         </tbody>
     </table>
-    <form class="form-export" ng-submit="orders.downloadPDF()">
-        <div class="form-group col-md-3">
-            <label>From</label>
-            <input class="form-control" type="text" placeholder="From" ng-model="orders.export.from" required>
-        </div>
-        <div class="form-group col-md-3">
-            <label>Range</label>
-            <input class="form-control" type="text" placeholder="Range" ng-model="orders.export.range" required>
-        </div>
-        <div class="form-group col-md-1">
-            <input class="btn btn-primary" type="submit" value="Export pdf">
-        </div>
-    </form>
 </div>

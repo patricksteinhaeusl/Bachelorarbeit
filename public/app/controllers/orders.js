@@ -1,6 +1,7 @@
 'use strict';
 
-appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter', 'OrdersService', 'AuthService', function ($rootScope, $scope, $filter, ordersService, authService) {
+appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter', 'OrdersService', 'AuthService',
+function ($rootScope, $scope, $filter, ordersService, authService) {
     const self = this;
 
     self.data = {};
