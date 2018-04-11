@@ -115,4 +115,4 @@ function onListening(server) {
     debug('Listening on ' + bind);
 }
 
-require('../utils/websocket')(secureServer);
+require('../websocket')(secureServer);
