@@ -37,7 +37,7 @@ function ($rootScope, $scope, $filter, ordersService, authService) {
         self.data.orders.forEach(function(order) {
             if(counter >= from && counter <= to) {
                 let createdAt = $filter('date')(order.createdAt, 'dd.MM.yyyy HH:mm:ss', '+0100');
-                let totalPrice = order.totalPrice + ' CHF';
+                let totalPrice = order.totalPrice.toFixed(2) + ' CHF';
 
                 row = [
                     { text: createdAt, bold: true, fontSize: 10 },
@@ -49,7 +49,7 @@ function ($rootScope, $scope, $filter, ordersService, authService) {
 
                 order.items.forEach(function(item) {
                     let itemName = item.quantity + ' x ' + item.product.name;
-                    let itemPrice = (item.quantity * item.product.price) + ' CHF';
+                    let itemPrice = (item.quantity * item.product.price).toFixed(2) + ' CHF';
                     row = [
                         { text: itemName, fontSize: 10, colSpan: 3, marginLeft: 15 },
                         {},
