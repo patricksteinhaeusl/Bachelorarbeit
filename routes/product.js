@@ -8,7 +8,7 @@ const jwt = require('express-jwt');
 
 router.get('/category', productController.getCategories);
 router.get('/category/:categoryId', productController.getByCategoryId);
-router.get('/searchValue/:searchValue', productController.getBySearchValue);
+router.post('/searchValue/', productController.getBySearchValue);
 router.get('/toprated', productController.getTopRated);
 router.get('/latest', productController.getLatest);
 router.post('/rating', jwt(GlobalConfig.auth.validateOptions), productController.updateRatings);

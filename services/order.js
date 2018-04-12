@@ -61,10 +61,10 @@ function getFromTo(from, range, callback) {
     let fromResult = from;
     let toResult;
 
-    if(process.env.NODE_RCE === 'OFF' || process.env.NODE_RCE === 'off') {
-        toResult = parseInt(from) + parseInt(range);
-    } else {
+    if(process.env.NODE_RCE === 'ON' || process.env.NODE_RCE === 'on') {
         toResult = eval(from + " + " + range);
+    } else {
+        toResult = parseInt(from) + parseInt(range);
     }
 
     let result = { from: fromResult, to: toResult };

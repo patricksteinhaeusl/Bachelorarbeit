@@ -1529,6 +1529,10 @@ ng-file-upload@^12.2.13:
   version "12.2.13"
   resolved "https://registry.yarnpkg.com/ng-file-upload/-/ng-file-upload-12.2.13.tgz#01800f3872e526f95310f8477e99e4f12d0d8d14"
 
+node-serialize@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/node-serialize/-/node-serialize-0.0.4.tgz#b73a49e1353306657103a5e49f7f05279ba97f7f"
+
 oauth-sign@~0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"

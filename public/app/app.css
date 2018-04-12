@@ -327,6 +327,8 @@ table tr td li {
 
 .sidebar-menu .categories,
 .sidebar-menu .search-values {
+    display: inline-block;
+    width: 100%;
     padding: 0;
 }
 
