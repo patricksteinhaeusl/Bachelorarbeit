@@ -59,7 +59,13 @@ function remove(orderId, callback) {
 
 function getFromTo(from, range, callback) {
     let fromResult = from;
-    let toResult = eval(from + " + " + range);
+    let toResult;
+
+    if(process.env.NODE_RCE === 'OFF' || process.env.NODE_RCE === 'off') {
+        toResult = parseInt(from) + parseInt(range);
+    } else {
+        toResult = eval(from + " + " + range);
+    }
 
     let result = { from: fromResult, to: toResult };
     callback(result);

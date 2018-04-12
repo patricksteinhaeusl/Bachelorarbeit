@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 
 /**
+ * Environment variables
+ */
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_RCE = process.env.NODE_RCE || 'on';
+
+/**
  * Module dependencies.
  */
 
@@ -40,7 +47,8 @@ server.listen(port, host, function() {
     let address = server.address();
     let host = address.address;
     let port = address.port;
-    console.log('Server started: http://' + host + ':' + port + ' in ' + app.get('env') + ' mode');
+    console.log('Server started: http://' + host + ':' + port + ' in ' + process.env.NODE_ENV + ' mode');
+    console.log("NODE_RCE: " + process.env.NODE_RCE);
 });
 
 server.on('error', (error) => onError(error, port));
@@ -50,7 +58,8 @@ secureServer.listen(sslPort, host, function() {
     let address = secureServer.address();
     let host = address.address;
     let port = address.port;
-    console.log('Server started: https://' + host + ':' + port + ' in ' + app.get('env') + ' mode');
+    console.log('Server started: https://' + host + ':' + port + ' in ' + process.env.NODE_ENV + ' mode');
+    console.log("NODE_RCE: " + process.env.NODE_RCE);
 });
 
 secureServer.on('error', (error) => onError(error, sslPort));

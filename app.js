@@ -47,7 +47,7 @@ app.use(function (req, res, next) {
     let err = new Error('Not Found');
     err.status = 404;
 
-    if(req.app.get('env') === 'production') {
+    if(process.env.NODE_ENV === 'production') {
         res.redirect('/#!/shop');
     }
 
@@ -56,7 +56,7 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res) {
-    if(req.app.get('env') === 'development') {
+    if(process.env.NODE_ENV === 'development') {
         res.locals.message = err.message;
         res.status(err.status || 500);
         res.send(err.message);
