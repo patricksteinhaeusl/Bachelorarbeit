@@ -24,7 +24,7 @@
         <tbody ng-repeat="order in orders.data.orders">
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ order.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0100' }}</td>
+                <td>{{ order.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200' }}</td>
                 <td>{{ order._id }}</td>
                 <td>{{ order.status }}</td>
                 <td>{{ order.totalPrice }} CHF</td>

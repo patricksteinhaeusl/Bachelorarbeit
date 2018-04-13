@@ -22,8 +22,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <input type="radio" name="type" ng-model="order.data.order.payment.type" value="bill"
-                   ng-change="order.changePayment()">
+            <input type="radio" name="type" ng-model="order.data.order.payment.type" value="bill" ng-change="order.changePayment()">
             <h3 class="panel-title">Bill</h3>
         </div>
         <div class="panel-heading">
@@ -42,8 +41,8 @@
                 </thead>
                 <tbody ng-repeat="creditCard in creditCards.data.creditCards">
                     <td>
-                        <input type="radio" name="creditCard" ng-model="order.data.order.payment.creditCard"
-                               ng-value="creditCard">
+                        <input type="radio" name="creditCard" ng-model="order.data.order.payment._creditCard"
+                               ng-value="creditCard._id">
                     </td>
                     <td>
                         <p><label>Number:</label>{{ creditCard.number }}</p>
@@ -57,8 +56,8 @@
     <a type="button" class="btn btn-outline-primary back" href="#!/checkout/address">
         <span class="glyphicon glyphicon glyphicon-backward" aria-hidden="true"></span> Back
     </a>
-    <button type="button" class="btn btn-outline-primary next" ng-click="order.save()"
-        ng-disabled="order.data.order.items.length === 0 || !order.data.order.deliveryAddress || !order.data.order.payment || !(order.data.order.payment.type === 'bill' && !order.data.order.payment.creditCard) && !(order.data.order.payment.type === 'creditCard' && order.data.order.payment.creditCard)">
+    <button type="button" class="btn btn-outline-primary next" ng-click="order.updateTemp(); order.save()"
+        ng-disabled="order.data.order.items.length === 0 || !order.data.order._deliveryAddress || !order.data.order.payment || !(order.data.order.payment.type === 'bill' && !order.data.order.payment._creditCard) && !(order.data.order.payment.type === 'creditCard' && order.data.order.payment._creditCard)">
         <span class="glyphicon glyphicon glyphicon-forward" aria-hidden="true"></span> Finish
     </button>
 </div>

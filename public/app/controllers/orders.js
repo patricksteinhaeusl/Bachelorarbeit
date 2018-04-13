@@ -36,7 +36,7 @@ function ($rootScope, $scope, $filter, ordersService, authService) {
         let row;
         self.data.orders.forEach(function(order) {
             if(counter >= from && counter <= to) {
-                let createdAt = $filter('date')(order.createdAt, 'dd.MM.yyyy HH:mm:ss', '+0100');
+                let createdAt = $filter('date')(order.createdAt, 'dd.MM.yyyy HH:mm:ss', '+0200');
                 let totalPrice = order.totalPrice.toFixed(2) + ' CHF';
 
                 row = [
@@ -81,7 +81,7 @@ function ($rootScope, $scope, $filter, ordersService, authService) {
                         return {
                             margin:10,
                             columns: [
-                                { text: $filter('date')(new Date(), 'dd.MM.yyyy HH:mm:ss', '+0100'), alignment: 'left', margin: 25},
+                                { text: $filter('date')(new Date(), 'dd.MM.yyyy HH:mm:ss', '+0200'), alignment: 'left', margin: 25},
                                 { text: currentPage.toString() + ' of ' + pageCount, alignment: 'right', margin: 25 }
                             ]
                         };
