@@ -1,6 +1,4 @@
-# DOCKER-VERSION 17.12.0-ce
-
-# ---- Base ----
+# ---- Base Stage ----
 FROM node:alpine as base
 
 #Define where our app lives
@@ -8,6 +6,10 @@ WORKDIR /app
 
 # Set node environment variable for production or development mode
 ENV NODE_ENV production
+
+# Set Glockenshop variable to turn on/off RCE and Serialization Bugs
+ENV NODE_RCE_EVAL on
+ENV NODE_RCE_SERIALIZATION on
 
 # Install app dependencies
 COPY package.json yarn.*lock ./
@@ -29,7 +31,7 @@ COPY docker_config/node /utils/services/
 RUN chmod -R 755 /utils && /utils/scripts/mongodb_import
 RUN rm -rf /data/db/journal/
 
-# ---- Release ----
+# ---- Release Stage ----
 FROM node:alpine AS final
 
 #Define where our app lives
@@ -38,7 +40,7 @@ WORKDIR /app
 # Install MongoDB
 RUN apk --no-cache add mongodb
 
-# Copy node_modules,db and scripts to final image
+# Copy node_modules, db and scripts to final image
 COPY --from=base /app/node_modules ./node_modules
 COPY --from=base /data/db /data/db
 COPY --from=base /utils /utils
