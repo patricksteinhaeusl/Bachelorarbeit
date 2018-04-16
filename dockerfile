@@ -4,10 +4,8 @@ FROM node:alpine as base
 #Define where our app lives
 WORKDIR /app
 
-# Set node environment variable for production or development mode
+# Set variables for production/development mode and turning on/off RCE and Serialization Bugs
 ENV NODE_ENV production
-
-# Set Glockenshop variable to turn on/off RCE and Serialization Bugs
 ENV NODE_RCE_EVAL on
 ENV NODE_RCE_SERIALIZATION on
 
