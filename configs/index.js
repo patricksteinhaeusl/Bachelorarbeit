@@ -45,8 +45,7 @@ const config = {
         }
     },
     postImages: {
-        directory: './assets/post-images/',
-        defaultImages: ['default.png', 'default.svg', 'schelbert-froschmaultreicheln.jpg', 'steiner-innenschweiz.jpg', 'zurfluh-bissen.jpg']
+        directory: './assets/post-images/'
     }
 };
 
