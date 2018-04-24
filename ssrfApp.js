@@ -28,5 +28,5 @@ ssrf.use(function (err, req, res) {
     res.send('An error occurred!');
 });
 
-module.exports = app;
+module.exports = ssrf;
 

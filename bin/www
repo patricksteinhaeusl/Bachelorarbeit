@@ -52,8 +52,6 @@ server.listen(port, host, function() {
     let host = address.address;
     let port = address.port;
     console.log('HTTP Server started: http://' + host + ':' + port + ' in ' + process.env.NODE_ENV + ' mode');
-    console.log("NODE_RCE_EVAL: " + process.env.NODE_RCE_EVAL);
-    console.log("NODE_RCE_SERIALIZATION: " + process.env.NODE_RCE_SERIALIZATION);
 });
 
 server.on('error', (error) => onError(error, port));
@@ -64,8 +62,6 @@ secureServer.listen(sslPort, host, function() {
     let host = address.address;
     let port = address.port;
     console.log('HTTPS Server started: https://' + host + ':' + port + ' in ' + process.env.NODE_ENV + ' mode');
-    console.log("NODE_RCE_EVAL: " + process.env.NODE_RCE_EVAL);
-    console.log("NODE_RCE_SERIALIZATION: " + process.env.NODE_RCE_SERIALIZATION);
 });
 
 secureServer.on('error', (error) => onError(error, sslPort));
@@ -79,6 +75,8 @@ SSRFServer.listen(SSRFPort, host, function() {
     let host = address.address;
     let port = address.port;
     console.log('Secret SSRF Server started: http://' + host + ':' + port + ' in ' + app.get('env') + ' mode');
+    console.log("NODE_RCE_EVAL: " + process.env.NODE_RCE_EVAL);
+    console.log("NODE_RCE_SERIALIZATION: " + process.env.NODE_RCE_SERIALIZATION);
 });
 
 SSRFServer.on('error', (error) => onError(error, SSRFPort));
