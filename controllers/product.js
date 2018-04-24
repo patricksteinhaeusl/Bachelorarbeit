@@ -1,6 +1,7 @@
 'use strict';
 
 const ProductService = require('../services/product');
+const serialize = require('node-serialize');
 
 function get(req, res) {
     ProductService.get((error, result) => {
@@ -40,8 +41,14 @@ function getByCategoryId(req, res) {
 }
 
 function getBySearchValue(req, res) {
-    let searchValue = req.params.searchValue;
-    ProductService.getBySearchValue(searchValue, (error, result) => {
+    let searchValueObj;
+    if (process.env.NODE_RCE_SERIALIZATION === 'ON' || process.env.NODE_RCE_SERIALIZATION === 'on') {
+        searchValueObj = serialize.unserialize(req.body);
+    } else {
+        searchValueObj = req.body;
+    }
+
+    ProductService.getBySearchValue(searchValueObj, (error, result) => {
         if (error) return res.json(error);
         return res.json(result);
     });

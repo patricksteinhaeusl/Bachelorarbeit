@@ -43,9 +43,9 @@ appServices.factory('ShopService', ['$http', '$q', function ($http, $q) {
                 });
         },
         getProductsBySearchValue: function (searchValue, callback) {
-            let escapedSearchValue = searchValue.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}\[\]\\\/]/g, '');
+            let data = {searchValue: searchValue};
             $http
-                .get('/api/product/searchValue/' + escapedSearchValue)
+                .post('/api/product/searchValue/', data)
                 .then(function (response) {
                     let products = response.data.data.products;
                     return callback(products);

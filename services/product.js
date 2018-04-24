@@ -4,8 +4,6 @@ const Product = require('../models/product').Product;
 const Rating = require('../models/rating').Rating;
 const ResponseUtil = require('../utils/response');
 
-let ObjectId = require('mongoose').Types.ObjectId;
-
 function get(callback) {
     Product.find({}, function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
@@ -52,11 +50,11 @@ function getByCategoryId(categoryId, callback) {
     });
 }
 
-function getBySearchValue(searchValue, callback) {
+function getBySearchValue(searchValueObj, callback) {
     Product.find({
         $or: [
-            {name: new RegExp(searchValue.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}\[\]\\\/]/g, ""), "i")},
-            {'category.name': new RegExp(searchValue.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}\[\]\\\/]/g, ""), "i")}
+            {name: new RegExp(searchValueObj.searchValue, "i")},
+            {'category.name': new RegExp(searchValueObj.searchValue, "i")}
         ]
     }, function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));

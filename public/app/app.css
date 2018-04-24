@@ -68,6 +68,10 @@ table {
     margin-bottom: 25px;
 }
 
+table table td {
+    font-weight: normal;
+}
+
 table tfoot td:first-child {
     font-weight: bold;
 }
@@ -215,7 +219,7 @@ table td:last-child button,
 table td:last-child a {
     display: inline-block;
     width: 100%;
-    margin: 5px 0 5px 0;
+    margin: 2px 0 2px 0;
 }
 
 table td p label {
@@ -231,10 +235,14 @@ table tr td li {
 }
 
 .sidebar-right {
-    padding: 0;
+    padding: 15px 0;
 }
 
-.sidebar-right > div > div {
+.sidebar-right > div > div > div {
+    padding: 15px;
+}
+
+.sidebar-topRatedProduct-wrapper {
     padding: 15px;
 }
 
@@ -244,7 +252,6 @@ table tr td li {
     border-radius: 10px;
     border: solid 1px lightgray;
     box-shadow: 5px 5px 2px lightgray;
-    margin: 15px
 }
 
 .sidebar-right .topRatedProduct-wrapper {
@@ -273,7 +280,7 @@ table tr td li {
 }
 
 .sidebar-right .sidebar-topRatedProduct .rating-average-wrapper {
-    padding: 10px 15px 10px 0;
+    padding: 10px 0 10px 0;
     text-align: right;
 }
 
@@ -321,6 +328,8 @@ table tr td li {
 
 .sidebar-menu .categories,
 .sidebar-menu .search-values {
+    display: inline-block;
+    width: 100%;
     padding: 0;
 }
 
@@ -361,7 +370,7 @@ table tr td li {
     border-radius: 10px;
     border: solid 1px lightgray;
     box-shadow: 5px 5px 2px lightgray;
-    margin: 15px 15px 0 15px;
+    margin: 0 15px;
 }
 
 .auth-menu .btn-outline-primary,
@@ -502,12 +511,11 @@ table tr td li {
 .product-rating {
     text-align: right;
     width: 100%;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .rating-average {
-    font-weight: bold;
-    padding: 2px 15px 2px 0;
+    padding: 0 15px 0 0;
 }
 
 .product-menu {
@@ -542,16 +550,25 @@ table tr td li {
     color: white;
 }
 
+.jk-rating-stars-container[read-only=true] a,
+.jk-rating-stars-container[read-only=true] .glyphicon,
+.jk-rating-stars-container[read-only=true] .material-icons {
+    cursor: default !important;
+    pointer-events: none;
+}
+
+.jk-rating-stars-container[read-only=true] a:hover,
+.jk-rating-stars-container[read-only=true] .glyphicon:hover,
+.jk-rating-stars-container[read-only=true] .material-icons:hover {
+    color: #ddd;
+}
+
+.jk-rating-stars-container .star-button {
+    text-shadow: none;
+}
+
 .material-icons {
-    font-size: 17px !important;
-}
-
-.wide .material-icons {
-    font-size: 17px !important;
-}
-
-.small .material-icons {
-    font-size: 14px !important;
+    font-size: 15px !important;
 }
 
 .glyphicon, .material-icons, a {
@@ -844,4 +861,28 @@ object {
     position: fixed;
     right: 15px;
     bottom: 15px;
+}
+
+.form-export {
+    display: inline-block;
+    width: 100%;
+}
+
+.form-export .form-group {
+    display: inline-block;
+    padding: 0;
+    margin: 0 15px 0 0;
+}
+
+.form-export .form-control {
+    display: inline-block;
+    width: 60%;
+    margin: 0;
+}
+
+.form-export label {
+    display: inline-block;
+    width: 30%;
+    line-height: 33.99px;
+    margin: 0;
 }

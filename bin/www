@@ -1,6 +1,14 @@
 #!/usr/bin/env node
 
 /**
+ * Environment variables
+ */
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_RCE_EVAL = process.env.NODE_RCE_EVAL || 'off';
+process.env.NODE_RCE_SERIALIZATION = process.env.NODE_RCE_SERIALIZATION || 'off';
+
+/**
  * Module dependencies.
  */
 
@@ -43,7 +51,9 @@ server.listen(port, host, function() {
     let address = server.address();
     let host = address.address;
     let port = address.port;
-    console.log('HTTP Server started: http://' + host + ':' + port + ' in ' + app.get('env') + ' mode');
+    console.log('HTTP Server started: http://' + host + ':' + port + ' in ' + process.env.NODE_ENV + ' mode');
+    console.log("NODE_RCE_EVAL: " + process.env.NODE_RCE_EVAL);
+    console.log("NODE_RCE_SERIALIZATION: " + process.env.NODE_RCE_SERIALIZATION);
 });
 
 server.on('error', (error) => onError(error, port));
@@ -53,7 +63,9 @@ secureServer.listen(sslPort, host, function() {
     let address = secureServer.address();
     let host = address.address;
     let port = address.port;
-    console.log('HTTPS Server started: https://' + host + ':' + port + ' in ' + app.get('env') + ' mode');
+    console.log('HTTPS Server started: https://' + host + ':' + port + ' in ' + process.env.NODE_ENV + ' mode');
+    console.log("NODE_RCE_EVAL: " + process.env.NODE_RCE_EVAL);
+    console.log("NODE_RCE_SERIALIZATION: " + process.env.NODE_RCE_SERIALIZATION);
 });
 
 secureServer.on('error', (error) => onError(error, sslPort));
@@ -131,4 +143,4 @@ function onListening(server) {
     debug('Listening on ' + bind);
 }
 
-require('../utils/websocket')(secureServer);
+require('../websocket')(secureServer);

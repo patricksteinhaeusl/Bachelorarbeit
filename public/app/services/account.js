@@ -2,6 +2,26 @@
 
 appServices.factory('AccountService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
     return {
+        get: function (accountId, callback) {
+            $http
+                .get('/api/account/' + accountId)
+                .then(function (response) {
+                    let statusCode = response.data.statusCode;
+                    let data = response.data.data;
+                    let message = response.data.message;
+                    let validations = response.data.validations;
+                    if (statusCode === 200) {
+                        let user = data.user;
+                        let responseData = {user: user};
+                        return callback(null, responseData, message, null);
+                    } else if (statusCode === 405) {
+                        return callback(null, null, null, validations);
+                    }
+                    return callback(null, null, message, null);
+                }, function (error) {
+                    return callback(error);
+                });
+        },
         update: function (account, callback) {
             let data = {account: account};
             $http

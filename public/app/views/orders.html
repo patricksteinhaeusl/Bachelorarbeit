@@ -1,26 +1,49 @@
 <div class="content-view" ng-controller="OrdersController as orders">
     <h1>My Orders</h1>
+    <form class="form-export" ng-submit="orders.downloadPDF()">
+        <div class="form-group col-md-3">
+            <label>From</label>
+            <input class="form-control" type="text" placeholder="From" ng-model="orders.export.from" required>
+        </div>
+        <div class="form-group col-md-3">
+            <label>Range</label>
+            <input class="form-control" type="text" placeholder="Range" ng-model="orders.export.range" required>
+        </div>
+        <div class="form-group col-md-1">
+            <input class="btn btn-primary" type="submit" value="Export pdf">
+        </div>
+    </form>
     <table class="tblOrders">
         <thead>
+        <th>#</th>
         <th>Created</th>
         <th>Order</th>
         <th>Status</th>
-        <th>Total Price</th>
+        <th>Total price</th>
         </thead>
-        <tbody ng-repeat="ord in orders.data.orders">
+        <tbody ng-repeat="order in orders.data.orders">
             <tr>
-                <td>{{ ord.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0100' }}</td>
-                <td>{{ ord._id }}</td>
-                <td>{{ ord.status }}</td>
-                <td>{{ ord.totalPrice }} CHF</td>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ order.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0100' }}</td>
+                <td>{{ order._id }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.totalPrice }} CHF</td>
             </tr>
-            <tr ng-repeat="item in ord.items">
-                <td colspan="3">
-                    <ul>
-                        <li>{{ item.quantity }} x {{ item.product.name }} - {{ item.product.category.name }}</li>
-                    </ul>
+            <tr>
+                <td colspan="5">
+                    <table>
+                        <tbody>
+                        <tr ng-repeat="item in order.items">
+                            <td colspan="4">
+                                <ul>
+                                    <li>{{ item.quantity }} x {{ item.product.name }} - {{ item.product.category.name }}</li>
+                                </ul>
+                            </td>
+                            <td>{{ (item.product.price * item.quantity).toFixed(2) }} CHF</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </td>
-                <td>{{ item.product.price * item.quantity }} CHF</td>
             </tr>
         </tbody>
     </table>

@@ -3,12 +3,11 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const jwt = require('express-jwt');
 const forceSSL = require('express-force-ssl');
 
-const GlobalConfig = require('./configs/index');
 require('./utils/mongo');
 
+const api = require('./routes/api');
 const auth = require('./routes/auth');
 const account = require('./routes/account');
 const creditCard = require('./routes/creditCard');
@@ -19,6 +18,8 @@ const post = require('./routes/post');
 const retailer = require('./routes/retailer');
 
 const app = express();
+
+app.set('view engine', 'pug');
 
 app.use(forceSSL);
 app.use(logger('dev'));
@@ -31,8 +32,7 @@ app.use('/post-images', express.static(__dirname + '/assets/post-images'));
 app.use('/slider-images', express.static(__dirname + '/assets/slider-images'));
 app.use('/favicon.ico', express.static(__dirname + '/assets/favicon.ico'));
 
-app.all('/api', jwt(GlobalConfig.auth.validateOptions));
-
+app.use('/api', api);
 app.use('/api/auth', auth);
 app.use('/api/account', account);
 app.use('/api/creditCard', creditCard);
@@ -47,7 +47,7 @@ app.use(function (req, res, next) {
     let err = new Error('Not Found');
     err.status = 404;
 
-    if(req.app.get('env') === 'production') {
+    if(process.env.NODE_ENV === 'production') {
         res.redirect('/#!/shop');
     }
 
@@ -56,7 +56,7 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res) {
-    if(req.app.get('env') === 'development') {
+    if(process.env.NODE_ENV === 'development') {
         res.locals.message = err.message;
         res.status(err.status || 500);
         res.send(err.message);

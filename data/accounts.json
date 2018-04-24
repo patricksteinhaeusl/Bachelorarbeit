@@ -7,6 +7,7 @@
 	"firstname": "Mike",
 	"lastname": "Kunze",
 	"email": "Mike.Kunze@gmail.com",
+	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.589Z"
 	},
@@ -24,6 +25,7 @@
 	"firstname": "Swen",
 	"lastname": "Dresner",
 	"email": "Swen.Dresner@gmail.com",
+	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.556Z"
 	},
@@ -41,6 +43,7 @@
 	"firstname": "Ines",
 	"lastname": "Schiffer",
 	"email": "Ines.Schiffer@gmail.com",
+	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.579Z"
 	},
@@ -58,6 +61,7 @@
 	"firstname": "Jennifer",
 	"lastname": "Baumgartner",
 	"email": "Jennifer.Baumgartner@gmail.com",
+	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.550Z"
 	},
@@ -75,6 +79,7 @@
 	"firstname": "Jessica",
 	"lastname": "Krueger",
 	"email": "Jessica.Krueger@gmail.com",
+	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.598Z"
 	},
@@ -92,6 +97,7 @@
 	"firstname": "Lena",
 	"lastname": "Lowe",
 	"email": "Lena.Lowe@gmail.com",
+	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.574Z"
 	},
@@ -109,6 +115,7 @@
 	"firstname": "Juliane",
 	"lastname": "Schulze",
 	"email": "Juliane.Schulze@gmail.com",
+	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.532Z"
 	},
@@ -126,6 +133,7 @@
 	"firstname": "Peter",
 	"lastname": "Holzmann",
 	"email": "Peter.Holzmann@gmail.com",
+	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.544Z"
 	},
@@ -143,6 +151,7 @@
 	"firstname": "Anne",
 	"lastname": "Schulz",
 	"email": "Anne.Schulz@gmail.com",
+	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.584Z"
 	},
@@ -160,6 +169,7 @@
 	"firstname": "Markus",
 	"lastname": "Wechsler",
 	"email": "Markus.Wechsler@gmail.com",
+	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.562Z"
 	},
@@ -177,6 +187,7 @@
 	"firstname": "Bernd",
 	"lastname": "Zimmer",
 	"email": "Bernd.Zimmer@gmail.com",
+	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.594Z"
 	},
@@ -194,6 +205,25 @@
 	"firstname": "Karolin",
 	"lastname": "Boehm",
 	"email": "Karolin.Boehm@gmail.com",
+	"isRetailer": false,
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.568Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.568Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5acc851fc8bc262214c01ee5"
+	},
+	"username": "retailer0",
+	"password": "5ca00d6802d80442a0f978673b68b0f212dafae915e2f1c43fc06046e569afd8",
+	"firstname": "Jackob",
+	"lastname": "Müller",
+	"email": "Jackob.Mueller@gmail.com",
+	"isRetailer": true,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.568Z"
 	},

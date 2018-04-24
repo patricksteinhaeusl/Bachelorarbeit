@@ -9,7 +9,7 @@ function get(accountId, callback) {
     Account.findById(accountId, function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
-        result = {'account': result};
+        result = {'user': result};
         return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }

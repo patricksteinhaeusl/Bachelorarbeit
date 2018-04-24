@@ -35,9 +35,8 @@ const config = {
     },
     auth: {
         signOptions: {
-            expiresIn: '1d',
             audience: 'self',
-            issuer: 'webshop'
+            issuer: 'webshop',
         },
         validateOptions: {
             secret: authSecret,

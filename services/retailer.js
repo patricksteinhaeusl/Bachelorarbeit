@@ -9,22 +9,18 @@ function change(orderId, callback) {
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
 
         if (result.payment.type === 'bill') {
-            result.totalPrice = round(result.totalPrice * 0.5, 0.05);
+            result.totalPrice = (result.totalPrice * 0.5).toFixed(2);
             result.items.forEach(function (item) {
-                item.product.price = round(item.product.price * 0.5, 0.05);
+                item.product.price = (item.product.price * 0.5).toFixed(2);
             });
             result.save();
+        } else {
+            return callback(ResponseUtil.createErrorResponse('Expected payment type: bill'));
         }
 
         result = {'order': result};
         return callback(null, ResponseUtil.createSuccessResponse(result));
     });
-}
-
-function round(value, step) {
-    if (!step) step = 1.0;
-    let inv = 1.0 / step;
-    return Math.round(value * inv) / inv;
 }
 
 module.exports = {

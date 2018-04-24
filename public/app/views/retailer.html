@@ -1,17 +1,7 @@
-<div class="content-view">
+<div class="content-view" ng-controller="RetailerController as retailer">
     <h1>Retailer Area</h1>
-    <table>
-        <thead>
-        <th>Method</th>
-        <th>Url</th>
-        <th>Params</th>
-        <th>Action</th>
-        </thead>
-        <tbody>
-        <td>GET</td>
-        <td>/retailer/order/:orderId/change/</td>
-        <td>orderId</td>
-        <td>You could change the price of a order, which is not payed by credit card</td>
-        </tbody>
-    </table>
+    <p>This area is just for retailers.</p>
+    <p>You wanna upgrade your account so just send us a request.</p>
+    <p>In the API you can find a detailed description how you can use the special retailer discount.</p>
+    <button class="btn btn-primary" ng-click="retailer.request()">Send request</button>
 </div>

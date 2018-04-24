@@ -1,0 +1,31 @@
+extends layout.pug
+
+block content
+    h1 Retailer
+        h2 Implemented features
+        h3 Retailer discount
+        table(class='table')
+            thead
+                th Method
+                th Url
+                th Params
+                th Action
+            tbody
+                td GET
+                td /api/retailer/order/:orderId/change/
+                td orderId
+                td You could change the price of a order, which is not payed by credit card
+        h2 Available soon...
+        h3 Authentication
+        table(class='table')
+            thead
+                th Method
+                th Url
+                th Params
+                th Action
+            tbody
+                td POST
+                td /api/auth/login/token/:tokenId
+                td tokenId
+                td Authentication Example to the API
+        p(style='overflow-wrap: break-word') <b>Example of an expired tokenId</b> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc1JldGFpbGVyIjp0cnVlLCJfaWQiOiI1YWNjODUxZmM4YmMyNjIyMTRjMDFlZTUiLCJ1c2VybmFtZSI6InJldGFpbGVyMCIsImZpcnN0bmFtZSI6IkphY2tvYiIsImxhc3RuYW1lIjoiTcO8bGxlciIsImVtYWlsIjoiSmFja29iLk11ZWxsZXJAZ21haWwuY29tIiwiaWF0IjoxNTIzMzU0NjIyLCJhdWQiOiJzZWxmIiwiaXNzIjoid2Vic2hvcCJ9.7eDbsqhJ0jyXdKWsjyVgpT5ZL6JIWlBMH8laQ6XYghQ

@@ -225,5 +225,24 @@
 		"$date": "2018-03-07T20:14:22.592Z"
 	},
 	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5acc8966372b410c7c61accd"
+	},
+	"street": "Bahnhofstrasse 44",
+	"zip": 8640,
+	"city": "Rapperswil",
+	"country": "Schweiz",
+	"_account": {
+		"$oid": "5acc851fc8bc262214c01ee5"
+	},
+	"createdAt": {
+		"$date": "2018-03-07T20:14:22.592Z"
+	},
+	"updatedAt": {
+		"$date": "2018-03-07T20:14:22.592Z"
+	},
+	"__v": 0
 }]
 
