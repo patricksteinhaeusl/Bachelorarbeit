@@ -10,8 +10,8 @@ ssrf.use(function (req, res, next) {
     let err = new Error('Not Found');
     err.status = 404;
 
-    if(req.app.get('env') === 'production') {
-        res.redirect('/');
+    if(process.env.NODE_ENV === 'production') {
+        res.redirect('/#!/shop');
     }
 
     next(err);
@@ -19,7 +19,7 @@ ssrf.use(function (req, res, next) {
 
 // error handler
 ssrf.use(function (err, req, res) {
-    if(req.app.get('env') === 'development') {
+    if(process.env.NODE_ENV === 'development') {
         res.locals.message = err.message;
         res.status(err.status || 500);
         res.send(err.message);
@@ -28,4 +28,5 @@ ssrf.use(function (err, req, res) {
     res.send('An error occurred!');
 });
 
-module.exports = ssrf;
+module.exports = app;
+
