@@ -5,7 +5,9 @@
              ng-repeat="topRatedProduct in shop.data.topRatedProducts | toArray: false | orderBy: '-rating.value' | limitTo: 1">
             <h4>{{ topRatedProduct.name }} - {{ topRatedProduct.category.name }}</h4>
             <div class="image-wrapper">
-                <img ng-src="/product-images/{{ topRatedProduct.image }}" alt="Top Rated Product">
+                <a href="/product-images/{{ topRatedProduct.image }}" data-lity>
+                    <img ng-src="/product-images/{{ topRatedProduct.image }}" alt="Top Rated Product">
+                </a>
             </div>
             <div class="rating-average-wrapper">
                 <span class="rating-average">&empty; {{ topRatedProduct.rating.value }}</span>
