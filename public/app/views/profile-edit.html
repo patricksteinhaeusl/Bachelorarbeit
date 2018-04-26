@@ -1,0 +1,30 @@
+<div class="content-view" ng-controller="AccountController as account">
+    <form class="form-profile" ng-submit="account.insertOrUpdateProfile()">
+        <h1>Your profile</h1>
+        <div class="form-group">
+            <label>Link to your profile:</label>
+            <a ng-href="#!/account/{{auth.getUser()._id}}/profile">#!/account/{{auth.getUser()._id}}/profile</a>
+        </div>
+        <div class="form-group">
+            <label class="label">Hobby:</label>
+            <input class="form-control" type="text" ng-model="account.data.account.profile.hobby" name="hobby"
+                   placeholder="Hobby" required/>
+        </div>
+        <div class="form-group">
+            <label class="label">Favorite animal:</label>
+            <input class="form-control" type="text" ng-model="account.data.account.profile.animal" name="animal"
+                   placeholder="Favorite animal" required/>
+        </div>
+        <div class="form-group">
+            <label class="label">Favorite food:</label>
+            <input class="form-control" type="text" ng-model="account.data.account.profile.food" name="food"
+                   placeholder="Favorite food" required/>
+        </div>
+        <button class="btn btn-outline-primary" ng-if="account.data.account.profile">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Update
+        </button>
+        <button class="btn btn-outline-primary" ng-if="!account.data.account.profile">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Save
+        </button>
+    </form>
+</div>

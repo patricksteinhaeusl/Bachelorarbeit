@@ -6,11 +6,13 @@ const fs = require('fs');
 const GlobalConfig = require('../configs/index');
 
 function getAll(callback) {
-    Post.find({}, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
-        result = {'posts': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
+    Post.find({})
+        .populate('_account')
+        .exec(function (error, result) {
+            if (error) return callback(ResponseUtil.createErrorResponse(error));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse());
+            result = {'posts': result};
+            return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }
 

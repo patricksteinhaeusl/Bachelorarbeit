@@ -2,6 +2,7 @@
 
 const GlobalConfig = require('../configs/index');
 const Account = require('../models/account');
+const Profile = require('../models/profile').Profile;
 const CryptoUtil = require('../utils/crypt');
 const ResponseUtil = require('../utils/response');
 
@@ -32,7 +33,52 @@ function update(account, callback) {
     });
 }
 
+function insertOrUpdateProfile(accountId, profile, callback) {
+    let profileObj = new Profile(profile);
+    profileObj.validate(function(error) {
+        if(error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        Account.findOne({_id: accountId}, function (error, result) {
+            if (error) {
+                if(error.hasOwnProperty("errors")) {
+                    return callback(ResponseUtil.createValidationResponse(error.errors));
+                }
+                return callback(ResponseUtil.createErrorResponse(error));
+            }
+            result.profile = profileObj;
+            result.save(function (error, resAccount) {
+                if (error) {
+                    if(error.hasOwnProperty("errors")) {
+                        return callback(ResponseUtil.createValidationResponse(error.errors));
+                    }
+                    return callback(ResponseUtil.createErrorResponse(error));
+                }
+                CryptoUtil.createToken(resAccount.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
+                    if (error) return callback(ResponseUtil.createErrorResponse(error));
+                    let result = {'user': resAccount, 'token': token};
+                    return callback(null, ResponseUtil.createSuccessResponse(result, 'Profile successfully saved.'));
+                });
+            });
+        });
+    });
+}
+
+function getProfileByAccountId(accountId, callback) {
+    Account.findOne({'_id': accountId }, function (error, result) {
+        if (error) {
+            if (error.hasOwnProperty("errors")) {
+                return callback(ResponseUtil.createValidationResponse(error.errors));
+            }
+            return callback(ResponseUtil.createErrorResponse(error));
+        }
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('Profile not found.'));
+        result = {'profile': result.profile};
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Profile found.'));
+    });
+}
+
 module.exports = {
     get,
-    update
+    update,
+    insertOrUpdateProfile,
+    getProfileByAccountId
 };

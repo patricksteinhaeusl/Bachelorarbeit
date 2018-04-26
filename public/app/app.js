@@ -37,6 +37,14 @@ let routes = {
         templateUrl: 'views/account.html',
         requireLogin: true
     },
+    '/account/:accountId/profile/': {
+        templateUrl: 'views/profile.html',
+        requireLogin: true
+    },
+    '/profile': {
+        templateUrl: 'views/profile-edit.html',
+        requireLogin: true
+    },
     '/creditcards': {
         templateUrl: 'views/creditCards.html',
         requireLogin: true

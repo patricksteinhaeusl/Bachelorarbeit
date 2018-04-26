@@ -7,6 +7,11 @@
 	"firstname": "Mike",
 	"lastname": "Kunze",
 	"email": "Mike.Kunze@gmail.com",
+	"profile": {
+		"hobby": "Football",
+		"animal": "Lion",
+		"food": "Lasagne"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.589Z"
@@ -25,6 +30,11 @@
 	"firstname": "Swen",
 	"lastname": "Dresner",
 	"email": "Swen.Dresner@gmail.com",
+	"profile": {
+		"hobby": "Cricket",
+		"animal": "Giraffe",
+		"food": "Pizza"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.556Z"
@@ -43,6 +53,11 @@
 	"firstname": "Ines",
 	"lastname": "Schiffer",
 	"email": "Ines.Schiffer@gmail.com",
+	"profile": {
+		"hobby": "Ping-pong",
+		"animal": "Elephant",
+		"food": "Pizza"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.579Z"
@@ -61,6 +76,11 @@
 	"firstname": "Jennifer",
 	"lastname": "Baumgartner",
 	"email": "Jennifer.Baumgartner@gmail.com",
+	"profile": {
+		"hobby": "Tennis",
+		"animal": "Hippo",
+		"food": "Pasta"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.550Z"
@@ -79,6 +99,11 @@
 	"firstname": "Jessica",
 	"lastname": "Krueger",
 	"email": "Jessica.Krueger@gmail.com",
+	"profile": {
+		"hobby": "Hockey",
+		"animal": "Penguin",
+		"food": "Pizza"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.598Z"
@@ -97,6 +122,11 @@
 	"firstname": "Lena",
 	"lastname": "Lowe",
 	"email": "Lena.Lowe@gmail.com",
+	"profile": {
+		"hobby": "Hockey",
+		"animal": "Penguin",
+		"food": "Pizza"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.574Z"
@@ -115,6 +145,11 @@
 	"firstname": "Juliane",
 	"lastname": "Schulze",
 	"email": "Juliane.Schulze@gmail.com",
+	"profile": {
+		"hobby": "Tennis",
+		"animal": "Hippo",
+		"food": "Pasta"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.532Z"
@@ -133,6 +168,11 @@
 	"firstname": "Peter",
 	"lastname": "Holzmann",
 	"email": "Peter.Holzmann@gmail.com",
+	"profile": {
+		"hobby": "Tennis",
+		"animal": "Hippo",
+		"food": "Pasta"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.544Z"
@@ -151,6 +191,11 @@
 	"firstname": "Anne",
 	"lastname": "Schulz",
 	"email": "Anne.Schulz@gmail.com",
+	"profile": {
+		"hobby": "Soccer",
+		"animal": "Elephant",
+		"food": "Pizza"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.584Z"
@@ -169,6 +214,11 @@
 	"firstname": "Markus",
 	"lastname": "Wechsler",
 	"email": "Markus.Wechsler@gmail.com",
+	"profile": {
+		"hobby": "Tennis",
+		"animal": "Hippo",
+		"food": "Pasta"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.562Z"
@@ -187,6 +237,11 @@
 	"firstname": "Bernd",
 	"lastname": "Zimmer",
 	"email": "Bernd.Zimmer@gmail.com",
+	"profile": {
+		"hobby": "Tennis",
+		"animal": "Hippo",
+		"food": "Pasta"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.594Z"
@@ -205,6 +260,11 @@
 	"firstname": "Karolin",
 	"lastname": "Boehm",
 	"email": "Karolin.Boehm@gmail.com",
+	"profile": {
+		"hobby": "Tennis",
+		"animal": "Hippo",
+		"food": "Pasta"
+	},
 	"isRetailer": false,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.568Z"
@@ -223,6 +283,11 @@
 	"firstname": "Jackob",
 	"lastname": "Müller",
 	"email": "Jackob.Mueller@gmail.com",
+	"profile": {
+		"hobby": "Tennis",
+		"animal": "Hippo",
+		"food": "Pasta"
+	},
 	"isRetailer": true,
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.568Z"

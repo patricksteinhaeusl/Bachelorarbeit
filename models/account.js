@@ -5,6 +5,8 @@ const uniqueValidator = require('mongoose-unique-validator');
 const validate = require('mongoose-validator');
 const Schema = mongoose.Schema;
 const cryptoUtil = require('../utils/crypt');
+const Profile = require('../models/profile').Profile;
+const ProfileSchema = require('../models/profile').ProfileSchema;
 
 let emailValidator = [
     validate({
@@ -28,7 +30,8 @@ let accountSchema = new Schema({
     firstname: {type: String, required: [true, 'Firstname is required']},
     lastname: {type: String, required: [true, 'Lastname is required']},
     email: {type: String, required: [true, 'Email is required'], validate: emailValidator, unique: true},
-    isRetailer: { type: Boolean, required: true, default: false }
+    isRetailer: { type: Boolean, required: true, default: false },
+    profile: {type: ProfileSchema, required: false}
 }, {
     timestamps: {}
 });

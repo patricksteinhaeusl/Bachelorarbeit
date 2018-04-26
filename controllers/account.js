@@ -18,7 +18,26 @@ function update(req, res) {
     });
 }
 
+function insertOrUpdateProfile(req, res) {
+    let accountId = req.body.accountId;
+    let profile = req.body.profile;
+    AccountService.insertOrUpdateProfile(accountId, profile, (error, result) => {
+        if (error) return res.json(error);
+        return res.json(result);
+    });
+}
+
+function getProfileByAccountId(req, res) {
+    let accountId = req.params.accountId;
+    AccountService.getProfileByAccountId(accountId, (error, result) => {
+        if (error) return res.json(error);
+        return res.json(result);
+    });
+}
+
 module.exports = {
     get,
-    update
+    update,
+    insertOrUpdateProfile,
+    getProfileByAccountId
 };

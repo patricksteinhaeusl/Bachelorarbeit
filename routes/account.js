@@ -8,5 +8,7 @@ const jwt = require('express-jwt');
 
 router.get('/:accountId', jwt(GlobalConfig.auth.validateOptions), accountController.get);
 router.put('/', jwt(GlobalConfig.auth.validateOptions), accountController.update);
+router.post('/profile', jwt(GlobalConfig.auth.validateOptions), accountController.insertOrUpdateProfile);
+router.get('/:accountId/profile', jwt(GlobalConfig.auth.validateOptions), accountController.getProfileByAccountId);
 
 module.exports = router;

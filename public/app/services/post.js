@@ -7,7 +7,6 @@ appServices.factory('PostService', ['$http', 'Upload', function ($http, Upload) 
                 .get('/api/post')
                 .then(function (response) {
                     let posts = response.data.data.posts;
-
                     if (posts) {
                         return callback(posts);
                     } else {
