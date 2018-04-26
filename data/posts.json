@@ -34,7 +34,7 @@
 	},
 	"title": "Awesome product",
 	"text": "This is one of the best bells.",
-	"image": "schelbert-froschmaultreicheln.jpg",
+	"image": "http://localhost:8765/file001.jpg",
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.626Z"
 	},
