@@ -23,7 +23,8 @@ let storage = multer.diskStorage({
 const upload = multer({storage: storage}).single('postImage');
 
 router.get('/', PostController.getAll);
-router.post('/', jwt(GlobalConfig.auth.validateOptions), upload, PostController.insert);
+router.post('/upload', jwt(GlobalConfig.auth.validateOptions), upload, PostController.insertUpload);
+router.post('/url', jwt(GlobalConfig.auth.validateOptions), PostController.insertURL);
 router.delete('/:postId', jwt(GlobalConfig.auth.validateOptions), PostController.remove);
 
 module.exports = router;

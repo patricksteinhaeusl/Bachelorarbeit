@@ -5,13 +5,14 @@ const ssrf = express();
 
 ssrf.use(express.static(__dirname + '/public/ssrf'));
 
+
 // catch 404 and forward to error handler
 ssrf.use(function (req, res, next) {
     let err = new Error('Not Found');
     err.status = 404;
 
     if(process.env.NODE_ENV === 'production') {
-        res.redirect('/#!/shop');
+        res.redirect('/index.hmtl');
     }
 
     next(err);

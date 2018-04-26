@@ -17,10 +17,10 @@ appServices.factory('PostService', ['$http', 'Upload', function ($http, Upload) 
                     return callback(false);
                 });
         },
-        insert: function (post, postImage, callback, callbackEvent) {
+        insertUpload: function (post, postImage, callback, callbackEvent) {
             let data = {postImage: postImage, post: post};
             Upload.upload({
-                url: '/api/post',
+                url: '/api/post/upload',
                 data: data,
             }).then(function (response) {
                 let statusCode = response.data.statusCode;
@@ -41,6 +41,27 @@ appServices.factory('PostService', ['$http', 'Upload', function ($http, Upload) 
                 let progressPercentage = parseInt(100.0 * event.loaded / event.total);
                 return callbackEvent(progressPercentage);
             });
+        },
+        insertURL: function (post, url, callback, callbackEvent) {
+            let data = {url: url, post: post};
+            $http
+                .post('/api/post/url', data)
+                .then(function (response) {
+                    let statusCode = response.data.statusCode;
+                    let data = response.data.data;
+                    let message = response.data.message;
+                    let validations = response.data.validations;
+                    if (statusCode === 200) {
+                        let url = data.url;
+                        let responseData = {url: url};
+                        return callback(null, responseData, message, null);
+                    } else if (statusCode === 405) {
+                        return callback(null, null, null, validations);
+                    }
+                    return callback(null, null, message, null);
+                }, function (error) {
+                    return callback(error);
+                });
         },
         remove: function (postId, callback) {
             $http
