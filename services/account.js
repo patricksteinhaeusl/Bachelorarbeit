@@ -32,7 +32,22 @@ function update(account, callback) {
     });
 }
 
+function upload(accountId, profile, callback) {
+    Account.findOne({_id: accountId}, function(error, result) {
+        if (error) return callback(ResponseUtil.createErrorResponse(error));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        result.profile = profile;
+        result.save(function (error, user) {
+            if (error) return callback(ResponseUtil.createErrorResponse(error));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse());
+            result = {'user': user};
+            return callback(null, ResponseUtil.createSuccessResponse(result, 'Profile successfully uploaded.'));
+        });
+    });
+}
+
 module.exports = {
     get,
-    update
+    update,
+    upload
 };

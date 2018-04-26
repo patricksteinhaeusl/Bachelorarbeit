@@ -7,14 +7,13 @@ appControllers.controller('CommunityController', ['$rootScope', '$scope', '$loca
         self.data.post = {};
         self.data.postImage = {};
         self.data.progress = 0;
-        self.error = false;
 
         self.insert = function () {
             self.data.post._account = AuthService.getUser()._id;
             $rootScope.messages = {};
             PostService.insert(self.data.post, self.data.postImage, function (error, data, message, validations) {
                 if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validation = validations;
+                if (validations) $rootScope.messages.validations = validations;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     self.data.post = {};

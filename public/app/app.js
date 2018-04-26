@@ -37,6 +37,12 @@ let routes = {
         templateUrl: 'views/account.html',
         requireLogin: true
     },
+    '/account/:accountId/profile': {
+        templateUrl: function(params){
+            return 'assets/profiles/' + params.accountId + '.html?' + new Date();
+        },
+        requireLogin: true
+    },
     '/creditcards': {
         templateUrl: 'views/creditCards.html',
         requireLogin: true

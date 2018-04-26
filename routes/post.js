@@ -9,7 +9,7 @@ const mime = require('mime');
 const GlobalConfig = require('../configs/index');
 const jwt = require('express-jwt');
 
-let storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: function (req, file, callback) {
         return callback(null, GlobalConfig.postImages.directory)
     },

@@ -38,7 +38,7 @@ appServices.factory('PostService', ['$http', 'Upload', function ($http, Upload) 
             }, function (error) {
                 return callback(error);
             }, function (event) {
-                let progressPercentage = parseInt(100.0 * event.loaded / event.total);
+                let progressPercentage = parseInt(100 * event.loaded / event.total);
                 return callbackEvent(progressPercentage);
             });
         },

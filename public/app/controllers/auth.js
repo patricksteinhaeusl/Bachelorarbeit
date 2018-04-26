@@ -12,7 +12,7 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
             $rootScope.messages = {};
             authService.login(user, function (error, data, message, validations) {
                 if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validation = validations;
+                if (validations) $rootScope.messages.validations = validations;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     $cookies.put('room', data.user._id);
@@ -28,7 +28,7 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
             $rootScope.messages = {};
             authService.register(account, function (error, data, message, validations) {
                 if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validation = validations;
+                if (validations) $rootScope.messages.validations = validations;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     $cookies.put('room', data.user._id);

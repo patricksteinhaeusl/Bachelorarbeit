@@ -49,7 +49,7 @@ appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$loc
             $rootScope.messages = {};
             creditCardService.update(creditCard, function (error, data, message, validations) {
                 if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validation = validations;
+                if (validations) $rootScope.messages.validations = validations;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     self.data.creditCard = {};
@@ -65,7 +65,7 @@ appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$loc
             $rootScope.messages = {};
             creditCardService.insert(creditCard, function (error, data, message, validations) {
                 if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validation = validations;
+                if (validations) $rootScope.messages.validations = validations;
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     self.data.creditCard = {};
