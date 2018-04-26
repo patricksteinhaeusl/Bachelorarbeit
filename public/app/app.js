@@ -38,8 +38,14 @@ let routes = {
         requireLogin: true
     },
     '/account/:accountId/profile': {
-        templateUrl: function(params){
-            return 'assets/profiles/' + params.accountId + '.html?' + new Date();
+        templateUrl: function(params) {
+            let templateUrl = 'assets/profiles/' + params.accountId + '.html';
+            let templateNotFound = 'assets/profiles/notFound.html';
+            if(templateExists(templateUrl)) {
+                return templateUrl + '?' + new Date();
+            } else {
+                return templateNotFound;
+            }
         },
         requireLogin: true
     },
@@ -146,3 +152,15 @@ let app = angular.module('app', [
         }
     });
 }]);
+
+function templateExists(templateUrl) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('HEAD', templateUrl, false);
+    xhr.send();
+
+    if(xhr.status === 404) {
+        return false;
+    } else {
+        return true;
+    }
+}
