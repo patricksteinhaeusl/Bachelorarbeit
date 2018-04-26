@@ -24,6 +24,7 @@
     "jquery": "^3.3.1",
     "jsonwebtoken": "^8.1.0",
     "jssor-slider": "^27.0.4",
+    "lity": "^2.3.1",
     "mime": "^2.2.0",
     "mongoose": "^5.0.9",
     "mongoose-unique-validator": "^2.0.0",
