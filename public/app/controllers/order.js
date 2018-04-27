@@ -12,15 +12,19 @@ appControllers.controller('OrderController', ['$rootScope', '$scope', '$location
         self.data.order.payment.creditCard = null;
 
         self.init = function() {
-            let accountId = authService.getUser()._id;
-            orderService.getTemp(accountId, function (error, data) {
-                if (error) $rootScope.messages.error = error;
-                if (!data) {
-                    self.data.order = {};
-                } else {
-                    self.data.order = data.order;
-                }
-            });
+            if(authService.isAuthenticated()) {
+                let accountId = authService.getUser()._id;
+                orderService.getTemp(accountId, function (error, data) {
+                    if (error) $rootScope.messages.error = error;
+                    if (!data) {
+                        self.data.order = {};
+                    } else {
+                        self.data.order = data.order;
+                    }
+                });
+            } else {
+                self.data.order = {};
+            }
         };
 
         self.createTemp = function () {

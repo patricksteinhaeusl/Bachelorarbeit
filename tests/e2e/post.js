@@ -12,7 +12,7 @@ describe('Post', function () {
     });
 
     beforeEach(function() {
-        browser.get('http://localhost:3000');
+        browser.get('https://localhost:3443');
     });
 
     describe('Add with data', function () {
@@ -24,7 +24,7 @@ describe('Post', function () {
             element(by.linkText('Community')).click();
             browser.sleep(250);
             //Fill form
-            let pathToFile = '../../assets/post-images/default.png';
+            let pathToFile = '../assets/default.png';
             let absolutePathToFile = path.resolve(__dirname, pathToFile);
             element(by.model('community.data.post.title')).sendKeys('Ganz Toll');
             element(by.model('community.data.post.text')).sendKeys('Ein perfektes Produkt zum verlieben.');

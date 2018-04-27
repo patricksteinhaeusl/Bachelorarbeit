@@ -13,7 +13,7 @@ describe('Account', function () {
     describe('Credit card', function () {
 
         beforeEach(function() {
-            browser.get('http://localhost:3000');
+            browser.get('https://localhost:3443');
         });
 
         describe('view', function () {

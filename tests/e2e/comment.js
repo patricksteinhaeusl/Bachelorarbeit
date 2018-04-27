@@ -130,7 +130,7 @@ describe('Comment and Rating', function () {
                     commentField.sendKeys('Cool Product');
                 });
                 //Submit form
-                firstProduct.element(by.buttonText('Save')).click();
+                firstProduct.element(by.buttonText('Update')).click();
                 //Check if Comment in Comment Field
                 expect(products[0].element(by.name('comment')).getAttribute('value')).toEqual('Cool Product');
             });

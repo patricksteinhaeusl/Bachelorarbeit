@@ -27,7 +27,7 @@ describe('Auth', function () {
     describe('Registration', function () {
 
         beforeEach(function() {
-            browser.get('http://localhost:3000');
+            browser.get('https://localhost:3443');
         });
 
         it('should success', function () {

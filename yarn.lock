@@ -1695,6 +1695,10 @@ promise@^7.0.1:
   dependencies:
     asap "~2.0.3"
 
+protractor-browser-logs@^1.0.351:
+  version "1.0.351"
+  resolved "https://registry.yarnpkg.com/protractor-browser-logs/-/protractor-browser-logs-1.0.351.tgz#eae01fa5c42738e962f6c5003f53d713b2c94ea3"
+
 protractor@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/protractor/-/protractor-5.3.0.tgz#5df98201cbdaeb50826af6d05630ef1945bf9c32"
