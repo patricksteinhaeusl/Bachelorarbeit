@@ -2,7 +2,7 @@
 const path = require('path');
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Deserialization - Deserialization Bug', function () {
+describe('Template Injection', function () {
 
     beforeAll(function () {
         HelperFunctions.login(browser, 'customer0', 'compass0');
@@ -76,7 +76,7 @@ describe('Deserialization - Deserialization Bug', function () {
             //Link
             element(by.linkText('My Profile')).click();
             browser.sleep(250);
-            
+
             expect(element.all(by.css('.profile-fields p')).get(0).getText()).toBe('Fencing');
             expect(element.all(by.css('.profile-fields p')).get(1).getText()).toBe('Lassagne');
             expect(element.all(by.css('.profile-fields p')).get(2).getText()).toBe('Horse');

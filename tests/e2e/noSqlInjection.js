@@ -1,7 +1,7 @@
 'use strict';
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Auth - NoSQL Injection', function () {
+describe('NoSQL Injection', function () {
     afterEach(function () {
         HelperFunctions.logout(browser);
     });

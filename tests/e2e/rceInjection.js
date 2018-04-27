@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('RCE - RCE Injection', function () {
+describe('RCE Injection', function () {
 
     beforeEach(function () {
         HelperFunctions.login(browser, 'customer0', 'compass0');
