@@ -1,6 +1,9 @@
 'use strict';
 
 const Order = require('../models/order');
+const OrderTemp = require('../models/orderTemp');
+const DeliveryAddress = require('../models/deliveryAddress').DeliveryAddress;
+const CreditCard = require('../models/creditCard').CreditCard;
 const ResponseUtil = require('../utils/response');
 
 function get(orderId, callback) {
@@ -24,13 +27,78 @@ function getByAccountId(accountId, callback) {
         });
 }
 
-function update(order, callback) {
-    let orderObj = new Order(order);
-    Order.findByIdAndUpdate(orderObj._id, orderObj, {new: true}, function (error, result) {
+function getTempByAccountId(accountId, callback) {
+    OrderTemp.findOne({_account: accountId}, {}, { sort: { 'createdAt' : -1 } }, function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         result = {'order': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully updated'));
+    });
+}
+
+function createTemp(items, totalPrice, account, callback) {
+    DeliveryAddress.findOne({_account: account}, function(error, deliveryAddress) {
+        if (error) return callback(ResponseUtil.createErrorResponse(error));
+        CreditCard.findOne({_account: account}, function(error, creditCard) {
+            if (error) return callback(ResponseUtil.createErrorResponse(error));
+            let orderObj;
+            if (creditCard && deliveryAddress) {
+                orderObj = new OrderTemp({
+                    items: items,
+                    totalPrice: totalPrice,
+                    _account: account,
+                    _deliveryAddress: deliveryAddress._id,
+                    payment: {
+                        type: 'creditCard',
+                        _creditCard: creditCard._id
+                    }
+                });
+            } else if(!creditCard && deliveryAddress) {
+                orderObj = new OrderTemp({
+                    items: items,
+                    totalPrice: totalPrice,
+                    _account: account,
+                    _deliveryAddress: deliveryAddress._id,
+                    payment: {
+                        type: 'bill',
+                    }
+                });
+            } else if(creditCard && !deliveryAddress) {
+                orderObj = new OrderTemp({
+                    items: items,
+                    totalPrice: totalPrice,
+                    _account: account,
+                    payment: {
+                        type: 'creditCard',
+                        _creditCard: creditCard._id
+                    }
+                });
+            } else {
+                orderObj = new OrderTemp({
+                    items: items,
+                    totalPrice: totalPrice,
+                    _account: account,
+                });
+            }
+
+            orderObj.save(function(error, result) {
+                if (error) return callback(ResponseUtil.createErrorResponse(error));
+                if (!result) return callback(ResponseUtil.createNotFoundResponse());
+                result = {'order': result};
+                return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully created.'));
+            });
+
+        });
+    });
+}
+
+function updateTemp(order, callback) {
+    let orderObj = new OrderTemp(order);
+    OrderTemp.findByIdAndUpdate(orderObj._id, orderObj, {new: true}, function (error, result) {
+        if (error) return callback(ResponseUtil.createErrorResponse(error));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        result = {'order': result};
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully updated'));
     });
 }
 
@@ -40,14 +108,8 @@ function insert(order, callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         result = {'order': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully created.'));
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully saved.'));
     });
-}
-
-function create(callback) {
-    let orderObj = new Order();
-    let result = {order: orderObj};
-    return callback(null, ResponseUtil.createSuccessResponse(result));
 }
 
 function remove(orderId, callback) {
@@ -74,9 +136,10 @@ function getFromTo(from, range, callback) {
 module.exports = {
     get,
     getByAccountId,
-    update,
+    getTempByAccountId,
+    createTemp,
+    updateTemp,
     insert,
-    create,
     remove,
     getFromTo
 };

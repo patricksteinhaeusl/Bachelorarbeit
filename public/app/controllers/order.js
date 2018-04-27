@@ -11,15 +11,64 @@ appControllers.controller('OrderController', ['$rootScope', '$scope', '$location
         self.data.order.payment.type = null;
         self.data.order.payment.creditCard = null;
 
-        self.createOrder = function () {
-            orderService.create(function (error, order) {
-                if (error) return console.log(error);
-                self.data.order = order;
-                self.data.order.items = cartService.getItems();
-                self.data.order.totalPrice = cartService.getTotalPrice();
+        self.init = function() {
+            let accountId = authService.getUser()._id;
+            orderService.getTemp(accountId, function (error, data) {
+                if (error) $rootScope.messages.error = error;
+                if (!data) {
+                    self.data.order = {};
+                } else {
+                    self.data.order = data.order;
+                }
+            });
+        };
 
-                if (self.data.order._id) {
-                    return $location.path('/checkout/overview');
+        self.createTemp = function () {
+            $rootScope.messages = {};
+            let items = cartService.getItems();
+            let totalPrice = cartService.getTotalPrice();
+            let account = authService.getUser()._id;
+            orderService.createTemp(items, totalPrice, account, function (error, data, message, validations) {
+                if (error) $rootScope.messages.error = error;
+                if (validations) $rootScope.messages.validation = validations;
+                if (!data) $rootScope.messages.warning = message;
+                if (data) {
+                    self.data.order = data.order;
+                    $rootScope.messages.success = message;
+                    $location.path('/checkout/overview');
+                }
+            });
+        };
+
+        self.updateTemp = function () {
+            $rootScope.messages = {};
+            orderService.updateTemp(self.data.order, function (error, data, message, validations) {
+                if (error) $rootScope.messages.error = error;
+                if (validations) $rootScope.messages.validation = validations;
+                if (!data) $rootScope.messages.warning = message;
+                if (data) {
+                    self.data.order = data.order;
+                    $rootScope.messages.success = message;
+                }
+            });
+        };
+
+        self.save = function () {
+            if (self.data.order.payment.type === 'bill') {
+                self.data.order.status = 'ready for payment';
+            } else if (self.data.order.payment.type === 'creditCard') {
+                self.data.order.status = 'ready for delivery';
+            }
+            $rootScope.messages = {};
+            orderService.save(self.data.order, function (error, data, message, validations) {
+                if (error) $rootScope.messages.error = error;
+                if (validations) $rootScope.messages.validations = validations;
+                if (!data) $rootScope.messages.warning = message;
+                if (data) {
+                    cartService.clear();
+                    self.data.order = {};
+                    $rootScope.messages.success = message;
+                    $location.path('/orders');
                 }
             });
         };
@@ -42,32 +91,10 @@ appControllers.controller('OrderController', ['$rootScope', '$scope', '$location
             }
         };
 
-        self.save = function () {
-            self.save.active = true;
-            self.data.order._account = authService.getUser()._id;
-            if (self.data.order.payment.type === 'bill') {
-                self.data.order.status = 'ready for payment';
-            } else if (self.data.order.payment.type === 'creditCard') {
-                self.data.order.status = 'ready for delivery';
+        self.changePayment = function() {
+            if(self.data.order.payment.type === 'bill') {
+                delete self.data.order.payment._creditCard;
             }
-            $rootScope.messages = {};
-            orderService.save(self.data.order, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validations = validations;
-                if (!data) $rootScope.messages.warning = message;
-                if (data) {
-                    cartService.clear();
-                    self.data.order = {};
-                    $rootScope.messages.success = message;
-                    $location.path('/orders');
-                }
-            });
-        };
-
-        self.save.active = false;
-
-        self.changePayment = function () {
-            if (self.data.order.payment && self.data.order.payment.creditCard) delete self.data.order.payment.creditCard;
         };
 
         $scope.$watch(function () {
@@ -85,5 +112,7 @@ appControllers.controller('OrderController', ['$rootScope', '$scope', '$location
             self.data.order.items = cartService.getItems();
             self.data.order.totalPrice = cartService.getTotalPrice();
         }, true);
+
+        self.init();
 
     }]);

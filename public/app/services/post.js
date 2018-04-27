@@ -47,7 +47,6 @@ appServices.factory('PostService', ['$http', 'Upload', function ($http, Upload) 
                 .delete('/api/post/' + postId)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
-                    let data = response.data.data;
                     let message = response.data.message;
                     let validations = response.data.validations;
                     if (statusCode === 200) {
