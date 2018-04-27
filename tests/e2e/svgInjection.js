@@ -20,6 +20,10 @@ describe('Post - SVG Injection', function () {
                 //Link
                 element(by.linkText('Community')).click();
                 browser.sleep(250);
+                //Check if Save Button is disabled
+                expect(element(by.buttonText('Save')).isEnabled()).toBe(false);
+                //Select Upload
+                element.all(by.model('community.type')).get(0).click();
                 //Fill form
                 let pathToFile = '../../assets/post-images/default.svg';
                 let absolutePathToFile = path.resolve(__dirname, pathToFile);
@@ -28,6 +32,7 @@ describe('Post - SVG Injection', function () {
                 browser.sleep(250);
                 element.all(by.model('community.data.postImage')).get(0).sendKeys(absolutePathToFile);
                 //Check
+                expect(element(by.buttonText('Save')).isEnabled()).toBe(true);
                 expect(element.all(by.css('.thumbnail')).get(0).isDisplayed()).toBe(true);
                 //Submit form
                 element(by.buttonText('Save')).click();
