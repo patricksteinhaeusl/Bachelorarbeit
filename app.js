@@ -28,6 +28,7 @@ app.use(bodyParser.json({'strict': true}));
 app.use(express.static(__dirname + '/public/app'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/product-images', express.static(__dirname + '/assets/product-images'));
+app.use('/profile-images', express.static(__dirname + '/assets/profile-images'));
 app.use('/post-images', express.static(__dirname + '/assets/post-images'));
 app.use('/slider-images', express.static(__dirname + '/assets/slider-images'));
 app.use('/favicon.ico', express.static(__dirname + '/assets/favicon.ico'));

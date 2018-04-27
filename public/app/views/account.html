@@ -1,7 +1,6 @@
 <div class="content-view" ng-controller="AccountController as account">
     <form class="auth-form-account" ng-submit="account.update()">
         <h1>Your account</h1>
-        <div ng-if="auth.data.account.formSubmitFailed" class="alert alert-danger"><strong>Update failed!</strong></div>
         <div class="form-group">
             <label class="label">Firstname:</label>
             <input class="form-control" type="text" ng-model="account.data.account.firstname" name="firstname"
@@ -28,6 +27,7 @@
     </form>
     <br />
     <form ng-submit="account.upload()">
+        <h1>Upload your profile</h1>
         <div class="form-group">
             <input id='file-selector' type="file" ng-model="account.data.profile" name="profile"
                    ngf-select=""
@@ -46,4 +46,9 @@
             </button>
         </div>
     </form>
+    <br />
+    <div>
+        <h1>Share your profile</h1>
+        <a ng-href="#!/account/{{auth.getUser()._id}}/profile">#!/account/{{auth.getUser()._id}}/profile</a>
+    </div>
 </div>
