@@ -7,10 +7,10 @@ appServices.factory('OrderService', ['$http', function ($http) {
                 .get('/api/order/temp/account/' + accountId)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
-                    let data = response.data.data.order;
+                    let data = response.data.data;
                     let message = response.data.message;
                     if (statusCode === 200) {
-                        let responseData = {order: data};
+                        let responseData = {order: data.order};
                         return callback(null, responseData, message);
                     }
                     return callback(null, null, message);
@@ -61,12 +61,12 @@ appServices.factory('OrderService', ['$http', function ($http) {
                 .post('/api/order', data)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
-                    let data = response.data.data.order;
+                    let data = response.data.data;
                     let message = response.data.message;
                     let validations = response.data.validations;
                     if (statusCode === 200) {
                         let order = data.order;
-                        let responseData = {order: data};
+                        let responseData = {order: order};
                         return callback(null, responseData, message, null);
                     } else if (statusCode === 405) {
                         return callback(null, null, null, validations);
