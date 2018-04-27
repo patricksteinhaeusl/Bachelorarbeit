@@ -128,11 +128,12 @@ describe('Comment and Rating', function () {
                 let commentField = products[0].element(by.name('comment'));
                 commentField.clear().then(function () {
                     commentField.sendKeys('Cool Product');
+                    //Submit form
+                    firstProduct.element(by.buttonText('Save')).click();
+                    browser.sleep(250);
+                    //Check if Comment in Comment Field
+                    expect(products[0].element(by.name('comment')).getAttribute('value')).toEqual('Cool Product');
                 });
-                //Submit form
-                firstProduct.element(by.buttonText('Update')).click();
-                //Check if Comment in Comment Field
-                expect(products[0].element(by.name('comment')).getAttribute('value')).toEqual('Cool Product');
             });
 
         });

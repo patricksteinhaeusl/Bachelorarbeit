@@ -25,7 +25,6 @@ describe('Post - SVG Injection', function () {
                 let absolutePathToFile = path.resolve(__dirname, pathToFile);
                 element(by.model('community.data.post.title')).sendKeys('Ein perfektes Produkt');
                 element(by.model('community.data.post.text')).sendKeys('Ein perfektes Produkt zum verlieben.');
-                browser.sleep(250);
                 element.all(by.model('community.data.postImage')).get(0).sendKeys(absolutePathToFile);
                 //Check
                 expect(element.all(by.css('.thumbnail')).get(0).isDisplayed()).toBe(true);
@@ -39,11 +38,11 @@ describe('Post - SVG Injection', function () {
     describe('View', function () {
         it('should success', function () {
             browser.get('https://localhost:3443/').catch(function () {
+                browser.sleep(500);
                 let alertDialog = browser.switchTo().alert();
                 expect(alertDialog.getText()).toBe('!SVGs are dangerous!');
                 alertDialog.accept();
-
-                browser.sleep(2000);
+                browser.sleep(500);
 
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();

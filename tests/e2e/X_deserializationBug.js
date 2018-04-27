@@ -27,7 +27,6 @@ describe('Deserialization - Deserialization Bug', function () {
             browser.actions().sendKeys(protractor.Key.ENTER).perform();
 
             let filePath = '../../' + fileName;
-
             let exists = false;
 
             setTimeout(function() {
