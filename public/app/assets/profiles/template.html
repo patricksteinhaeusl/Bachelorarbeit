@@ -1,0 +1,30 @@
+<!-- Bind AngularJS controller to get access of account data -->
+<div ng-controller="AccountController as account">
+    <h1>Welcome to my profile</h1>
+    <br>
+    <br>
+    <div class="row">
+        <div class="profile-image col col-xs-5">
+            <!-- Bind your own images from external ressources -->
+            <img src="YOUR_URL_TO_IMAGE" style="display: block; max-width: 100%; max-height: 100%">
+        </div>
+
+        <div class="profile-fields col col-xs-7">
+            <!-- Expression get firstname of account -->
+            <label>Firstname</label>
+            <p>{{ account.data.account.firstname }}</p>
+            <!-- Expression get lastname of account -->
+            <label>Lastname</label>
+            <p>{{ account.data.account.lastname }}</p>
+            <label>Hobby:</label>
+            <p>Fencing</p>
+            <label>Favorite food:</label>
+            <p>Lassagne</p>
+            <label>Favorite animal:</label>
+            <p>Horse</p>
+            <!-- Expression calculate your own values -->
+            <label>Age</label>
+            <p>{{ 20 + 2 }}</p>
+        </div>
+    </div>
+</div>
