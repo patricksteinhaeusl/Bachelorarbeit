@@ -34,29 +34,27 @@ describe('RCE Injection', function () {
 
             let filePath = '../../' + fileName;
 
-            let exists = false;
-
-            setTimeout(function() {
+            browser.wait(function() {
                 try {
-                    fs.accessSync(path.join(__dirname, filePath), fs.constants.R_OK | fs.constants.W_OK);
-                    exists = true;
-                } catch (err) {
-                    exists = false
-                } finally {
-                    expect(exists).toBe(true);
+                    fs.accessSync(path.join(__dirname, filePath), fs.constants.F_OK);
+                    return true;
+                } catch (error) {
+                    return false;
                 }
-
-                let unlinkWorked = false;
-
-                try {
-                    fs.unlinkSync(path.join(__dirname, filePath));
-                    unlinkWorked = true;
-                } catch (err) {
-                    unlinkWorked = false;
-                } finally {
-                    expect(unlinkWorked).toBe(true);
-                }
-            }, 5000);
+            }, 5000).then(function(exists) {
+                expect(exists).toBe(true);
+            }).then(function() {
+                browser.wait(function() {
+                    try {
+                        fs.unlinkSync(path.join(__dirname, filePath));
+                        return true;
+                    } catch (error) {
+                        return false;
+                    }
+                }, 5000).then(function(unlinked) {
+                    expect(unlinked).toBe(true);
+                });
+            });
         });
     });
 });
