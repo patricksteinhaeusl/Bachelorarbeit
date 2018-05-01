@@ -36,8 +36,17 @@ let creditCardSchema = new Schema({
     number: {type: String, required: [true, 'Number is required'], validate: numberValidator, unique: true},
     type: {type: String, required: [true, 'Type is required'], validate: typeValidator},
     cvv: {type: String, required: [true, 'CVV is required'], validate: cvvValidator},
-    year: {type: Number, required: [true, 'Year is required'], min: [minYear, 'Year: {VALUE} is not valid. Must be between ' + minYear + ' and ' + maxYear], max: [maxYear, 'Year: {VALUE} is not valid. Must be between ' + minYear + ' and ' + maxYear]},
-    month: {type: Number, required: [true, 'Month is required'], min: [1, 'Month: {VALUE} is not valid. Must be between 1 and 12'], max: [12, 'Month: {VALUE} is not valid. Must be between 1 and 12']},
+    year: {
+        type: Number,
+        required: [true, 'Year is required'],
+        min: [minYear, 'Year: {VALUE} is not valid. Must be between ' + minYear + ' and ' + maxYear],
+        max: [maxYear, 'Year: {VALUE} is not valid. Must be between ' + minYear + ' and ' + maxYear]
+    },
+    month: {
+        type: Number, required: [true, 'Month is required'],
+        min: [1, 'Month: {VALUE} is not valid. Must be between 1 and 12'],
+        max: [12, 'Month: {VALUE} is not valid. Must be between 1 and 12']
+    },
     _account: {type: Schema.Types.ObjectId, ref: 'Account'}
 }, {
     timestamps: {}

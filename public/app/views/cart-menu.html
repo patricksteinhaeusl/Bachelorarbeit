@@ -9,7 +9,7 @@
         <tbody ng-repeat="item in cart.data.items" ng-show="cart.data.items.length > 0">
             <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>
-            <td>{{ item.product.price * item.quantity }} CHF</td>
+            <td>{{ (item.product.price * item.quantity).toFixed(2) }} CHF</td>
             <td>
                 <button class="btn btn-outline-primary btn-xs" ng-click="cart.remove($index)">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -22,12 +22,12 @@
         <tfoot ng-show="cart.data.items.length > 0">
             <td>Sum:</td>
             <td></td>
-            <td>{{ cart.data.totalPrice }} CHF</td>
+            <td>{{ cart.data.totalPrice.toFixed(2) }} CHF</td>
             <td></td>
         </tfoot>
     </table>
     <button type="button" class="btn btn-outline-primary"
-            ng-if="auth.isAuthenticated() === true && cart.data.items.length > 0" ng-click="order.createOrder()">
+            ng-if="auth.isAuthenticated() === true && cart.data.items.length > 0" ng-click="order.createTemp()">
         <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Check out
     </button>
 </div>

@@ -18,9 +18,27 @@ function getByAccountId(req, res) {
     });
 }
 
-function update(req, res) {
+function getTempByAccountId(req, res) {
+    let accountId = req.params.accountId;
+    OrderService.getTempByAccountId(accountId, (error, result) => {
+        if (error) return res.json(error);
+        return res.json(result);
+    });
+}
+
+function createTemp(req, res) {
+    let items = req.body.items;
+    let totalPrice = req.body.totalPrice;
+    let account = req.body.account;
+    OrderService.createTemp(items, totalPrice, account, (error, result) => {
+        if (error) return res.json(error);
+        return res.json(result);
+    });
+}
+
+function updateTemp(req, res) {
     let order = req.body.order;
-    OrderService.update(order, (error, result) => {
+    OrderService.updateTemp(order, (error, result) => {
         if (error) return res.json(error);
         return res.json(result);
     });
@@ -29,13 +47,6 @@ function update(req, res) {
 function insert(req, res) {
     let order = req.body.order;
     OrderService.insert(order, (error, result) => {
-        if (error) return res.json(error);
-        return res.json(result);
-    });
-}
-
-function create(req, res) {
-    OrderService.create((error, result) => {
         if (error) return res.json(error);
         return res.json(result);
     });
@@ -58,9 +69,10 @@ function getFromTo(req, res) {
 module.exports = {
     get,
     getByAccountId,
-    update,
+    getTempByAccountId,
+    createTemp,
+    updateTemp,
     insert,
-    create,
     remove,
     getFromTo
 };

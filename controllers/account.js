@@ -18,7 +18,17 @@ function update(req, res) {
     });
 }
 
+function upload(req, res) {
+    let accountId = req.body.accountId;
+    let profile = req.file.filename;
+    AccountService.upload(accountId, profile, (error, result) => {
+        if (error) return res.json(error);
+        return res.json(result);
+    });
+}
+
 module.exports = {
     get,
-    update
+    update,
+    upload
 };

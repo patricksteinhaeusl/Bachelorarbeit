@@ -1,11 +1,4 @@
 <div class="content-view">
-    <div class="alert alert-warning" ng-show="auth.register.validations.length > 0">
-        <h4>Validation Error:</h4>
-        <ul ng-repeat="validation in auth.register.validations">
-            <li>- {{validation}}</li>
-        </ul>
-    </div>
-
     <form class="auth-form-register" ng-submit="auth.register()">
         <h1>Create an account</h1>
         <div class="form-group">

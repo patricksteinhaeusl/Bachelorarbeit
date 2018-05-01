@@ -19,6 +19,7 @@
         <ul>
             <li><a href="#!/account">My Account</a></li>
             <ul>
+                <li><a ng-href="#!/account/{{ auth.getUser()._id }}/profile">My Profile</a></li>
                 <li><a href="#!/creditcards">Credit Cards</a></li>
                 <li><a href="#!/deliveryaddresses">Delivery Addresses</a></li>
             </ul>

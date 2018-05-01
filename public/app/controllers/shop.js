@@ -88,7 +88,7 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
             shopService.rateProduct(product, rating, function (error, data, message, validations) {
                 if (error) $rootScope.messages.error = error;
                 if (validations) {
-                    $rootScope.messages.validation = validations;
+                    $rootScope.messages.validations = validations;
                     self.ratingByAccount = {};
                     self.ratingEmptyByAccount = {};
                 }

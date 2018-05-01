@@ -6,8 +6,6 @@
     <div ng-if="creditCard.data.creditCard">
         <form class="creditCard-form" ng-submit="creditCard.update()">
             <h1>Update your credit card</h1>
-            <div ng-if="creditCard.data.creditCard.formSubmitFailed" class="alert alert-danger"><strong>Credit card
-                failed!</strong></div>
             <div class="form-group">
                 <label class="label">Number:</label>
                 <input class="form-control" type="text" ng-model="creditCard.data.creditCard.number" name="number"

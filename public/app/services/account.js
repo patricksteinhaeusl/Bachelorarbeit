@@ -1,6 +1,6 @@
 'use strict';
 
-appServices.factory('AccountService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
+appServices.factory('AccountService', ['$http', '$q', 'Upload', 'localStorageService', function ($http, $q, Upload, localStorageService) {
     return {
         get: function (accountId, callback) {
             $http
@@ -47,6 +47,30 @@ appServices.factory('AccountService', ['$http', '$q', 'localStorageService', fun
                 }, function (error) {
                     return callback(error);
                 });
-        }
+        },
+        upload: function (accountId, profile, callback, callbackEvent) {
+            let data = {accountId: accountId, profile: profile};
+            Upload.upload({
+                url: '/api/account/profile',
+                data: data,
+            }).then(function (response) {
+                let statusCode = response.data.statusCode;
+                let data = response.data.data;
+                let message = response.data.message;
+                let validations = response.data.validations;
+                if (statusCode === 200) {
+                    let responseData = data;
+                    return callback(null, responseData, message, null);
+                } else if (statusCode === 405) {
+                    return callback(null, null, null, validations);
+                }
+                return callback(null, null, message, null);
+            }, function (error) {
+                return callback(error);
+            }, function (event) {
+                let progressPercentage = parseInt(100 * event.loaded / event.total);
+                return callbackEvent(progressPercentage);
+            });
+        },
     };
 }]);

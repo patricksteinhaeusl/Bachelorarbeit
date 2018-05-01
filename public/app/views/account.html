@@ -1,17 +1,6 @@
 <div class="content-view" ng-controller="AccountController as account">
-
-    <div ng-if="account.update.messages.success" class="alert alert-success"><strong>{{ account.update.messages.success
-        }}</strong></div>
-    <div ng-if="account.update.messages.warning" class="alert alert-warning"><strong>{{ account.update.messages.warning
-        }}</strong></div>
-
-    <div ng-repeat="validation in account.update.validations">
-        <div class="alert alert-warning"><strong>{{ validation }}</strong></div>
-    </div>
-
     <form class="auth-form-account" ng-submit="account.update()">
         <h1>Your account</h1>
-        <div ng-if="auth.data.account.formSubmitFailed" class="alert alert-danger"><strong>Update failed!</strong></div>
         <div class="form-group">
             <label class="label">Firstname:</label>
             <input class="form-control" type="text" ng-model="account.data.account.firstname" name="firstname"
@@ -36,4 +25,30 @@
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Update
         </button>
     </form>
+    <br />
+    <form ng-submit="account.upload()">
+        <h1>Upload your profile</h1>
+        <div class="form-group">
+            <input id='file-selector' type="file" ng-model="account.data.profile" name="profile"
+                   ngf-select=""
+                   ngf-pattern="'.html'"
+                   ngf-accept="'.html'" ngf-max-size="20MB" required />
+        </div>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{ account.data.progress }}"
+                 aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width' : account.data.progress + '%' }">
+                <span class="sr-only">{{ account.data.progress }} &</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-outline-primary">
+                <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Upload
+            </button>
+        </div>
+    </form>
+    <br />
+    <div>
+        <h1>Share your profile</h1>
+        <a ng-href="#!/account/{{auth.getUser()._id}}/profile">#!/account/{{auth.getUser()._id}}/profile</a>
+    </div>
 </div>
