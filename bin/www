@@ -13,6 +13,7 @@ process.env.NODE_RCE_SERIALIZATION = process.env.NODE_RCE_SERIALIZATION || 'off'
  */
 
 const app = require('../app');
+const ssrf = require('../ssrfApp');
 const debug = require('debug')('server:server');
 const http = require('http');
 const https = require('https');
@@ -24,6 +25,7 @@ const GlobalConfig = require('../configs/index');
 
 const port = normalizePort(GlobalConfig.server.port);
 const sslPort = normalizePort(GlobalConfig.server.sslPort);
+const SSRFPort = normalizePort(GlobalConfig.server.SSRFPort);
 const host = GlobalConfig.server.host;
 
 /**
@@ -38,6 +40,7 @@ app.set('forceSSLOptions', {
  */
 
 const server = http.createServer(app);
+const SSRFServer = http.createServer(ssrf);
 const secureServer = https.createServer(GlobalConfig.sslOptions, app);
 
 /**
@@ -48,9 +51,7 @@ server.listen(port, host, function() {
     let address = server.address();
     let host = address.address;
     let port = address.port;
-    console.log('Server started: http://' + host + ':' + port + ' in ' + process.env.NODE_ENV + ' mode');
-    console.log("NODE_RCE_EVAL: " + process.env.NODE_RCE_EVAL);
-    console.log("NODE_RCE_SERIALIZATION: " + process.env.NODE_RCE_SERIALIZATION);
+    console.log('HTTP Server started: http://' + host + ':' + port + ' in ' + process.env.NODE_ENV + ' mode');
 });
 
 server.on('error', (error) => onError(error, port));
@@ -60,13 +61,26 @@ secureServer.listen(sslPort, host, function() {
     let address = secureServer.address();
     let host = address.address;
     let port = address.port;
-    console.log('Server started: https://' + host + ':' + port + ' in ' + process.env.NODE_ENV + ' mode');
-    console.log("NODE_RCE_EVAL: " + process.env.NODE_RCE_EVAL);
-    console.log("NODE_RCE_SERIALIZATION: " + process.env.NODE_RCE_SERIALIZATION);
+    console.log('HTTPS Server started: https://' + host + ':' + port + ' in ' + process.env.NODE_ENV + ' mode');
 });
 
 secureServer.on('error', (error) => onError(error, sslPort));
 secureServer.on('listening', () => onListening(secureServer));
+
+/**
+ * Start hidden HTTP Server for SSRF Challenge
+ */
+SSRFServer.listen(SSRFPort, host, function() {
+    let address = SSRFServer.address();
+    let host = address.address;
+    let port = address.port;
+    console.log('Secret SSRF Server started: http://' + host + ':' + port + ' in ' + app.get('env') + ' mode');
+    console.log("NODE_RCE_EVAL: " + process.env.NODE_RCE_EVAL);
+    console.log("NODE_RCE_SERIALIZATION: " + process.env.NODE_RCE_SERIALIZATION);
+});
+
+SSRFServer.on('error', (error) => onError(error, SSRFPort));
+SSRFServer.on('listening', () => onListening(SSRFServer));
 
 /**
  * Normalize a port into a number, string, or false.

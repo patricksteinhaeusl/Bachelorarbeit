@@ -9,10 +9,19 @@ function getAll(req, res) {
     });
 }
 
-function insert(req, res) {
+function insertUpload(req, res) {
     let post = req.body.post;
     post.image = req.file.filename;
-    PostService.insert(post, (error, result) => {
+    PostService.insertUpload(post, (error, result) => {
+        if (error) return res.json(error);
+        return res.json(result);
+    });
+}
+
+function insertURL(req, res) {
+    let post = req.body.post;
+    let url = req.body.url;
+    PostService.insertURL(post, url, (error, result) => {
         if (error) return res.json(error);
         return res.json(result);
     });
@@ -28,6 +37,7 @@ function remove(req, res) {
 
 module.exports = {
     getAll,
-    insert,
+    insertUpload,
+    insertURL,
     remove
 };

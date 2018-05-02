@@ -9,7 +9,8 @@ const config = {
     server: {
         host: '0.0.0.0',
         port: '3000',
-        sslPort: '3443'
+        sslPort: '3443',
+        SSRFPort: '8765'
     },
     sslOptions: {
         key: sslKey,
@@ -45,7 +46,6 @@ const config = {
     },
     postImages: {
         directory: './assets/post-images/',
-        defaultImages: ['default.png', 'default.svg', 'schelbert-froschmaultreicheln.jpg', 'steiner-innenschweiz.jpg', 'zurfluh-bissen.jpg']
     },
     accountProfile: {
         directory: './public/app/assets/profiles/',

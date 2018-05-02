@@ -14,7 +14,7 @@ module.exports = function(server) {
         let room = null;
         if(socket.request.headers.cookie) {
             let cookies = cookie.parse(socket.request.headers.cookie);
-            room = cookies.room;
+            room = cookies.chatUser;
             if(room) {
                 socket.join(room);
             }

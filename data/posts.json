@@ -32,9 +32,9 @@
 	"_id": {
 		"$oid": "5aa0481e876d9d39d4397887"
 	},
-	"title": "Awesome product",
-	"text": "This is one of the best bells.",
-	"image": "schelbert-froschmaultreicheln.jpg",
+	"title": "Broken bells...",
+	"text": "are sometimes a sign of hidden treasures.",
+	"image": "http://localhost:8765/file001.jpg",
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.626Z"
 	},
