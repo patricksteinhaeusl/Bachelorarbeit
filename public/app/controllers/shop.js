@@ -86,7 +86,6 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
             rating._account = authService.getUser()._id;
             $rootScope.messages = {};
             if(rating.value >= 1) {
-                console.log(rating.value);
                 shopService.rateProduct(product, rating, function (error, data, message, validations) {
                     if (error) $rootScope.messages.error = error;
                     if (validations) {
