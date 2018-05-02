@@ -32,7 +32,12 @@ function insertUpload(post, callback) {
 }
 
 function insertURL(post, url, callback) {
-    let parsedFile = path.parse(urlParse.parse(url).pathname);
+    let parsedFile = "";
+    try {
+        parsedFile = path.parse(urlParse.parse(url).pathname);
+    } catch (err) {
+        return callback(ResponseUtil.createErrorResponse('Not a valid URL'));
+    }
     let extension = parsedFile.ext;
     let scrambledFileName = crypto.randomBytes(16).toString('hex');
     post.image = "";
@@ -53,8 +58,8 @@ function insertURL(post, url, callback) {
                     return callback(null, ResponseUtil.createSuccessResponse(result, 'Post successfully created.'));
                 });
             });
-        }).catch((err) => {
-        throw err
+        }).catch(() => {
+        return callback(ResponseUtil.createErrorResponse('Could not fetch image from given URL'));
     });
 }
 
