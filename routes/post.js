@@ -8,6 +8,7 @@ const multer = require('multer');
 const mime = require('mime');
 const GlobalConfig = require('../configs/index');
 const jwt = require('express-jwt');
+const ResponseUtil = require('../utils/response');
 
 const storage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -20,10 +21,26 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({storage: storage}).single('postImage');
+const upload = multer({
+    storage: storage,
+    fileFilter: function (req, file, callback) {
+        const regEx = new RegExp("image");
+        if (!regEx.test(file.mimetype)) {
+            return callback('Only image files are allowed!');
+        }
+        return callback(null, true);
+    }
+}).single('postImage');
 
 router.get('/', PostController.getAll);
-router.post('/', jwt(GlobalConfig.auth.validateOptions), upload, PostController.insert);
+router.post('/', jwt(GlobalConfig.auth.validateOptions), function(req, res, callback) {
+    upload(req, res, function (error) {
+        if(error) {
+            return res.json(ResponseUtil.createErrorResponse(error));
+        }
+        return callback();
+    });
+}, PostController.insert);
 router.delete('/:postId', jwt(GlobalConfig.auth.validateOptions), PostController.remove);
 
 module.exports = router;
