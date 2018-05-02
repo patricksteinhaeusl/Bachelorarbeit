@@ -20,7 +20,8 @@ appControllers.controller('CommunityController', ['$rootScope', '$scope', '$loca
                     self.insertURL();
                     break;
                 default:
-                    console.log("error");
+                    $rootScope.messages = {};
+                    $rootScope.messages.error = "No Type selected";
                     break;
             }
         };

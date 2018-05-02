@@ -57,6 +57,8 @@ appServices.factory('PostService', ['$http', 'Upload', function ($http, Upload) 
                         return callback(null, responseData, message, null);
                     } else if (statusCode === 405) {
                         return callback(null, null, null, validations);
+                    } else if (statusCode === 500) {
+                        return callback(message, null, null, null);
                     }
                     return callback(null, null, message, null);
                 }, function (error) {
