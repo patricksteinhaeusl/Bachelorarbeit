@@ -13,7 +13,7 @@ describe('Post - SVG Injection', function () {
 
     describe('Add with data', function () {
         it('should success', function () {
-            browser.get('http://localhost:3000/').then(function () {
+            browser.get('https://localhost:3443/').then(function () {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -21,11 +21,10 @@ describe('Post - SVG Injection', function () {
                 element(by.linkText('Community')).click();
                 browser.sleep(250);
                 //Fill form
-                let pathToFile = '../../assets/post-images/default.svg';
+                let pathToFile = '../assets/default.svg';
                 let absolutePathToFile = path.resolve(__dirname, pathToFile);
                 element(by.model('community.data.post.title')).sendKeys('Ein perfektes Produkt');
                 element(by.model('community.data.post.text')).sendKeys('Ein perfektes Produkt zum verlieben.');
-                browser.sleep(250);
                 element.all(by.model('community.data.postImage')).get(0).sendKeys(absolutePathToFile);
                 //Check
                 expect(element.all(by.css('.thumbnail')).get(0).isDisplayed()).toBe(true);
@@ -38,12 +37,12 @@ describe('Post - SVG Injection', function () {
 
     describe('View', function () {
         it('should success', function () {
-            browser.get('http://localhost:3000/').catch(function () {
+            browser.get('https://localhost:3443/').catch(function () {
+                browser.sleep(500);
                 let alertDialog = browser.switchTo().alert();
                 expect(alertDialog.getText()).toBe('!SVGs are dangerous!');
                 alertDialog.accept();
-
-                browser.sleep(2000);
+                browser.sleep(500);
 
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
@@ -65,7 +64,7 @@ describe('Post - SVG Injection', function () {
 
     describe('Delete', function () {
         it('should success', function () {
-            browser.get('http://localhost:3000/').then(function () {
+            browser.get('https://localhost:3443/').then(function () {
                 element(by.linkText('Home')).click();
                 browser.sleep(250);
                 let posts = element.all(by.repeater('post in home.data.posts'));

@@ -26,7 +26,7 @@ describe('Order and Cart Processes', function () {
         });
 
         it('should be possible to add items with correct Properties', function () {
-            browser.get('http://localhost:3000/#!/shop').then(function () {
+            browser.get('https://localhost:3443/#!/shop').then(function () {
 
                 element.all(by.repeater('product in shop.data.products')).then(function (products) {
                     product1Name = products[0].element(by.binding('product.name')).getText();
@@ -48,7 +48,7 @@ describe('Order and Cart Processes', function () {
                     expect(items[1].all(by.tagName('td')).get(0).getAttribute('innerText')).toBe(product2Name);
                     expect(items[1].all(by.tagName('td')).get(1).getAttribute('innerText')).toBe(quantity.toString());
                     sumPrice = product2Price.then(function (text) {
-                        return (parseInt(text.replace(/ CHF/gi, '')) * quantity) + " CHF";
+                        return (parseInt(text.replace(/ CHF/gi, '')) * quantity).toFixed(2) + " CHF";
                     });
                     expect(items[1].all(by.tagName('td')).get(2).getAttribute('innerText')).toBe(sumPrice);
                     expect(items[2].all(by.tagName('td')).get(0).getAttribute('innerText')).toBe(product3Name);
@@ -89,11 +89,6 @@ describe('Order and Cart Processes', function () {
             });
         });
 
-        it('should not proceed without selected address', function () {
-            expect(browser.getCurrentUrl()).toContain('/checkout/address');
-            expect(element.all(by.buttonText('Next')).get(0).isEnabled()).toBe(false);
-        });
-
         it('should have same addresses as in the settings', function () {
             element.all(by.repeater('deliveryAddress in deliveryAddresses.data.deliveryAddresses')).then(function (address) {
                 expect(address[0].getText()).toBe(addressSettings.getText());
@@ -102,17 +97,17 @@ describe('Order and Cart Processes', function () {
 
         it('should proceed with selected address', function () {
             element.all(by.repeater('deliveryAddress in deliveryAddresses.data.deliveryAddresses')).then(function (address) {
-                address[0].element(by.model('order.data.order.deliveryAddress')).click();
-                expect(address[0].element(by.model('order.data.order.deliveryAddress'))
-                    .getAttribute('class')).toContain('ng-valid-parse');
+                address[0].element(by.model('order.data.order._deliveryAddress')).click();
+                expect(address[0].element(by.model('order.data.order._deliveryAddress'))
+                    .getAttribute('class')).toContain('ng-pristine ng-untouched ng-valid ng-not-empty');
             });
             expect(element.all(by.buttonText('Next')).get(0).isEnabled()).toBe(true);
             element.all(by.buttonText('Next')).get(0).click();
         });
 
-        it('should not proceed without selected method of payment', function () {
+        it('should proceed with selected method of payment', function () {
             expect(browser.getCurrentUrl()).toContain('/checkout/payment');
-            expect(element.all(by.buttonText('Finish')).get(0).isEnabled()).toBe(false);
+            expect(element.all(by.buttonText('Finish')).get(0).isEnabled()).toBe(true);
         });
 
         it('should have same creditcard as in the settings', function () {
@@ -126,30 +121,30 @@ describe('Order and Cart Processes', function () {
             element(by.css(".panel input[value='creditCard']")).click();
             //Payment type must be CC
             expect(element(by.css(".panel input[value='creditCard']")).getAttribute('class'))
-                .toContain('ng-valid-parse');
+                .toContain('ng-pristine ng-untouched ng-valid ng-scope ng-not-empty');
             //Payment type mustn't be bill
             expect(element(by.css(".panel input[value='bill']")).getAttribute('class'))
-                .not.toContain('ng-valid-parse');
+                .not.toContain('ng-pristine ng-untouched ng-valid ng-scope ng-not-empty');
             //No CC should be selected
             element.all(by.repeater('creditCard in creditCards.data.creditCards')).each(function (element) {
-                expect(element.element(by.model('order.data.order.payment.creditCard'))
-                    .getAttribute('class')).not.toContain('ng-valid-parse');
+                expect(element.element(by.model('order.data.order.payment._creditCard'))
+                    .getAttribute('class')).not.toContain('ng-pristine ng-untouched ng-valid ng-scope ng-not-empty');
             });
-            expect(element.all(by.buttonText('Finish')).get(0).isEnabled()).toBe(false);
+            expect(element.all(by.buttonText('Finish')).get(0).isEnabled()).toBe(true);
         });
 
         it('should proceed if creditcard selected', function () {
             element(by.css(".panel input[value='creditCard']")).click();
             //Payment type must be CC
             expect(element(by.css(".panel input[value='creditCard']")).getAttribute('class'))
-                .toContain('ng-valid-parse');
+                .toContain('ng-pristine ng-untouched ng-valid ng-scope ng-not-empty');
             //Payment type mustn't be bill
             expect(element(by.css(".panel input[value='bill']")).getAttribute('class'))
-                .not.toContain('ng-valid-parse');
+                .not.toContain('ng-pristine ng-untouched ng-valid ng-scope ng-not-empty');
             element.all(by.repeater('creditCard in creditCards.data.creditCards')).then(function (cc) {
-                cc[0].element(by.model('order.data.order.payment.creditCard')).click();
-                expect(cc[0].element(by.model('order.data.order.payment.creditCard'))
-                    .getAttribute('class')).toContain('ng-valid-parse');
+                cc[0].element(by.model('order.data.order.payment._creditCard')).click();
+                expect(cc[0].element(by.model('order.data.order.payment._creditCard'))
+                    .getAttribute('class')).toContain('ng-pristine ng-untouched ng-valid ng-not-empty');
             });
             expect(element.all(by.buttonText('Finish')).get(0).isEnabled()).toBe(true);
         });
@@ -169,13 +164,13 @@ describe('Order and Cart Processes', function () {
         it('should show correct order after finishing process', function () {
             expect(browser.getCurrentUrl()).toContain('/orders');
             expect(element(by.className('alert alert-success alert-dismissible')).isDisplayed()).toBe(true);
-            element.all(by.repeater('ord in orders.data.orders')).then(function (order) {
-                element.all(by.binding('ord._id')).get(0).getText().then(function (firstID) {
+            element.all(by.repeater('order in orders.data.orders')).then(function (order) {
+                element.all(by.binding('order._id')).get(0).getText().then(function (firstID) {
                     orderID.then(function (secondID) {
                         expect(firstID).toBe(secondID);
                     });
                 });
-                order[0].all(by.repeater('item in ord.items')).then(function (item) {
+                order[0].all(by.repeater('item in order.items')).then(function (item) {
                     item[0].all(by.binding('item.quantity')).getText().then(function (element) {
                         product1Name.then(function (text) {
                             expect(element.toString()).toContain(text);

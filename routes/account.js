@@ -3,21 +3,11 @@
 const express = require('express');
 const router = express.Router();
 const accountController = require('../controllers/account');
-const crypto = require('crypto');
 const multer = require('multer');
-const mime = require('mime');
 const GlobalConfig = require('../configs/index');
 const jwt = require('express-jwt');
 
-const storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        return callback(null, GlobalConfig.accountProfile.directory)
-    },
-    filename: function (req, file, callback) {
-        let accountId = req.body.accountId;
-        return callback(null, accountId + '.' + mime.getExtension(file.mimetype));
-    }
-});
+const storage = multer.memoryStorage();
 
 const upload = multer({storage: storage}).single('profile');
 
