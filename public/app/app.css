@@ -567,6 +567,10 @@ table tr td li {
     text-shadow: none;
 }
 
+.jk-rating-stars-container.no-zero .button:first-child {
+    display:none;
+}
+
 .material-icons {
     font-size: 15px !important;
 }

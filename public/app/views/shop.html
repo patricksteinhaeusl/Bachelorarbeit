@@ -56,7 +56,7 @@
                         <form ng-attr-id="{{ 'shop-form-rating-' + product._id }}" class="shop-form-rating"
                               ng-submit="shop.rateProduct(product, rating);" ng-if="rating">
                             <div class="form-group">
-                                <jk-rating-stars max-rating="5" rating="rating.value" read-only="false"></jk-rating-stars>
+                                <jk-rating-stars class="no-zero" max-rating="5" rating="rating.value" read-only="false"></jk-rating-stars>
                             </div>
                             <input class="form-control" type="hidden" min="0" max="5" value="0" name="value" ng-model="rating.value" required>
                             <div class="form-group">
@@ -72,7 +72,7 @@
                         <form ng-attr-id="{{ 'shop-form-rating-' + product._id }}" class="shop-form-rating"
                               ng-submit="shop.rateProduct(product, rating); rating = {comment: '', value: 0}">
                             <div class="form-group">
-                                <jk-rating-stars max-rating="5" rating="rating.value" read-only="false"></jk-rating-stars>
+                                <jk-rating-stars class="no-zero" max-rating="5" rating="rating.value" read-only="false"></jk-rating-stars>
                             </div>
                             <input class="form-control" type="hidden" min="0" max="5" value="0" name="value" ng-model="rating.value" required>
                             <div class="form-group">

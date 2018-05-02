@@ -85,17 +85,22 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
         self.rateProduct = function (product, rating) {
             rating._account = authService.getUser()._id;
             $rootScope.messages = {};
-            shopService.rateProduct(product, rating, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) {
-                    $rootScope.messages.validations = validations;
-                    self.ratingByAccount = {};
-                    self.ratingEmptyByAccount = {};
-                }
-                $rootScope.messages.success = message;
-                $('.shop-form-rating').slideUp();
-                self.getProducts();
-            });
+            if(rating.value >= 1) {
+                console.log(rating.value);
+                shopService.rateProduct(product, rating, function (error, data, message, validations) {
+                    if (error) $rootScope.messages.error = error;
+                    if (validations) {
+                        $rootScope.messages.validations = validations;
+                        self.ratingByAccount = {};
+                        self.ratingEmptyByAccount = {};
+                    }
+                    $rootScope.messages.success = message;
+                    $('.shop-form-rating').slideUp();
+                    self.getProducts();
+                });
+            }else {
+                $rootScope.messages.warning = "Rating must be at least 1 star";
+            }
         };
 
         self.collapseRatingForm = function (productIndex) {
