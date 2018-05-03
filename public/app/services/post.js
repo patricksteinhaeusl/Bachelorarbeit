@@ -42,7 +42,7 @@ appServices.factory('PostService', ['$http', 'Upload', function ($http, Upload) 
                 return callbackEvent(progressPercentage);
             });
         },
-        insertURL: function (post, url, callback, callbackEvent) {
+        insertURL: function (post, url, callback) {
             let data = {url: url, post: post};
             $http
                 .post('/api/post/url', data)
