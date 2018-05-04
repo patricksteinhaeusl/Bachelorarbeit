@@ -167,7 +167,9 @@ a:hover {
 .navbar-menu .menu-item-username {
     display: inline-block;
     word-break: break-all;
+    cursor: pointer;
 }
+
 
 .navbar-menu .menu-item {
     display: inline-block;

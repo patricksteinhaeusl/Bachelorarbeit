@@ -1,6 +1,6 @@
 <div class="navbar-menu">
     <ul class="list-unstyled">
-        <li ng-if="auth.isAuthenticated()" class="menu-item-username">{{ auth.getUser().firstname + " " +
+        <li ng-if="auth.isAuthenticated()" class="menu-item-username" ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')">{{ auth.getUser().firstname + " " +
             auth.getUser().lastname }}
         </li>
         <li ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')" class="menu-item glyphicon glyphicon-user"
