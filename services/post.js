@@ -39,6 +39,9 @@ function insertURL(post, url, callback) {
         return callback(ResponseUtil.createErrorResponse('Not a valid URL'));
     }
     let extension = parsedFile.ext;
+    if (extension !== '.jpg' && extension !== '.jpeg' && extension !== '.gif' && extension !== '.png') {
+        return callback(ResponseUtil.createErrorResponse('Only jpg, jpeg, gif and png are allowed'));
+    }
     let scrambledFileName = crypto.randomBytes(16).toString('hex');
     post.image = "";
     const options = {
