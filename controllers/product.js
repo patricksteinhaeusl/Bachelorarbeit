@@ -70,6 +70,17 @@ function getCategories(req, res) {
     });
 }
 
+function insertQuestion(req, res) {
+    let productId = req.body.productId;
+    let question = req.body.question;
+    ProductService.insertQuestion(productId, question, (error, result) => {
+        if (error) return res.json(error);
+        res.setHeader('content-type', 'text/html');
+        console.log(result);
+        return res.send(JSON.parse(result));
+    });
+}
+
 module.exports = {
     get,
     getById,
@@ -78,5 +89,6 @@ module.exports = {
     getTopRated,
     getLatest,
     updateRatings,
-    getCategories
+    getCategories,
+    insertQuestion
 };

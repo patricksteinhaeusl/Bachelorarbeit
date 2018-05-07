@@ -13,6 +13,7 @@ router.get('/toprated', productController.getTopRated);
 router.get('/latest', productController.getLatest);
 router.post('/rating', jwt(GlobalConfig.auth.validateOptions), productController.updateRatings);
 router.get('/', productController.get);
+router.post('/questions', productController.insertQuestion);
 router.get('/:productId', productController.getById);
 
 module.exports = router;

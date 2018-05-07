@@ -81,6 +81,9 @@ let routes = {
         templateUrl: 'views/community.html',
         requireLogin: true
     },
+    '/product/:productId': {
+        templateUrl: 'views/product.html'
+    },
     '/retailer': {
         templateUrl: 'views/retailer.html',
         requireLogin: true
