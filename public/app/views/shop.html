@@ -45,10 +45,15 @@
                                          read-only="true"></jk-rating-stars>
                     </div>
                     <div class="product-menu">
-                        <span class="glyphicon glyphicon-star" aria-hidden="true"
-                              ng-click="shop.collapseRatingForm(product._id)" ng-if="auth.isAuthenticated() === true"></span>
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"
-                              ng-click="cart.insert(product); nav.collapseCartNavigation('.cart-menu', '.auth-menu');"></span>
+                        <button class="btn btn-primary" ng-click="shop.collapseRatingForm(product._id)" ng-if="auth.isAuthenticated() === true">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            Rate
+                        </button>
+
+                        <button class="btn btn-primary" ng-click="cart.insert(product); nav.collapseCartNavigation('.cart-menu', '.auth-menu');">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                            Add to cart
+                        </button>
                     </div>
                 </div>
                 <div ng-if="auth.isAuthenticated() === true">
