@@ -6,7 +6,7 @@ appControllers.controller('OrderController', ['$rootScope', '$scope', '$location
 
         self.data = {};
         self.data.order = {};
-        self.data.order.deliveryAddress = {};
+        self.data.order._deliveryAddress = {};
         self.data.order.payment = {};
         self.data.order.payment.type = null;
         self.data.order.payment.creditCard = null;

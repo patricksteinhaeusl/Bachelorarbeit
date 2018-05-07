@@ -208,24 +208,8 @@
 		}
 	],
 	"totalPrice": 1262.55,
-	"deliveryAddress": {
-		"_id": {
-			"$oid": "5aa0481e876d9d39d439785b"
-		},
-		"street": "Im Sandbüel 93",
-		"zip": 1700,
-		"city": "Fribourg",
-		"country": "Schweiz",
-		"_account": {
-			"$oid": "5aa0481e876d9d39d4397859"
-		},
-		"createdAt": {
-			"$date": "2018-03-07T20:14:22.541Z"
-		},
-		"updatedAt": {
-			"$date": "2018-03-07T20:14:22.541Z"
-		},
-		"__v": 0
+	"_deliveryAddress": {
+		"$oid": "5aa0481e876d9d39d439785b"
 	},
 	"_account": {
 		"$oid": "5aa0481e876d9d39d4397859"
@@ -474,24 +458,8 @@
 		}
 	],
 	"totalPrice": 1285.25,
-	"deliveryAddress": {
-		"_id": {
-			"$oid": "5aa0481e876d9d39d439785b"
-		},
-		"street": "Im Sandbüel 93",
-		"zip": 1700,
-		"city": "Fribourg",
-		"country": "Schweiz",
-		"_account": {
-			"$oid": "5aa0481e876d9d39d4397859"
-		},
-		"createdAt": {
-			"$date": "2018-03-07T20:14:22.541Z"
-		},
-		"updatedAt": {
-			"$date": "2018-03-07T20:14:22.541Z"
-		},
-		"__v": 0
+	"_deliveryAddress": {
+		"$oid": "5aa0481e876d9d39d439785b"
 	},
 	"_account": {
 		"$oid": "5aa0481e876d9d39d4397859"
@@ -715,24 +683,8 @@
 		}
 	],
 	"totalPrice": 1485.9,
-	"deliveryAddress": {
-		"_id": {
-			"$oid": "5aa0481e876d9d39d439785b"
-		},
-		"street": "Im Sandbüel 93",
-		"zip": 1700,
-		"city": "Fribourg",
-		"country": "Schweiz",
-		"_account": {
-			"$oid": "5aa0481e876d9d39d4397859"
-		},
-		"createdAt": {
-			"$date": "2018-03-07T20:14:22.541Z"
-		},
-		"updatedAt": {
-			"$date": "2018-03-07T20:14:22.541Z"
-		},
-		"__v": 0
+	"_deliveryAddress": {
+		"$oid": "5aa0481e876d9d39d439785b"
 	},
 	"_account": {
 		"$oid": "5aa0481e876d9d39d4397859"
@@ -821,24 +773,8 @@
 		}
 	],
 	"totalPrice": 125.25,
-	"deliveryAddress": {
-		"_id": {
-			"$oid": "5aa0481e876d9d39d439785b"
-		},
-		"street": "Im Sandbüel 93",
-		"zip": 1700,
-		"city": "Fribourg",
-		"country": "Schweiz",
-		"_account": {
-			"$oid": "5aa0481e876d9d39d4397859"
-		},
-		"createdAt": {
-			"$date": "2018-03-07T20:14:22.541Z"
-		},
-		"updatedAt": {
-			"$date": "2018-03-07T20:14:22.541Z"
-		},
-		"__v": 0
+	"_deliveryAddress": {
+		"$oid": "5aa0481e876d9d39d439785b"
 	},
 	"_account": {
 		"$oid": "5aa0481e876d9d39d4397859"
@@ -952,24 +888,8 @@
 		}
 	],
 	"totalPrice": 2950,
-	"deliveryAddress": {
-		"_id": {
-			"$oid": "5aa0481e876d9d39d439785b"
-		},
-		"street": "Im Sandbüel 93",
-		"zip": 1700,
-		"city": "Fribourg",
-		"country": "Schweiz",
-		"_account": {
-			"$oid": "5aa0481e876d9d39d4397859"
-		},
-		"createdAt": {
-			"$date": "2018-03-07T20:14:22.541Z"
-		},
-		"updatedAt": {
-			"$date": "2018-03-07T20:14:22.541Z"
-		},
-		"__v": 0
+	"_deliveryAddress": {
+		"$oid": "5aa0481e876d9d39d439785b"
 	},
 	"_account": {
 		"$oid": "5aa0481e876d9d39d4397859"
@@ -1193,24 +1113,8 @@
 		}
 	],
 	"totalPrice": 2200.5,
-	"deliveryAddress": {
-		"_id": {
-			"$oid": "5aa0481e876d9d39d439785e"
-		},
-		"street": "Sonnenbergstr 114",
-		"zip": 1897,
-		"city": "Bouveret",
-		"country": "Schweiz",
-		"_account": {
-			"$oid": "5aa0481e876d9d39d439785c"
-		},
-		"createdAt": {
-			"$date": "2018-03-07T20:14:22.548Z"
-		},
-		"updatedAt": {
-			"$date": "2018-03-07T20:14:22.548Z"
-		},
-		"__v": 0
+	"_deliveryAddress": {
+		"$oid": "5aa0481e876d9d39d439785e"
 	},
 	"_account": {
 		"$oid": "5aa0481e876d9d39d439785c"
@@ -1434,24 +1338,8 @@
 		}
 	],
 	"totalPrice": 2200.5,
-	"deliveryAddress": {
-		"_id": {
-			"$oid": "5aa0481e876d9d39d439785e"
-		},
-		"street": "Sonnenbergstr 114",
-		"zip": 1897,
-		"city": "Bouveret",
-		"country": "Schweiz",
-		"_account": {
-			"$oid": "5aa0481e876d9d39d439785c"
-		},
-		"createdAt": {
-			"$date": "2018-03-07T20:14:22.548Z"
-		},
-		"updatedAt": {
-			"$date": "2018-03-07T20:14:22.548Z"
-		},
-		"__v": 0
+	"_deliveryAddress": {
+		"$oid": "5aa0481e876d9d39d439785e"
 	},
 	"_account": {
 		"$oid": "5aa0481e876d9d39d439785c"
@@ -1790,24 +1678,8 @@
 		}
 	],
 	"totalPrice": 2816.4,
-	"deliveryAddress": {
-		"_id": {
-			"$oid": "5aa0481e876d9d39d439785e"
-		},
-		"street": "Sonnenbergstr 114",
-		"zip": 1897,
-		"city": "Bouveret",
-		"country": "Schweiz",
-		"_account": {
-			"$oid": "5aa0481e876d9d39d439785c"
-		},
-		"createdAt": {
-			"$date": "2018-03-07T20:14:22.548Z"
-		},
-		"updatedAt": {
-			"$date": "2018-03-07T20:14:22.548Z"
-		},
-		"__v": 0
+	"_deliveryAddress": {
+		"$oid": "5aa0481e876d9d39d439785e"
 	},
 	"_account": {
 		"$oid": "5aa0481e876d9d39d439785c"
@@ -1986,24 +1858,8 @@
 		}
 	],
 	"totalPrice": 925,
-	"deliveryAddress": {
-		"_id": {
-			"$oid": "5aa0481e876d9d39d439785e"
-		},
-		"street": "Sonnenbergstr 114",
-		"zip": 1897,
-		"city": "Bouveret",
-		"country": "Schweiz",
-		"_account": {
-			"$oid": "5aa0481e876d9d39d439785c"
-		},
-		"createdAt": {
-			"$date": "2018-03-07T20:14:22.548Z"
-		},
-		"updatedAt": {
-			"$date": "2018-03-07T20:14:22.548Z"
-		},
-		"__v": 0
+	"_deliveryAddress": {
+		"$oid": "5aa0481e876d9d39d439785e"
 	},
 	"_account": {
 		"$oid": "5aa0481e876d9d39d439785c"
