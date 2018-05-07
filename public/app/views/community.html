@@ -9,8 +9,8 @@
             <textarea class="form-control" type="text" ng-model="community.data.post.text" name="text"
                       placeholder="Text" required></textarea>
         </div>
-        <label aria-label="Add picture from your computer">Add picture from your computer</label>
         <input type="radio" name="fileUpload" ng-model="community.type" ng-value="1"/>
+        <label aria-label="Add picture from your computer">Add picture from your computer</label>
         <div class="progress">
             <div class="progress-bar" role="progressbar" aria-valuenow="{{ community.data.progress }}"
                  aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width' : community.data.progress + '%' }">
@@ -26,8 +26,8 @@
                    ng-disabled="community.type != 1"/>
         </div>
         <img class="thumbnail" ngf-src="community.data.postImage" alt="Uploaded Image Preview">
-        <label aria-label="Add picture from URL">Add picture from URL</label>
         <input type="radio" name="fileUpload" ng-model="community.type" ng-value="2"/>
+        <label aria-label="Add picture from URL">Add picture from URL</label>
         <div class="form-group">
             <input class="form-control" type="url" name="url"
                       placeholder="URL" required ng-disabled="community.type != 2" ng-model="community.data.url">
