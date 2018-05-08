@@ -56,9 +56,14 @@
                         </a>
 
                         <div class="add-cart-container" style="display: inline-block;">
-                            {{product.selectedQuantity}}
-                            <select class="quantity form-control" ng-options="quantity.value as quantity.text for quantity in shop.quantities" ng-model="product.selectedQuantity"></select>
-                            <button class="btn btn-primary" ng-click="cart.insert(product, this.closest('.add-cart-container').children('.quantity').value()); nav.collapseCartNavigation('.cart-menu', '.auth-menu');">
+                            <select class="quantity form-control" ng-model="product.selectedQuantity">
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                            </select>
+                            <button class="btn btn-primary" ng-click="cart.insert(product, product.selectedQuantity); nav.collapseCartNavigation('.cart-menu', '.auth-menu');">
                                 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
                                 Add to cart
                             </button><br>
@@ -107,66 +112,25 @@
 <script type="text/javascript">
     $(function() {
         function createDropDownOptions(defaultQuantity) {
-            switch(defaultQuantity) {
-                case "1":
-                    $(".quantity").append([
-                        $("<option value=1>1</option>"),
-                        $("<option value=2>2</option>"),
-                        $("<option value=3>3</option>"),
-                        $("<option value=4>4</option>"),
-                        $("<option value=5>5</option>")
-                    ]);
-                    break;
-                case "2":
-                    $(".quantity").append([
-                        $("<option value=2>2</option>"),
-                        $("<option value=1>1</option>"),
-                        $("<option value=3>3</option>"),
-                        $("<option value=4>4</option>"),
-                        $("<option value=5>5</option>")
-                    ]);
-                    break;
-                case "3":
-                    $(".quantity").append([
-                        $("<option value=3>3</option>"),
-                        $("<option value=1>1</option>"),
-                        $("<option value=2>2</option>"),
-                        $("<option value=4>4</option>"),
-                        $("<option value=5>5</option>")
-                    ]);
-                    break;
-                case "4":
-                    $(".quantity").append([
-                        $("<option value=4>4</option>"),
-                        $("<option value=1>1</option>"),
-                        $("<option value=2>2</option>"),
-                        $("<option value=3>3</option>"),
-                        $("<option value=5>5</option>")
-                    ]);
-                    break;
-                case "5":
-                    $(".quantity").append([
-                        $("<option value=5>5</option>"),
-                        $("<option value=1>1</option>"),
-                        $("<option value=2>2</option>"),
-                        $("<option value=3>3</option>"),
-                        $("<option value=4>4</option>")
-                    ]);
-                    break;
-                default:
-                    $(".quantity").append([
-                        $("<option value=" + defaultQuantity + ">" + defaultQuantity + "</option>"),
-                        $("<option value=1>1</option>"),
-                        $("<option value=2>2</option>"),
-                        $("<option value=3>3</option>"),
-                        $("<option value=4>4</option>"),
-                        $("<option value=5>5</option>")
-                    ]);
-                    break;
-            }
+            $(".quantity").prepend([
+                $("<option value=" + defaultQuantity + ">" + defaultQuantity + "</option>")
+            ]);
         }
 
-        let defaultQuantity = decodeURIComponent((document.location.href.substring(document.location.href.indexOf("defaultQuantity=")+16)));
-        //createDropDownOptions(defaultQuantity);
+        function removeDropDownOptions(defaultQuantity) {
+            $(".quantity").each(function() {
+                $(this).children('option').each(function() {
+                    if($(this).val() === defaultQuantity && $(this).is(':selected') === false) {
+                       $(this).remove();
+                    }
+                });
+            });
+        }
+
+        if(document.location.href.indexOf("defaultQuantity=") > -1) {
+            let defaultQuantity = decodeURIComponent((document.location.href.substring(document.location.href.indexOf("defaultQuantity=")+16)));
+            createDropDownOptions(defaultQuantity);
+            removeDropDownOptions(defaultQuantity);
+        }
     });
 </script>

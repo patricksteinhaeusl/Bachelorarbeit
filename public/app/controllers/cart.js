@@ -8,9 +8,9 @@ appControllers.controller('CartController', ['$rootScope', '$scope', 'CartServic
     self.data.totalPrice = cartService.getTotalPrice();
 
     self.insert = function (product, quantity) {
-        console.log(quantity);
         $rootScope.messages = {};
-        cartService.insert(product, function (error, message) {
+        let quantityNumber = Number(quantity);
+        cartService.insert(product, quantityNumber, function (error, message) {
             if(error) {
                 $rootScope.messages.error = 'Adding the Item to the shopping cart failed!';
             } else {

@@ -26,17 +26,17 @@ appServices.service('CartService', ['$http', '$q', 'localStorageService', functi
         return self.items;
     };
 
-    self.insert = function (product, callback) {
+    self.insert = function (product, quantity, callback) {
         let found = false;
         let item = {
-            quantity: 1,
+            quantity: quantity,
             product: product
         };
 
         self.items.forEach(function (element) {
             if (element.product._id === item.product._id) {
                 found = true;
-                element.quantity++;
+                element.quantity += quantity;
             }
         });
 
