@@ -54,6 +54,11 @@
                             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
                             Add to cart
                         </button>
+
+                        <a class="btn btn-primary" ng-href="#!/product/{{product._id}}">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Details
+                        </a>
                     </div>
                 </div>
                 <div ng-if="auth.isAuthenticated() === true">

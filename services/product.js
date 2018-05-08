@@ -2,6 +2,7 @@
 
 const Product = require('../models/product').Product;
 const Rating = require('../models/rating').Rating;
+const Question = require('../models/question').Question;
 const ResponseUtil = require('../utils/response');
 
 function get(callback) {
@@ -14,7 +15,7 @@ function get(callback) {
 }
 
 function getById(productId, callback) {
-    Product.findById(productId, function (error, result) {
+    Product.findById(productId).populate('questions._account').exec(function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         result = {'product': result};
@@ -130,6 +131,23 @@ function calculateTotalRating(ratings) {
     }
 }
 
+function insertQuestion(productId, question, callback) {
+    let questionObj = new Question(question);
+    questionObj.validate(function (error) {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        Product.findOneAndUpdate(
+            {_id: productId},
+            {$push: {questions: questionObj}},
+            {new: true},
+            function (error, result) {
+                if (error) return callback(ResponseUtil.createErrorResponse(error));
+                if (!result) return callback(ResponseUtil.createNotFoundResponse());
+                result = {'product': result};
+                return callback(null, ResponseUtil.createSuccessResponse(result, 'Question saved successfully.'));
+            });
+    });
+}
+
 module.exports = {
     get,
     getById,
@@ -138,5 +156,6 @@ module.exports = {
     getTopRated,
     getLatest,
     updateRatings,
-    getCategories
+    getCategories,
+    insertQuestion
 };

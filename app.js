@@ -4,7 +4,7 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const forceSSL = require('express-force-ssl');
-var cors = require('cors');
+const cors = require('cors');
 
 require('./utils/mongo');
 
