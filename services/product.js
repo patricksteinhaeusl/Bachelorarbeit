@@ -15,7 +15,7 @@ function get(callback) {
 }
 
 function getById(productId, callback) {
-    Product.findById(productId, function (error, result) {
+    Product.findById(productId).populate('questions._account').exec(function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         result = {'product': result};

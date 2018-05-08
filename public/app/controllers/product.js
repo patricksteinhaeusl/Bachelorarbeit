@@ -34,8 +34,8 @@ appControllers.controller('ProductController', ['$rootScope', '$scope', '$routeP
                 if (!data) $rootScope.messages.warning = message;
                 if (data) {
                     self.data.question = {};
-                    self.data.product = data;
                     $rootScope.messages.success = message;
+                    self.get($routeParams.productId);
                 }
             });
         };

@@ -523,8 +523,31 @@ table tr td li {
     padding-top: 87px;
 }
 
+.product-menu .btn-primary {
+    margin-top: 5px;
+}
+
 .product-menu > span {
     margin-left: 15px;
+}
+
+.product-detail {
+    margin-bottom: 30px;
+}
+
+.questions {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 10px 5px 10px;
+    border: solid 1px lightgray;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 7px;
+}
+
+.question-info {
+    font-size: 12px;
 }
 
 .shop-form-rating {
