@@ -36,6 +36,13 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
         };
         self.data.sortSelected = self.data.sort.name.query;
         self.productOrientation = 'wide';
+        self.quantities = [
+            {"value": "1", "text": 1},
+            {"value": "2", "text": 2},
+            {"value": "3", "text": 3},
+            {"value": "4", "text": 4},
+            {"value": "5", "text": 5}
+        ];
 
         self.init = function () {
             self.getProductCategories();
@@ -46,6 +53,9 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
             self.data.categoryId = null;
             shopService.getProducts(function (products) {
                 self.data.products = products;
+                self.data.products.forEach(function(product) {
+                   product.selectedQuantity = $location.search().defaultQuantity;
+                });
             });
         };
 
@@ -144,16 +154,16 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
 
         self.init();
     }]).directive('ngEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if (event.which === 13) {
-                scope.$apply(function () {
-                    scope.$eval(attrs.ngEnter, {'event': event});
-                });
-                event.preventDefault();
-            }
-        });
-    };
+        return function (scope, element, attrs) {
+            element.bind("keydown keypress", function (event) {
+                if (event.which === 13) {
+                    scope.$apply(function () {
+                        scope.$eval(attrs.ngEnter, {'event': event});
+                    });
+                    event.preventDefault();
+                }
+            });
+        };
 })
 // Injection Code Start - XSS
 .filter('trustAsHTML', ['$sce', function ($sce) {

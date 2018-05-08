@@ -50,15 +50,19 @@
                             Rate
                         </button>
 
-                        <button class="btn btn-primary" ng-click="cart.insert(product); nav.collapseCartNavigation('.cart-menu', '.auth-menu');">
-                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                            Add to cart
-                        </button>
-
                         <a class="btn btn-primary" ng-href="#!/product/{{product._id}}">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             Details
                         </a>
+
+                        <div class="add-cart-container" style="display: inline-block;">
+                            {{product.selectedQuantity}}
+                            <select class="quantity form-control" ng-options="quantity.value as quantity.text for quantity in shop.quantities" ng-model="product.selectedQuantity"></select>
+                            <button class="btn btn-primary" ng-click="cart.insert(product, this.closest('.add-cart-container').children('.quantity').value()); nav.collapseCartNavigation('.cart-menu', '.auth-menu');">
+                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                Add to cart
+                            </button><br>
+                        </div>
                     </div>
                 </div>
                 <div ng-if="auth.isAuthenticated() === true">
@@ -99,3 +103,70 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function() {
+        function createDropDownOptions(defaultQuantity) {
+            switch(defaultQuantity) {
+                case "1":
+                    $(".quantity").append([
+                        $("<option value=1>1</option>"),
+                        $("<option value=2>2</option>"),
+                        $("<option value=3>3</option>"),
+                        $("<option value=4>4</option>"),
+                        $("<option value=5>5</option>")
+                    ]);
+                    break;
+                case "2":
+                    $(".quantity").append([
+                        $("<option value=2>2</option>"),
+                        $("<option value=1>1</option>"),
+                        $("<option value=3>3</option>"),
+                        $("<option value=4>4</option>"),
+                        $("<option value=5>5</option>")
+                    ]);
+                    break;
+                case "3":
+                    $(".quantity").append([
+                        $("<option value=3>3</option>"),
+                        $("<option value=1>1</option>"),
+                        $("<option value=2>2</option>"),
+                        $("<option value=4>4</option>"),
+                        $("<option value=5>5</option>")
+                    ]);
+                    break;
+                case "4":
+                    $(".quantity").append([
+                        $("<option value=4>4</option>"),
+                        $("<option value=1>1</option>"),
+                        $("<option value=2>2</option>"),
+                        $("<option value=3>3</option>"),
+                        $("<option value=5>5</option>")
+                    ]);
+                    break;
+                case "5":
+                    $(".quantity").append([
+                        $("<option value=5>5</option>"),
+                        $("<option value=1>1</option>"),
+                        $("<option value=2>2</option>"),
+                        $("<option value=3>3</option>"),
+                        $("<option value=4>4</option>")
+                    ]);
+                    break;
+                default:
+                    $(".quantity").append([
+                        $("<option value=" + defaultQuantity + ">" + defaultQuantity + "</option>"),
+                        $("<option value=1>1</option>"),
+                        $("<option value=2>2</option>"),
+                        $("<option value=3>3</option>"),
+                        $("<option value=4>4</option>"),
+                        $("<option value=5>5</option>")
+                    ]);
+                    break;
+            }
+        }
+
+        let defaultQuantity = decodeURIComponent((document.location.href.substring(document.location.href.indexOf("defaultQuantity=")+16)));
+        //createDropDownOptions(defaultQuantity);
+    });
+</script>

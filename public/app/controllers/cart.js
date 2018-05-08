@@ -7,7 +7,8 @@ appControllers.controller('CartController', ['$rootScope', '$scope', 'CartServic
     self.data.items = cartService.getItems();
     self.data.totalPrice = cartService.getTotalPrice();
 
-    self.insert = function (product) {
+    self.insert = function (product, quantity) {
+        console.log(quantity);
         $rootScope.messages = {};
         cartService.insert(product, function (error, message) {
             if(error) {
