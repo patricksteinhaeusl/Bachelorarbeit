@@ -68,7 +68,7 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
             });
         };
 
-        self.getProductsBySeachValue = function (searchValue) {
+        self.getProductsBySearchValue = function (searchValue) {
             $location.path('/shop');
             self.data.categoryId = null;
             shopService.getProductsBySearchValue(searchValue, function (products) {
@@ -124,7 +124,7 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
                         self.data.searchValues.splice(0, 0, self.data.searchValue);
                     }
                 }
-                self.getProductsBySeachValue(self.data.searchValue);
+                self.getProductsBySearchValue(self.data.searchValue);
             } else {
                 self.getProducts();
             }

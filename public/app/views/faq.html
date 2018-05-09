@@ -1,0 +1,17 @@
+<div class="content-view" ng-controller="FaqController as faq">
+    <h1>FAQ</h1>
+    <form name="search">
+        <div class="form-group">
+            <input name="searchField" class="form-control" ng-model="faq.data.searchValue"
+                   placeholder="Search within the FAQ">
+        </div>
+
+        <div class="faqQuestions"
+             ng-repeat="faq in faq.data.FaqQuestions">
+            <div class="product-container">
+                <label>Q: {{ faq.question }}</label>
+                <p>A: {{ faq.answer }}</p>
+            </div>
+        </div>
+    </form>
+</div>

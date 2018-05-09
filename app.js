@@ -17,6 +17,7 @@ const order = require('./routes/order');
 const product = require('./routes/product');
 const post = require('./routes/post');
 const retailer = require('./routes/retailer');
+const faq = require('./routes/faq');
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use('/api/order', order);
 app.use('/api/product', product);
 app.use('/api/post', post);
 app.use('/api/retailer', retailer);
+app.use('/api/faq', faq);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

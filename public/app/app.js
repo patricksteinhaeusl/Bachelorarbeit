@@ -88,6 +88,11 @@ let routes = {
         templateUrl: 'views/retailer.html',
         requireLogin: true
     }
+    ,
+    '/faq': {
+        templateUrl: 'views/faq.html',
+        requireLogin: false
+    }
 };
 
 let appControllers = angular.module('app.controllers', []);
