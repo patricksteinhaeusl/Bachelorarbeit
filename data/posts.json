@@ -5,6 +5,9 @@
 	"title": "Individual bells",
 	"text": "I ordered my individual bell!",
 	"image": "steiner-innenschweiz.jpg",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397859"
+	},
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.628Z"
 	},
@@ -20,6 +23,9 @@
 	"title": "Just genius",
 	"text": "This bell is genius. My cows love this bell!",
 	"image": "zurfluh-bissen.jpg",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397859"
+	},
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.627Z"
 	},
@@ -35,6 +41,9 @@
 	"title": "Broken bells...",
 	"text": "are sometimes a sign of hidden treasures.",
 	"image": "http://localhost:8765/file001.jpg",
+	"_account": {
+		"$oid": "5aa0481e876d9d39d4397859"
+	},
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.626Z"
 	},
@@ -43,4 +52,3 @@
 	},
 	"__v": 0
 }]
-

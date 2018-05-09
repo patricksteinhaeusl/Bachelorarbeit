@@ -14,7 +14,8 @@ function getById(req, res) {
     let productId = req.params.productId;
     ProductService.getById(productId, (error, result) => {
         if (error) return res.json(error);
-        return res.json(result);
+        res.setHeader('content-type', 'text/html');
+        return res.send(result);
     });
 }
 
@@ -66,6 +67,15 @@ function updateRatings(req, res) {
 function getCategories(req, res) {
     ProductService.getCategories((error, result) => {
         if (error) return res.json(error);
+        return res.send(result);
+    });
+}
+
+function insertQuestion(req, res) {
+    let productId = req.body.productId;
+    let question = req.body.question;
+    ProductService.insertQuestion(productId, question, (error, result) => {
+        if (error) return res.json(error);
         return res.json(result);
     });
 }
@@ -78,5 +88,6 @@ module.exports = {
     getTopRated,
     getLatest,
     updateRatings,
-    getCategories
+    getCategories,
+    insertQuestion
 };
