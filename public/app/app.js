@@ -157,5 +157,9 @@ function templateExists(templateUrl) {
     let xhr = new XMLHttpRequest();
     xhr.open('HEAD', templateUrl, false);
     xhr.send();
-    return xhr.status === 404;
+    if(xhr.status === 404) {
+        return false;
+    } else {
+        return true;
+    }
 }
