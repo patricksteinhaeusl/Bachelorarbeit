@@ -1,26 +1,5 @@
 [{
   "_id": {
-    "$oid": "5af2f98ae2239856c64c906c"
-  },
-  "question": "Do you sell chairs aswell?",
-  "answer": "No"
-},
-{
-  "_id": {
-    "$oid": "5af2f9e8e2239856c64c906d"
-  },
-  "question": "How much is the fish?",
-  "answer": "Sunshine in the air!"
-},
-{
-  "_id": {
-    "$oid": "5af2fa2fe2239856c64c906e"
-  },
-  "question": "Do you sell Hells Bells?",
-  "answer": "Top priority on our planned products."
-},
-{
-  "_id": {
     "$oid": "5af2fa67e2239856c64c906f"
   },
   "question": "How can I differentiate the payment types 'bill' and 'creditcard'?",
@@ -32,4 +11,46 @@
   },
   "question": "How can I delete a community Post.",
   "answer": "You can delete your own posts by clicking on the small bin icon in the bottom right corner."
+},
+{
+  "_id": {
+    "$oid": "5af2f98ae2239856c64c906c"
+  },
+  "question": "Where can I find the chat?",
+  "answer": "The Chat ist available to all logged in users by clicking on the button \"Community Chat\" in the bottom right corner."
+},
+{
+  "_id": {
+    "$oid": "5af2f9e8e2239856c64c906d"
+  },
+  "question": "Why can't I see my sent messages in the Chat?",
+  "answer": "You only see received messaged. There is no history of your sent messages."
+},
+{
+  "_id": {
+    "$oid": "5af2fa2fe2239856c64c906e"
+  },
+  "question": "What does a valid creditcard number look like?",
+  "answer": "It is not that hard, try to search for it with your favourite search engine."
+},
+{
+  "_id": {
+    "$oid": "5af3426fe2239856c64c9072"
+  },
+  "question": "Do you sell chairs aswell?",
+  "answer": "No"
+},
+{
+  "_id": {
+    "$oid": "5af3426fe2239856c64c9073"
+  },
+  "question": "How much is the fish?",
+  "answer": "Sunshine in the air!"
+},
+{
+  "_id": {
+    "$oid": "5af3426fe2239856c64c9075"
+  },
+  "question": "Do you sell Hells Bells?",
+  "answer": "Top priority on our planned products."
 }]
