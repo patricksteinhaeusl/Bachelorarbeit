@@ -2,16 +2,13 @@
     <h1>FAQ</h1>
     <form name="search">
         <div class="form-group">
-            <input name="searchField" class="form-control" ng-model="faq.data.searchValue"
+            <input name="searchField" class="form-control" ng-model="faq.data.searchValue" ng-enter="faq.getFaqBySearchValue()"
                    placeholder="Search within the FAQ">
         </div>
-
-        <div class="faqQuestions"
-             ng-repeat="faq in faq.data.FaqQuestions">
-            <div class="product-container">
-                <label>Q: {{ faq.question }}</label>
-                <p>A: {{ faq.answer }}</p>
-            </div>
+        <div class="panel panel-default" ng-repeat="faq in faq.data.FaqQuestions">
+            <div class="panel-heading"><b>{{ faq.question }}</b></div>
+                <div class="panel-body">{{ faq.answer }}</div>
         </div>
+        <div ng-if="faq.data.FaqQuestions.length == 0">We're sorry, but we couldn't find anything.</div>
     </form>
 </div>

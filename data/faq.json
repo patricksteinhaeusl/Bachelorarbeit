@@ -23,7 +23,7 @@
   "_id": {
     "$oid": "5af2f9e8e2239856c64c906d"
   },
-  "question": "Why can't I see my sent messages in the Chat?",
+  "question": "Why can't I see my sent messages in the chat?",
   "answer": "You only see received messaged. There is no history of your sent messages."
 },
 {
