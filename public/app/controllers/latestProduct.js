@@ -20,8 +20,10 @@ appControllers.controller('LatestProductController', ['$rootScope', '$scope', 'S
 
         $scope.$watch(function() {
             return ShopService.productsCategory;
-        }, function(products) {
-            self.data.products = products;
+        }, function() {
+            self.data.products = ShopService.getProducts(function(products) {
+                self.data.products = products;
+            });
         }, false);
 
         self.getProducts();

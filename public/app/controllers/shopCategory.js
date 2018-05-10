@@ -1,10 +1,9 @@
 'use strict';
 
-appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$location', '$routeParams', 'AuthService', 'ShopService',
-    function ($rootScope, $scope, $location, $routeParams, AuthService, ShopService) {
+appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ShopService',
+    function ($rootScope, $scope, $routeParams, AuthService, ShopService) {
         const self = this;
-        self.data = {};
-        self.data.products = {};
+        self.products = {};
 
         self.sort = {
             name: {
@@ -30,15 +29,12 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$l
         };
         self.selectedSort = self.sort.name.query;
         self.productOrientation = 'wide';
-        self.selectedQuantity = $location.search().selectedQuantity;
+        self.selectedQuantity = ShopService.getSelectedQuantity();
         self.categoryId = $routeParams.categoryId;
 
         self.getProducts = function() {
-            ShopService.getProductsByCategory(self.categoryId, function(products) {
-                products.forEach(function(product) {
-                    product.selectedQuantity = self.selectedQuantity;
-                });
-                self.data.products = products;
+            ShopService.getProductsCategory(self.categoryId, function(products) {
+                self.products = products;
             });
         };
 
@@ -76,39 +72,22 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$l
             self.productOrientation = orientation;
         };
 
-        self.createDropDownOptions = function() {
-            $(function() {
-                let selectedQuantity = getParameterByName("selectedQuantity");
-
-                if(selectedQuantity) {
-                    createDropDownOptions(selectedQuantity);
-                }
-
-                function createDropDownOptions(defaultQuantity) {
-                    $('.quantity').append(
-                        $('<option>', {
-                            value: defaultQuantity,
-                            text: defaultQuantity
-                        })
-                    );
-                }
-
-                function getParameterByName(name) {
-                    let url = window.location.href;
-                    name = name.replace(/[\[\]]/g, "\\$&");
-                    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                        results = regex.exec(url);
-                    if (!results) return null;
-                    if (!results[2]) return '';
-                    return decodeURIComponent(results[2].replace(/\+/g, " "));
-                }
-            });
-        };
-
         $scope.$watch(function() {
             return ShopService.productsCategory;
         }, function(products) {
-            self.data.products = products;
+            self.products = products;
+        }, false);
+
+        $scope.$watch(function() {
+            return ShopService.productsSearchValue;
+        }, function(products) {
+            self.products = products;
+        }, false);
+
+        $scope.$watch(function() {
+            return ShopService.selectedQuantity;
+        }, function(selectedQuantity) {
+            self.selectedQuantity = selectedQuantity;
         }, false);
 
         self.getProducts();

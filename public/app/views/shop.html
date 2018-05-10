@@ -23,7 +23,7 @@
         </div>
     </form>
     <div class="products"
-         ng-repeat="product in shop.data.products | toArray: false | orderBy: shop.selectedSort track by product._id"
+         ng-repeat="product in shop.products | toArray: false | orderBy: shop.selectedSort track by product._id"
          ng-class="shop.productOrientation">
         <div class="product-container">
             <div class="product">
@@ -55,8 +55,15 @@
                             Details
                         </a>
 
-                        <div class="add-cart-container" style="display: inline-block;">
-                            <select class="quantity form-control" ng-model="product.selectedQuantity"></select>
+                        <div class="add-cart-container">
+                            <select ng-if="product.selectedQuantity" add-options class="quantity form-control" ng-model="product.selectedQuantity">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+
                             <button class="btn btn-primary" ng-click="cart.insert(product, product.selectedQuantity); nav.collapseCartNavigation('.cart-menu', '.auth-menu');">
                                 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
                                 Add to cart
@@ -102,37 +109,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(function() {
-        let selectedQuantity = getParameterByName("selectedQuantity");
-
-        if(selectedQuantity) {
-            createDropDownOptions(selectedQuantity);
-        }
-
-        function createDropDownOptions(defaultQuantity) {
-            /*let option = document.createElement('option');
-            option.innerHTML = defaultQuantity;
-            option.value = 1;
-            console.log(option);
-            let selectQuantities = document.getElementsByClassName("quantity");
-            for (let i = 0; i < selectQuantities.length; i++) {
-                selectQuantities[i].appendChild(option);
-            }*/
-            $('.quantity').html("");
-            let $option = $('<option value="1">' + defaultQuantity + '</option>');
-            $('.quantity').append($option);
-        }
-
-        function getParameterByName(name) {
-            let url = window.location.href;
-            name = name.replace(/[\[\]]/g, "\\$&");
-            let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
-        }
-    });
-</script>

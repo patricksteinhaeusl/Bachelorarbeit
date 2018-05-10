@@ -1,9 +1,10 @@
 'use strict';
 
-appServices.factory('ShopService', ['$http', function ($http) {
+appServices.factory('ShopService', ['$http', '$location', function ($http, $location) {
     let self = this;
     self.products = {};
     self.productsCategory = {};
+    self.productsCategorySelectedQuantity = {};
     self.productsTopRated = {};
     self.productsLatest = {};
     self.productsSearchValue = {};
@@ -11,20 +12,28 @@ appServices.factory('ShopService', ['$http', function ($http) {
     self.searchValue = null;
     self.searchValues = [];
 
-    self.getProducts = function (callback) {
+    self.selectedQuantity = $location.search().selectedQuantity;
+
+    self.getProducts = function(callback) {
         $http
             .get('/api/product')
             .then(function (response) {
                 self.products = response.data.data.products;
+                self.products.forEach(function(product) {
+                    product.selectedQuantity = self.selectedQuantity;
+                });
                 return callback(self.products);
             });
     };
 
-    self.getProductsByCategory = function (categoryId, callback) {
+    self.getProductsCategory = function (categoryId, callback) {
         $http
             .get('/api/product/category/' + categoryId)
             .then(function (response) {
                 self.productsCategory = response.data.data.products;
+                self.productsCategory.forEach(function(product) {
+                    product.selectedQuantity = self.selectedQuantity;
+                });
                 return callback(self.productsCategory);
             });
     };
@@ -129,6 +138,10 @@ appServices.factory('ShopService', ['$http', function ($http) {
             });
         }
         self.searchValue = null;
+    };
+    
+    self.getSelectedQuantity = function () {
+        return self.selectedQuantity;
     };
 
     return self;

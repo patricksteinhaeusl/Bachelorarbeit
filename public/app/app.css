@@ -552,6 +552,10 @@ table tr td li {
     font-size: 12px;
 }
 
+.add-cart-container {
+    display: inline-block;
+}
+
 .shop-form-rating {
     display: none;
     width: 100%;
