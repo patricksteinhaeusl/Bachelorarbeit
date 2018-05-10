@@ -102,3 +102,37 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function() {
+        let selectedQuantity = getParameterByName("selectedQuantity");
+
+        if(selectedQuantity) {
+            createDropDownOptions(selectedQuantity);
+        }
+
+        function createDropDownOptions(defaultQuantity) {
+            /*let option = document.createElement('option');
+            option.innerHTML = defaultQuantity;
+            option.value = 1;
+            console.log(option);
+            let selectQuantities = document.getElementsByClassName("quantity");
+            for (let i = 0; i < selectQuantities.length; i++) {
+                selectQuantities[i].appendChild(option);
+            }*/
+            $('.quantity').html("");
+            let $option = $('<option value="1">' + defaultQuantity + '</option>');
+            $('.quantity').append($option);
+        }
+
+        function getParameterByName(name) {
+            let url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    });
+</script>
