@@ -27,23 +27,29 @@
          ng-class="shop.productOrientation">
         <div class="product-container">
             <div class="product">
-                <div class="col col-xs-3">
-                    <a href="/product-images/{{ product.image }}" data-lity="">
-                        <img class="product-image" alt="Product Image" ng-src="/product-images/{{ product.image }}"/>
-                    </a>
-                </div>
-                <div class="col col-xs-4">
-                    <p class="product-name">{{ product.name }}</p>
-                    <p class="product-category">{{ product.category.name }}</p>
-                    <p class="product-value">{{ product.size }} cm</p>
-                    <p class="product-price">{{ product.price.toFixed(2) }} CHF</p>
-                </div>
-                <div class="col col-xs-5">
-                    <div class="product-rating">
-                        <span class="rating-average">&empty; {{ product.rating.value }}</span>
-                        <jk-rating-stars max-rating="5" rating="product.rating.value"
-                                         read-only="true"></jk-rating-stars>
+                <div class="row">
+                    <div class="col col-xs-12">
+                        <div class="product-rating">
+                            <span class="rating-average">&empty; {{ product.rating.value }}</span>
+                            <jk-rating-stars max-rating="5" rating="product.rating.value"
+                                             read-only="true"></jk-rating-stars>
+                        </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col col-xs-3">
+                        <a href="/product-images/{{ product.image }}" data-lity="">
+                            <img class="product-image" alt="Product Image" ng-src="/product-images/{{ product.image }}"/>
+                        </a>
+                    </div>
+                    <div class="col col-xs-9">
+                        <p class="product-name">{{ product.name }}</p>
+                        <p class="product-category">{{ product.category.name }}</p>
+                        <p class="product-value">{{ product.size }} cm</p>
+                        <p class="product-price">{{ product.price.toFixed(2) }} CHF</p>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="product-menu">
                         <button class="btn btn-primary" ng-click="shop.collapseRatingForm(product._id)" ng-if="auth.isAuthenticated() === true">
                             <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
