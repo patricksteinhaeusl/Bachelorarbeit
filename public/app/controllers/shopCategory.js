@@ -1,13 +1,10 @@
 'use strict';
 
-appControllers.controller('ShopController', ['$rootScope', '$scope', '$location', 'AuthService', 'ShopService',
-    function ($rootScope, $scope, $location, AuthService, ShopService) {
+appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$location', '$routeParams', 'AuthService', 'ShopService',
+    function ($rootScope, $scope, $location, $routeParams, AuthService, ShopService) {
         const self = this;
         self.data = {};
         self.data.products = {};
-
-        self.searchValue = null;
-        self.searchValues = {};
 
         self.sort = {
             name: {
@@ -34,9 +31,10 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$location'
         self.selectedSort = self.sort.name.query;
         self.productOrientation = 'wide';
         self.selectedQuantity = $location.search().selectedQuantity;
+        self.categoryId = $routeParams.categoryId;
 
         self.getProducts = function() {
-            ShopService.getProducts(function(products) {
+            ShopService.getProductsByCategory(self.categoryId, function(products) {
                 products.forEach(function(product) {
                     product.selectedQuantity = self.selectedQuantity;
                 });
@@ -57,6 +55,7 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$location'
                     }
                     $rootScope.messages.success = message;
                     $('.shop-form-rating').slideUp();
+                    self.getProducts();
                 });
             } else {
                 $rootScope.messages.warning = "Rating must be at least 1 star";
@@ -107,23 +106,5 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$location'
             });
         };
 
-        $scope.$watch(function() {
-            return ShopService.products;
-        }, function(products) {
-            self.data.products = products;
-        }, false);
-
-        $scope.$watch(function() {
-            return ShopService.productsSearchValue;
-        }, function(products) {
-            self.data.products = products;
-        }, false);
-
         self.getProducts();
-    }])
-    .filter('trustAsHTML', ['$sce', function ($sce) {
-        return function (comment) {
-            return $sce.trustAs($sce.HTML, comment);
-        };
     }]);
-    // Injection Code End

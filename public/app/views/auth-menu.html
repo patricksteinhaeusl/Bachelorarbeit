@@ -2,11 +2,11 @@
     <form class="auth-form" ng-submit="auth.login()" ng-if="auth.isAuthenticated() === false">
         <div class="form-group">
             <input class="form-control" type="text" ng-model="auth.data.login.user.username" name="username"
-                   placeholder="Username" required/>
+                   placeholder="Username" required autocomplete="true"/>
         </div>
         <div class="form-group">
             <input class="form-control" type="password" ng-model="auth.data.login.user.password" name="password"
-                   placeholder="Password" required/>
+                   placeholder="Password" required autocomplete="true"/>
         </div>
         <p>Not yet an account? <a href="#!/auth/register">Register</a></p>
         <div class="form-group">

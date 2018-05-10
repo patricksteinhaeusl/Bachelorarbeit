@@ -2,12 +2,12 @@
     <form class="product-sort-form">
         <div class="col col-xs-6">
             <label>Sort:</label>
-            <select class="form-control" ng-model="shop.data.sortSelected" ng-change="shop.sort.change()">
-                <option ng-value="shop.data.sort.name.query">{{ shop.data.sort.name.label }}</option>
-                <option ng-value="shop.data.sort.category.query">{{ shop.data.sort.category.label }}</option>
-                <option ng-value="shop.data.sort.price.query">{{ shop.data.sort.price.label }}</option>
-                <option ng-value="shop.data.sort.size.query">{{ shop.data.sort.size.label }}</option>
-                <option ng-value="shop.data.sort.rating.query">{{ shop.data.sort.rating.label }}</option>
+            <select class="form-control" ng-model="shop.selectedSort">
+                <option ng-value="shop.sort.name.query" ng-selected="">{{ shop.sort.name.label }}</option>
+                <option ng-value="shop.sort.category.query">{{ shop.sort.category.label }}</option>
+                <option ng-value="shop.sort.price.query">{{ shop.sort.price.label }}</option>
+                <option ng-value="shop.sort.size.query">{{ shop.sort.size.label }}</option>
+                <option ng-value="shop.sort.rating.query">{{ shop.sort.rating.label }}</option>
             </select>
         </div>
         <div class="col col-xs-6">
@@ -23,7 +23,7 @@
         </div>
     </form>
     <div class="products"
-         ng-repeat="product in shop.data.products | toArray: false | orderBy: shop.data.sortSelected track by product._id"
+         ng-repeat="product in shop.data.products | toArray: false | orderBy: shop.selectedSort track by product._id"
          ng-class="shop.productOrientation">
         <div class="product-container">
             <div class="product">
@@ -56,13 +56,7 @@
                         </a>
 
                         <div class="add-cart-container" style="display: inline-block;">
-                            <select class="quantity form-control" ng-model="product.selectedQuantity">
-                                <option value=1>1</option>
-                                <option value=2>2</option>
-                                <option value=3>3</option>
-                                <option value=4>4</option>
-                                <option value=5>5</option>
-                            </select>
+                            <select class="quantity form-control" ng-model="product.selectedQuantity"></select>
                             <button class="btn btn-primary" ng-click="cart.insert(product, product.selectedQuantity); nav.collapseCartNavigation('.cart-menu', '.auth-menu');">
                                 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
                                 Add to cart
@@ -108,29 +102,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(function() {
-        function createDropDownOptions(defaultQuantity) {
-            $(".quantity").prepend([
-                $("<option value=" + defaultQuantity + ">" + defaultQuantity + "</option>")
-            ]);
-        }
-
-        function removeDropDownOptions(defaultQuantity) {
-            $(".quantity").each(function() {
-                $(this).children('option').each(function() {
-                    if($(this).val() === defaultQuantity && $(this).is(':selected') === false) {
-                       $(this).remove();
-                    }
-                });
-            });
-        }
-
-        if(document.location.href.indexOf("defaultQuantity=") > -1) {
-            let defaultQuantity = decodeURIComponent((document.location.href.substring(document.location.href.indexOf("defaultQuantity=")+16)));
-            createDropDownOptions(defaultQuantity);
-            removeDropDownOptions(defaultQuantity);
-        }
-    });
-</script>

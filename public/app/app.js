@@ -15,6 +15,14 @@ let routes = {
     },
     '/shop': {
         templateUrl: 'views/shop.html',
+        controller: 'ShopController',
+        controllerAs: 'shop',
+        requireLogin: false
+    },
+    '/shop/category/:categoryId': {
+        templateUrl: 'views/shop.html',
+        controller: 'ShopCategoryController',
+        controllerAs: 'shop',
         requireLogin: false
     },
     '/auth/register': {
@@ -135,7 +143,7 @@ let app = angular.module('app', [
             .setStorageType('localStorage');
 
         $compileProvider.debugInfoEnabled(true);
-}]).run(['$rootScope', '$http', '$location', 'localStorageService', 'AuthService', function ($rootScope, $http, $location, localStorageService, authService) {
+}]).run(['$rootScope', '$http', '$location', '$routeParams', 'localStorageService', 'AuthService', function ($rootScope, $http, $location, $routeParams, localStorageService, authService) {
     if (!localStorageService.get('items')) {
         localStorageService.set('items', '[]');
     }
@@ -160,5 +168,6 @@ function templateExists(templateUrl) {
     let xhr = new XMLHttpRequest();
     xhr.open('HEAD', templateUrl, false);
     xhr.send();
-    return xhr.status === 404;
+    if(xhr.status === 404) return false;
+    else return true;
 }
