@@ -86,10 +86,7 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
                 let message = response.data.message;
                 let validations = response.data.validations;
                 if (statusCode === 200) {
-                    self.getProducts(function(products) {
-                        self.products = products;
-                        return callback(null, data, message, null);
-                    });
+                    return callback(null, data, message, null);
                 } else if (statusCode === 405) {
                     return callback(null, null, null, validations);
                 }
@@ -108,10 +105,7 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
                 let message = response.data.message;
                 let validations = response.data.validations;
                 if (statusCode === 200) {
-                    self.getProductsByCategory(categoryId, function(products) {
-                        self.productsCategory = products;
-                        return callback(null, data, message, null);
-                    });
+                    return callback(null, data, message, null);
                 } else if (statusCode === 405) {
                     return callback(null, null, null, validations);
                 }
@@ -139,7 +133,7 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
         }
         self.searchValue = null;
     };
-    
+
     self.getSelectedQuantity = function () {
         return self.selectedQuantity;
     };

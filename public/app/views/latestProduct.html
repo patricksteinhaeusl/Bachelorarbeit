@@ -2,7 +2,7 @@
     <div class="sidebar-topRatedProduct">
         <h3>Latest product</h3>
         <div class="topRatedProduct-wrapper"
-             ng-repeat="latestProduct in latest.data.products | toArray: false | orderBy: '-createdAt' | limitTo: 1">
+             ng-repeat="latestProduct in latest.products | toArray: false | orderBy: '-createdAt' | limitTo: 1">
             <h4>{{ latestProduct.name }} - {{ latestProduct.category.name }}</h4>
             <div class="image-wrapper">
                 <a href="/product-images/{{ latestProduct.image }}" data-lity="">

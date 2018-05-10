@@ -74,11 +74,6 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', 'AuthServic
             self.productOrientation = orientation;
         };
 
-        self.changeSelectedQuantity = function(index, value) {
-            console.log(index, value);
-            self.products[index].selectedQuantity = value;
-        };
-
         $scope.$watch(function() {
             return ShopService.products;
         }, function(products) {

@@ -2,7 +2,7 @@
     <div class="sidebar-topRatedProduct">
         <h3>Top rated product</h3>
         <div class="topRatedProduct-wrapper"
-             ng-repeat="topRatedProduct in topRated.data.products | toArray: false | orderBy: '-rating.value' | limitTo: 1">
+             ng-repeat="topRatedProduct in topRated.products | toArray: false | orderBy: '-rating.value' | limitTo: 1">
             <h4>{{ topRatedProduct.name }} - {{ topRatedProduct.category.name }}</h4>
             <div class="image-wrapper">
                 <a href="/product-images/{{ topRatedProduct.image }}" data-lity>
