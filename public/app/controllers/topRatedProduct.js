@@ -18,5 +18,11 @@ appControllers.controller('TopRatedProductController', ['$rootScope', '$scope', 
             self.data.products = products;
         }, false);
 
+        $scope.$watch(function() {
+            return ShopService.productsCategory;
+        }, function(products) {
+            self.data.products = products;
+        }, false);
+
         self.getProducts();
     }]);

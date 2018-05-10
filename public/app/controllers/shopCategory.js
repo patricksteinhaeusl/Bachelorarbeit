@@ -46,7 +46,7 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$l
             rating._account = AuthService.getUser()._id;
             $rootScope.messages = {};
             if(rating.value >= 1) {
-                ShopService.rateProduct(product, rating, function (error, data, message, validations) {
+                ShopService.rateProductCategory(self.categoryId, product, rating, function (error, data, message, validations) {
                     if (error) $rootScope.messages.error = error;
                     if (validations) {
                         $rootScope.messages.validations = validations;
@@ -55,7 +55,6 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$l
                     }
                     $rootScope.messages.success = message;
                     $('.shop-form-rating').slideUp();
-                    self.getProducts();
                 });
             } else {
                 $rootScope.messages.warning = "Rating must be at least 1 star";
@@ -105,6 +104,12 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$l
                 }
             });
         };
+
+        $scope.$watch(function() {
+            return ShopService.productsCategory;
+        }, function(products) {
+            self.data.products = products;
+        }, false);
 
         self.getProducts();
     }]);

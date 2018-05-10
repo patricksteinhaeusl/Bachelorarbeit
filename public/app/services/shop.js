@@ -90,6 +90,28 @@ appServices.factory('ShopService', ['$http', function ($http) {
             });
     };
 
+    self.rateProductCategory = function (categoryId, product, rating, callback) {
+        let data = {'product': product, 'rating': rating};
+        $http
+            .post('/api/product/rating', data)
+            .then(function (response) {
+                let statusCode = response.data.statusCode;
+                let message = response.data.message;
+                let validations = response.data.validations;
+                if (statusCode === 200) {
+                    self.getProductsByCategory(categoryId, function(products) {
+                        self.productsCategory = products;
+                        return callback(null, data, message, null);
+                    });
+                } else if (statusCode === 405) {
+                    return callback(null, null, null, validations);
+                }
+                return callback(null, null, message, null);
+            }, function (error) {
+                return callback(error);
+            });
+    };
+
     self.addSearchValue = function () {
         let maxSearchValues = 2;
         if (self.searchValue) {
