@@ -1,6 +1,6 @@
 'use strict';
 const HelperFunctions = require('./helperFunctions.js');
-let ccSettings, addressSettings, sumPrice, orderID, product1Name, product1Price, product2Name,
+let ccSettings, addressSettings, sumPrice, orderID, product1Name, product1Price, product1PriceReal, product1Quantity, product2Name,
     product2Price, product3Name, product3Price, quantity = 7;
 
 describe('Order and Cart Processes', function () {
@@ -26,7 +26,7 @@ describe('Order and Cart Processes', function () {
         });
 
         it('should be possible to add items with correct Properties', function () {
-            browser.get('https://localhost:3443/#!/shop').then(function () {
+            browser.get('https://localhost:3443/#!/shop?selectedQuantity=1').then(function () {
 
                 element.all(by.repeater('product in shop.products')).then(function (products) {
                     let firstProduct = products[0];
@@ -34,6 +34,10 @@ describe('Order and Cart Processes', function () {
                     let thirdProduct = products[2];
                     product1Name = firstProduct.element(by.binding('product.name')).getText();
                     product1Price = firstProduct.element(by.binding('product.price')).getText();
+                    product1Price.then(function(text) {
+                        product1PriceReal = text.replace(' CHF', '') * 5 + ' CHF';
+                    });
+                    product1Quantity = firstProduct.element(by.model('product.selectedQuantity')).sendKeys('5');
                     firstProduct.element(by.css('.glyphicon.glyphicon-shopping-cart')).click();
                     product2Name = secondProduct.element(by.binding('product.name')).getText();
                     product2Price = secondProduct.element(by.binding('product.price')).getText();
@@ -49,8 +53,8 @@ describe('Order and Cart Processes', function () {
                     let secondItem = items[1];
                     let thirdItem = items[2];
                     expect(firstItem.all(by.tagName('td')).get(0).getAttribute('innerText')).toBe(product1Name);
-                    expect(firstItem.all(by.tagName('td')).get(1).getAttribute('innerText')).toBe('1');
-                    expect(firstItem.all(by.tagName('td')).get(2).getAttribute('innerText')).toBe(product1Price);
+                    expect(firstItem.all(by.tagName('td')).get(1).getAttribute('innerText')).toBe('5');
+                    expect(firstItem.all(by.tagName('td')).get(2).getAttribute('innerText')).toBe(product1PriceReal);
                     expect(secondItem.all(by.tagName('td')).get(0).getAttribute('innerText')).toBe(product2Name);
                     expect(secondItem.all(by.tagName('td')).get(1).getAttribute('innerText')).toBe(quantity.toString());
                     sumPrice = product2Price.then(function (text) {
@@ -181,9 +185,7 @@ describe('Order and Cart Processes', function () {
                         product1Name.then(function (text) {
                             expect(element.toString()).toContain(text);
                         });
-                        product1Price.then(function (text) {
-                            expect(element).toContain(text);
-                        });
+                        expect(element).toContain(product1PriceReal);
                     });
                     item[1].all(by.binding('item.quantity')).getText().then(function (element) {
                         product2Name.then(function (text) {
