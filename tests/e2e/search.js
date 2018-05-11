@@ -11,13 +11,14 @@ describe('Search and Filter', function () {
         it('should return correct amount of products', function () {
             browser.get('https://localhost:3443/').then(function () {
                 //Fill out Input
-                element(by.model('shop.data.searchValue')).sendKeys('treich').sendKeys(protractor.Key.ENTER);
-                expect(element.all(by.repeater('product in shop.data.products')).count()).toBe(5);
+                element(by.model('productSearch.searchValue')).sendKeys('treich').sendKeys(protractor.Key.ENTER);
+                browser.sleep(250);
+                expect(element.all(by.repeater('product in shop.products')).count()).toBe(5);
             });
         });
 
         it('should store latest search in history', function () {
-            expect(element.all(by.repeater('searchValue in shop.data.searchValues'))
+            expect(element.all(by.repeater('searchValue in productSearch.searchValues'))
                 .get(0).element(by.linkText('treich')).getText()).toBe('treich');
         });
     });
@@ -25,25 +26,25 @@ describe('Search and Filter', function () {
     describe('Filter by Categories', function () {
         it('should return correct amount of Schelbert', function () {
             element(by.linkText('Schelbert')).click();
-            expect(element.all(by.repeater('product in shop.data.products')).count()).toBe(3);
+            expect(element.all(by.repeater('product in shop.products')).count()).toBe(3);
         });
 
         it('should return correct amount of Steiner, Wynigen', function () {
             element(by.linkText('Steiner, Wynigen')).click();
-            expect(element.all(by.repeater('product in shop.data.products')).count()).toBe(2);
+            expect(element.all(by.repeater('product in shop.products')).count()).toBe(2);
         });
 
         it('should return correct amount of Zurfluh', function () {
             element(by.linkText('Zurfluh')).click();
-            expect(element.all(by.repeater('product in shop.data.products')).count()).toBe(2);
+            expect(element.all(by.repeater('product in shop.products')).count()).toBe(2);
         });
     });
 
     describe('Sort by', function () {
         it('name should return correct order', function () {
-            element(by.model('shop.data.sortSelected')).sendKeys('name');
+            element(by.model('shop.selectedSort')).sendKeys('name');
             let unSorted = [];
-            element.all(by.repeater('product in shop.data.products')).each(function (element, index) {
+            element.all(by.repeater('product in shop.products')).each(function (element, index) {
                 element.element(by.className('product-name')).getText().then(function (element) {
                     unSorted[index] = element;
                 });
@@ -51,9 +52,9 @@ describe('Search and Filter', function () {
         });
 
         it('size should return correct order', function () {
-            element(by.model('shop.data.sortSelected')).sendKeys('size');
+            element(by.model('shop.selectedSort')).sendKeys('size');
             let unSorted = [];
-            element.all(by.repeater('product in shop.data.products')).each(function (element, index) {
+            element.all(by.repeater('product in shop.products')).each(function (element, index) {
                 element.element(by.className('product-value')).getText().then(function (element) {
                     unSorted[index] = element;
                 });
@@ -61,9 +62,9 @@ describe('Search and Filter', function () {
         });
 
         it('price should return correct order', function () {
-            element(by.model('shop.data.sortSelected')).sendKeys('price');
+            element(by.model('shop.selectedSort')).sendKeys('price');
             let unSorted = [];
-            element.all(by.repeater('product in shop.data.products')).each(function (element, index) {
+            element.all(by.repeater('product in shop.products')).each(function (element, index) {
                 element.element(by.className('product-price')).getText().then(function (element) {
                     unSorted[index] = element;
                 });
@@ -71,9 +72,9 @@ describe('Search and Filter', function () {
         });
 
         it('category should return correct order', function () {
-            element(by.model('shop.data.sortSelected')).sendKeys('category');
+            element(by.model('shop.selectedSort')).sendKeys('category');
             let unSorted = [];
-            element.all(by.repeater('product in shop.data.products')).each(function (element, index) {
+            element.all(by.repeater('product in shop.products')).each(function (element, index) {
                 element.element(by.className('product-category')).getText().then(function (element) {
                     unSorted[index] = element;
                 });
@@ -81,9 +82,9 @@ describe('Search and Filter', function () {
         });
 
         it('rating should return correct order', function () {
-            element(by.model('shop.data.sortSelected')).sendKeys('rating');
+            element(by.model('shop.selectedSort')).sendKeys('rating');
             let sorted = [], unSorted = [];
-            element.all(by.repeater('product in shop.data.products')).each(function (element, index) {
+            element.all(by.repeater('product in shop.products')).each(function (element, index) {
                 element.element(by.className('rating-average')).getText().then(function (element) {
                     unSorted[index] = element;
                 });

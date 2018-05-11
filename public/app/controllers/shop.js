@@ -5,9 +5,6 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', 'AuthServic
         const self = this;
         self.products = {};
 
-        self.searchValue = null;
-        self.searchValues = {};
-
         self.sort = {
             name: {
                 label: 'Name',
@@ -75,13 +72,19 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', 'AuthServic
         };
 
         $scope.$watch(function() {
-            return ShopService.products;
+            return ShopService.searchValue;
+        }, function(searchValue) {
+            self.searchValue = searchValue;
+        }, false);
+
+        $scope.$watch(function() {
+            return ShopService.productsSearchValue;
         }, function(products) {
             self.products = products;
         }, false);
 
         $scope.$watch(function() {
-            return ShopService.productsSearchValue;
+            return ShopService.products;
         }, function(products) {
             self.products = products;
         }, false);
@@ -93,6 +96,7 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', 'AuthServic
         }, false);
 
         self.getProducts();
+
     }]).filter('trustAsHTML', ['$sce', function ($sce) {
         return function (comment) {
             return $sce.trustAs($sce.HTML, comment);

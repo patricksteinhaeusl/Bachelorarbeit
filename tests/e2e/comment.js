@@ -7,21 +7,22 @@ describe('Comment and Rating', function () {
         //Add a Comment
         element(by.linkText('Shop')).click();
         //Get first product
-        element.all(by.repeater('product in shop.data.products')).then(function (products) {
+        element.all(by.repeater('product in shop.products')).then(function (products) {
             let firstProduct = products[0];
             //Open Comment
-            firstProduct.element(by.css('.glyphicon.glyphicon-star')).click();
+            firstProduct.element(by.buttonText('Rate')).click();
             browser.sleep(250);
             //Reset Stars and then Set them
-            firstProduct.all(by.css('.form-group .jk-rating-stars-container .button')).first().click();
+            //TODO: WHAT IS THIS?
+            //firstProduct.all(by.css('.form-group .jk-rating-stars-container .button')).first().click();
             firstProduct.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();
             //Fill form
-            let commentField = products[0].element(by.name('comment'));
+            let commentField = firstProduct.element(by.name('comment'));
             commentField.clear().then(function () {
                 commentField.sendKeys('Nice Product');
+                //Submit form
+                firstProduct.element(by.buttonText('Save')).click();
             });
-            //Submit form
-            firstProduct.element(by.buttonText('Save')).click();
         });
     });
 
@@ -34,8 +35,12 @@ describe('Comment and Rating', function () {
             //Goto Shop
             element(by.linkText('Shop')).click();
             //Check if Comment in Comment Field
-            element.all(by.repeater('product in shop.data.products')).then(function (products) {
-                expect(products[0].element(by.name('comment')).getAttribute('value')).toEqual('Nice Product');
+            element.all(by.repeater('product in shop.products')).then(function (products) {
+                let firstProduct = products[0];
+                //Open Comment
+                firstProduct.element(by.buttonText('Rate')).click();
+                browser.sleep(250);
+                expect(firstProduct.element(by.name('comment')).getAttribute('value')).toEqual('Nice Product');
             });
         });
 
@@ -43,7 +48,7 @@ describe('Comment and Rating', function () {
             //Goto Shop
             element(by.linkText('Shop')).click();
             //Check if Product is now topRated and also stars count
-            element.all(by.repeater('topRatedProduct in shop.data.topRatedProducts')).then(function (topRated) {
+            element.all(by.repeater('topRatedProduct in topRated.products')).then(function (topRated) {
                 let firstRatedProductText = topRated[0].element(by.binding('topRatedProduct.name'));
                 let allStars = topRated[0].all(by.css('.button.star-button.ng-scope.star-on'));
                 expect(firstRatedProductText.getText()).toBe('Berner Treicheln - Steiner, Wynigen');
@@ -58,22 +63,18 @@ describe('Comment and Rating', function () {
             //Goto Shop
             element(by.linkText('Shop')).click();
             //get first product which has already a comment and edit it
-            element.all(by.repeater('product in shop.data.products')).then(function (products) {
+            element.all(by.repeater('product in shop.products')).then(function (products) {
                 let firstProduct = products[0];
-                //Open Comment
-                firstProduct.element(by.css('.glyphicon.glyphicon-star')).click();
-                browser.sleep(250);
                 expect(firstProduct.element(by.name('comment')).getAttribute('value')).toEqual('Nice Product');
                 //Reset Stars and then Set them
-                firstProduct.all(by.css('.form-group .jk-rating-stars-container .button')).first().click();
                 firstProduct.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(2).click();
                 //Fill form
-                let commentField = products[0].element(by.name('comment'));
+                let commentField = firstProduct.element(by.name('comment'));
                 commentField.clear().then(function () {
                     commentField.sendKeys('Not so nice Product');
+                    //Submit form
+                    firstProduct.element(by.buttonText('Update')).click();
                 });
-                //Submit form
-                firstProduct.element(by.buttonText('Update')).click();
             });
         });
 
@@ -81,8 +82,9 @@ describe('Comment and Rating', function () {
             //Goto Shop
             element(by.linkText('Shop')).click();
             //Check if Comment in Comment Field
-            element.all(by.repeater('product in shop.data.products')).then(function (products) {
-                expect(products[0].element(by.name('comment')).getAttribute('value')).toEqual('Not so nice Product');
+            element.all(by.repeater('product in shop.products')).then(function (products) {
+                let firstProduct = products[0];
+                expect(firstProduct.element(by.name('comment')).getAttribute('value')).toEqual('Not so nice Product');
             });
         });
 
@@ -90,7 +92,7 @@ describe('Comment and Rating', function () {
             //Goto Shop
             element(by.linkText('Shop')).click();
             //Check if Product is now topRated and also stars count
-            element.all(by.repeater('topRatedProduct in shop.data.topRatedProducts')).then(function (topRated) {
+            element.all(by.repeater('topRatedProduct in topRated.products')).then(function (topRated) {
                 let firstRatedProductText = topRated[0].element(by.binding('topRatedProduct.name'));
                 let allStars = topRated[0].all(by.css('.button.star-button.ng-scope.star-on'));
                 expect(firstRatedProductText.getText()).toBe('Berner Treicheln - Steiner, Wynigen');
@@ -107,39 +109,41 @@ describe('Comment and Rating', function () {
             //Goto Shop
             element(by.linkText('Shop')).click();
             //Check if Comment in Comment Field
-            element.all(by.repeater('product in shop.data.products')).then(function (products) {
-                expect(products[0].element(by.name('comment')).getAttribute('value')).toEqual('');
+            element.all(by.repeater('product in shop.products')).then(function (products) {
+                let firstProduct = products[0];
+                expect(firstProduct.element(by.name('comment')).getAttribute('value')).toEqual('');
             });
         });
 
         it('User B should be able to comment on same product like User A', function () {
             //Get first product
-            element.all(by.repeater('product in shop.data.products')).then(function (products) {
+            element.all(by.repeater('product in shop.products')).then(function (products) {
                 let firstProduct = products[0];
                 //Open Comment
-                firstProduct.element(by.css('.glyphicon.glyphicon-star')).click();
+                firstProduct.element(by.buttonText('Rate')).click();
                 browser.sleep(250);
                 //Check if Comment is empty
-                expect(products[0].element(by.name('comment')).getAttribute('value')).toEqual('');
+                expect(firstProduct.element(by.name('comment')).getAttribute('value')).toEqual('');
                 //Reset Stars and then Set them
-                firstProduct.all(by.css('.form-group .jk-rating-stars-container .button')).first().click();
+                //TODO: What is this?
+                //firstProduct.all(by.css('.form-group .jk-rating-stars-container .button')).first().click();
                 firstProduct.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();
                 //Fill form
-                let commentField = products[0].element(by.name('comment'));
+                let commentField = firstProduct.element(by.name('comment'));
                 commentField.clear().then(function () {
                     commentField.sendKeys('Cool Product');
                     //Submit form
                     firstProduct.element(by.buttonText('Save')).click();
                     browser.sleep(250);
                     //Check if Comment in Comment Field
-                    expect(products[0].element(by.name('comment')).getAttribute('value')).toEqual('Cool Product');
+                    expect(firstProduct.element(by.name('comment')).getAttribute('value')).toEqual('Cool Product');
                 });
             });
 
         });
 
         it('multiple ratings on one product should have right average ', function () {
-            element.all(by.repeater('topRatedProduct in shop.data.topRatedProducts')).then(function (topRated) {
+            element.all(by.repeater('topRatedProduct in topRated.products')).then(function (topRated) {
                 let topRatedValue = topRated[0].element(by.binding('topRatedProduct.rating.value'));
                 expect(topRatedValue.getText()).toBe('∅ 4');
             });

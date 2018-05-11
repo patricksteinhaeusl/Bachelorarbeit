@@ -63,8 +63,11 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
             .post('/api/product/searchValue/', data)
             .then(function (response) {
                 self.productsSearchValue = response.data.data.products;
+                self.productsSearchValue.forEach(function(product) {
+                    product.selectedQuantity = self.selectedQuantity;
+                });
                 self.addSearchValue();
-                return callback(self.products);
+                return callback(self.productsSearchValue);
             });
     };
 
@@ -86,7 +89,10 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
                 let message = response.data.message;
                 let validations = response.data.validations;
                 if (statusCode === 200) {
-                    return callback(null, data, message, null);
+                    self.getProducts(function(products) {
+                        self.products = products;
+                        return callback(null, data, message, null);
+                    });
                 } else if (statusCode === 405) {
                     return callback(null, null, null, validations);
                 }
@@ -105,7 +111,10 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
                 let message = response.data.message;
                 let validations = response.data.validations;
                 if (statusCode === 200) {
-                    return callback(null, data, message, null);
+                    self.getProductCategories(function(products) {
+                        self.productsCategory = products;
+                        return callback(null, data, message, null);
+                    });
                 } else if (statusCode === 405) {
                     return callback(null, null, null, validations);
                 }
@@ -132,6 +141,10 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
             });
         }
         self.searchValue = null;
+    };
+
+    self.getSearchValue = function () {
+        return self.searchValue;
     };
 
     self.getSelectedQuantity = function () {

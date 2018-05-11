@@ -1,38 +1,34 @@
 'use strict';
 
-appControllers.controller('ProductSearchController', ['$rootScope', '$scope', '$location', 'ShopService',
-    function ($rootScope, $scope, $location, ShopService) {
+appControllers.controller('ProductSearchController', ['$rootScope', '$scope', '$timeout', '$location', 'ShopService',
+    function ($rootScope, $scope, $timeout, $location, ShopService) {
         const self = this;
-        self.data = {};
-        self.data.products = {};
+        self.products = {};
         self.searchValues = [];
         self.searchValue = null;
 
         self.getProducts = function() {
             $location.path('/shop');
-            ShopService.getProductsBySearchValue(self.searchValue, function (products) {
-                self.data.products = products;
-            });
+            $timeout(function() {
+                ShopService.getProductsBySearchValue(self.searchValue, function (products) {
+                    self.products = products;
+                });
+            }, 50);
         };
 
         self.getProductsBySearchValue = function(searchValue) {
             $location.path('/shop');
-            ShopService.getProductsBySearchValue(searchValue, function (products) {
-                self.data.products = products;
-            });
+            $timeout(function() {
+                ShopService.getProductsBySearchValue(searchValue, function (products) {
+                    self.products = products;
+                });
+            }, 50);
         };
 
         $scope.$watch(function() {
             return ShopService.searchValues;
         }, function(searchValues) {
             self.searchValues = searchValues;
-        }, false);
-
-
-        $scope.$watch(function() {
-            return ShopService.searchValue;
-        }, function(searchValue) {
-            self.searchValue = searchValue;
         }, false);
 
     }]).directive('ngEnter', function () {

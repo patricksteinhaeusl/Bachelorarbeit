@@ -28,32 +28,38 @@ describe('Order and Cart Processes', function () {
         it('should be possible to add items with correct Properties', function () {
             browser.get('https://localhost:3443/#!/shop').then(function () {
 
-                element.all(by.repeater('product in shop.data.products')).then(function (products) {
-                    product1Name = products[0].element(by.binding('product.name')).getText();
-                    product1Price = products[0].element(by.binding('product.price')).getText();
-                    products[0].element(by.css('.glyphicon.glyphicon-shopping-cart')).click();
-                    product2Name = products[1].element(by.binding('product.name')).getText();
-                    product2Price = products[1].element(by.binding('product.price')).getText();
+                element.all(by.repeater('product in shop.products')).then(function (products) {
+                    let firstProduct = products[0];
+                    let secondProduct = products[1];
+                    let thirdProduct = products[2];
+                    product1Name = firstProduct.element(by.binding('product.name')).getText();
+                    product1Price = firstProduct.element(by.binding('product.price')).getText();
+                    firstProduct.element(by.css('.glyphicon.glyphicon-shopping-cart')).click();
+                    product2Name = secondProduct.element(by.binding('product.name')).getText();
+                    product2Price = secondProduct.element(by.binding('product.price')).getText();
                     for (let i = 0; i < quantity; i++) {
-                        products[1].element(by.css('.glyphicon.glyphicon-shopping-cart')).click();
+                        secondProduct.element(by.css('.glyphicon.glyphicon-shopping-cart')).click();
                     }
-                    product3Name = products[2].element(by.binding('product.name')).getText();
-                    product3Price = products[2].element(by.binding('product.price')).getText();
-                    products[2].element(by.css('.glyphicon.glyphicon-shopping-cart')).click();
+                    product3Name = thirdProduct.element(by.binding('product.name')).getText();
+                    product3Price = thirdProduct.element(by.binding('product.price')).getText();
+                    thirdProduct.element(by.css('.glyphicon.glyphicon-shopping-cart')).click();
                 });
                 element.all(by.repeater('item in cart.data.items')).then(function (items) {
-                    expect(items[0].all(by.tagName('td')).get(0).getAttribute('innerText')).toBe(product1Name);
-                    expect(items[0].all(by.tagName('td')).get(1).getAttribute('innerText')).toBe('1');
-                    expect(items[0].all(by.tagName('td')).get(2).getAttribute('innerText')).toBe(product1Price);
-                    expect(items[1].all(by.tagName('td')).get(0).getAttribute('innerText')).toBe(product2Name);
-                    expect(items[1].all(by.tagName('td')).get(1).getAttribute('innerText')).toBe(quantity.toString());
+                    let firstItem = items[0];
+                    let secondItem = items[1];
+                    let thirdItem = items[2];
+                    expect(firstItem.all(by.tagName('td')).get(0).getAttribute('innerText')).toBe(product1Name);
+                    expect(firstItem.all(by.tagName('td')).get(1).getAttribute('innerText')).toBe('1');
+                    expect(firstItem.all(by.tagName('td')).get(2).getAttribute('innerText')).toBe(product1Price);
+                    expect(secondItem.all(by.tagName('td')).get(0).getAttribute('innerText')).toBe(product2Name);
+                    expect(secondItem.all(by.tagName('td')).get(1).getAttribute('innerText')).toBe(quantity.toString());
                     sumPrice = product2Price.then(function (text) {
                         return (parseInt(text.replace(/ CHF/gi, '')) * quantity).toFixed(2) + " CHF";
                     });
-                    expect(items[1].all(by.tagName('td')).get(2).getAttribute('innerText')).toBe(sumPrice);
-                    expect(items[2].all(by.tagName('td')).get(0).getAttribute('innerText')).toBe(product3Name);
-                    expect(items[2].all(by.tagName('td')).get(1).getAttribute('innerText')).toBe('1');
-                    expect(items[2].all(by.tagName('td')).get(2).getAttribute('innerText')).toBe(product3Price);
+                    expect(secondItem.all(by.tagName('td')).get(2).getAttribute('innerText')).toBe(sumPrice);
+                    expect(thirdItem.all(by.tagName('td')).get(0).getAttribute('innerText')).toBe(product3Name);
+                    expect(thirdItem.all(by.tagName('td')).get(1).getAttribute('innerText')).toBe('1');
+                    expect(thirdItem.all(by.tagName('td')).get(2).getAttribute('innerText')).toBe(product3Price);
                 });
             });
         });

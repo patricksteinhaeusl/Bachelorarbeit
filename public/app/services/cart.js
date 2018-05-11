@@ -27,6 +27,10 @@ appServices.service('CartService', ['$http', '$q', 'localStorageService', functi
     };
 
     self.insert = function (product, quantity, callback) {
+        if(!quantity) {
+            quantity = 1;
+        }
+
         let found = false;
         let item = {
             quantity: quantity,
