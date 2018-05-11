@@ -12,6 +12,7 @@ appControllers.controller('ProductSearchController', ['$rootScope', '$scope', '$
             $timeout(function() {
                 ShopService.getProductsBySearchValue(self.searchValue, function (products) {
                     self.products = products;
+                    self.searchValue = null;
                 });
             }, 50);
         };
@@ -21,6 +22,7 @@ appControllers.controller('ProductSearchController', ['$rootScope', '$scope', '$
             $timeout(function() {
                 ShopService.getProductsBySearchValue(searchValue, function (products) {
                     self.products = products;
+                    self.searchValue = null;
                 });
             }, 50);
         };
