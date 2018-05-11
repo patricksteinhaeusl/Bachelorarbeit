@@ -15,7 +15,7 @@ function get(callback) {
 function getFaqBySearchValue(searchValueObj, callback) {
     let param = searchValueObj.searchValue;
     Faq.find({
-        $where:  "this.question.indexOf('" + param +"') > -1 || this.answer.indexOf('" + param +"') > -1"
+        $where: "'"+ param +"'; /" + param + "/i.test(this.question) || /" + param + "/i.test(this.answer);"
     }, null, {sort: {_id: 1}}, function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse("Could not process your input."));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
