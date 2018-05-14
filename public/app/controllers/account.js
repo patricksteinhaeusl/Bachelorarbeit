@@ -4,6 +4,7 @@ appControllers.controller('AccountController', ['$scope', '$rootScope', 'Account
     const self = this;
     self.data = {};
     self.data.account = {};
+    self.data.profile = {};
     self.data.progress = 0;
 
     self.init = function () {
