@@ -1,6 +1,6 @@
 'use strict';
 
-appServices.factory('ShopService', ['$http', '$location', function ($http, $location) {
+appServices.factory('ShopService', ['$http', function ($http, $location) {
     let self = this;
     self.products = {};
     self.productsCategory = {};
@@ -12,16 +12,11 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
     self.searchValue = null;
     self.searchValues = [];
 
-    self.selectedQuantity = $location.search().selectedQuantity;
-
     self.getProducts = function(callback) {
         $http
             .get('/api/product')
             .then(function (response) {
                 self.products = response.data.data.products;
-                self.products.forEach(function(product) {
-                    product.selectedQuantity = self.selectedQuantity;
-                });
                 return callback(self.products);
             });
     };
@@ -31,9 +26,6 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
             .get('/api/product/category/' + categoryId)
             .then(function (response) {
                 self.productsCategory = response.data.data.products;
-                self.productsCategory.forEach(function(product) {
-                    product.selectedQuantity = self.selectedQuantity;
-                });
                 return callback(self.productsCategory);
             });
     };
@@ -63,9 +55,6 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
             .post('/api/product/searchValue/', data)
             .then(function (response) {
                 self.productsSearchValue = response.data.data.products;
-                self.productsSearchValue.forEach(function(product) {
-                    product.selectedQuantity = self.selectedQuantity;
-                });
                 self.addSearchValue();
                 return callback(self.productsSearchValue);
             });
@@ -145,10 +134,6 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
 
     self.getSearchValue = function () {
         return self.searchValue;
-    };
-
-    self.getSelectedQuantity = function () {
-        return self.selectedQuantity;
     };
 
     return self;

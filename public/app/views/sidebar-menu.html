@@ -1,9 +1,9 @@
 <div class="sidebar-menu">
     <div ng-controller="CategoryController as category">
         <h3>Categories</h3>
-        <ul class="categories"><li class="sidebar-item"><a ng-href="#!/shop?selectedQuantity=1">All</a></li></ul>
-        <ul class="categories" ng-repeat="category in category.data.categories">
-            <li class="sidebar-item"><a ng-href="#!/shop/category/{{ category._id }}?selectedQuantity=1">{{ category.name }}</a></li>
+        <ul class="categories"><li class="sidebar-item" ng-class="!category.data.categoryId ? 'selected' : ''" ng-click="category.changeCategoryId(null)"><a ng-href="#!/shop?selectedQuantity=1">All</a></li></ul>
+        <ul class="categories" ng-repeat="cat in category.data.categories">
+            <li class="sidebar-item" ng-class="category.data.categoryId === cat._id ? 'selected' : ''" ng-click="category.changeCategoryId(cat._id)"><a ng-href="#!/shop/category/{{ cat._id }}?selectedQuantity=1">{{ cat.name }}</a></li>
         </ul>
     </div>
     <div ng-controller="ProductSearchController as productSearch">

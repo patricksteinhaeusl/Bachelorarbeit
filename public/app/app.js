@@ -134,7 +134,7 @@ let app = angular.module('app', [
 .config(['$httpProvider', '$locationProvider', '$routeProvider', '$compileProvider', 'localStorageServiceProvider',
     function ($httpProvider, $locationProvider, $routeProvider, $compileProvider, localStorageServiceProvider) {
         $httpProvider.interceptors.push('AuthHttpResponseInterceptor');
-        $locationProvider.hashPrefix('!');
+        $locationProvider.html5Mode(false).hashPrefix('!');
 
         for (let path in routes) {
             $routeProvider.when(path, routes[path]);

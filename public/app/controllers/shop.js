@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('ShopController', ['$rootScope', '$scope', 'AuthService', 'ShopService',
-    function ($rootScope, $scope, AuthService, ShopService) {
+appControllers.controller('ShopController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ShopService',
+    function ($rootScope, $scope, $routeParams, AuthService, ShopService) {
         const self = this;
         self.products = {};
 
@@ -29,11 +29,13 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', 'AuthServic
         };
         self.selectedSort = self.sort.name.query;
         self.productOrientation = 'wide';
-        self.selectedQuantity = ShopService.getSelectedQuantity();
 
         self.getProducts = function() {
             ShopService.getProducts(function(products) {
                 self.products = products;
+                self.products.forEach(function(product) {
+                    product.selectedQuantity = self.selectedQuantity;
+                });
             });
         };
 
@@ -84,15 +86,15 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', 'AuthServic
         }, false);
 
         $scope.$watch(function() {
+            return $routeParams.selectedQuantity;
+        }, function(selectedQuantity) {
+            self.selectedQuantity = selectedQuantity;
+        }, true);
+
+        $scope.$watch(function() {
             return ShopService.products;
         }, function(products) {
             self.products = products;
-        }, false);
-
-        $scope.$watch(function() {
-            return ShopService.selectedQuantity;
-        }, function(selectedQuantity) {
-            self.selectedQuantity = selectedQuantity;
         }, false);
 
         self.getProducts();
@@ -101,24 +103,25 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', 'AuthServic
         return function (comment) {
             return $sce.trustAs($sce.HTML, comment);
         };
-    }]).directive('addOptions', ['$location', function($location) {
+    }]).directive('addOptions', ['$routeParams', function($routeParams) {
+
         function link(scope, element) {
-            scope.$watch(function() {
-                return self.selectedQuantity
-            }, function() {
-                let selectedQuantity = $location.search().selectedQuantity;
+            scope.$watch(function () {
+                return $routeParams.selectedQuantity;
+            }, function (selectedQuantity) {
                 let options = element.find('option');
-                angular.forEach(options, function(element) {
-                    if(element.value === selectedQuantity) {
+                angular.forEach(options, function (element) {
+                    if (element.value === selectedQuantity) {
                         element.remove();
                     }
                 });
-                element.prepend('<option value="' + selectedQuantity + '" selected>' + selectedQuantity + '</option>');
+                element.prepend('<option value=' + selectedQuantity + ' selected>' + selectedQuantity + '</option>');
             }, false);
         }
 
         return {
             link: link
         };
+
     }]);
 
