@@ -26,7 +26,7 @@ describe('Order and Cart Processes', function () {
         });
 
         it('should be possible to add items with correct Properties', function () {
-            browser.get('https://localhost:3443/#!/shop?selectedQuantity=1').then(function () {
+            browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=1').then(function () {
 
                 element.all(by.repeater('product in shop.products')).then(function (products) {
                     let firstProduct = products[0];
@@ -85,7 +85,7 @@ describe('Order and Cart Processes', function () {
 
     describe('Order Process', function () {
         it('should have the same items in cart as in order overview', function () {
-            browser.get('http://localhost:3000/').then(function () {
+            browser.get(browser.params.webshop).then(function () {
                 element.all(by.css('.glyphicon.glyphicon-shopping-cart')).get(0).click();
                 browser.sleep(500);
                 element.all(by.buttonText('Check out')).get(1).click();

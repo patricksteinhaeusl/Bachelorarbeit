@@ -16,7 +16,7 @@ describe('Deserialization - Deserialization Bug', function () {
     describe('Try to run netstat command', function () {
 
         beforeEach(function() {
-            browser.get('https://localhost:3443');
+            browser.get(browser.params.webshop);
         });
 
         it('should be successfully', function () {

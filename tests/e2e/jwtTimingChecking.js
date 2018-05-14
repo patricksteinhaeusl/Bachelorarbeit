@@ -6,7 +6,7 @@ describe('JWT Timing Checking', function () {
     describe('Retailer User Login', function () {
 
         beforeEach(function () {
-            browser.get('https://localhost:3443');
+            browser.get(browser.params.webshop);
         });
 
         it('should fail', function () {

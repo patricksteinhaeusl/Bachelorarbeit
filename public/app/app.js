@@ -95,6 +95,10 @@ let routes = {
     '/retailer': {
         templateUrl: 'views/retailer.html',
         requireLogin: true
+    },
+    '/faq': {
+        templateUrl: 'views/faq.html',
+        requireLogin: false
     }
 };
 
@@ -143,7 +147,7 @@ let app = angular.module('app', [
             .setStorageType('localStorage');
 
         $compileProvider.debugInfoEnabled(true);
-}]).run(['$rootScope', '$http', '$location', '$routeParams', 'localStorageService', 'AuthService', function ($rootScope, $http, $location, $routeParams, localStorageService, authService) {
+}]).run(['$rootScope', '$http', '$location', 'localStorageService', 'AuthService', function ($rootScope, $http, $location, localStorageService, authService) {
     if (!localStorageService.get('items')) {
         localStorageService.set('items', '[]');
     }
@@ -168,6 +172,9 @@ function templateExists(templateUrl) {
     let xhr = new XMLHttpRequest();
     xhr.open('HEAD', templateUrl, false);
     xhr.send();
-    if(xhr.status === 404) return false;
-    else return true;
+    if(xhr.status === 404) {
+        return false;
+    } else {
+        return true;
+    }
 }
