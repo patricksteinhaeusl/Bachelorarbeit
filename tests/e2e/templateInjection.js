@@ -15,7 +15,7 @@ describe('Template Injection', function () {
     describe('Update profile', function () {
 
         beforeEach(function () {
-            browser.get('https://localhost:3443');
+            browser.get(browser.params.webshop);
         });
 
         it('default profile edited', function () {
@@ -32,7 +32,7 @@ describe('Template Injection', function () {
             element(by.buttonText('Upload')).click();
             browser.sleep(500);
             //Link
-            browser.get('https://localhost:3443/#!/account/5aa0481e876d9d39d4397859/profile');
+            browser.get(browser.params.webshop + '/#!/account/5aa0481e876d9d39d4397859/profile');
             browser.sleep(250);
 
             expect(element.all(by.css('.profile-fields p')).get(0).getText()).toBe('Fencing');

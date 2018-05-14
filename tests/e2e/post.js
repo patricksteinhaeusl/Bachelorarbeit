@@ -12,7 +12,7 @@ describe('Post', function () {
     });
 
     beforeEach(function() {
-        browser.get('https://localhost:3443');
+        browser.get(browser.params.webshop);
     });
 
     describe('Add with Upload', function () {

@@ -13,7 +13,7 @@ describe('Post - SVG Injection', function () {
 
     describe('Add with data', function () {
         it('should success', function () {
-            browser.get('https://localhost:3443/').then(function () {
+            browser.get(browser.params.webshop).then(function () {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -42,7 +42,7 @@ describe('Post - SVG Injection', function () {
 
     describe('View', function () {
         it('should success', function () {
-            browser.get('https://localhost:3443/').catch(function () {
+            browser.get(browser.params.webshop).catch(function () {
                 browser.sleep(500);
                 let alertDialog = browser.switchTo().alert();
                 expect(alertDialog.getText()).toBe('!SVGs are dangerous!');
@@ -69,7 +69,7 @@ describe('Post - SVG Injection', function () {
 
     describe('Delete', function () {
         it('should success', function () {
-            browser.get('https://localhost:3443/').then(function () {
+            browser.get(browser.params.webshop).then(function () {
                 element(by.linkText('Home')).click();
                 browser.sleep(250);
                 let posts = element.all(by.repeater('post in home.data.posts'));

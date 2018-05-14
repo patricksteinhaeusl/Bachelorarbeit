@@ -9,7 +9,7 @@ describe('Search and Filter', function () {
 
     describe('Search for products', function () {
         it('should return correct amount of products', function () {
-            browser.get('https://localhost:3443/').then(function () {
+            browser.get(browser.params.webshop).then(function () {
                 //Fill out Input
                 element(by.model('shop.data.searchValue')).sendKeys('treich').sendKeys(protractor.Key.ENTER);
                 expect(element.all(by.repeater('product in shop.data.products')).count()).toBe(5);

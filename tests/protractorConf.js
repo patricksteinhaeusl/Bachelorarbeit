@@ -3,6 +3,9 @@ exports.config = {
     framework: 'jasmine',
     seleniumAddress: 'http://localhost:4444/wd/hub',
     specs: ['./e2e/*'],
+    params: {
+        webshop: 'https://localhost:3443'
+    },
     capabilities: {
         'browserName': 'chrome',
         chromeOptions: {

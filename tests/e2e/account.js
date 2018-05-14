@@ -13,7 +13,7 @@ describe('Account', function () {
     describe('Credit card', function () {
 
         beforeEach(function() {
-            browser.get('https://localhost:3443');
+            browser.get(browser.params.webshop);
         });
 
         describe('view', function () {
@@ -103,7 +103,7 @@ describe('Account', function () {
     describe('Delivery Address', function () {
 
         beforeEach(function() {
-            browser.get('http://localhost:3000');
+            browser.get(browser.params.webshop);
         });
 
         describe('view', function () {

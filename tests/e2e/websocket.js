@@ -9,7 +9,7 @@ describe('Websocket', function () {
 
     describe('Chat before authentication', function () {
         it('should be hidden', function () {
-            firstBrowser.get('https://localhost:3443/').then(function () {
+            firstBrowser.get(browser.params.webshop).then(function () {
                 expect(firstBrowser.element(by.id('chat-button')).isPresent()).toBe(false);
             });
         });
@@ -28,7 +28,7 @@ describe('Websocket', function () {
         });
 
         beforeEach(function() {
-            firstBrowser.get('http://localhost:3000/');
+            firstBrowser.get(browser.params.webshop);
         });
 
         it('should be visible', function () {
