@@ -1,5 +1,4 @@
 'use strict';
-let EC = protractor.ExpectedConditions;
 
 describe('DOM Based XSS', function () {
 
@@ -18,13 +17,10 @@ describe('DOM Based XSS', function () {
 
     describe('should throw alert', function () {
         it('should be successfully', function () {
-            browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=1').then(function () {
-                const products = element.all(by.repeater('product in shop.products'));
-                browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=<script>console.log("DOM Based XSS");</script>').then(function () {
-                    browser.manage().logs().get('browser').then(function(browserLog) {
-                        require('util').inspect(browserLog);
-                        expect(browserLog[browserLog.length-1].message).toContain('DOM Based XSS');
-                    });
+            browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=<script>console.log("DOM Based XSS");</script>').then(function () {
+                browser.manage().logs().get('browser').then(function(browserLog) {
+                    require('util').inspect(browserLog);
+                    expect(browserLog[browserLog.length-1].message).toContain('DOM Based XSS');
                 });
             });
         });
