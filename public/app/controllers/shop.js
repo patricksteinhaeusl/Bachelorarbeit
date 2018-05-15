@@ -29,6 +29,7 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
         };
         self.selectedSort = self.sort.name.query;
         self.productOrientation = 'wide';
+        self.selectedQuantity = $routeParams.selectedQuantity;
 
         self.getProducts = function() {
             ShopService.getProducts(function(products) {

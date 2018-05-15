@@ -1,17 +1,21 @@
 'use strict';
 
-appControllers.controller('ProductSearchController', ['$rootScope', '$scope', '$timeout', '$location', 'ShopService',
-    function ($rootScope, $scope, $timeout, $location, ShopService) {
+appControllers.controller('ProductSearchController', ['$rootScope', '$scope', '$routeParams', '$timeout', '$location', 'ShopService',
+    function ($rootScope, $scope, $routeParams, $timeout, $location, ShopService) {
         const self = this;
         self.products = {};
         self.searchValues = [];
         self.searchValue = null;
+        self.selectedQuantity = $routeParams.selectedQuantity;
 
         self.getProducts = function() {
             $location.path('/shop');
             $timeout(function() {
                 ShopService.getProductsBySearchValue(self.searchValue, function (products) {
                     self.products = products;
+                    self.products.forEach(function(product) {
+                        product.selectedQuantity = self.selectedQuantity;
+                    });
                     self.searchValue = null;
                 });
             }, 50);
@@ -22,6 +26,9 @@ appControllers.controller('ProductSearchController', ['$rootScope', '$scope', '$
             $timeout(function() {
                 ShopService.getProductsBySearchValue(searchValue, function (products) {
                     self.products = products;
+                    self.products.forEach(function(product) {
+                        product.selectedQuantity = self.selectedQuantity;
+                    });
                     self.searchValue = null;
                 });
             }, 50);
@@ -32,6 +39,12 @@ appControllers.controller('ProductSearchController', ['$rootScope', '$scope', '$
         }, function(searchValues) {
             self.searchValues = searchValues;
         }, false);
+
+        $scope.$watch(function() {
+            return $routeParams.selectedQuantity;
+        }, function(selectedQuantity) {
+            self.selectedQuantity = selectedQuantity;
+        }, true);
 
     }]).directive('ngEnter', function () {
         return function (scope, element, attrs) {
