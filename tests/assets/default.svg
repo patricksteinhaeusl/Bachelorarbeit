@@ -3,6 +3,6 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
     <circle cx="50%" cy="50%" r="50" fill="red"/>
     <script type="text/javascript"><![CDATA[
-        alert("!SVGs are dangerous!");
+        console.log("SVG Injection");
     ]]></script>
 </svg>

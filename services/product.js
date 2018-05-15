@@ -6,7 +6,7 @@ const Question = require('../models/question').Question;
 const ResponseUtil = require('../utils/response');
 
 function get(callback) {
-    Product.find({}, function (error, result) {
+    Product.find({}, function(error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         result = {'products': result};
@@ -15,7 +15,10 @@ function get(callback) {
 }
 
 function getById(productId, callback) {
-    Product.findById(productId).populate('questions._account').exec(function (error, result) {
+    Product.findById(productId).populate({
+        path: 'questions._account',
+        select: '_id username'
+    }).exec(function (error, result) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         result = {'product': result};
@@ -138,13 +141,16 @@ function insertQuestion(productId, question, callback) {
         Product.findOneAndUpdate(
             {_id: productId},
             {$push: {questions: questionObj}},
-            {new: true},
-            function (error, result) {
-                if (error) return callback(ResponseUtil.createErrorResponse(error));
-                if (!result) return callback(ResponseUtil.createNotFoundResponse());
-                result = {'product': result};
-                return callback(null, ResponseUtil.createSuccessResponse(result, 'Question saved successfully.'));
-            });
+            {new: true})
+        .populate({
+            path: 'questions._account',
+            select: '_id username'
+        }).exec(function (error, result) {
+            if (error) return callback(ResponseUtil.createErrorResponse(error));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse());
+            result = {'product': result};
+            return callback(null, ResponseUtil.createSuccessResponse(result, 'Question saved successfully.'));
+        });
     });
 }
 

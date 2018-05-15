@@ -42,12 +42,12 @@ describe('Post - SVG Injection', function () {
 
     describe('View', function () {
         it('should success', function () {
-            browser.get(browser.params.webshop).catch(function () {
-                browser.sleep(500);
-                let alertDialog = browser.switchTo().alert();
-                expect(alertDialog.getText()).toBe('!SVGs are dangerous!');
-                alertDialog.accept();
-                browser.sleep(500);
+            browser.get(browser.params.webshop).then(function () {
+
+                browser.manage().logs().get('browser').then(function(browserLog) {
+                    require('util').inspect(browserLog);
+                    expect(browserLog[browserLog.length-1].message).toContain('SVG Injection');
+                });
 
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
@@ -70,25 +70,13 @@ describe('Post - SVG Injection', function () {
     describe('Delete', function () {
         it('should success', function () {
             browser.get(browser.params.webshop).then(function () {
-                element(by.linkText('Home')).click();
-                browser.sleep(250);
-                let posts = element.all(by.repeater('post in home.data.posts'));
-                element.all(by.repeater('post in home.data.posts')).count().then(function (preCount) {
-                    posts.last().all(by.css('.glyphicon-trash')).get(0).click();
-                    let postCount = element.all(by.repeater('post in home.data.posts')).count();
-                    //Check
-                    expect(preCount - 1).toBe(postCount);
+
+                browser.manage().logs().get('browser').then(function(browserLog) {
+                    require('util').inspect(browserLog);
+                    expect(browserLog[browserLog.length-1].message).toContain('SVG Injection');
                 });
-            }).catch(function () {
-                let alertDialog = browser.switchTo().alert();
-                expect(alertDialog.getText()).toBe('!SVGs are dangerous!');
-                alertDialog.accept();
-
-                element(by.linkText('Home')).click();
-                browser.sleep(250);
 
                 let posts = element.all(by.repeater('post in home.data.posts'));
-
                 element.all(by.repeater('post in home.data.posts')).count().then(function (preCount) {
                     posts.last().all(by.css('.glyphicon-trash')).get(0).click();
                     let postCount = element.all(by.repeater('post in home.data.posts')).count();

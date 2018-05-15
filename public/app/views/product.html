@@ -16,7 +16,7 @@
         </p>
     </div>
 
-    <form ng-submit="product.saveQuestion()">
+    <form ng-submit="product.saveQuestion()" ng-if="auth.isAuthenticated()">
         <h2>Add a question</h2>
         <div class="form-group">
             <label>Question:</label>

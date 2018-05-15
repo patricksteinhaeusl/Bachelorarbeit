@@ -13,7 +13,7 @@ describe('Product Details', function () {
 
     describe('Product', function () {
         it('should have Details View with same attributes in details view as in overview', function () {
-            element.all(by.repeater('product in shop.data.products')).then(function (products) {
+            element.all(by.repeater('product in shop.products')).then(function (products) {
                 let firstProduct = products[0];
                 let product1Name = firstProduct.element(by.binding('product.name')).getText();
                 let product1Category = firstProduct.element(by.binding('product.category')).getText().then(function (text) {
