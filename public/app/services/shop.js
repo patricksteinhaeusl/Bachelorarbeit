@@ -1,6 +1,6 @@
 'use strict';
 
-appServices.factory('ShopService', ['$http', function ($http, $location) {
+appServices.factory('ShopService', ['$http', '$routeParams', function ($http, $routeParams) {
     let self = this;
     self.products = {};
     self.productsCategory = {};
@@ -12,11 +12,16 @@ appServices.factory('ShopService', ['$http', function ($http, $location) {
     self.searchValue = null;
     self.searchValues = [];
 
+    self.selectedQuantity = $routeParams.selectedQuantity;
+
     self.getProducts = function(callback) {
         $http
             .get('/api/product')
             .then(function (response) {
                 self.products = response.data.data.products;
+                self.products.forEach(function(product) {
+                    product.selectedQuantity = self.selectedQuantity;
+                });
                 return callback(self.products);
             });
     };
@@ -26,6 +31,9 @@ appServices.factory('ShopService', ['$http', function ($http, $location) {
             .get('/api/product/category/' + categoryId)
             .then(function (response) {
                 self.productsCategory = response.data.data.products;
+                self.productsCategory.forEach(function(product) {
+                    product.selectedQuantity = self.selectedQuantity;
+                });
                 return callback(self.productsCategory);
             });
     };
@@ -55,6 +63,9 @@ appServices.factory('ShopService', ['$http', function ($http, $location) {
             .post('/api/product/searchValue/', data)
             .then(function (response) {
                 self.productsSearchValue = response.data.data.products;
+                self.productsSearchValue.forEach(function(product) {
+                    product.selectedQuantity = self.selectedQuantity;
+                });
                 self.addSearchValue();
                 return callback(self.productsSearchValue);
             });
@@ -100,7 +111,7 @@ appServices.factory('ShopService', ['$http', function ($http, $location) {
                 let message = response.data.message;
                 let validations = response.data.validations;
                 if (statusCode === 200) {
-                    self.getProductCategories(function(products) {
+                    self.getProductsCategory(product.category._id, function(products) {
                         self.productsCategory = products;
                         return callback(null, data, message, null);
                     });

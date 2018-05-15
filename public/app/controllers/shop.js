@@ -29,14 +29,11 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
         };
         self.selectedSort = self.sort.name.query;
         self.productOrientation = 'wide';
-        self.selectedQuantity = $routeParams.selectedQuantity;
+        //self.selectedQuantity = $routeParams.selectedQuantity;
 
         self.getProducts = function() {
             ShopService.getProducts(function(products) {
                 self.products = products;
-                self.products.forEach(function(product) {
-                    product.selectedQuantity = self.selectedQuantity;
-                });
             });
         };
 
@@ -89,7 +86,7 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
         $scope.$watch(function() {
             return $routeParams.selectedQuantity;
         }, function(selectedQuantity) {
-            self.selectedQuantity = selectedQuantity;
+            ShopService.selectedQuantity = selectedQuantity;
         }, true);
 
         $scope.$watch(function() {
@@ -101,8 +98,8 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
         self.getProducts();
 
     }]).filter('trustAsHTML', ['$sce', function ($sce) {
-        return function (comment) {
-            return $sce.trustAs($sce.HTML, comment);
+        return function (html) {
+            return $sce.trustAs($sce.HTML, html);
         };
     }]).directive('addOptions', ['$routeParams', function($routeParams) {
 

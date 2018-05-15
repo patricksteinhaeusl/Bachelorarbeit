@@ -29,15 +29,12 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$r
         };
         self.selectedSort = self.sort.name.query;
         self.productOrientation = 'wide';
-        self.selectedQuantity = $routeParams.selectedQuantity;
+        //self.selectedQuantity = $routeParams.selectedQuantity;
         self.categoryId = $routeParams.categoryId;
 
         self.getProducts = function() {
             ShopService.getProductsCategory(self.categoryId, function(products) {
                 self.products = products;
-                self.products.forEach(function(product) {
-                    product.selectedQuantity = self.selectedQuantity;
-                });
             });
         };
 
@@ -90,7 +87,7 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$r
         $scope.$watch(function() {
             return $routeParams.selectedQuantity;
         }, function(selectedQuantity) {
-            self.selectedQuantity = selectedQuantity;
+            ShopService.selectedQuantity = selectedQuantity;
         }, true);
 
         self.getProducts();
