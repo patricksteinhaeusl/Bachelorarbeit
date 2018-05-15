@@ -97,29 +97,5 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
 
         self.getProducts();
 
-    }]).filter('trustAsHTML', ['$sce', function ($sce) {
-        return function (html) {
-            return $sce.trustAs($sce.HTML, html);
-        };
-    }]).directive('addOptions', ['$routeParams', function($routeParams) {
-
-        function link(scope, element) {
-            scope.$watch(function () {
-                return $routeParams.selectedQuantity;
-            }, function (selectedQuantity) {
-                let options = element.find('option');
-                angular.forEach(options, function (element) {
-                    if (element.value === selectedQuantity) {
-                        element.remove();
-                    }
-                });
-                element.prepend('<option value=' + selectedQuantity + ' selected>' + selectedQuantity + '</option>');
-            }, false);
-        }
-
-        return {
-            link: link
-        };
-
     }]);
 
