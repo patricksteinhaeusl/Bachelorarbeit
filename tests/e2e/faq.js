@@ -40,11 +40,15 @@ describe('FAQ', function () {
 
     describe('Clear Search Form', function () {
         it('should return all questions/answers', function () {
-            //Fill out Input
-            element(by.model('faq.data.searchValue')).clear().then(function () {
-                element(by.model('faq.data.searchValue')).sendKeys('').sendKeys(protractor.Key.ENTER);
+            element(by.model('faq.data.searchValue')).clear().sendKeys(protractor.Key.ENTER).then(function () {
+                let countedQuestions =element.all(by.repeater('faq in faq.data.FaqQuestions')).count();
+                element(by.model('faq.data.searchValue')).sendKeys('chat').sendKeys(protractor.Key.ENTER);
+                element(by.model('faq.data.searchValue')).clear().then(function () {
+                    element(by.model('faq.data.searchValue')).sendKeys(protractor.Key.ENTER);
+                    expect(element.all(by.repeater('faq in faq.data.FaqQuestions')).count()).toBe(countedQuestions);
+                });
             });
-            expect(element.all(by.repeater('faq in faq.data.FaqQuestions')).count()).toBe(8);
+
         });
     });
 });
