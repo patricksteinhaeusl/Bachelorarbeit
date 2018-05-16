@@ -19,7 +19,7 @@ describe('JSON Response with text/html Content-Type', function () {
                 let firstProduct = products[0];
                 firstProduct.element(by.linkText('Details')).click();
                 element(by.model('product.data.question.text')).clear().then(function () {
-                    element(by.model('product.data.question.text')).sendKeys("<script>alert(12345);</script>");
+                    element(by.model('product.data.question.text')).sendKeys("<script>console.log('JSON with Text/Html');</script>");
                 });
                 element(by.buttonText('Save')).click();
                 browser.getCurrentUrl().then(function (url) {
@@ -70,9 +70,10 @@ describe('JSON Response with text/html Content-Type', function () {
     it('should throw alert because of XSS', function () {
         browser.waitForAngularEnabled(false);
         browser.get(browser.params.webshop + "/api/product/" + lastSegment).then(function () {
-            let alertDialog = browser.switchTo().alert();
-            expect(alertDialog.getText()).toBe('12345');
-            alertDialog.accept();
+            browser.manage().logs().get('browser').then(function(browserLog) {
+                require('util').inspect(browserLog);
+                expect(browserLog[browserLog.length-1].message).toContain('JSON with Text/Html');
+            });
         });
         browser.waitForAngularEnabled(true);
     });

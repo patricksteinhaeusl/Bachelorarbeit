@@ -104,8 +104,10 @@ let routes = {
 
 let appControllers = angular.module('app.controllers', []);
 let appServices = angular.module('app.services', []);
+let appDirectives = angular.module('app.directives', []);
+let appFilters = angular.module('app.filters', []);
 
-let app = angular.module('app', [
+angular.module('app', [
     'ngRoute',
     'ngCookies',
     'ngSanitize',
@@ -114,7 +116,9 @@ let app = angular.module('app', [
     'angular-toArrayFilter',
     'jkAngularRatingStars',
     'app.controllers',
-    'app.services'
+    'app.services',
+    'app.directives',
+    'app.filters'
 ])
 .factory('AuthHttpResponseInterceptor', ['$q', '$location', 'localStorageService', function ($q, $location, localStorageService) {
     return {
@@ -134,7 +138,7 @@ let app = angular.module('app', [
 .config(['$httpProvider', '$locationProvider', '$routeProvider', '$compileProvider', 'localStorageServiceProvider',
     function ($httpProvider, $locationProvider, $routeProvider, $compileProvider, localStorageServiceProvider) {
         $httpProvider.interceptors.push('AuthHttpResponseInterceptor');
-        $locationProvider.hashPrefix('!');
+        $locationProvider.html5Mode(false).hashPrefix('!');
 
         for (let path in routes) {
             $routeProvider.when(path, routes[path]);

@@ -1,6 +1,6 @@
 'use strict';
 
-appServices.factory('ShopService', ['$http', '$location', function ($http, $location) {
+appServices.factory('ShopService', ['$http', '$routeParams', function ($http, $routeParams) {
     let self = this;
     self.products = {};
     self.productsCategory = {};
@@ -12,7 +12,7 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
     self.searchValue = null;
     self.searchValues = [];
 
-    self.selectedQuantity = $location.search().selectedQuantity;
+    self.selectedQuantity = $routeParams.selectedQuantity;
 
     self.getProducts = function(callback) {
         $http
@@ -111,7 +111,7 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
                 let message = response.data.message;
                 let validations = response.data.validations;
                 if (statusCode === 200) {
-                    self.getProductCategories(function(products) {
+                    self.getProductsCategory(product.category._id, function(products) {
                         self.productsCategory = products;
                         return callback(null, data, message, null);
                     });
@@ -145,10 +145,6 @@ appServices.factory('ShopService', ['$http', '$location', function ($http, $loca
 
     self.getSearchValue = function () {
         return self.searchValue;
-    };
-
-    self.getSelectedQuantity = function () {
-        return self.selectedQuantity;
     };
 
     return self;

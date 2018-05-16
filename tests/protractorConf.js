@@ -9,11 +9,13 @@ exports.config = {
     },
     capabilities: {
         'browserName': 'chrome',
+        'loggingPrefs': {
+            'browser': 'INFO'
+        },
         chromeOptions: {
             args: ['--window-size=1500,1500']
-        }
+        },
     },
-
     jasmineNodeOpts: {
         //Don't show protractors . output
         print: function() {}
