@@ -53,6 +53,7 @@ describe('Account', function () {
                 //Submit form
                 element(by.buttonText('Save')).click();
                 browser.sleep(250);
+                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Credit card successfully created.\n×");
             });
         });
 
@@ -82,6 +83,7 @@ describe('Account', function () {
                 //link
                 element(by.buttonText('Remove')).click();
                 browser.sleep(5000);
+                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Creditcard successfully deleted.\n×");
             });
         });
 
@@ -140,6 +142,7 @@ describe('Account', function () {
                 //Submit form
                 element(by.buttonText('Save')).click();
                 browser.sleep(250);
+                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Delivery address successfully created.\n×");
             });
         });
 
@@ -169,6 +172,7 @@ describe('Account', function () {
                 //link
                 element(by.buttonText('Remove')).click();
                 browser.sleep(5000);
+                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Deliveryaddress successfully deleted.\n×");
             });
         });
 

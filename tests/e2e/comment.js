@@ -4,24 +4,6 @@ const HelperFunctions = require('./helperFunctions.js');
 describe('Comment and Rating', function () {
     beforeAll(function () {
         HelperFunctions.login(browser, 'customer0', 'compass0');
-        //Add a Comment
-        element(by.linkText('Shop')).click();
-        //Get first product
-        element.all(by.repeater('product in shop.products')).then(function (products) {
-            let firstProduct = products[0];
-            //Open Comment
-            firstProduct.element(by.buttonText('Rate')).click();
-            browser.sleep(250);
-            //firstProduct.all(by.css('.form-group .jk-rating-stars-container .button')).first().click();
-            firstProduct.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();
-            //Fill form
-            let commentField = firstProduct.element(by.name('comment'));
-            commentField.clear().then(function () {
-                commentField.sendKeys('Nice Product');
-                //Submit form
-                firstProduct.element(by.buttonText('Save')).click();
-            });
-        });
     });
 
     afterAll(function () {
@@ -29,6 +11,27 @@ describe('Comment and Rating', function () {
     });
 
     describe('Adding a comment', function () {
+        it('should be successfully', function () {
+            //Add a Comment
+            element(by.linkText('Shop')).click();
+            //Get first product
+            element.all(by.repeater('product in shop.products')).then(function (products) {
+                let firstProduct = products[0];
+                //Open Comment
+                firstProduct.element(by.buttonText('Rate')).click();
+                browser.sleep(250);
+                firstProduct.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();
+                //Fill form
+                let commentField = firstProduct.element(by.model('rating.comment'));
+                commentField.clear().then(function () {
+                    commentField.sendKeys('Nice Product');
+                    //Submit form
+                    firstProduct.element(by.buttonText('Save')).click();
+                    expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Rating saved successfully.\n×");
+                });
+            });
+        });
+
         it('should have correct text', function () {
             //Goto Shop
             element(by.linkText('Shop')).click();
@@ -57,7 +60,7 @@ describe('Comment and Rating', function () {
     });
 
     describe('Editing a comment', function () {
-        beforeAll(function () {
+        it('should be successfully', function () {
             //Goto Shop
             element(by.linkText('Shop')).click();
             //get first product which has already a comment and edit it
@@ -72,6 +75,7 @@ describe('Comment and Rating', function () {
                     commentField.sendKeys('Not so nice Product');
                     //Submit form
                     firstProduct.element(by.buttonText('Update')).click();
+                    expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Rating updated successfully.\n×");
                 });
             });
         });
@@ -101,6 +105,7 @@ describe('Comment and Rating', function () {
     });
 
     describe('Comments from multiple Users', function () {
+        let messageFromUserB = "Cool Product";
         it('User B should not see User A comment in comment field', function () {
             HelperFunctions.logout(browser);
             HelperFunctions.login(browser, 'customer1', 'compass1');
@@ -109,7 +114,7 @@ describe('Comment and Rating', function () {
             //Check if Comment in Comment Field
             element.all(by.repeater('product in shop.products')).then(function (products) {
                 let firstProduct = products[0];
-                expect(firstProduct.element(by.name('comment')).getAttribute('value')).toEqual('');
+                expect(firstProduct.element(by.model('rating.comment')).getAttribute('value').getText()).toEqual('');
             });
         });
 
@@ -121,28 +126,25 @@ describe('Comment and Rating', function () {
                 firstProduct.element(by.buttonText('Rate')).click();
                 browser.sleep(250);
                 //Check if Comment is empty
-                expect(firstProduct.element(by.name('comment')).getAttribute('value')).toEqual('');
-                //firstProduct.all(by.css('.form-group .jk-rating-stars-container .button')).first().click();
+                expect(firstProduct.element(by.model('rating.comment')).getAttribute('value').getText()).toEqual('');
                 firstProduct.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();
                 //Fill form
-                let commentField = firstProduct.element(by.name('comment'));
+                let commentField = firstProduct.element(by.model('rating.comment'));
                 commentField.clear().then(function () {
-                    commentField.sendKeys('Cool Product');
+                    commentField.sendKeys(messageFromUserB);
                     //Submit form
                     firstProduct.element(by.buttonText('Save')).click();
-                    browser.sleep(250);
-                    //Check if Comment in Comment Field
-                    expect(firstProduct.element(by.name('comment')).getAttribute('value')).toEqual('Cool Product');
+                    expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Rating saved successfully.\n×");
+                    expect(firstProduct.element(by.model('rating.comment')).getAttribute('value')).toEqual(messageFromUserB);
                 });
             });
-
         });
+    });
 
-        it('multiple ratings on one product should have right average ', function () {
-            element.all(by.repeater('topRatedProduct in topRated.products')).then(function (topRated) {
-                let topRatedValue = topRated[0].element(by.binding('topRatedProduct.rating.value'));
-                expect(topRatedValue.getText()).toBe('∅ 4');
-            });
+    it('multiple ratings on one product should have right average ', function () {
+        element.all(by.repeater('topRatedProduct in topRated.products')).then(function (topRated) {
+            let topRatedValue = topRated[0].element(by.binding('topRatedProduct.rating.value'));
+            expect(topRatedValue.getText()).toBe('∅ 4');
         });
     });
 });

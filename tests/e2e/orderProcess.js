@@ -173,7 +173,7 @@ describe('Order and Cart Processes', function () {
 
         it('should show correct order after finishing process', function () {
             expect(browser.getCurrentUrl()).toContain('/orders');
-            expect(element(by.className('alert alert-success alert-dismissible')).isDisplayed()).toBe(true);
+            expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Order successfully saved.\n×");
             element.all(by.repeater('order in orders.data.orders')).then(function (order) {
                 element.all(by.binding('order._id')).get(0).getText().then(function (firstID) {
                     orderID.then(function (secondID) {

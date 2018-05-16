@@ -3,9 +3,9 @@ const SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 exports.config = {
     framework: 'jasmine',
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['./e2e/*'],
+    specs: ['./e2e/**/*.js'],
     params: {
-        webshop: 'https://localhost:3443'
+        webshop: 'https://localhost'
     },
     capabilities: {
         'browserName': 'chrome',

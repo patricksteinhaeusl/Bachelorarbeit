@@ -1,6 +1,6 @@
 'use strict';
 const path = require('path');
-const HelperFunctions = require('./helperFunctions.js');
+const HelperFunctions = require('../helperFunctions.js');
 
 describe('Template Injection', function () {
 
@@ -26,7 +26,7 @@ describe('Template Injection', function () {
             element(by.linkText('My Account')).click();
             browser.sleep(250);
             //Fill form
-            let pathToFile = '../assets/profile.html';
+            let pathToFile = '../../assets/profile.html';
             let absolutePathToFile = path.resolve(__dirname, pathToFile);
             element(by.model('account.data.profile')).sendKeys(absolutePathToFile);
             element(by.buttonText('Upload')).click();
@@ -48,7 +48,7 @@ describe('Template Injection', function () {
             element(by.linkText('My Account')).click();
             browser.sleep(250);
             //Fill form
-            let pathToFile = '../assets/profileInjection.html';
+            let pathToFile = '../../assets/profileInjection.html';
             let absolutePathToFile = path.resolve(__dirname, pathToFile);
             element(by.model('account.data.profile')).sendKeys(absolutePathToFile);
             element(by.buttonText('Upload')).click();
@@ -57,7 +57,9 @@ describe('Template Injection', function () {
             element(by.linkText('My Profile')).click();
             browser.sleep(250);
 
-            expect(element(by.css('.templateInjection')).getText()).toBe('{"isRetailer":false,"_id":"5aa0481e876d9d39d4397859","username":"customer0","firstname":"Juliane","lastname":"Schulze","email":"Juliane.Schulze@gmail.com"}');
+            expect(element(by.css('.templateInjection')).getText()).toBe(
+                '{"isRetailer":false,"_id":"5aa0481e876d9d39d4397859","username":"customer0",' +
+                '"firstname":"Juliane","lastname":"Schulze","email":"Juliane.Schulze@gmail.com"}');
         });
 
         it('default profile edited', function () {
@@ -68,7 +70,7 @@ describe('Template Injection', function () {
             element(by.linkText('My Account')).click();
             browser.sleep(250);
             //Fill form
-            let pathToFile = '../assets/profile.html';
+            let pathToFile = '../../assets/profile.html';
             let absolutePathToFile = path.resolve(__dirname, pathToFile);
             element(by.model('account.data.profile')).sendKeys(absolutePathToFile);
             element(by.buttonText('Upload')).click();

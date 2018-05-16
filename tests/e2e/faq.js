@@ -25,7 +25,7 @@ describe('FAQ', function () {
             element(by.model('faq.data.searchValue')).clear().then(function () {
                 element(by.model('faq.data.searchValue')).sendKeys(');').sendKeys(protractor.Key.ENTER);
             });
-            expect(element.all(by.className('alert alert-danger alert-dismissible')).get(0).getText()).toBe("Error: Could not process your input.\n×");
+            expect(element.all(by.className('alert')).get(0).getText()).toBe("Error: Could not process your input.\n×");
         });
 
         it('should say that nothing can be found if nothing can be found', function () {
