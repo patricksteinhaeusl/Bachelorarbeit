@@ -18,9 +18,8 @@ describe('JSON Response with text/html Content-Type', function () {
                 });
                 element(by.buttonText('Save')).click();
                 browser.getCurrentUrl().then(function (url) {
-                    let parsedURL = urlParse.parse(url);
-                    let parts = parsedURL.hash.split('/');
-                    lastSegment = parts.pop() || parts.pop();
+                    let parsedURL = urlParse.parse("https://localhost/api/product/5aa0481e876d9d39d4397885/");
+                    lastSegment = parsedURL.path.split('/').filter(function(el){ return !!el; }).pop();
                     result = HelperFunctions.httpRequest(browser.params.webshop + "/api/product/" + lastSegment).then(function (result) {
                         done();
                         return result;
