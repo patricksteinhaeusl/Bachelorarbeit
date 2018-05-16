@@ -15,7 +15,7 @@ describe('JSON Response with text/html Content-Type', function () {
     let lastSegment;
     it('should return 200 and have content-type text/html', function () {
         browser.get(browser.params.webshop + '/#!/shop').then(function () {
-            element.all(by.repeater('product in shop.data.products')).then(function (products) {
+            element.all(by.repeater('product in shop.products')).then(function (products) {
                 let firstProduct = products[0];
                 firstProduct.element(by.linkText('Details')).click();
                 element(by.model('product.data.question.text')).clear().then(function () {
