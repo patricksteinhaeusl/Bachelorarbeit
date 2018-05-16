@@ -4,6 +4,7 @@ const express = require('express');
 const ssrf = express();
 
 ssrf.use(express.static(__dirname + '/public/ssrf'));
+ssrf.disable('x-powered-by');
 
 
 // catch 404 and forward to error handler
