@@ -33,7 +33,29 @@ exports.selectDropDown = function (element, optionNumber) {
     });
 };
 
-exports.httpRequest = function (siteUrl, postData, isJSON) {
+exports.registerUser = function (firstname, lastname, password) {
+    browser.get(browser.params.webshop + '/').then(function () {
+        //Open Auth Menu
+        element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+        browser.sleep(250);
+        if (element.all(by.buttonText('Logout')).isDisplayed()) {
+            element.all(by.buttonText('Logout')).click()
+        }
+        //Link
+        element(by.linkText('Register')).click();
+        //Fill form
+        element(by.model('auth.data.register.account.firstname')).sendKeys(firstname);
+        element(by.model('auth.data.register.account.lastname')).sendKeys(lastname);
+        element(by.model('auth.data.register.account.email')).sendKeys(firstname+"."+lastname+"@gmail.com");
+        element(by.model('auth.data.register.account.username')).sendKeys(firstname+"_"+lastname);
+        element(by.model('auth.data.register.account.password')).sendKeys(password);
+        //Submit form
+        element(by.buttonText('Register')).click();
+        browser.sleep(250);
+    });
+};
+
+exports.httpRequest = function (siteUrl, postData, isJSON, Method) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     let req;
     let https = require('https');
@@ -46,7 +68,9 @@ exports.httpRequest = function (siteUrl, postData, isJSON) {
         host: parsedURL.hostname,
         path: parsedURL.path,
     };
-
+    if (Method) {
+        options.method = Method;
+    }
     if (isJSON) {
         postData = JSON.stringify(postData);
         options.method = 'POST';

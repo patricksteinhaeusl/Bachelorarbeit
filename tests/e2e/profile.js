@@ -12,6 +12,47 @@ describe('Template Injection', function () {
         HelperFunctions.logout(browser);
     });
 
+    describe('Basic Profile Functions', function () {
+
+        beforeEach(function () {
+            browser.get(browser.params.webshop);
+        });
+
+        it('Test Share', function () {
+            //Open Auth Menu
+            element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+            browser.sleep(250);
+            //Link
+            element(by.linkText('My Account')).click();
+            browser.sleep(250);
+            element(by.linkText('#!/account/5aa0481e876d9d39d4397859/profile')).click();
+            browser.getCurrentUrl().then(function (url) {
+                expect(url).toBe("https://localhost/#!/account/5aa0481e876d9d39d4397859/profile");
+            });
+            expect(element(by.tagName('h1')).getAttribute('innerText')).toBe("Welcome to my profile");
+        });
+
+        it('Test example Template reachable', function (done) {
+            //Open Auth Menu
+            element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+            browser.sleep(250);
+            //Link
+            element(by.linkText('My Account')).click();
+            browser.sleep(250);
+            element(by.linkText('sample template')).getAttribute('href').then(function(link){
+                let result;
+                result = HelperFunctions.httpRequest(link, null, false, "HEAD")
+                    .then(function (result) {
+                        done();
+                        return result;
+                    });
+                result.then((text) => {
+                    expect(text.statusCode).toBe(200);
+                });
+            });
+        });
+    });
+
     describe('Update profile', function () {
 
         beforeEach(function () {
@@ -26,7 +67,7 @@ describe('Template Injection', function () {
             element(by.linkText('My Account')).click();
             browser.sleep(250);
             //Fill form
-            let pathToFile = '../../assets/profile.html';
+            let pathToFile = '../assets/profile.html';
             let absolutePathToFile = path.resolve(__dirname, pathToFile);
             element(by.model('account.data.profile')).sendKeys(absolutePathToFile);
             element(by.buttonText('Upload')).click();
@@ -48,7 +89,7 @@ describe('Template Injection', function () {
             element(by.linkText('My Account')).click();
             browser.sleep(250);
             //Fill form
-            let pathToFile = '../../assets/profileInjection.html';
+            let pathToFile = '../assets/profileInjection.html';
             let absolutePathToFile = path.resolve(__dirname, pathToFile);
             element(by.model('account.data.profile')).sendKeys(absolutePathToFile);
             element(by.buttonText('Upload')).click();
@@ -70,7 +111,7 @@ describe('Template Injection', function () {
             element(by.linkText('My Account')).click();
             browser.sleep(250);
             //Fill form
-            let pathToFile = '../../assets/profile.html';
+            let pathToFile = '../assets/profile.html';
             let absolutePathToFile = path.resolve(__dirname, pathToFile);
             element(by.model('account.data.profile')).sendKeys(absolutePathToFile);
             element(by.buttonText('Upload')).click();
