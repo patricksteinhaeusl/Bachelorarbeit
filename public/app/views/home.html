@@ -40,10 +40,8 @@
                 <div class="row">
                     <p>{{ post.text }}</p>
                 </div>
-                <div ng-controller="AuthController as auth">
-                    <div class="actions" ng-if="auth.getUser() && post._account._id === auth.getUser()._id">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="posts.remove($index)"></span>
-                    </div>
+                <div class="actions" ng-if="auth.getUser() && post._account._id === auth.getUser()._id">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="posts.remove($index)"></span>
                 </div>
             </div>
         </div>

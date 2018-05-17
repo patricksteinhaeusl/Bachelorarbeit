@@ -26,10 +26,8 @@
             <td></td>
         </tfoot>
     </table>
-    <div class="cart-auth-wrapper" ng-controller="AuthController as auth">
-        <button type="button" class="btn btn-outline-primary"
-                ng-if="auth.isAuthenticated() === true && cart.data.items.length > 0" ng-click="order.createTemp()">
-            <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Check out
-        </button>
-    </div>
+    <button type="button" class="btn btn-outline-primary"
+            ng-if="auth.isAuthenticated() === true && cart.data.items.length > 0" ng-click="order.createTemp()">
+        <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Check out
+    </button>
 </div>

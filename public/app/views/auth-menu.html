@@ -1,4 +1,4 @@
-<div class="auth-menu" ng-controller="AuthController as auth">
+<div class="auth-menu">
     <form class="auth-form" ng-submit="auth.login()" ng-if="auth.isAuthenticated() === false">
         <div class="form-group">
             <input class="form-control" type="text" ng-model="auth.data.login.user.username" name="username"

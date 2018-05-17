@@ -36,8 +36,8 @@ appControllers.controller('AuthController', ['$scope', '$http', '$location', '$c
                     LocalStorageService.set('token', token);
                     $http.defaults.headers.common.Authorization = 'Bearer ' + token;
 
-                    $cookies.put('chatUser', data.user._id);
-                    WebSocketService.join(data.user);
+                    $cookies.put('chatUser', user._id);
+                    WebSocketService.join(user);
                     self.data.register.account = {};
                     $location.path('/shop');
                 }
