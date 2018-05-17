@@ -3,7 +3,7 @@
 appServices.factory('ShopService', ['$http', '$routeParams', function ($http, $routeParams) {
     let self = this;
     self.products = {};
-    self.productsCategory = {};
+    //self.productsCategory = {};
     self.productsCategorySelectedQuantity = {};
     self.productsTopRated = {};
     self.productsLatest = {};
@@ -30,11 +30,11 @@ appServices.factory('ShopService', ['$http', '$routeParams', function ($http, $r
         $http
             .get('/api/product/category/' + categoryId)
             .then(function (response) {
-                self.productsCategory = response.data.data.products;
-                self.productsCategory.forEach(function(product) {
+                self.products = response.data.data.products;
+                self.products.forEach(function(product) {
                     product.selectedQuantity = self.selectedQuantity;
                 });
-                return callback(self.productsCategory);
+                return callback(self.products);
             });
     };
 
@@ -91,6 +91,9 @@ appServices.factory('ShopService', ['$http', '$routeParams', function ($http, $r
                 if (statusCode === 200) {
                     self.getProducts(function(products) {
                         self.products = products;
+                        self.products.forEach(function(product) {
+                            product.selectedQuantity = self.selectedQuantity;
+                        });
                         return callback(null, data, message, null);
                     });
                 } else if (statusCode === 405) {
@@ -112,7 +115,10 @@ appServices.factory('ShopService', ['$http', '$routeParams', function ($http, $r
                 let validations = response.data.validations;
                 if (statusCode === 200) {
                     self.getProductsCategory(product.category._id, function(products) {
-                        self.productsCategory = products;
+                        self.products = products;
+                        self.products.forEach(function(product) {
+                            product.selectedQuantity = self.selectedQuantity;
+                        });
                         return callback(null, data, message, null);
                     });
                 } else if (statusCode === 405) {

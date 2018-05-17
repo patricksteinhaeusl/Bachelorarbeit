@@ -22,51 +22,47 @@
 </head>
 <body>
 <div class="container">
-    <div class="container" ng-controller="AuthController as auth">
-        <div class="container" ng-controller="CartController as cart">
-            <div class="container" ng-controller="NavController as nav">
-                <div class="container" ng-controller="OrderController as order">
-                        <div class="navbar">
-                            <div class="col col-xs-3">
-                                <ul class="list-unstyled">
-                                    <a href="#!/home"><li class="logo-item glyphicon glyphicon-bell" aria-hidden="true"></li></a>
-                                </ul>
-                            </div>
-                            <div class="col col-xs-4">
-                                <div ng-include src="'views/navbar-navigation.html'"></div>
-                            </div>
-                            <div class="col col-xs-5">
-                                <div ng-include src="'views/navbar-menu.html'"></div>
-                            </div>
-                        </div>
+    <div class="container" ng-controller="OrderController as order">
+        <div class="navbar">
+            <div class="col col-xs-3">
+                <ul class="list-unstyled">
+                    <a href="#!/home"><li class="logo-item glyphicon glyphicon-bell" aria-hidden="true"></li></a>
+                </ul>
+            </div>
+            <div class="col col-xs-4">
+                <div ng-include src="'views/navbar-navigation.html'"></div>
+            </div>
+            <div class="col col-xs-5">
+                <div ng-include src="'views/navbar-menu.html'"></div>
+            </div>
+        </div>
 
-                        <div class="content">
-                            <div class="sidebar-left col col-md-3">
-                                <div ng-include src="'views/auth-menu.html'" class="hidden-lg hidden-md"></div>
-                                <div ng-include src="'views/cart-menu.html'" class="hidden-lg hidden-md"></div>
-                                <div ng-include src="'views/sidebar-menu.html'"></div>
-                            </div>
-                            <div class="content-content col col-md-6">
-                                <div ng-include src="'views/alerts.html'"></div>
-                                <div ng-include src="'views/product-search.html'"></div>
-                                <div ng-view></div>
-                            </div>
-                            <div class="sidebar-right col col-md-3">
-                                <div ng-include src="'views/auth-menu.html'" class="visible-lg-block visible-md-block"></div>
-                                <div ng-include src="'views/cart-menu.html'" class="visible-lg-block visible-md-block"></div>
-                                <div ng-include src="'views/topRatedProduct.html'"></div>
-                                <div ng-include src="'views/latestProduct.html'"></div>
-                            </div>
-                        </div>
-                        <div ng-include src="'views/chat.html'"></div>
+        <div class="content">
+            <div class="sidebar-left col col-md-3">
+                <div ng-include src="'views/auth-menu.html'" class="hidden-lg hidden-md"></div>
+                <div ng-include src="'views/cart-menu.html'" class="hidden-lg hidden-md"></div>
+                <div ng-include src="'views/sidebar-menu.html'"></div>
+            </div>
+            <div class="content-content col col-md-6">
+                <div ng-include src="'views/alerts.html'"></div>
+                <div ng-include src="'views/product-search.html'"></div>
+                <div ng-view></div>
+            </div>
+            <div class="sidebar-right col col-md-3">
+                <div ng-include src="'views/auth-menu.html'" class="visible-lg-block visible-md-block"></div>
+                <div ng-include src="'views/cart-menu.html'" class="visible-lg-block visible-md-block"></div>
+                <div ng-include src="'views/topRatedProduct.html'"></div>
+                <div ng-include src="'views/latestProduct.html'"></div>
+            </div>
+        </div>
 
-                        <div class="chat-button" ng-if="auth.isAuthenticated()">
-                            <button id="chat-button" type="button" class="btn btn-default" aria-label="Left Align" ng-click="nav.collapseChat('.chat')">
-                                <span class="glyphicon glyphicon glyphicon-modal-window" aria-hidden="true"></span> Community Chat
-                            </button>
-                        </div>
-                    </div>
-                </div>
+        <div class="chat" ng-controller="WebSocketController as websocket">
+            <div ng-include src="'views/chat.html'"></div>
+
+            <div class="chat-button" ng-if="auth.isAuthenticated()">
+                <button id="chat-button" type="button" class="btn btn-default" aria-label="Left Align" ng-click="websocket.collapseChat('.chat')">
+                    <span class="glyphicon glyphicon glyphicon-modal-window" aria-hidden="true"></span> Community Chat
+                </button>
             </div>
         </div>
     </div>

@@ -29,7 +29,6 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$r
         };
         self.selectedSort = self.sort.name.query;
         self.productOrientation = 'wide';
-        //self.selectedQuantity = $routeParams.selectedQuantity;
         self.categoryId = $routeParams.categoryId;
 
         self.getProducts = function() {
@@ -73,7 +72,7 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$r
         };
 
         $scope.$watch(function() {
-            return ShopService.productsCategory;
+            return ShopService.products;
         }, function(products) {
             self.products = products;
         }, false);

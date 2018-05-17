@@ -47,4 +47,14 @@ appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebS
     webSocketService.on('sendMsg', function (data) {
         self.messages.push(data);
     });
+
+    self.collapseChat = function (elementClassToSlide) {
+        $(function () {
+            if (!$(elementClassToSlide).is(':visible')) {
+                $(elementClassToSlide).fadeIn();
+            } else {
+                $(elementClassToSlide).fadeOut();
+            }
+        });
+    };
 }]);

@@ -934,3 +934,7 @@ object {
     line-height: 33.99px;
     margin: 0;
 }
+
+.cart-auth-wrapper {
+    padding: 0 !important;
+}

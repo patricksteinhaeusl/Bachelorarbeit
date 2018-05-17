@@ -1,4 +1,4 @@
-<div class="content-view">
+<div class="content-view" ng-controller="AuthController as auth">
     <form class="product-sort-form">
         <div class="col col-xs-6">
             <label>Sort:</label>
@@ -61,7 +61,7 @@
                             Details
                         </a>
 
-                        <div class="add-cart-container">
+                        <div class="add-cart-container" ng-controller="CartController as cart">
                             <select add-options class="quantity form-control" ng-model="product.selectedQuantity">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -70,10 +70,12 @@
                                 <option value="5">5</option>
                             </select>
 
-                            <button class="btn btn-primary" ng-click="cart.insert(product, product.selectedQuantity); nav.collapseCartNavigation('.cart-menu', '.auth-menu');">
-                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                                Add to cart
-                            </button><br>
+                            <div ng-controller="NavController as nav">
+                                <button class="btn btn-primary" ng-click="cart.insert(product, product.selectedQuantity); nav.collapseCartNavigation('.cart-menu', '.auth-menu');">
+                                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                    Add to cart
+                                </button><br>
+                            </div>
                         </div>
                     </div>
                 </div>

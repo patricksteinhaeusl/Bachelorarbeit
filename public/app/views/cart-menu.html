@@ -1,4 +1,4 @@
-<div class="cart-menu">
+<div class="cart-menu" ng-controller="CartController as cart">
     <table>
         <thead>
             <th>Name</th>
@@ -6,7 +6,7 @@
             <th>Price</th>
             <th></th>
         </thead>
-        <tbody ng-repeat="item in cart.data.items" ng-show="cart.data.items.length > 0">
+        <tbody ng-repeat="item in cart.data.items track by item.product._id" ng-show="cart.data.items.length > 0">
             <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ (item.product.price * item.quantity).toFixed(2) }} CHF</td>
@@ -26,8 +26,10 @@
             <td></td>
         </tfoot>
     </table>
-    <button type="button" class="btn btn-outline-primary"
-            ng-if="auth.isAuthenticated() === true && cart.data.items.length > 0" ng-click="order.createTemp()">
-        <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Check out
-    </button>
+    <div class="cart-auth-wrapper" ng-controller="AuthController as auth">
+        <button type="button" class="btn btn-outline-primary"
+                ng-if="auth.isAuthenticated() === true && cart.data.items.length > 0" ng-click="order.createTemp()">
+            <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Check out
+        </button>
+    </div>
 </div>

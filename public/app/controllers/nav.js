@@ -22,14 +22,4 @@ appControllers.controller('NavController', function ($scope) {
             }
         });
     };
-
-    self.collapseChat = function (elementClassToSlide) {
-        $(function () {
-            if (!$(elementClassToSlide).is(':visible')) {
-                $(elementClassToSlide).fadeIn();
-            } else {
-                $(elementClassToSlide).fadeOut();
-            }
-        });
-    };
 });
