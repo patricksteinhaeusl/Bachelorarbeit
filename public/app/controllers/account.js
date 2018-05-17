@@ -27,7 +27,7 @@ appControllers.controller('AccountController', ['$scope', '$rootScope', 'Account
     self.update = function () {
         let account = self.data.account;
         $rootScope.messages = {};
-        AuthService.update(account, function (error, data, message, validations) {
+        AccountService.update(account, function (error, data, message, validations) {
             if (error) $rootScope.messages.error = error;
             if (validations) $rootScope.messages.validations = validations;
             if (!data) $rootScope.messages.warning = message;
