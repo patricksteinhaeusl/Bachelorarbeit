@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('ProductController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ProductService',
-    function ($rootScope, $scope, $routeParams, AuthService, ProductService) {
+appControllers.controller('ProductController', ['$scope', '$routeParams', 'AuthService', 'ProductService',
+    function ($scope, $routeParams, AuthService, ProductService) {
         const self = this;
 
         self.data = {};
@@ -13,29 +13,21 @@ appControllers.controller('ProductController', ['$rootScope', '$scope', '$routeP
         };
 
         self.get = function (productId) {
-            $rootScope.messages = {};
-            ProductService.get(productId, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validations = validations;
-                if (!data) $rootScope.messages.warning = message;
+            ProductService.get(productId, function (error, data) {
                 if (data) {
-                    self.data.product = data;
-                    $rootScope.messages.success = message;
+                    let product = data.product;
+                    self.data.product = product;
                 }
             });
         };
 
         self.saveQuestion = function () {
-            $rootScope.messages = {};
             self.data.question._account = AuthService.getUser()._id;
-            ProductService.saveQuestion(self.data.product._id, self.data.question, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validations = validations;
-                if (!data) $rootScope.messages.warning = message;
+            ProductService.saveQuestion(self.data.product._id, self.data.question, function (error, data) {
                 if (data) {
+                    let product = data.product;
                     self.data.question = {};
-                    $rootScope.messages.success = message;
-                    self.data.product = data;
+                    self.data.product = product;
                 }
             });
         };

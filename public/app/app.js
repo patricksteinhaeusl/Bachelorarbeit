@@ -170,6 +170,12 @@ angular.module('app', [
             }
         }
     });
+
+    $rootScope.messages = {};
+    $rootScope.messages.successes = [];
+    $rootScope.messages.warnings = [];
+    $rootScope.messages.validations = [];
+    $rootScope.messages.errors = [];
 }]);
 
 function templateExists(templateUrl) {

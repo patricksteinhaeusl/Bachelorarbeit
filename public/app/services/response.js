@@ -8,11 +8,6 @@ appServices.factory('ResponseService', ['$rootScope', function ($rootScope) {
             let message = successResponse.data.message;
             let validations = successResponse.data.validations;
 
-            console.log("STATUSCODE", statusCode);
-            console.log("DATA", data);
-            console.log("VALIDATIONS", validations);
-            console.log("MESSAGE", message);
-
             if (statusCode === 200) {
                 $rootScope.messages.successes.push(message);
                 return callback(null, data);

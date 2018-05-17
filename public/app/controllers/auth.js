@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('AuthController', ['$rootScope', '$scope', '$location', '$cookies', 'AuthService', 'WebSocketService',
-    function ($rootScope, $scope, $location, $cookies, authService, webSocketService) {
+appControllers.controller('AuthController', ['$scope', '$http', '$location', '$cookies', 'localStorageService', 'AuthService', 'WebSocketService',
+    function ($scope, $http, $location, $cookies, LocalStorageService, AuthService, WebSocketService) {
         let self = this;
         self.data = {};
         self.data.login = {};
@@ -9,15 +9,17 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
 
         self.login = function () {
             let user = self.data.login.user;
-            $rootScope.messages = {};
-            authService.login(user, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validations = validations;
-                if (!data) $rootScope.messages.warning = message;
+            AuthService.login(user, function (error, data) {
                 if (data) {
-                    $cookies.put('chatUser', data.user._id);
-                    webSocketService.join(data.user);
-                    $rootScope.messages.success = message;
+                    let user = data.user;
+                    let token = data.token;
+
+                    LocalStorageService.set('user', user);
+                    LocalStorageService.set('token', token);
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+
+                    $cookies.put('chatUser', user._id);
+                    WebSocketService.join(user);
                     self.data.login.user = {};
                 }
             });
@@ -25,37 +27,37 @@ appControllers.controller('AuthController', ['$rootScope', '$scope', '$location'
 
         self.register = function () {
             let account = self.data.register.account;
-            $rootScope.messages = {};
-            authService.register(account, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validations = validations;
-                if (!data) $rootScope.messages.warning = message;
+            AuthService.register(account, function (error, data) {
                 if (data) {
+                    let user = data.user;
+                    let token = data.token;
+
+                    LocalStorageService.set('user', user);
+                    LocalStorageService.set('token', token);
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+
                     $cookies.put('chatUser', data.user._id);
-                    webSocketService.join(data.user);
+                    WebSocketService.join(data.user);
                     self.data.register.account = {};
-                    $rootScope.messages.success = message;
                     $location.path('/shop');
                 }
             });
         };
 
         self.logout = function () {
-            $rootScope.messages = {};
-            authService.logout(function (error, data, message) {
-                if (error) $rootScope.messages.error = error;
-                if (!data) $rootScope.messages.warning = message;
+            AuthService.logout(function (error, data) {
                 if (data) {
-                    webSocketService.leave(data);
+                    let user = data.user;
+
+                    WebSocketService.leave(user);
                     $cookies.remove('chatUser');
-                    $rootScope.messages.success = message;
                     $location.path('/home');
                 }
             });
         };
 
-        self.isAuthenticated = authService.isAuthenticated;
+        self.isAuthenticated = AuthService.isAuthenticated;
 
-        self.getUser = authService.getUser;
+        self.getUser = AuthService.getUser;
 
 }]);

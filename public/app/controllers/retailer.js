@@ -1,11 +1,9 @@
 'use strict';
 
-appControllers.controller('RetailerController', ['$rootScope', '$scope',
-    function ($rootScope, $scope) {
-        const self = this;
+appControllers.controller('RetailerController', ['$rootScope', function ($rootScope) {
+    const self = this;
 
-        self.request = function() {
-            $rootScope.messages = {};
-            $rootScope.messages.warning = 'This function is disabled.';
-        }
-    }]);
+    self.request = function() {
+        $rootScope.messages.warnings.push('This function is disabled.');
+    }
+}]);

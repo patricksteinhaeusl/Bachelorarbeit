@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter', 'OrdersService', 'AuthService',
-function ($rootScope, $scope, $filter, ordersService, authService) {
+appControllers.controller('OrdersController', ['$scope', '$filter', 'OrdersService', 'AuthService',
+function ($scope, $filter, OrdersService, AuthService) {
     const self = this;
 
     self.data = {};
@@ -15,8 +15,11 @@ function ($rootScope, $scope, $filter, ordersService, authService) {
     };
 
     self.getAllByAccount = function () {
-        ordersService.getAllByAccount(authService.getUser()._id, function (orders) {
-            self.data.orders = orders;
+        OrdersService.getAllByAccount(AuthService.getUser()._id, function (error, data) {
+            if(data) {
+                let orders = data.orders;
+                self.data.orders = orders;
+            }
         });
     };
 
@@ -67,42 +70,45 @@ function ($rootScope, $scope, $filter, ordersService, authService) {
 
     self.downloadPDF = function() {
         if(!self.export.from || !self.export.range) {
-            $rootScope.messages = {};
-            $rootScope.messages.warning = 'Parameter from or range is missing!';
+            $rootScope.messages.warnings.push('Parameter from or range is missing!');
         } else {
-            ordersService.getFromTo(self.export.from, self.export.range, function (result) {
-                let docDefinition = {
-                    pageOrientation: 'landscape',
-                    pageMargins: [ 40, 60, 40, 60 ],
+            OrdersService.getFromTo(self.export.from, self.export.range, function (error, data) {
+                if(data) {
+                    let from = data.from;
+                    let to = data.to;
+                    let docDefinition = {
+                        pageOrientation: 'landscape',
+                        pageMargins: [ 40, 60, 40, 60 ],
 
-                    header: { text: 'Order output as pdf', margin: [25, 10, 25, 10] },
+                        header: { text: 'Order output as pdf', margin: [25, 10, 25, 10] },
 
-                    footer: function(currentPage, pageCount) {
-                        return {
-                            margin:10,
-                            columns: [
-                                { text: $filter('date')(new Date(), 'dd.MM.yyyy HH:mm:ss', '+0200'), alignment: 'left', margin: 25},
-                                { text: currentPage.toString() + ' of ' + pageCount, alignment: 'right', margin: 25 }
-                            ]
-                        };
-                    },
+                        footer: function(currentPage, pageCount) {
+                            return {
+                                margin:10,
+                                columns: [
+                                    { text: $filter('date')(new Date(), 'dd.MM.yyyy HH:mm:ss', '+0200'), alignment: 'left', margin: 25},
+                                    { text: currentPage.toString() + ' of ' + pageCount, alignment: 'right', margin: 25 }
+                                ]
+                            };
+                        },
 
-                    content: [
-                        { text: 'Orders', fontSize: 17, margin: [0, 0, 0, 25] },
-                        {
-                            table: {
-                                headerRows: 1,
-                                widths: [ '*', '*', '*', '*' ],
+                        content: [
+                            { text: 'Orders', fontSize: 17, margin: [0, 0, 0, 25] },
+                            {
+                                table: {
+                                    headerRows: 1,
+                                    widths: [ '*', '*', '*', '*' ],
 
-                                body: buildTableBody(result.from, result.to)
+                                    body: buildTableBody(from, to)
+                                }
                             }
-                        }
-                    ]
-                };
+                        ]
+                    };
 
-                pdfMake.createPdf(docDefinition).download();
-                self.export.from = null;
-                self.export.range = null;
+                    pdfMake.createPdf(docDefinition).download();
+                    self.export.from = null;
+                    self.export.range = null;
+                }
             });
         }
     };

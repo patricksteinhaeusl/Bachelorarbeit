@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('FaqController', ['$rootScope', '$scope', '$routeParams', 'FaqService',
-    function ($rootScope, $scope, $routeParams, faqService) {
+appControllers.controller('FaqController', ['$scope', '$routeParams', 'FaqService',
+    function ($scope, $routeParams, FaqService) {
         const self = this;
         self.data = {};
         self.data.searchValue = null;
@@ -11,27 +11,18 @@ appControllers.controller('FaqController', ['$rootScope', '$scope', '$routeParam
         };
 
         self.getFaq = function () {
-            $rootScope.messages = {};
-            faqService.getFaq(function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validations = validations;
-                if (!data) $rootScope.messages.warning = message;
+            FaqService.getFaq(function (error, data) {
                 if (data) {
-                    self.data.FaqQuestions = data;
-                    $rootScope.messages.success = message;
+                    self.data.FaqQuestions = data.faq;
                 }
             });
         };
 
         self.getFaqBySearchValue = function () {
             if (self.data.searchValue) {
-                faqService.getFaqBySearchValue(self.data.searchValue, function (error, data, message, validations) {
-                    if (error) $rootScope.messages.error = error;
-                    if (validations) $rootScope.messages.validations = validations;
-                    if (!data) $rootScope.messages.warning = message;
+                FaqService.getFaqBySearchValue(self.data.searchValue, function (error, data) {
                     if (data) {
-                        self.data.FaqQuestions = data;
-                        $rootScope.messages.success = message;
+                        self.data.FaqQuestions = data.faq;
                     }
                 });
             } else {

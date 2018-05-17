@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$location', '$routeParams', 'CreditCardService', 'AuthService',
-    function ($rootScope, $scope, $location, $routeParams, creditCardService, authService) {
+appControllers.controller('CreditCardController', ['$scope', '$location', '$routeParams', 'CreditCardService', 'AuthService',
+    function ($scope, $location, $routeParams, CreditCardService, AuthService) {
         const self = this;
         self.data = {};
         self.data.creditCard = {};
@@ -38,22 +38,20 @@ appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$loc
         self.getByNumber = function () {
             let creditCardNumber = $routeParams.creditCardNumber;
             if (creditCardNumber) {
-                creditCardService.getByNumber(creditCardNumber, function (data) {
-                    self.data.creditCard = data;
+                CreditCardService.getByNumber(creditCardNumber, function (error, data) {
+                    if(data) {
+                        let creditCard = data.creditCard;
+                        self.data.creditCard = creditCard;
+                    }
                 });
             }
         };
 
         self.update = function () {
             let creditCard = self.data.creditCard;
-            $rootScope.messages = {};
-            creditCardService.update(creditCard, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validations = validations;
-                if (!data) $rootScope.messages.warning = message;
+            CreditCardService.update(creditCard, function (error, data) {
                 if (data) {
                     self.data.creditCard = {};
-                    $rootScope.messages.success = message;
                     $location.path('/creditcards');
                 }
             });
@@ -61,15 +59,10 @@ appControllers.controller('CreditCardController', ['$rootScope', '$scope', '$loc
 
         self.insert = function () {
             let creditCard = self.data.creditCard;
-            creditCard._account = authService.getUser()._id;
-            $rootScope.messages = {};
-            creditCardService.insert(creditCard, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validations = validations;
-                if (!data) $rootScope.messages.warning = message;
+            creditCard._account = AuthService.getUser()._id;
+            CreditCardService.insert(creditCard, function (error, data) {
                 if (data) {
                     self.data.creditCard = {};
-                    $rootScope.messages.success = message;
                     $location.path('/creditcards');
                 }
             });

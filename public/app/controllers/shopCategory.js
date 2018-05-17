@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ShopService',
-    function ($rootScope, $scope, $routeParams, AuthService, ShopService) {
+appControllers.controller('ShopCategoryController', ['$scope', '$routeParams', 'AuthService', 'ShopService',
+    function ($scope, $routeParams, AuthService, ShopService) {
         const self = this;
         self.products = {};
 
@@ -32,27 +32,27 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$r
         self.categoryId = $routeParams.categoryId;
 
         self.getProducts = function() {
-            ShopService.getProductsCategory(self.categoryId, function(products) {
-                self.products = products;
+            ShopService.getProductsCategory(self.categoryId, function(error, data) {
+                if(data) {
+                    let products = data.products;
+                    self.products = products;
+                }
             });
         };
 
         self.rateProduct = function (product, rating) {
             rating._account = AuthService.getUser()._id;
-            $rootScope.messages = {};
             if(rating.value >= 1) {
-                ShopService.rateProductCategory(self.categoryId, product, rating, function (error, data, message, validations) {
-                    if (error) $rootScope.messages.error = error;
-                    if (validations) {
-                        $rootScope.messages.validations = validations;
+                ShopService.rateProductCategory(self.categoryId, product, rating, function (error, data) {
+                    if(data) {
                         self.ratingByAccount = {};
                         self.ratingEmptyByAccount = {};
+                        $('.shop-form-rating').slideUp();
+                        self.getProducts();
                     }
-                    $rootScope.messages.success = message;
-                    $('.shop-form-rating').slideUp();
                 });
             } else {
-                $rootScope.messages.warning = "Rating must be at least 1 star";
+                $rootScope.messages.warnings.push('Rating must be at least 1 star');
             }
         };
 
@@ -72,13 +72,13 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$r
         };
 
         $scope.$watch(function() {
-            return ShopService.products;
-        }, function(products) {
-            self.products = products;
+            return ShopService.searchValue;
+        }, function(searchValue) {
+            self.searchValue = searchValue;
         }, false);
 
         $scope.$watch(function() {
-            return ShopService.productsSearchValue;
+            return ShopService.products;
         }, function(products) {
             self.products = products;
         }, false);

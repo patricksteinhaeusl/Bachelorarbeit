@@ -1,6 +1,6 @@
 'use strict';
 
-appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebSocketService', function ($scope, authService, webSocketService) {
+appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebSocketService', function ($scope, AuthService, WebSocketService) {
     const self = this;
 
     self.user = null;
@@ -15,7 +15,7 @@ appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebS
     };
 
     self.sendMsg = function () {
-        webSocketService.emit('getMsg',{
+        WebSocketService.emit('getMsg',{
             to : self.selectedUser._id,
             msg : self.message,
             from : self.user.username
@@ -23,28 +23,28 @@ appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebS
         self.message = null;
     };
 
-    if(authService.isAuthenticated()) {
+    if(AuthService.isAuthenticated()) {
         let authUser = {
-            _id: authService.getUser()._id,
-            username: authService.getUser().username
+            _id: AuthService.getUser()._id,
+            username: AuthService.getUser().username
         };
 
-        webSocketService.reJoin(authUser);
+        WebSocketService.reJoin(authUser);
     }
 
-    webSocketService.on('join', function (user) {
+    WebSocketService.on('join', function (user) {
         self.user = user;
     });
 
-    webSocketService.on('leave', function () {
+    WebSocketService.on('leave', function () {
         self.user = null;
     });
 
-    webSocketService.on('userList', function (userList) {
+    WebSocketService.on('userList', function (userList) {
         self.userList = userList;
     });
 
-    webSocketService.on('sendMsg', function (data) {
+    WebSocketService.on('sendMsg', function (data) {
         self.messages.push(data);
     });
 

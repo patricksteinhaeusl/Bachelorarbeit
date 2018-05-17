@@ -1,6 +1,6 @@
 'use strict';
 
-appControllers.controller('PostsController', ['$rootScope', '$scope', 'PostService', function ($rootScope, $scope, PostService) {
+appControllers.controller('PostsController', ['$scope', 'PostService', function ($scope, PostService) {
     const self = this;
     self.data = {};
     self.data.posts = [];
@@ -41,10 +41,9 @@ appControllers.controller('PostsController', ['$rootScope', '$scope', 'PostServi
 
     self.getPosts = function () {
         PostService.getAll(function (error, data) {
-            if (error) {
-                self.posts = {};
-            } else {
-                self.data.posts = data.posts;
+            if(data) {
+                let posts = data.posts;
+                self.data.posts = posts;
             }
         });
     };

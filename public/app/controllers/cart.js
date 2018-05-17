@@ -1,32 +1,33 @@
 'use strict';
 
-appControllers.controller('CartController', ['$rootScope', '$scope', 'CartService', function ($rootScope, $scope, cartService) {
+appControllers.controller('CartController', ['$scope', 'CartService', function ($scope, CartService) {
     const self = this;
 
     self.data = {};
-    self.data.items = cartService.getItems();
-    self.data.totalPrice = cartService.getTotalPrice();
+    self.data.items = CartService.getItems();
+    self.data.totalPrice = CartService.getTotalPrice();
 
     self.insert = function (product, quantity) {
-        $rootScope.messages = {};
         let quantityNumber = Number(quantity);
-        cartService.insert(product, quantityNumber, function (error, message) {
-            if(error) {
-                $rootScope.messages.error = 'Adding the Item to the shopping cart failed!';
-            } else {
-                $rootScope.messages.success = message;
+        CartService.insert(product, quantityNumber, function (error, message) {
+            if(message) {
+                $rootScope.messages.successes.push(message);
             }
         });
     };
 
     self.remove = function (itemIndex) {
-        cartService.remove(itemIndex);
+        CartService.remove(itemIndex, function(error, message) {
+            if(message) {
+                $rootScope.messages.successes.push(message);
+            }
+        });
     };
 
     $scope.$watch(function () {
-        return cartService.getItems()
+        return CartService.getItems()
     }, function (items) {
-        self.data.items = cartService.getItems();
-        self.data.totalPrice = cartService.getTotalPrice();
+        self.data.items = items;
+        self.data.totalPrice = CartService.getTotalPrice();
     }, true);
 }]);

@@ -16,22 +16,24 @@
         </p>
     </div>
 
-    <form ng-submit="product.saveQuestion()" ng-if="auth.isAuthenticated()">
-        <h2>Add a question</h2>
-        <div class="form-group">
-            <label>Question:</label>
-            <textarea class="form-control" type="text" ng-model="product.data.question.text" placeholder="Add your question..." required></textarea>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Save">
-        </div>
-    </form>
+    <div ng-controller="AuthController as auth">
+        <form ng-submit="product.saveQuestion()" ng-if="auth.isAuthenticated()">
+            <h2>Add a question</h2>
+            <div class="form-group">
+                <label>Question:</label>
+                <textarea class="form-control" type="text" ng-model="product.data.question.text" placeholder="Add your question..." required></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Save">
+            </div>
+        </form>
 
-    <h2>Existing questions</h2>
-    <div class="questions" ng-repeat="question in product.data.product.questions">
-        <div class="question">
-            <p ng-bind-html="question.text" trustAsHtml></p>
-            <span class="question-info pull-right"><a ng-href="#!/account/{{question._account._id}}/profile">{{ question._account.username }}</a> at {{ question.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200'}}</span>
+        <h2>Existing questions</h2>
+        <div class="questions" ng-repeat="question in product.data.product.questions">
+            <div class="question">
+                <p ng-bind-html="question.text" trustAsHtml></p>
+                <span class="question-info pull-right"><a ng-href="#!/account/{{question._account._id}}/profile">{{ question._account.username }}</a> at {{ question.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200'}}</span>
+            </div>
         </div>
     </div>
 </div>

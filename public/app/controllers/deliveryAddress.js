@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', '$location', '$routeParams', 'DeliveryAddressService', 'AuthService',
-    function ($rootScope, $scope, $location, $routeParams, deliveryAddressService, authService) {
+appControllers.controller('DeliveryAddressController', ['$scope', '$location', '$routeParams', 'DeliveryAddressService', 'AuthService',
+    function ($scope, $location, $routeParams, DeliveryAddressService, AuthService) {
         const self = this;
         self.data = {};
         self.data.deliveryAddress = {};
@@ -12,24 +12,22 @@ appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', 
 
         self.getById = function () {
             let deliveryAddressId = $routeParams.deliveryAddressId;
-            let accountId = authService.getUser()._id;
+            let accountId = AuthService.getUser()._id;
             if (deliveryAddressId) {
-                deliveryAddressService.getById(deliveryAddressId, accountId, function (data) {
-                    self.data.deliveryAddress = data;
+                DeliveryAddressService.getById(deliveryAddressId, accountId, function (error, data) {
+                    if(data) {
+                        let deliveyAddress = data.deliveryAddress;
+                        self.data.deliveryAddress = deliveyAddress;
+                    }
                 });
             }
         };
 
         self.update = function () {
             let deliveryAddress = self.data.deliveryAddress;
-            $rootScope.messages = {};
-            deliveryAddressService.update(deliveryAddress, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validations = validations;
-                if (!data) $rootScope.messages.warning = message;
+            DeliveryAddressService.update(deliveryAddress, function (error, data) {
                 if (data) {
                     self.data.creditCard = {};
-                    $rootScope.messages.success = message;
                     $location.path('/deliveryaddresses');
                 }
             });
@@ -37,15 +35,10 @@ appControllers.controller('DeliveryAddressController', ['$rootScope', '$scope', 
 
         self.insert = function () {
             let deliveryAddress = self.data.deliveryAddress;
-            deliveryAddress._account = authService.getUser()._id;
-            $rootScope.messages = {};
-            deliveryAddressService.insert(deliveryAddress, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validations = validations;
-                if (!data) $rootScope.messages.warning = message;
+            deliveryAddress._account = AuthService.getUser()._id;
+            DeliveryAddressService.insert(deliveryAddress, function (error, data) {
                 if (data) {
                     self.data.creditCard = {};
-                    $rootScope.messages.success = message;
                     $location.path('/deliveryaddresses');
                 }
             });

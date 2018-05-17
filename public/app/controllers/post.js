@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('PostController', ['$rootScope', '$scope', '$location', 'PostService', 'AuthService',
-    function ($rootScope, $scope, $location, PostService, AuthService) {
+appControllers.controller('PostController', ['$scope', '$location', 'PostService', 'AuthService',
+    function ($scope, $location, PostService, AuthService) {
         const self = this;
         self.data = {};
         self.data.post = {};
@@ -20,8 +20,7 @@ appControllers.controller('PostController', ['$rootScope', '$scope', '$location'
                     self.insertURL();
                     break;
                 default:
-                    $rootScope.messages = {};
-                    $rootScope.messages.error = "No Type selected";
+                    $rootScope.messages.warnings.push('No Type selected');
                     break;
             }
         };
@@ -29,7 +28,7 @@ appControllers.controller('PostController', ['$rootScope', '$scope', '$location'
         self.insertUpload = function () {
             self.data.post._account = AuthService.getUser()._id;
             PostService.insertUpload(self.data.post, self.data.postImage, function (error, data) {
-                if(!error) {
+                if(data) {
                     self.data.post = {};
                     $location.path('/home');
                 }
@@ -41,7 +40,7 @@ appControllers.controller('PostController', ['$rootScope', '$scope', '$location'
         self.insertURL = function () {
             self.data.post._account = AuthService.getUser()._id;
             PostService.insertURL(self.data.post, self.data.url, function (error, data) {
-                if(!error) {
+                if(data) {
                     self.data.post = {};
                     $location.path('/home');
                 }

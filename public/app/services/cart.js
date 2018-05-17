@@ -1,6 +1,6 @@
 'use strict';
 
-appServices.service('CartService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
+appServices.service('CartService', ['$http', 'localStorageService', function ($http, localStorageService) {
 
     let self = this;
 
@@ -53,9 +53,10 @@ appServices.service('CartService', ['$http', '$q', 'localStorageService', functi
         return callback(null, 'Item successfully added to cart.');
     };
 
-    self.remove = function (itemIndex) {
+    self.remove = function (itemIndex, callback) {
         self.items.splice(itemIndex, 1);
         localStorageService.set('items', JSON.stringify(self.items));
+        return callback(null, 'Item successfully removed from cart.');
     };
 
     self.clear = function () {

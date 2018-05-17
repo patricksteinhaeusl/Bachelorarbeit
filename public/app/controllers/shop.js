@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('ShopController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ShopService',
-    function ($rootScope, $scope, $routeParams, AuthService, ShopService) {
+appControllers.controller('ShopController', ['$scope', '$routeParams', 'AuthService', 'ShopService',
+    function ($scope, $routeParams, AuthService, ShopService) {
         const self = this;
         self.products = {};
 
@@ -31,27 +31,27 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
         self.productOrientation = 'wide';
 
         self.getProducts = function() {
-            ShopService.getProducts(function(products) {
-                self.products = products;
+            ShopService.getProducts(function(error, data) {
+                if(data) {
+                    let products = data.products;
+                    self.products = products;
+                }
             });
         };
 
         self.rateProduct = function (product, rating) {
             rating._account = AuthService.getUser()._id;
-            $rootScope.messages = {};
             if(rating.value >= 1) {
-                ShopService.rateProduct(product, rating, function (error, data, message, validations) {
-                    if (error) $rootScope.messages.error = error;
-                    if (validations) {
-                        $rootScope.messages.validations = validations;
+                ShopService.rateProduct(product, rating, function (error, data) {
+                    if(data) {
                         self.ratingByAccount = {};
                         self.ratingEmptyByAccount = {};
+                        $('.shop-form-rating').slideUp();
+                        self.getProducts();
                     }
-                    $rootScope.messages.success = message;
-                    $('.shop-form-rating').slideUp();
                 });
             } else {
-                $rootScope.messages.warning = "Rating must be at least 1 star";
+                $rootScope.messages.warnings.push('Rating must be at least 1 star');
             }
         };
 
@@ -77,7 +77,7 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
         }, false);
 
         $scope.$watch(function() {
-            return ShopService.productsSearchValue;
+            return ShopService.products;
         }, function(products) {
             self.products = products;
         }, false);
@@ -87,12 +87,6 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
         }, function(selectedQuantity) {
             ShopService.selectedQuantity = selectedQuantity;
         }, true);
-
-        $scope.$watch(function() {
-            return ShopService.products;
-        }, function(products) {
-            self.products = products;
-        }, false);
 
         self.getProducts();
 

@@ -1,13 +1,10 @@
 'use strict';
 
-appServices.factory('ShopService', ['$http', '$routeParams', function ($http, $routeParams) {
+appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', function ($http, $routeParams, ResponseService) {
     let self = this;
     self.products = {};
-    //self.productsCategory = {};
-    self.productsCategorySelectedQuantity = {};
     self.productsTopRated = {};
     self.productsLatest = {};
-    self.productsSearchValue = {};
     self.categories = {};
     self.searchValue = null;
     self.searchValues = [];
@@ -17,43 +14,35 @@ appServices.factory('ShopService', ['$http', '$routeParams', function ($http, $r
     self.getProducts = function(callback) {
         $http
             .get('/api/product')
-            .then(function (response) {
-                self.products = response.data.data.products;
-                self.products.forEach(function(product) {
-                    product.selectedQuantity = self.selectedQuantity;
-                });
-                return callback(self.products);
-            });
+            .then(
+                (response) => {
+                    let products = response.data.data.products;
+                    if(products) {
+                        products.forEach((product) => {
+                            product.selectedQuantity = $routeParams.selectedQuantity;
+                        });
+                        self.products = products;
+                    }
+                    ResponseService.successCallback(response, callback);
+                }, (error) => ResponseService.errorCallback(error, callback)
+            );
     };
 
     self.getProductsCategory = function (categoryId, callback) {
         $http
             .get('/api/product/category/' + categoryId)
-            .then(function (response) {
-                self.products = response.data.data.products;
-                self.products.forEach(function(product) {
-                    product.selectedQuantity = self.selectedQuantity;
-                });
-                return callback(self.products);
-            });
-    };
-
-    self.getProductsTopRated = function (callback) {
-        $http
-            .get('/api/product/toprated')
-            .then(function (response) {
-                self.productsTopRated = response.data.data.products;
-                return callback(self.productsTopRated);
-            });
-    };
-
-    self.getProductsLatest = function (callback) {
-        $http
-            .get('/api/product/latest')
-            .then(function (response) {
-                self.productsLatest = response.data.data.products;
-                return callback(self.productsLatest);
-            });
+            .then(
+                (response) => {
+                    let products = response.data.data.products;
+                    if(products) {
+                        products.forEach((product) => {
+                            product.selectedQuantity = $routeParams.selectedQuantity;
+                        });
+                        self.products = products;
+                    }
+                    ResponseService.successCallback(response, callback);
+                }, (error) => ResponseService.errorCallback(error, callback)
+            );
     };
 
     self.getProductsBySearchValue = function (searchValue, callback) {
@@ -61,73 +50,66 @@ appServices.factory('ShopService', ['$http', '$routeParams', function ($http, $r
         let data = {searchValue: searchValue};
         $http
             .post('/api/product/searchValue/', data)
-            .then(function (response) {
-                self.productsSearchValue = response.data.data.products;
-                self.productsSearchValue.forEach(function(product) {
-                    product.selectedQuantity = self.selectedQuantity;
-                });
-                self.addSearchValue();
-                return callback(self.productsSearchValue);
-            });
+            .then(
+                (response) => {
+                    let products = response.data.data.products;
+                    if(products) {
+                        products.forEach((product) => {
+                            product.selectedQuantity = $routeParams.selectedQuantity;
+                        });
+                        self.products = products;
+                        self.addSearchValue();
+                    }
+                    ResponseService.successCallback(response, callback);
+                }, (error) => ResponseService.errorCallback(error, callback)
+            );
+    };
+
+    self.getProductsTopRated = function (callback) {
+        $http
+            .get('/api/product/toprated')
+            .then(
+                (response) => ResponseService.successCallback(response, callback),
+                (error) => ResponseService.errorCallback(error, callback)
+            );
+    };
+
+    self.getProductsLatest = function (callback) {
+        $http
+            .get('/api/product/latest')
+            .then(
+                (response) => ResponseService.successCallback(response, callback),
+                (error) => ResponseService.errorCallback(error, callback)
+            );
     };
 
     self.getProductCategories = function (callback) {
         $http
             .get('/api/product/category')
-            .then(function (response) {
-                self.categories = response.data.data.categories;
-                return callback(self.categories);
-            });
+            .then(
+                (response) => ResponseService.successCallback(response, callback),
+                (error) => ResponseService.errorCallback(error, callback)
+            );
     };
 
     self.rateProduct = function (product, rating, callback) {
         let data = {'product': product, 'rating': rating};
         $http
             .post('/api/product/rating', data)
-            .then(function (response) {
-                let statusCode = response.data.statusCode;
-                let message = response.data.message;
-                let validations = response.data.validations;
-                if (statusCode === 200) {
-                    self.getProducts(function(products) {
-                        self.products = products;
-                        self.products.forEach(function(product) {
-                            product.selectedQuantity = self.selectedQuantity;
-                        });
-                        return callback(null, data, message, null);
-                    });
-                } else if (statusCode === 405) {
-                    return callback(null, null, null, validations);
-                }
-                return callback(null, null, message, null);
-            }, function (error) {
-                return callback(error);
-            });
+            .then(
+                (response) => ResponseService.successCallback(response, callback),
+                (error) => ResponseService.errorCallback(error, callback)
+            );
     };
 
     self.rateProductCategory = function (categoryId, product, rating, callback) {
         let data = {'product': product, 'rating': rating};
         $http
             .post('/api/product/rating', data)
-            .then(function (response) {
-                let statusCode = response.data.statusCode;
-                let message = response.data.message;
-                let validations = response.data.validations;
-                if (statusCode === 200) {
-                    self.getProductsCategory(product.category._id, function(products) {
-                        self.products = products;
-                        self.products.forEach(function(product) {
-                            product.selectedQuantity = self.selectedQuantity;
-                        });
-                        return callback(null, data, message, null);
-                    });
-                } else if (statusCode === 405) {
-                    return callback(null, null, null, validations);
-                }
-                return callback(null, null, message, null);
-            }, function (error) {
-                return callback(error);
-            });
+            .then(
+                (response) => ResponseService.successCallback(response, callback),
+                (error) => ResponseService.errorCallback(error, callback)
+            );
     };
 
     self.addSearchValue = function () {
@@ -141,12 +123,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', function ($http, $r
                     self.searchValues.splice(0, 0, self.searchValue);
                 }
             }
-        } else {
-            self.getProducts(function(products) {
-                self.productsSearchValue = products;
-            });
         }
-        self.searchValue = null;
     };
 
     self.getSearchValue = function () {
