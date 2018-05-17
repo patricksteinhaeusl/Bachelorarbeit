@@ -61,7 +61,8 @@ function remove(req, res) {
 }
 
 function getFromTo(req, res) {
-    OrderService.getFromTo(req.params.from, req.params.range, (result) => {
+    OrderService.getFromTo(req.params.from, req.params.range, (error, result) => {
+        if (error) return res.json(error);
         return res.json(result);
     });
 }

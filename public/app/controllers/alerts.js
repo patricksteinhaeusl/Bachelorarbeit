@@ -5,5 +5,10 @@ appControllers.controller('AlertsController', ['$rootScope', function ($rootScop
 
     self.clear = function() {
         $rootScope.messages = {};
+
+        $rootScope.messages.successes = [];
+        $rootScope.messages.warnings = [];
+        $rootScope.messages.validations = [];
+        $rootScope.messages.errors = [];
     }
 }]);

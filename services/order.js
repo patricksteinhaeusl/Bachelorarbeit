@@ -8,10 +8,10 @@ const ResponseUtil = require('../utils/response');
 
 function get(orderId, callback) {
     Order.findById(orderId, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
         result = {'order': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Order found.'));
     });
 }
 
@@ -20,16 +20,16 @@ function getByAccountId(accountId, callback) {
         .find({_account: accountId})
         .sort({'createdAt': -1})
         .exec(function (error, result) {
-            if (error) return callback(ResponseUtil.createErrorResponse(error));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse());
+            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
             result = {'orders': result};
-            return callback(null, ResponseUtil.createSuccessResponse(result));
+            return callback(null, ResponseUtil.createSuccessResponse(result, 'Order found.'));
         });
 }
 
 function getTempByAccountId(accountId, callback) {
     OrderTemp.findOne({_account: accountId}, {}, { sort: { 'createdAt' : -1 } }, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         result = {'order': result};
         return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully updated'));
@@ -38,9 +38,9 @@ function getTempByAccountId(accountId, callback) {
 
 function createTemp(items, totalPrice, account, callback) {
     DeliveryAddress.findOne({_account: account}, function(error, deliveryAddress) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         CreditCard.findOne({_account: account}, function(error, creditCard) {
-            if (error) return callback(ResponseUtil.createErrorResponse(error));
+            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
             let orderObj;
             if (creditCard && deliveryAddress) {
                 orderObj = new OrderTemp({
@@ -81,41 +81,49 @@ function createTemp(items, totalPrice, account, callback) {
                 });
             }
 
-            orderObj.save(function(error, result) {
-                if (error) return callback(ResponseUtil.createErrorResponse(error));
-                if (!result) return callback(ResponseUtil.createNotFoundResponse());
-                result = {'order': result};
-                return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully created.'));
+            orderObj.validate(function(error) {
+                if (error) return callback(ResponseUtil.createValidationResponse(error));
+                orderObj.save(function(error, result) {
+                    if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                    if (!result) return callback(ResponseUtil.createNotFoundResponse('Order failed to create.'));
+                    result = {'order': result};
+                    return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully created.'));
+                });
             });
-
         });
     });
 }
 
 function updateTemp(order, callback) {
     let orderObj = new OrderTemp(order);
-    OrderTemp.findByIdAndUpdate(orderObj._id, orderObj, {new: true}, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
-        result = {'order': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully updated'));
+    orderObj.validate(function(error) {
+        if (error) return callback(ResponseUtil.createValidationResponse(error));
+        OrderTemp.findByIdAndUpdate(orderObj._id, orderObj, {new: true}, function (error, result) {
+            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse('Order failed to update.'));
+            result = {'order': result};
+            return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully updated'));
+        });
     });
 }
 
 function insert(order, callback) {
     let orderObj = new Order(order);
-    orderObj.save(function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
-        result = {'order': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully saved.'));
+    orderObj.validate(function(error) {
+        if (error) return callback(ResponseUtil.createValidationResponse(error));
+        orderObj.save(function (error, result) {
+            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse('Order failed to create.'));
+            result = {'order': result};
+            return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully saved.'));
+        });
     });
 }
 
 function remove(orderId, callback) {
     Order.findByIdAndRemove(orderId, function (error) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        return callback(null, ResponseUtil.createSuccessResponse(result));
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully removed'));
     });
 }
 
@@ -130,7 +138,7 @@ function getFromTo(from, range, callback) {
     }
 
     let result = { from: fromResult, to: toResult };
-    callback(result);
+    return callback(null, ResponseUtil.createSuccessResponse(result, 'Parameters accepted.'));
 }
 
 module.exports = {

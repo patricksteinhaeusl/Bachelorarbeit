@@ -8,7 +8,7 @@ appControllers.controller('ProductSearchController', ['$scope', '$routeParams', 
         self.searchValue = ShopService.getSearchValue();
 
         self.getProducts = function() {
-            $location.path('/shop');
+            $location.path('/shop').search('selectedQuantity', '1');
             $timeout(function() {
                 ShopService.getProductsBySearchValue(self.searchValue, function (error, data) {
                     if(data) {
@@ -20,7 +20,7 @@ appControllers.controller('ProductSearchController', ['$scope', '$routeParams', 
         };
 
         self.getProductsBySearchValue = function(searchValue) {
-            $location.path('/shop');
+            $location.path('/shop').search('selectedQuantity', '1');
             $timeout(function() {
                 ShopService.getProductsBySearchValue(searchValue, function (error, data) {
                     if(data) {

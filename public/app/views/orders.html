@@ -27,7 +27,7 @@
                 <td>{{ order.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200' }}</td>
                 <td>{{ order._id }}</td>
                 <td>{{ order.status }}</td>
-                <td>{{ order.totalPrice }} CHF</td>
+                <td>{{ order.totalPrice.toFixed(2) }} CHF</td>
             </tr>
             <tr>
                 <td colspan="5">

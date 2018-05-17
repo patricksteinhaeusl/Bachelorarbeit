@@ -525,6 +525,7 @@ table tr td li {
     text-align: right;
     width: 100%;
     font-size: 15px;
+    margin-bottom: 15px;
 }
 
 .rating-average {
@@ -756,6 +757,15 @@ svg {
     display: inline-block;
     width: 50%;
     margin: 0 25% 0 25%;
+}
+
+.alert {
+    display: inline-block;
+    width: 100%;
+}
+
+.alert.close {
+    opacity: .5;
 }
 
 .alert-container .alert {

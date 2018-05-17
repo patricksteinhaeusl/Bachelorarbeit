@@ -5,10 +5,10 @@ const ResponseUtil = require('../utils/response');
 
 function get(callback) {
     Faq.find({}, null, {sort: {_id: 1}}, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
         result = {'faq': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Faqs found.'));
     });
 }
 
@@ -17,10 +17,10 @@ function getFaqBySearchValue(searchValueObj, callback) {
     Faq.find({
         $where: "'"+ param +"'; /" + param + "/i.test(this.question) || /" + param + "/i.test(this.answer);"
     }, null, {sort: {_id: 1}}, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse("Could not process your input."));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        if (error) return callback(ResponseUtil.createErrorResponse('Something went wrong.'));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
         result = {'faq': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Faqs found.'));
     });
 }
 

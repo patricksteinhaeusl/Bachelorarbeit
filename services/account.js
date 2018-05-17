@@ -7,10 +7,10 @@ const ResponseUtil = require('../utils/response');
 
 function get(accountId, callback) {
     Account.findById(accountId, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        if (error) return callback(ResponseUtil.createErrorResponse(error), 'Something went wrong.');
+        if (!result) return callback(ResponseUtil.createNotFoundResponse(), 'Account not found.');
         result = {'user': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Account found.'));
     });
 }
 
@@ -22,10 +22,10 @@ function update(account, callback) {
         context: 'query',
         projection: { password: false, createdAt: false, updatedAt: false, __v: false }
     }, function (error, resAccount) {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors, 'Something went wrong.'));
         if (!resAccount) return callback(ResponseUtil.createNotFoundResponse('Account failed to create'));
         CryptoUtil.createToken(resAccount.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
-            if (error) return callback(ResponseUtil.createErrorResponse(error));
+            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
             let result = {'user': resAccount, 'token': token};
             return callback(null, ResponseUtil.createSuccessResponse(result, 'Account successfully created.'));
         });
@@ -34,12 +34,12 @@ function update(account, callback) {
 
 function upload(accountId, profile, callback) {
     Account.findOne({_id: accountId}, function(error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong'));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
         result.profile = profile;
         result.save(function (error, user) {
-            if (error) return callback(ResponseUtil.createErrorResponse(error));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse());
+            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
             result = {'user': user};
             return callback(null, ResponseUtil.createSuccessResponse(result, 'Profile successfully uploaded.'));
         });

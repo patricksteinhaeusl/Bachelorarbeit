@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('ShopController', ['$scope', '$routeParams', 'AuthService', 'ShopService',
-    function ($scope, $routeParams, AuthService, ShopService) {
+appControllers.controller('ShopController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ShopService',
+    function ($rootScope, $scope, $routeParams, AuthService, ShopService) {
         const self = this;
         self.products = {};
 

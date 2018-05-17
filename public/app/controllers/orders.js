@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('OrdersController', ['$scope', '$filter', 'OrdersService', 'AuthService',
-function ($scope, $filter, OrdersService, AuthService) {
+appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter', 'OrdersService', 'AuthService',
+function ($rootScope, $scope, $filter, OrdersService, AuthService) {
     const self = this;
 
     self.data = {};
@@ -73,6 +73,7 @@ function ($scope, $filter, OrdersService, AuthService) {
             $rootScope.messages.warnings.push('Parameter from or range is missing!');
         } else {
             OrdersService.getFromTo(self.export.from, self.export.range, function (error, data) {
+                console.log(data);
                 if(data) {
                     let from = data.from;
                     let to = data.to;

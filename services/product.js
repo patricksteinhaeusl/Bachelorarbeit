@@ -7,8 +7,8 @@ const ResponseUtil = require('../utils/response');
 
 function get(callback) {
     Product.find({}, function(error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('No product found.'));
         result = {'products': result};
         return callback(null, ResponseUtil.createSuccessResponse(result));
     });
@@ -19,17 +19,17 @@ function getById(productId, callback) {
         path: 'questions._account',
         select: '_id username'
     }).exec(function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('No product found.'));
         result = {'product': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Product found.'));
     });
 }
 
 function getTopRated(callback) {
     Product.find({}, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('No products found.'));
         result = {'products': result};
         return callback(null, ResponseUtil.createSuccessResponse(result));
     });
@@ -37,8 +37,8 @@ function getTopRated(callback) {
 
 function getLatest(callback) {
     Product.find({}, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('No products found.'));
         result = {'products': result};
         return callback(null, ResponseUtil.createSuccessResponse(result));
     });
@@ -47,8 +47,8 @@ function getLatest(callback) {
 
 function getByCategoryId(categoryId, callback) {
     Product.find({'category._id': categoryId}, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('No products found.'));
         result = {'products': result};
         return callback(null, ResponseUtil.createSuccessResponse(result));
     });
@@ -61,8 +61,9 @@ function getBySearchValue(searchValueObj, callback) {
             {'category.name': new RegExp(searchValueObj.searchValue, "i")}
         ]
     }, function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        console.log("Result", result);
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('No product found.'));
         result = {'products': result};
         return callback(null, ResponseUtil.createSuccessResponse(result));
     });
@@ -77,10 +78,11 @@ function updateRatings(product, rating, callback) {
                 {$set: {'ratings.$.comment': rating.comment, 'ratings.$.value': rating.value}},
                 {new: true},
                 function (error, result) {
-                    if (error) return callback(ResponseUtil.createErrorResponse(error));
+                    if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
                     if (result) {
                         result.rating.value = calculateTotalRating(result.ratings);
                         result.save(function(error, result) {
+                            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
                             result = {'product': result};
                             return callback(null, ResponseUtil.createSuccessResponse(result, 'Rating updated successfully.'));
                         });
@@ -90,10 +92,11 @@ function updateRatings(product, rating, callback) {
                             {$push: {ratings: rating}},
                             {new: true},
                             function (error, result) {
-                                if (error) return callback(ResponseUtil.createErrorResponse(error));
-                                if (!result) return callback(ResponseUtil.createNotFoundResponse());
+                                if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                                if (!result) return callback(ResponseUtil.createNotFoundResponse('Rating failed to save.'));
                                 result.rating.value = calculateTotalRating(result.ratings);
                                 result.save(function(error, result) {
+                                    if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
                                     result = {'product': result};
                                     return callback(null, ResponseUtil.createSuccessResponse(result, 'Rating saved successfully.'));
                                 });
@@ -115,8 +118,8 @@ function getCategories(callback) {
                 'name': 1
             }
         }], function (error, result) {
-            if (error) return callback(ResponseUtil.createErrorResponse(error));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse());
+            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse('No categories found.'));
             result = {'categories': result};
             return callback(null, ResponseUtil.createSuccessResponse(result));
         });
@@ -146,8 +149,8 @@ function insertQuestion(productId, question, callback) {
             path: 'questions._account',
             select: '_id username'
         }).exec(function (error, result) {
-            if (error) return callback(ResponseUtil.createErrorResponse(error));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse());
+            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse('Question failed to save.'));
             result = {'product': result};
             return callback(null, ResponseUtil.createSuccessResponse(result, 'Question saved successfully.'));
         });

@@ -1,10 +1,10 @@
 'use strict';
 
-appServices.service('CartService', ['$http', 'localStorageService', function ($http, localStorageService) {
+appServices.service('CartService', ['localStorageService', function (LocalStorageService) {
 
     let self = this;
 
-    self.items = JSON.parse(localStorageService.get('items'));
+    self.items = JSON.parse(LocalStorageService.get('items'));
 
     self.calculateTotalPrice = function () {
         let sum = 0;
@@ -48,20 +48,20 @@ appServices.service('CartService', ['$http', 'localStorageService', function ($h
             self.items.push(item);
         }
 
-        localStorageService.set('items', JSON.stringify(self.items));
+        LocalStorageService.set('items', JSON.stringify(self.items));
 
         return callback(null, 'Item successfully added to cart.');
     };
 
     self.remove = function (itemIndex, callback) {
         self.items.splice(itemIndex, 1);
-        localStorageService.set('items', JSON.stringify(self.items));
+        LocalStorageService.set('items', JSON.stringify(self.items));
         return callback(null, 'Item successfully removed from cart.');
     };
 
     self.clear = function () {
         self.items = [];
-        localStorageService.set('items', '[]');
+        LocalStorageService.set('items', '[]');
         self.totalPrice = 0;
     };
 

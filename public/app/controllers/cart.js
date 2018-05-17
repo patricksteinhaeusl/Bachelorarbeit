@@ -1,6 +1,6 @@
 'use strict';
 
-appControllers.controller('CartController', ['$scope', 'CartService', function ($scope, CartService) {
+appControllers.controller('CartController', ['$rootScope', '$scope', 'CartService', function ($rootScope, $scope, CartService) {
     const self = this;
 
     self.data = {};

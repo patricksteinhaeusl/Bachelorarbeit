@@ -14,10 +14,10 @@ function getAll(callback) {
         path: '_account',
         select: '_id username'
     }).exec(function (error, result) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse());
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        if (!result) return callback(ResponseUtil.createNotFoundResponse('No posts found.'));
         result = {'posts': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Posts found.'));
     });
 }
 
@@ -26,8 +26,8 @@ function insertUpload(post, callback) {
     postObj.validate(function (error) {
         if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
         postObj.save(function (error, result) {
-            if (error) return callback(ResponseUtil.createErrorResponse(error));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse());
+            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
             result = {'post': result};
             return callback(null, ResponseUtil.createSuccessResponse(result, 'Post successfully created.'));
         });
@@ -58,8 +58,8 @@ function insertURL(post, url, callback) {
             postObj.validate(function (error) {
                 if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
                 postObj.save(function (error, result) {
-                    if (error) return callback(ResponseUtil.createErrorResponse(error));
-                    if (!result) return callback(ResponseUtil.createNotFoundResponse());
+                    if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                    if (!result) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
                     result = {'post': result};
                     return callback(null, ResponseUtil.createSuccessResponse(result, 'Post successfully created.'));
                 });
@@ -71,10 +71,10 @@ function insertURL(post, url, callback) {
 
 function remove(postId, callback) {
     Post.findById(postId, function (error, post) {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-
+        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         fs.unlink(GlobalConfig.postImages.directory + post.image, function() {
             post.remove(function(error) {
+                if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
                 return callback(null, ResponseUtil.createSuccessResponse(null, 'Post successfully deleted.'));
             });
         });
