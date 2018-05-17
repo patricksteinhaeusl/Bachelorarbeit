@@ -17,7 +17,7 @@ function getAll(callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         result = {'posts': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
+        return callback(null, ResponseUtil.createSuccessResponse(result, 'Posts successfully loaded.'));
     });
 }
 

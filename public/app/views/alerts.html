@@ -1,32 +1,41 @@
 <div class="alert-container" ng-controller="AlertsController as alerts">
-    <div class="alert alert-success alert-dismissible" role="alert" ng-if="messages.success">
-        <strong>Success:</strong> {{ messages.success }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
-            <span aria-hidden="true">&times;</span>
-        </button>
+
+    <div ng-repeat="success in messages.successes track by $index">
+        <div class="alert alert-success alert-dismissible" role="alert" ng-if="success">
+            <strong>Success:</strong> {{ success }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </div>
 
-    <div class="alert alert-danger alert-dismissible" role="alert" ng-if="messages.error">
-        <strong>Error:</strong> {{ messages.error }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div ng-repeat="error in messages.errors track by $index">
+        <div class="alert alert-danger alert-dismissible" role="alert" ng-if="error">
+            <strong>Error:</strong> {{ error }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </div>
 
-    <div class="alert alert-warning alert-dismissible" role="alert" ng-if="messages.warning">
-        <strong>Warning:</strong> {{ messages.warning }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div ng-repeat="warning in messages.warnings track by $index">
+        <div class="alert alert-warning alert-dismissible" role="alert" ng-if="warning">
+            <strong>Warning:</strong> {{ warning }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </div>
 
-    <div class="alert alert-warning alert-dismissible" role="alert" ng-if="messages.validations">
-        <strong>Validation:</strong>
-        <ul ng-repeat="validationMessage in messages.validations">
-            <li>- {{validationMessage}}</li>
-        </ul>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div ng-repeat="validations in messages.validations track by $index">
+        <div class="alert alert-warning alert-dismissible" role="alert" ng-if="validations">
+            <strong>Validation:</strong>
+            <ul ng-repeat="validationMessage in validations">
+                <li>- {{validationMessage}}</li>
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </div>
 </div>

@@ -1,39 +1,39 @@
-<div class="container content-view" ng-controller="CommunityController as community">
-    <form class="post-form" ng-submit="community.insert()">
+<div class="container content-view" ng-controller="PostController as post">
+    <form class="post-form" ng-submit="post.insert()">
         <h1>Add a Post</h1>
         <div class="form-group">
-            <input class="form-control" type="text" ng-model="community.data.post.title" name="title"
+            <input class="form-control" type="text" ng-model="post.data.post.title" name="title"
                    placeholder="Title" required/>
         </div>
         <div class="form-group">
-            <textarea class="form-control" type="text" ng-model="community.data.post.text" name="text"
+            <textarea class="form-control" type="text" ng-model="post.data.post.text" name="text"
                       placeholder="Text" required></textarea>
         </div>
-        <input type="radio" name="fileUpload" ng-model="community.type" ng-value="1"/>
+        <input type="radio" name="fileUpload" ng-model="post.type" ng-value="1"/>
         <label aria-label="Add picture from your computer">Add picture from your computer</label>
         <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{ community.data.progress }}"
-                 aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width' : community.data.progress + '%' }">
-                <span class="sr-only">{{ community.data.progress }} &</span>
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{ post.data.progress }}"
+                 aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width' : post.data.progress + '%' }">
+                <span class="sr-only">{{ post.data.progress }} &</span>
             </div>
         </div>
         <div class="form-group">
-            <input id='file-selector' type="file" ng-model="community.data.postImage" name="postImage"
+            <input id='file-selector' type="file" ng-model="post.data.postImage" name="postImage"
                    ngf-select=""
                    ngf-accept="'image/*'"
                    ngf-max-size="20MB"
                    required
-                   ng-disabled="community.type != 1"/>
+                   ng-disabled="post.type != 1"/>
         </div>
-        <img class="thumbnail" ngf-src="community.data.postImage" alt="Uploaded Image Preview">
-        <input type="radio" name="fileUpload" ng-model="community.type" ng-value="2"/>
+        <img class="thumbnail" ngf-src="post.data.postImage" alt="Uploaded Image Preview">
+        <input type="radio" name="fileUpload" ng-model="post.type" ng-value="2"/>
         <label aria-label="Add picture from URL">Add picture from URL</label>
         <div class="form-group">
             <input class="form-control" type="url" name="url"
-                      placeholder="URL" required ng-disabled="community.type != 2" ng-model="community.data.url">
+                      placeholder="URL" required ng-disabled="post.type != 2" ng-model="post.data.url">
         </div>
         <div class="form-group">
-            <button class="btn btn-outline-primary" ng-disabled="community.type != 2 && community.type != 1">
+            <button class="btn btn-outline-primary" ng-disabled="post.type != 2 && post.type != 1">
                 <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
             </button>
         </div>

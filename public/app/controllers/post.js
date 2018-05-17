@@ -1,6 +1,6 @@
 'use strict';
 
-appControllers.controller('CommunityController', ['$rootScope', '$scope', '$location', 'PostService', 'AuthService',
+appControllers.controller('PostController', ['$rootScope', '$scope', '$location', 'PostService', 'AuthService',
     function ($rootScope, $scope, $location, PostService, AuthService) {
         const self = this;
         self.data = {};
@@ -28,14 +28,9 @@ appControllers.controller('CommunityController', ['$rootScope', '$scope', '$loca
 
         self.insertUpload = function () {
             self.data.post._account = AuthService.getUser()._id;
-            $rootScope.messages = {};
-            PostService.insertUpload(self.data.post, self.data.postImage, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validations = validations;
-                if (!data) $rootScope.messages.warning = message;
-                if (data) {
+            PostService.insertUpload(self.data.post, self.data.postImage, function (error, data) {
+                if(!error) {
                     self.data.post = {};
-                    $rootScope.messages.success = message;
                     $location.path('/home');
                 }
             }, function (progress) {
@@ -45,14 +40,9 @@ appControllers.controller('CommunityController', ['$rootScope', '$scope', '$loca
 
         self.insertURL = function () {
             self.data.post._account = AuthService.getUser()._id;
-            $rootScope.messages = {};
-            PostService.insertURL(self.data.post, self.data.url, function (error, data, message, validations) {
-                if (error) $rootScope.messages.error = error;
-                if (validations) $rootScope.messages.validation = validations;
-                if (!data) $rootScope.messages.warning = message;
-                if (data) {
+            PostService.insertURL(self.data.post, self.data.url, function (error, data) {
+                if(!error) {
                     self.data.post = {};
-                    $rootScope.messages.success = message;
                     $location.path('/home');
                 }
             });

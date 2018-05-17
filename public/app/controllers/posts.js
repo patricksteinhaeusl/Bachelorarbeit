@@ -1,6 +1,6 @@
 'use strict';
 
-appControllers.controller('HomeController', ['$rootScope', '$scope', 'PostService', function ($rootScope, $scope, PostService) {
+appControllers.controller('PostsController', ['$rootScope', '$scope', 'PostService', function ($rootScope, $scope, PostService) {
     const self = this;
     self.data = {};
     self.data.posts = [];
@@ -40,25 +40,23 @@ appControllers.controller('HomeController', ['$rootScope', '$scope', 'PostServic
     }
 
     self.getPosts = function () {
-        PostService.getAll(function (data) {
-            self.data.posts = data;
+        PostService.getAll(function (error, data) {
+            if (error) {
+                self.posts = {};
+            } else {
+                self.data.posts = data.posts;
+            }
         });
     };
 
     self.remove = function (index) {
         let postId = self.data.posts[index]._id;
-        $rootScope.messages = {};
-        PostService.remove(postId, function (error, data, message) {
-            if (error) $rootScope.messages.error = error;
-            $rootScope.messages.success = message;
-            self.data.posts.splice(index, 1);
+        PostService.remove(postId, function (error, data) {
+            if (!error) {
+                self.data.posts.splice(index, 1);
+            }
         });
     };
 
     self.init();
-}])
-.filter('extension', function () {
-    return function (input) {
-        return input.split('.').pop();
-    };
-});
+}]);

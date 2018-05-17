@@ -1,4 +1,4 @@
-<div class="content-view" ng-controller="HomeController as home">
+<div class="content-view" ng-controller="PostsController as posts">
 
     <div id="slider_container" style="position: relative; left: 0; right: 0; top: 0; width: 960px; height: 420px;">
         <div u="slides"
@@ -18,7 +18,7 @@
     </div>
 
     <div class="posts-container">
-        <div class="posts col col-xs-6" ng-repeat="post in home.data.posts">
+        <div class="posts col col-xs-6" ng-repeat="post in posts.data.posts track by post._id">
             <div class="post-element">
                 <div class="row">
                     <h2 class="post-title">{{ post.title }}</h2>
@@ -40,8 +40,10 @@
                 <div class="row">
                     <p>{{ post.text }}</p>
                 </div>
-                <div class="actions" ng-if="auth.getUser() && post._account._id === auth.getUser()._id">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="home.remove($index)"></span>
+                <div ng-controller="AuthController as auth">
+                    <div class="actions" ng-if="auth.getUser() && post._account._id === auth.getUser()._id">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="posts.remove($index)"></span>
+                    </div>
                 </div>
             </div>
         </div>
