@@ -70,9 +70,7 @@ describe('Auth', function () {
             //Submit form
             element(by.buttonText('Register')).click();
             browser.sleep(250);
-            expect(element.all(by.className('alert')).get(0).getText()).toBe("Expected 'Validation:\n" +
-                "- username: already exists!\n" +
-                "- email: already exists!\n×");
+            expect(element.all(by.className('alert')).get(0).getText()).toContain("already exists!");
             //Check
             expect(element.all(by.css('.menu-item-username')).count()).toBe(0);
         });

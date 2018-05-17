@@ -1,6 +1,6 @@
 'use strict';
 const path = require('path');
-const HelperFunctions = require('../helperFunctions.js');
+const HelperFunctions = require('./helperFunctions.js');
 
 describe('Template Injection', function () {
 
