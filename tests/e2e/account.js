@@ -10,6 +10,56 @@ describe('Account', function () {
         HelperFunctions.logout(browser);
     });
 
+    describe('User Information', function () {
+
+        beforeEach(function () {
+            browser.get(browser.params.webshop);
+        });
+
+        describe('view', function () {
+            it('should have correct information', function () {
+                //Open Auth Menu
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Link
+                element(by.linkText('My Account')).click();
+                browser.sleep(250);
+                expect(element(by.model('account.data.account.firstname')).getAttribute('value')).toEqual('Juliane');
+                expect(element(by.model('account.data.account.lastname')).getAttribute('value')).toEqual('Schulze');
+                expect(element(by.model('account.data.account.email')).getAttribute('value')).toEqual('Juliane.Schulze@gmail.com');
+                expect(element(by.model('account.data.account.username')).getAttribute('value')).toEqual('customer0');
+                expect(element(by.model('account.data.account.username')).isEnabled()).toEqual(false);
+                expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Juliane Schulze');
+            });
+        });
+
+        describe('update', function () {
+            it('should succesfully update', function () {
+                //Open Auth Menu
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Link
+                element(by.linkText('My Account')).click();
+                browser.sleep(250);
+                element(by.model('account.data.account.firstname')).clear().then(function () {
+                    element(by.model('account.data.account.firstname')).sendKeys('Neu').sendKeys(protractor.Key.ENTER);
+                });
+                element(by.model('account.data.account.email')).clear().then(function () {
+                    element(by.model('account.data.account.email')).sendKeys('juliane.schmitz@gmail.com').sendKeys(protractor.Key.ENTER);
+                });
+                element(by.buttonText('Update')).click();
+                browser.sleep(250);
+                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Account successfully updated.\n×");
+                expect(element(by.model('account.data.account.firstname')).getAttribute('value')).toEqual('Neu');
+                expect(element(by.model('account.data.account.lastname')).getAttribute('value')).toEqual('Schulze');
+                expect(element(by.model('account.data.account.email')).getAttribute('value')).toEqual('juliane.schmitz@gmail.com');
+                expect(element(by.model('account.data.account.username')).getAttribute('value')).toEqual('customer0');
+                expect(element(by.model('account.data.account.username')).isEnabled()).toEqual(false);
+                expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Neu Schulze');
+            });
+        });
+    });
+
     describe('Credit card', function () {
 
         beforeEach(function() {

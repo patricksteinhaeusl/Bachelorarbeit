@@ -23,11 +23,11 @@ function update(account, callback) {
         projection: { password: false, createdAt: false, updatedAt: false, __v: false }
     }, function (error, resAccount) {
         if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        if (!resAccount) return callback(ResponseUtil.createNotFoundResponse('Account failed to create'));
+        if (!resAccount) return callback(ResponseUtil.createNotFoundResponse('Account failed to update'));
         CryptoUtil.createToken(resAccount.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
             if (error) return callback(ResponseUtil.createErrorResponse(error));
             let result = {'user': resAccount, 'token': token};
-            return callback(null, ResponseUtil.createSuccessResponse(result, 'Account successfully created.'));
+            return callback(null, ResponseUtil.createSuccessResponse(result, 'Account successfully updated.'));
         });
     });
 }
