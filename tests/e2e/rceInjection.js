@@ -1,6 +1,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const glob = require("glob");
 const HelperFunctions = require('./helperFunctions.js');
 
 describe('RCE Injection', function () {
@@ -34,26 +35,13 @@ describe('RCE Injection', function () {
 
             let filePath = '../../' + fileName;
 
-            browser.wait(function() {
-                try {
-                    fs.accessSync(path.join(__dirname, filePath), fs.constants.F_OK);
-                    return true;
-                } catch (error) {
-                    return false;
+            browser.driver.wait(function () {
+                let filesArray = glob.sync(path.join(__dirname, filePath));
+                if (typeof filesArray !== 'undefined' && filesArray.length > 0) {
+                    return filesArray;
                 }
-            }, 5000).then(function(exists) {
-                expect(exists).toBe(true);
-            }).then(function() {
-                browser.wait(function() {
-                    try {
-                        fs.unlinkSync(path.join(__dirname, filePath));
-                        return true;
-                    } catch (error) {
-                        return false;
-                    }
-                }, 5000).then(function(unlinked) {
-                    expect(unlinked).toBe(true);
-                });
+            }, 5000).then(function (filesArray) {
+                expect(filesArray[0]).toContain(fileName);
             });
         });
     });

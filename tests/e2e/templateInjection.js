@@ -57,7 +57,10 @@ describe('Template Injection', function () {
             element(by.linkText('My Profile')).click();
             browser.sleep(250);
 
-            expect(element(by.css('.templateInjection')).getText()).toBe('{"isRetailer":false,"_id":"5aa0481e876d9d39d4397859","username":"customer0","firstname":"Juliane","lastname":"Schulze","email":"Juliane.Schulze@gmail.com"}');
+            browser.manage().logs().get('browser').then(function(browserLog) {
+                require('util').inspect(browserLog);
+                expect(browserLog[browserLog.length-1].message).toContain("{\\\"isRetailer\\\":false,\\\"_id\\\":\\\"5aa0481e876d9d39d4397859\\\",\\\"username\\\":\\\"customer0\\\",\\\"firstname\\\":\\\"Juliane\\\",\\\"lastname\\\":\\\"Schulze\\\",\\\"email\\\":\\\"Juliane.Schulze@gmail.com\\\"}\"");
+            });
         });
 
         it('default profile edited', function () {

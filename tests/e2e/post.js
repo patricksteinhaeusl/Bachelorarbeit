@@ -26,14 +26,14 @@ describe('Post', function () {
             //Check if save Button is disabled
             expect(element(by.buttonText('Save')).isEnabled()).toBe(false);
             //Select Upload
-            element.all(by.model('community.type')).get(0).click();
+            element.all(by.model('post.type')).get(0).click();
             //Fill form
             let pathToFile = '../assets/default.png';
             let absolutePathToFile = path.resolve(__dirname, pathToFile);
-            element(by.model('community.data.post.title')).sendKeys('Ganz Toll');
-            element(by.model('community.data.post.text')).sendKeys('Ein perfektes Produkt zum verlieben.');
+            element(by.model('post.data.post.title')).sendKeys('Ganz Toll');
+            element(by.model('post.data.post.text')).sendKeys('Ein perfektes Produkt zum verlieben.');
             browser.sleep(250);
-            element.all(by.model('community.data.postImage')).get(0).sendKeys(absolutePathToFile);
+            element.all(by.model('post.data.postImage')).get(0).sendKeys(absolutePathToFile);
             //Check
             expect(element.all(by.css('.thumbnail')).get(0).isDisplayed()).toBe(true);
             expect(element(by.buttonText('Save')).isEnabled()).toBe(true);
@@ -46,7 +46,7 @@ describe('Post', function () {
     describe('View', function () {
         it('should success', function () {
             element(by.linkText('Home')).click();
-            let posts = element.all(by.repeater('post in home.data.posts'));
+            let posts = element.all(by.repeater('post in posts.data.posts'));
             //Check
             expect(posts.last().getText()).toContain('Ganz Toll\n');
             expect(posts.last().getText()).toContain('Ein perfektes Produkt zum verlieben.');
@@ -61,10 +61,10 @@ describe('Post', function () {
             //Link
             element(by.linkText('Home')).click();
             browser.sleep(250);
-            let posts = element.all(by.repeater('post in home.data.posts'));
-            element.all(by.repeater('post in home.data.posts')).count().then(function (preCount) {
+            let posts = element.all(by.repeater('post in posts.data.posts'));
+            element.all(by.repeater('post in posts.data.posts')).count().then(function (preCount) {
                 posts.last().all(by.css('.glyphicon-trash')).get(0).click();
-                let postCount = element.all(by.repeater('post in home.data.posts')).count();
+                let postCount = element.all(by.repeater('post in posts.data.posts')).count();
                 //Check
                 expect(preCount - 1).toBe(postCount);
             });
@@ -82,11 +82,11 @@ describe('Post', function () {
             //Check if Save Button is disabled
             expect(element(by.buttonText('Save')).isEnabled()).toBe(false);
             //Select Upload
-            element.all(by.model('community.type')).get(1).click();
+            element.all(by.model('post.type')).get(1).click();
             //Fill form
-            element(by.model('community.data.post.title')).sendKeys('Super Bild');
-            element(by.model('community.data.post.text')).sendKeys('Ich finde das super.');
-            element(by.model('community.data.url')).sendKeys('http://localhost:8765/file002.jpg');
+            element(by.model('post.data.post.title')).sendKeys('Super Bild');
+            element(by.model('post.data.post.text')).sendKeys('Ich finde das super.');
+            element(by.model('post.data.url')).sendKeys('http://localhost:8765/file002.jpg');
             //Check
             expect(element(by.buttonText('Save')).isEnabled()).toBe(true);
             //Submit form
@@ -96,7 +96,7 @@ describe('Post', function () {
 
         it('should be visible', function () {
             element(by.linkText('Home')).click();
-            let posts = element.all(by.repeater('post in home.data.posts'));
+            let posts = element.all(by.repeater('post in posts.data.posts'));
             //Check
             expect(posts.last().getText()).toContain('Super Bild\n');
             expect(posts.last().getText()).toContain('Ich finde das super.');

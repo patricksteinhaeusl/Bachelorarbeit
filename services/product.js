@@ -22,7 +22,7 @@ function getById(productId, callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('No product found.'));
         result = {'product': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Product found.'));
+        return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }
 

@@ -9,6 +9,8 @@ exports.config = {
     capabilities: {
         'browserName': 'chrome',
         'loggingPrefs': {
+            'driver': 'INFO',
+            'server': 'INFO',
             'browser': 'INFO'
         },
         chromeOptions: {
