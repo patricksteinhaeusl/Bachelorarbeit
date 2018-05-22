@@ -9,19 +9,17 @@ appControllers.controller('CartController', ['$rootScope', '$scope', 'CartServic
 
     self.insert = function (product, quantity) {
         let quantityNumber = Number(quantity);
-        CartService.insert(product, quantityNumber, function (error, message) {
-            if(message) {
-                $rootScope.messages.successes.push(message);
-            }
-        });
+        CartService.insert(product, quantityNumber, self.updateRootScope);
     };
 
     self.remove = function (itemIndex) {
-        CartService.remove(itemIndex, function(error, message) {
-            if(message) {
-                $rootScope.messages.successes.push(message);
-            }
-        });
+        CartService.remove(itemIndex, self.updateRootScope);
+    };
+
+    self.updateRootScope = function(error, message) {
+        if(message) {
+            $rootScope.messages.successes.push(message);
+        }
     };
 
     $scope.$watch(function () {

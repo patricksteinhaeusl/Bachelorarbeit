@@ -49,23 +49,20 @@ appControllers.controller('CreditCardController', ['$scope', '$location', '$rout
 
         self.update = function () {
             let creditCard = self.data.creditCard;
-            CreditCardService.update(creditCard, function (error, data) {
-                if (data) {
-                    self.data.creditCard = {};
-                    $location.path('/creditcards');
-                }
-            });
+            CreditCardService.update(creditCard, self.updateCreditCard);
         };
 
         self.insert = function () {
             let creditCard = self.data.creditCard;
             creditCard._account = AuthService.getUser()._id;
-            CreditCardService.insert(creditCard, function (error, data) {
-                if (data) {
-                    self.data.creditCard = {};
-                    $location.path('/creditcards');
-                }
-            });
+            CreditCardService.insert(creditCard, self.updateCreditCard);
+        };
+
+        self.updateCreditCard = (error, data) => {
+            if (data) {
+                self.data.creditCard = {};
+                $location.path('/creditcards');
+            }
         };
 
         self.init();

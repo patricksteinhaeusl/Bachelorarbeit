@@ -43,7 +43,6 @@ describe('Product Details', function () {
                 element(by.model('product.data.question.text')).sendKeys(QuestionString);
             });
             element(by.buttonText('Save')).click();
-            /*expect(element.all(by.className('alert alert-success alert-dismissible ')).get(0).getText()).toBe("Success: Question saved successfully.\n×");*/
             element.all(by.repeater('question in product.data.product.questions')).count().then(function (newCount) {
                 expect(QuestionCount).toBe(newCount-1);
             });

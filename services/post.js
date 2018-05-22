@@ -23,15 +23,7 @@ function getAll(callback) {
 
 function insertUpload(post, callback) {
     let postObj = new Post(post);
-    postObj.validate(function (error) {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        postObj.save(function (error, result) {
-            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
-            result = {'post': result};
-            return callback(null, ResponseUtil.createSuccessResponse(result, 'Post successfully created.'));
-        });
-    });
+    savePost(postObj, callback);
 }
 
 function insertURL(post, url, callback) {
@@ -55,18 +47,10 @@ function insertURL(post, url, callback) {
         .then(({}) => {
             post.image = scrambledFileName + extension;
             let postObj = new Post(post);
-            postObj.validate(function (error) {
-                if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-                postObj.save(function (error, result) {
-                    if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                    if (!result) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
-                    result = {'post': result};
-                    return callback(null, ResponseUtil.createSuccessResponse(result, 'Post successfully created.'));
-                });
-            });
+            savePost(postObj, callback);
         }).catch(() => {
-        return callback(ResponseUtil.createErrorResponse('Could not fetch image from given URL'));
-    });
+            return callback(ResponseUtil.createErrorResponse('Could not fetch image from given URL'));
+        });
 }
 
 function remove(postId, callback) {
@@ -77,6 +61,18 @@ function remove(postId, callback) {
                 if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
                 return callback(null, ResponseUtil.createSuccessResponse(null, 'Post successfully deleted.'));
             });
+        });
+    });
+}
+
+function savePost(postObj, callback) {
+    postObj.validate(function (error) {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        postObj.save(function (error, result) {
+            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            if (!result) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
+            result = {'post': result};
+            return callback(null, ResponseUtil.createSuccessResponse(result, 'Post successfully created.'));
         });
     });
 }

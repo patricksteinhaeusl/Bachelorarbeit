@@ -156,6 +156,10 @@ function insertQuestion(productId, question, callback) {
     });
 }
 
+function handleProductReponse(error, result) {
+
+}
+
 module.exports = {
     get,
     getById,

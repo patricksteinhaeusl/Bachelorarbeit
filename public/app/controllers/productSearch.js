@@ -10,25 +10,22 @@ appControllers.controller('ProductSearchController', ['$scope', '$routeParams', 
         self.getProducts = function() {
             $location.path('/shop').search('selectedQuantity', '1');
             $timeout(function() {
-                ShopService.getProductsBySearchValue(self.searchValue, function (error, data) {
-                    if(data) {
-                        let products = data.products;
-                        self.products = products;
-                    }
-                });
+                ShopService.getProductsBySearchValue(self.searchValue, self.updateProducts);
             }, 50);
         };
 
         self.getProductsBySearchValue = function(searchValue) {
             $location.path('/shop').search('selectedQuantity', '1');
             $timeout(function() {
-                ShopService.getProductsBySearchValue(searchValue, function (error, data) {
-                    if(data) {
-                        let products = data.products;
-                        self.products = products;
-                    }
-                });
+                ShopService.getProductsBySearchValue(searchValue, self.updateProducts);
             }, 50);
+        };
+
+        self.updateProducts = (error, data) => {
+            if(data) {
+                let products = data.products;
+                self.products = products;
+            }
         };
 
         $scope.$watch(function() {

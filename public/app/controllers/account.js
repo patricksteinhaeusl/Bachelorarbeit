@@ -13,12 +13,7 @@ appControllers.controller('AccountController', ['$scope', '$http', 'AccountServi
         };
 
         self.get = function(accountId) {
-            AccountService.get(accountId, function (error, data) {
-                if (data) {
-                    let user = data.user;
-                    self.data.account = user;
-                }
-            });
+            AccountService.get(accountId, self.updateUserData);
         };
 
         self.update = function () {
@@ -38,15 +33,16 @@ appControllers.controller('AccountController', ['$scope', '$http', 'AccountServi
 
         self.upload = function () {
             let accountId = AuthService.getUser()._id;
-            AccountService.upload(accountId, self.data.profile, function (error, data) {
-                if (data) {
-                    let user = data.user;
-
-                    self.data.account = user;
-                }
-            }, function (progress) {
+            AccountService.upload(accountId, self.data.profile, self.updateUserData, function (progress) {
                 self.data.progress = progress;
             });
+        };
+
+        self.updateUserData = function(error, data) {
+            if (data) {
+                let user = data.user;
+                self.data.account = user;
+            }
         };
 
         self.init();

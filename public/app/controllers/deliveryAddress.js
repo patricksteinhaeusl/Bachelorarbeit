@@ -25,23 +25,20 @@ appControllers.controller('DeliveryAddressController', ['$scope', '$location', '
 
         self.update = function () {
             let deliveryAddress = self.data.deliveryAddress;
-            DeliveryAddressService.update(deliveryAddress, function (error, data) {
-                if (data) {
-                    self.data.creditCard = {};
-                    $location.path('/deliveryaddresses');
-                }
-            });
+            DeliveryAddressService.update(deliveryAddress, self.updateDeliveryAddress);
         };
 
         self.insert = function () {
             let deliveryAddress = self.data.deliveryAddress;
             deliveryAddress._account = AuthService.getUser()._id;
-            DeliveryAddressService.insert(deliveryAddress, function (error, data) {
-                if (data) {
-                    self.data.creditCard = {};
-                    $location.path('/deliveryaddresses');
-                }
-            });
+            DeliveryAddressService.insert(deliveryAddress, self.updateDeliveryAddress);
+        };
+
+        self.updateDeliveryAddress = (error, data) => {
+            if (data) {
+                self.data.deliveryAddress = {};
+                $location.path('/deliveryaddresses');
+            }
         };
 
         self.init();

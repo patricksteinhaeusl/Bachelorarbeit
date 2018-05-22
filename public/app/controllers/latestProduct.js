@@ -6,24 +6,21 @@ appControllers.controller('LatestProductController', ['$scope', 'ShopService',
         self.products = {};
 
         self.getProducts = function() {
-            ShopService.getProductsLatest(function(error, data) {
-                if(data) {
-                    let products = data.products;
-                    self.products = products;
-                }
-            });
+            ShopService.getProductsLatest(self.updateProducts);
         };
 
         $scope.$watch(function() {
             return ShopService.products;
         }, function() {
-            ShopService.getProductsLatest(function(error, data) {
-                if(data) {
-                    let products = data.products;
-                    self.products = products;
-                }
-            });
+            ShopService.getProductsLatest(self.updateProducts);
         }, false);
+
+        self.updateProducts = (error, data) => {
+            if(data) {
+                let products = data.products;
+                self.products = products;
+            }
+        };
 
         self.getProducts();
     }]);

@@ -25,7 +25,7 @@ describe('JSON Response with text/html Content-Type', function () {
                 browser.getCurrentUrl().then(function (url) {
                     let parsedURL = urlParse.parse(url);
                     let parts = parsedURL.hash.split('/');
-                    lastSegment = parts.pop() || parts.pop();
+                    lastSegment = parts.pop();
                     httpGet(browser.params.webshop + "/api/product/" + lastSegment).then(function (result) {
                         expect(result.statusCode).toBe(200);
                         expect(JSON.stringify(result.headers)).toContain("text/html");

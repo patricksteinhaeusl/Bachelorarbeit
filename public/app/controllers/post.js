@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('PostController', ['$scope', '$location', 'PostService', 'AuthService',
-    function ($scope, $location, PostService, AuthService) {
+appControllers.controller('PostController', ['$rootScope', '$scope', '$location', 'PostService', 'AuthService',
+    function ($rootScope, $scope, $location, PostService, AuthService) {
         const self = this;
         self.data = {};
         self.data.post = {};
@@ -27,23 +27,20 @@ appControllers.controller('PostController', ['$scope', '$location', 'PostService
 
         self.insertUpload = function () {
             self.data.post._account = AuthService.getUser()._id;
-            PostService.insertUpload(self.data.post, self.data.postImage, function (error, data) {
-                if(data) {
-                    self.data.post = {};
-                    $location.path('/home');
-                }
-            }, function (progress) {
+            PostService.insertUpload(self.data.post, self.data.postImage, self.updatePost, function (progress) {
                 self.data.progress = progress;
             });
         };
 
         self.insertURL = function () {
             self.data.post._account = AuthService.getUser()._id;
-            PostService.insertURL(self.data.post, self.data.url, function (error, data) {
-                if(data) {
-                    self.data.post = {};
-                    $location.path('/home');
-                }
-            });
+            PostService.insertURL(self.data.post, self.data.url, self.updatePost);
+        };
+
+        self.updatePost = (error, data) => {
+            if(data) {
+                self.data.post = {};
+                $location.path('/home');
+            }
         };
 }]);

@@ -13,8 +13,6 @@ describe('Comment and Rating', function () {
             firstProduct.element(by.buttonText('Rate')).click();
             browser.sleep(250);
             //Reset Stars and then Set them
-            //TODO: WHAT IS THIS?
-            //firstProduct.all(by.css('.form-group .jk-rating-stars-container .button')).first().click();
             firstProduct.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();
             //Fill form
             let commentField = firstProduct.element(by.name('comment'));
@@ -125,8 +123,6 @@ describe('Comment and Rating', function () {
                 //Check if Comment is empty
                 expect(firstProduct.element(by.name('comment')).getAttribute('value')).toEqual('');
                 //Reset Stars and then Set them
-                //TODO: What is this?
-                //firstProduct.all(by.css('.form-group .jk-rating-stars-container .button')).first().click();
                 firstProduct.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();
                 //Fill form
                 let commentField = firstProduct.element(by.name('comment'));

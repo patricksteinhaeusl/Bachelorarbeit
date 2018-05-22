@@ -6,24 +6,21 @@ appControllers.controller('TopRatedProductController', ['$scope', 'ShopService',
         self.products = {};
 
         self.getProducts = function() {
-            ShopService.getProductsTopRated(function(error, data) {
-                if(data) {
-                    let products = data.products;
-                    self.products = products;
-                }
-            });
+            ShopService.getProductsTopRated(self.updateProducts);
         };
 
         $scope.$watch(function() {
             return ShopService.products;
         }, function() {
-            ShopService.getProductsTopRated(function(error, data) {
-                if(data) {
-                    let products = data.products;
-                    self.products = products;
-                }
-            });
+            ShopService.getProductsTopRated(self.updateProducts);
         }, false);
+
+        self.updateProducts = (error, data) => {
+            if(data) {
+                let products = data.products;
+                self.products = products;
+            }
+        };
 
         self.getProducts();
     }]);

@@ -11,24 +11,23 @@ appControllers.controller('FaqController', ['$scope', '$routeParams', 'FaqServic
         };
 
         self.getFaq = function () {
-            FaqService.getFaq(function (error, data) {
-                if (data) {
-                    self.data.FaqQuestions = data.faq;
-                }
-            });
+            FaqService.getFaq(self.updateFaq);
         };
 
         self.getFaqBySearchValue = function () {
             if (self.data.searchValue) {
-                FaqService.getFaqBySearchValue(self.data.searchValue, function (error, data) {
-                    if (data) {
-                        self.data.FaqQuestions = data.faq;
-                    }
-                });
+                FaqService.getFaqBySearchValue(self.data.searchValue, self.updateFaq);
             } else {
                 self.getFaq();
             }
             self.data.searchValue = '';
         };
+
+        self.updateFaq = (error, data) => {
+            if (data) {
+                self.data.FaqQuestions = data.faq;
+            }
+        };
+
         self.init();
     }]);
