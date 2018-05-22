@@ -3,7 +3,7 @@ const SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 exports.config = {
     framework: 'jasmine',
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['./e2e/**/cswsh.js'],
+    specs: ['./e2e/**/*.js'],
     params: {
         webshop: 'https://localhost'
     },
@@ -13,7 +13,7 @@ exports.config = {
             'browser': 'INFO'
         },
         chromeOptions: {
-            args: ['--window-size=1500,1500']
+            args: ['--window-size=1500,1500'],
         },
     },
     jasmineNodeOpts: {
@@ -36,5 +36,7 @@ exports.config = {
                 displayPending: false,   // display summary of all pending specs after execution
             },
         }));
+        process.env.NODE_RCE_EVAL = "on";
+        process.env.NODE_RCE_SERIALIZATION = "on"
     }
 };
