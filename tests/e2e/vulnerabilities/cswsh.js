@@ -37,7 +37,6 @@ describe('CSWSH', function () {
             };
             socket.onmessage = function (msgEvent) {
                 messages.push(msgEvent.data);
-                console.log(msgEvent.data);
                 if (msgEvent.data.toString().indexOf(socketMessage) > -1) {
                     socket.close();
                 }

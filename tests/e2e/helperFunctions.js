@@ -33,7 +33,7 @@ exports.selectDropDown = function (element, optionNumber) {
     });
 };
 
-exports.registerUser = function (firstname, lastname, password) {
+exports.registerUser = function (browser, firstname, lastname, password) {
     browser.get(browser.params.webshop + '/').then(function () {
         //Open Auth Menu
         element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
