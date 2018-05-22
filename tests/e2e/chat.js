@@ -2,7 +2,7 @@
 
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Websocket', function () {
+describe('Chat', function () {
 
     let firstBrowser = browser;
     let secondBrowser = browser.forkNewDriverInstance();
