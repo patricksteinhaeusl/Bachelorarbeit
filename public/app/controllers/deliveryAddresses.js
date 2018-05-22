@@ -1,6 +1,7 @@
 'use strict';
 
-appControllers.controller('DeliveryAddressesController', ['$scope', '$location', 'DeliveryAddressesService', 'AuthService', function ($scope, $location, DeliveryAddressesService, AuthService) {
+appControllers.controller('DeliveryAddressesController', ['$scope', '$location', 'DeliveryAddressesService', 'AuthService',
+    function ($scope, $location, DeliveryAddressesService, AuthService) {
         const self = this;
         self.data = {};
         self.data.account = {};
@@ -35,4 +36,4 @@ appControllers.controller('DeliveryAddressesController', ['$scope', '$location',
         };
 
         self.init();
-}]);
+    }]);

@@ -1,6 +1,7 @@
 'use strict';
 
-appControllers.controller('DeliveryAddressController', ['$scope', '$location', '$routeParams', 'DeliveryAddressService', 'AuthService', function ($scope, $location, $routeParams, DeliveryAddressService, AuthService) {
+appControllers.controller('DeliveryAddressController', ['$scope', '$location', '$routeParams', 'DeliveryAddressService', 'AuthService',
+    function ($scope, $location, $routeParams, DeliveryAddressService, AuthService) {
         const self = this;
         self.data = {};
         self.data.deliveryAddress = {};

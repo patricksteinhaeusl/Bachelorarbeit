@@ -83,16 +83,6 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             );
     };
 
-    self.rateProductCategory = (categoryId, product, rating, callback) => {
-        let data = {'product': product, 'rating': rating};
-        $http
-            .post('/api/product/rating', data)
-            .then(
-                (response) => ResponseService.successCallback(response, callback),
-                (error) => ResponseService.errorCallback(error, callback)
-            );
-    };
-
     self.addSearchValue = () => {
         let maxSearchValues = 2;
         if (self.searchValue) {
