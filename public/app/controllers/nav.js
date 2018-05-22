@@ -3,8 +3,8 @@
 appControllers.controller('NavController', function ($scope) {
     const self = this;
 
-    self.collapseNavigation = function (elementClassToSlide, elementClassToFooter) {
-       $(function () {
+    self.collapseNavigation = (elementClassToSlide, elementClassToFooter) => {
+       $(() => {
             $(elementClassToFooter).css('display', 'none');
             if ($(elementClassToSlide).is(':visible')) {
                 $scope.$slider = $(elementClassToSlide).slideUp();
@@ -14,8 +14,8 @@ appControllers.controller('NavController', function ($scope) {
         });
     };
 
-    self.collapseCartNavigation = function (elementClassToSlide, elementClassToFooter) {
-        $(function () {
+    self.collapseCartNavigation = (elementClassToSlide, elementClassToFooter) => {
+        $(() => {
             $(elementClassToFooter).css('display', 'none');
             if (!$(elementClassToSlide).is(':visible')) {
                 $scope.$slider = $(elementClassToSlide).slideDown();

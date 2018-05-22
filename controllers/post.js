@@ -5,11 +5,11 @@ const multer = require('multer');
 const ResponseUtil = require('../utils/response');
 
 const storage = multer.diskStorage({
-    destination: function (req, file, callback) {
+    destination: (req, file, callback) => {
         return callback(null, GlobalConfig.postImages.directory)
     },
-    filename: function (req, file, callback) {
-        crypto.pseudoRandomBytes(16, function (err, raw) {
+    filename: (req, file, callback) => {
+        crypto.pseudoRandomBytes(16, (err, raw) => {
             return callback(null, raw.toString('hex') + Date.now() + '.' + mime.getExtension(file.mimetype));
         });
     }
@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 
 const Upload = multer({
     storage: storage,
-    fileFilter: function (req, file, callback) {
+    fileFilter: (req, file, callback) => {
         const regEx = new RegExp("image");
         if (!regEx.test(file.mimetype)) {
             return callback('Only image files are allowed!');
@@ -44,7 +44,7 @@ function insertUpload(req, res) {
 }
 
 function uploadFile(req, res, callback) {
-    Upload(req, res, function (error) {
+    Upload(req, res, (error) => {
         if(error) {
             const errorResponse = ResponseUtil.createErrorResponse(error);
             return res.status(errorResponse.statusCode).json(errorResponse);

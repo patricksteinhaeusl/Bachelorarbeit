@@ -6,7 +6,7 @@ const CryptoUtil = require('../utils/crypt');
 const ResponseUtil = require('../utils/response');
 
 function get(accountId, callback) {
-    Account.findById(accountId, function (error, result) {
+    Account.findById(accountId, (error, result) => {
         if (error) return callback(ResponseUtil.createErrorResponse(error), 'Something went wrong.');
         if (!result) return callback(ResponseUtil.createNotFoundResponse(), 'Account not found.');
         result = {'user': result};
@@ -21,7 +21,7 @@ function update(account, callback) {
         runValidators: true,
         context: 'query',
         projection: { password: false, createdAt: false, updatedAt: false, __v: false }
-    }, function (error, resAccount) {
+    }, (error, resAccount) => {
         if (error) return callback(ResponseUtil.createValidationResponse(error.errors, 'Something went wrong.'));
         if (!resAccount) return callback(ResponseUtil.createNotFoundResponse('Account failed to create'));
         CryptoUtil.createToken(resAccount.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
@@ -33,11 +33,11 @@ function update(account, callback) {
 }
 
 function upload(accountId, profile, callback) {
-    Account.findOne({_id: accountId}, function(error, result) {
+    Account.findOne({_id: accountId}, (error, result) => {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
         result.profile = profile;
-        result.save(function (error, user) {
+        result.save((error, user) => {
             if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
             if (!result) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
             result = {'user': user};

@@ -31,7 +31,7 @@ function login(username, password, callback) {
         username: usernameObj,
         password: hashedPassword,
         isRetailer: false,
-    }, { password: false, createdAt: false, updatedAt: false, __v: false }, function (error, resAccount) {
+    }, { password: false, createdAt: false, updatedAt: false, __v: false }, (error, resAccount) => {
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!resAccount) {
             return callback(null, ResponseUtil.createNotFoundResponse('Username or Password incorrect.'));
@@ -47,12 +47,12 @@ function login(username, password, callback) {
 
 function register(account, callback) {
     let accountObj = new Account(account);
-    accountObj.validate(function (error) {
+    accountObj.validate((error) => {
         if(error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        accountObj.save(function (error, result) {
+        accountObj.save((error, result) => {
             if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
             if (!result) return callback(ResponseUtil.createNotFoundResponse('Registration failed.'));
-            Account.findOne(result, { password: false, createdAt: false, updatedAt: false, __v: false }, function (error, resAccount) {
+            Account.findOne(result, { password: false, createdAt: false, updatedAt: false, __v: false }, (error, resAccount) => {
                 if (error) return callback(ResponseUtil.createErrorResponse(error));
                 if (!result) return callback(ResponseUtil.createNotFoundResponse('Registration failed'));
                 CryptoUtil.createToken(resAccount.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {

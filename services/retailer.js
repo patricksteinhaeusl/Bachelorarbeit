@@ -4,16 +4,16 @@ const Order = require('../models/order');
 const ResponseUtil = require('../utils/response');
 
 function change(orderId, callback) {
-    Order.findById(orderId, function (error, result) {
+    Order.findById(orderId, (error, result) => {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
 
         if (result.payment.type === 'bill') {
             result.totalPrice = (result.totalPrice * 0.5).toFixed(2);
-            result.items.forEach(function (item) {
+            result.items.forEach((item) => {
                 item.product.price = (item.product.price * 0.5).toFixed(2);
             });
-            result.save(function(error, result) {
+            result.save((error, result) => {
                 if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
                 if (!result) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
                 result = {'order': result};

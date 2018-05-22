@@ -1,7 +1,6 @@
 'use strict';
 
-appControllers.controller('CreditCardController', ['$scope', '$location', '$routeParams', 'CreditCardService', 'AuthService',
-    function ($scope, $location, $routeParams, CreditCardService, AuthService) {
+appControllers.controller('CreditCardController', ['$scope', '$location', '$routeParams', 'CreditCardService', 'AuthService', function ($scope, $location, $routeParams, CreditCardService, AuthService) {
         const self = this;
         self.data = {};
         self.data.creditCard = {};
@@ -22,7 +21,7 @@ appControllers.controller('CreditCardController', ['$scope', '$location', '$rout
             {"value": 12, "text": "December"}
         ];
 
-        self.generateYears = function () {
+        self.generateYears = () => {
             let minYear = new Date().getFullYear();
             for(let i = 0; i <= 3; i++) {
                 self.years.push(minYear + i);
@@ -30,15 +29,15 @@ appControllers.controller('CreditCardController', ['$scope', '$location', '$rout
             return self.years;
         };
 
-        self.init = function () {
+        self.init = () => {
             self.getByNumber();
             self.generateYears();
         };
 
-        self.getByNumber = function () {
+        self.getByNumber = () => {
             let creditCardNumber = $routeParams.creditCardNumber;
             if (creditCardNumber) {
-                CreditCardService.getByNumber(creditCardNumber, function (error, data) {
+                CreditCardService.getByNumber(creditCardNumber, (error, data) => {
                     if(data) {
                         let creditCard = data.creditCard;
                         self.data.creditCard = creditCard;
@@ -47,12 +46,12 @@ appControllers.controller('CreditCardController', ['$scope', '$location', '$rout
             }
         };
 
-        self.update = function () {
+        self.update = () => {
             let creditCard = self.data.creditCard;
             CreditCardService.update(creditCard, self.updateCreditCard);
         };
 
-        self.insert = function () {
+        self.insert = () => {
             let creditCard = self.data.creditCard;
             creditCard._account = AuthService.getUser()._id;
             CreditCardService.insert(creditCard, self.updateCreditCard);

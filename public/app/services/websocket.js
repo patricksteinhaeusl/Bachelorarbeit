@@ -1,37 +1,37 @@
 'use strict';
 
-appServices.factory('WebSocketService', ['$rootScope', function($rootScope) {
+appServices.factory('WebSocketService', ['$rootScope', function ($rootScope) {
     let self = this;
     self.socket = io.connect({
         transports: ['websocket']
     });
 
     return {
-        on: function (eventName, callback) {
-            self.socket.on(eventName, function () {
+        on(eventName, callback) {
+            self.socket.on(eventName, () => {
                 let args = arguments;
-                $rootScope.$apply(function () {
+                $rootScope.$apply(() => {
                     callback.apply(self.socket, args);
                 });
             });
         },
-        emit: function (eventName, data, callback) {
-            self.socket.emit(eventName, data, function () {
+        emit(eventName, data, callback) {
+            self.socket.emit(eventName, data, () => {
                 let args = arguments;
-                $rootScope.$apply(function () {
+                $rootScope.$apply(() => {
                     if (callback) {
                         callback.apply(self.socket, args);
                     }
                 });
             })
         },
-        reJoin: function(user) {
+        reJoin(user) {
             this.emit('reJoin', user);
         },
-        join: function(user) {
+        join(user) {
             this.emit('join', user);
         },
-        leave: function(user) {
+        leave(user) {
             this.emit('leave', user);
         }
     };

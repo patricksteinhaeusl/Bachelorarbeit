@@ -5,7 +5,7 @@ const RetailerService = require('../services/retailer');
 function change(req, res) {
     if(req.user && req.user.isRetailer) {
         let orderId = req.params.orderId;
-        RetailerService.change(orderId, function (error, result) {
+        RetailerService.change(orderId, (error, result) => {
             if (error) return res.render('feedback', { feedback: error });
             return res.render('feedback', {feedback: result });
         });

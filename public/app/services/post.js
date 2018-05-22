@@ -1,8 +1,8 @@
 'use strict';
 
-appServices.factory('PostService', ['$http', 'Upload', 'ResponseService', function ($http, Upload, ResponseService) {
+appServices.factory('PostService', ['$http', 'Upload', 'ResponseService', function  ($http, Upload, ResponseService) {
     return {
-        getAll: function (callback) {
+        getAll(callback) {
             $http
                 .get('/api/post')
                 .then(
@@ -10,7 +10,7 @@ appServices.factory('PostService', ['$http', 'Upload', 'ResponseService', functi
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        insertUpload: function (post, postImage, callback, callbackEvent) {
+        insertUpload(post, postImage, callback, callbackEvent) {
             let data = {postImage: postImage, post: post};
             Upload.upload({
                 url: '/api/post/upload',
@@ -21,7 +21,7 @@ appServices.factory('PostService', ['$http', 'Upload', 'ResponseService', functi
                 (event) => ResponseService.eventCallback(event, callbackEvent)
             );
         },
-        insertURL: function (post, url, callback) {
+        insertURL(post, url, callback) {
             let data = {url: url, post: post};
             $http
                 .post('/api/post/url', data)
@@ -30,7 +30,7 @@ appServices.factory('PostService', ['$http', 'Upload', 'ResponseService', functi
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        remove: function (postId, callback) {
+        remove(postId, callback) {
             $http
                 .delete('/api/post/' + postId)
                 .then(

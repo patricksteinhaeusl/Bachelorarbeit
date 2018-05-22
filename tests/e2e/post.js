@@ -2,21 +2,21 @@
 const HelperFunctions = require('./helperFunctions.js');
 const path = require('path');
 
-describe('Post', function () {
-    beforeAll(function () {
+describe('Post', () => {
+    beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
-    afterAll(function () {
+    afterAll(() => {
         HelperFunctions.logout(browser);
     });
 
-    beforeEach(function() {
+    beforeEach(() => {
         browser.get(browser.params.webshop);
     });
 
-    describe('Add with Upload', function () {
-        it('should success', function () {
+    describe('Add with Upload', () => {
+        it('should success', () => {
             //Open Auth Menu
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
             browser.sleep(250);
@@ -43,8 +43,8 @@ describe('Post', function () {
         });
     });
 
-    describe('View', function () {
-        it('should success', function () {
+    describe('View', () => {
+        it('should success', () => {
             element(by.linkText('Home')).click();
             let posts = element.all(by.repeater('post in posts.data.posts'));
             //Check
@@ -56,13 +56,13 @@ describe('Post', function () {
         });
     });
 
-    describe('Delete', function () {
-        it('should success', function () {
+    describe('Delete', () => {
+        it('should success', () => {
             //Link
             element(by.linkText('Home')).click();
             browser.sleep(250);
             let posts = element.all(by.repeater('post in posts.data.posts'));
-            element.all(by.repeater('post in posts.data.posts')).count().then(function (preCount) {
+            element.all(by.repeater('post in posts.data.posts')).count().then((preCount) => {
                 posts.last().all(by.css('.glyphicon-trash')).get(0).click();
                 let postCount = element.all(by.repeater('post in posts.data.posts')).count();
                 //Check
@@ -71,8 +71,8 @@ describe('Post', function () {
         });
     });
 
-    describe('Add with URL', function () {
-        it('should success', function () {
+    describe('Add with URL', () => {
+        it('should success', () => {
             //Open Auth Menu
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
             browser.sleep(250);
@@ -94,7 +94,7 @@ describe('Post', function () {
             browser.sleep(250);
         });
 
-        it('should be visible', function () {
+        it('should be visible', () => {
             element(by.linkText('Home')).click();
             let posts = element.all(by.repeater('post in posts.data.posts'));
             //Check

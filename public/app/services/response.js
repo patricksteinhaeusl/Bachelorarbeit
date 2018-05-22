@@ -2,15 +2,15 @@
 
 appServices.factory('ResponseService', [function () {
     return {
-        successCallback: function (successResponse, callback) {
+        successCallback(successResponse, callback) {
             let data = successResponse.data.data;
             return callback(null, data);
         },
-        errorCallback: function (errorResponse, callback) {
+        errorCallback(errorResponse, callback) {
             let message = errorResponse.data.message;
             return callback(message, null);
         },
-        eventCallback: function(eventResponse, callback) {
+        eventCallback(eventResponse, callback) {
             let progressPercentage = parseInt(100 * event.loaded / event.total);
             return callback(progressPercentage);
         }

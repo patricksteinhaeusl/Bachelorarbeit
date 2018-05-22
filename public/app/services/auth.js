@@ -1,8 +1,8 @@
 'use strict';
 
-appServices.factory('AuthService', ['$http', '$rootScope', 'localStorageService', 'ResponseService', function ($http, $rootScope, LocalStorageService, ResponseService) {
+appServices.factory('AuthService', ['$http', '$rootScope', 'localStorageService', 'ResponseService', function  ($http, $rootScope, LocalStorageService, ResponseService) {
     return {
-        login: function (user, callback) {
+        login(user, callback) {
             $http
                 .post('/api/auth/login', user)
                 .then(
@@ -10,7 +10,7 @@ appServices.factory('AuthService', ['$http', '$rootScope', 'localStorageService'
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        register: function (account, callback) {
+        register(account, callback) {
             $http
                 .post('/api/auth/register', account)
                 .then(
@@ -18,7 +18,7 @@ appServices.factory('AuthService', ['$http', '$rootScope', 'localStorageService'
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        logout: function (callback) {
+        logout(callback) {
             let user = LocalStorageService.get('user');
             LocalStorageService.remove('token');
             LocalStorageService.remove('user');
@@ -26,10 +26,10 @@ appServices.factory('AuthService', ['$http', '$rootScope', 'localStorageService'
             $rootScope.messages.successes.push('Logout was successfully');
             return callback(null, {user: user});
         },
-        isAuthenticated: function () {
+        isAuthenticated() {
             return !!(LocalStorageService.get('token') && LocalStorageService.get('user') !== null);
         },
-        getUser: function () {
+        getUser() {
             if (LocalStorageService.get('token')) {
                 return LocalStorageService.get('user');
             }

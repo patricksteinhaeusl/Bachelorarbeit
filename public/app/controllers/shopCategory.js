@@ -1,93 +1,92 @@
 'use strict';
 
-appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ShopService',
-    function ($rootScope, $scope, $routeParams, AuthService, ShopService) {
-        const self = this;
-        self.products = {};
+appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ShopService', function ($rootScope, $scope, $routeParams, AuthService, ShopService) {
+    const self = this;
+    self.products = {};
 
-        self.sort = {
-            name: {
-                label: 'Name',
-                query: '+name'
-            },
-            category: {
-                label: 'Category',
-                query: '+category.name'
-            },
-            price: {
-                label: 'Price',
-                query: '+price'
-            },
-            size: {
-                label: 'Size',
-                query: '+size'
-            },
-            rating: {
-                label: 'Rating',
-                query: '-rating.value'
+    self.sort = {
+        name: {
+            label: 'Name',
+            query: '+name'
+        },
+        category: {
+            label: 'Category',
+            query: '+category.name'
+        },
+        price: {
+            label: 'Price',
+            query: '+price'
+        },
+        size: {
+            label: 'Size',
+            query: '+size'
+        },
+        rating: {
+            label: 'Rating',
+            query: '-rating.value'
+        }
+    };
+    self.selectedSort = self.sort.name.query;
+    self.productOrientation = 'wide';
+    self.categoryId = $routeParams.categoryId;
+
+    self.getProducts = () => {
+        ShopService.getProductsCategory(self.categoryId, (error, data) => {
+            if(data) {
+                let products = data.products;
+                self.products = products;
             }
-        };
-        self.selectedSort = self.sort.name.query;
-        self.productOrientation = 'wide';
-        self.categoryId = $routeParams.categoryId;
+        });
+    };
 
-        self.getProducts = function() {
-            ShopService.getProductsCategory(self.categoryId, function(error, data) {
+    self.rateProduct = (product, rating) => {
+        rating._account = AuthService.getUser()._id;
+        if(rating.value >= 1) {
+            ShopService.rateProductCategory(self.categoryId, product, rating, (error, data) => {
                 if(data) {
-                    let products = data.products;
-                    self.products = products;
+                    self.ratingByAccount = {};
+                    self.ratingEmptyByAccount = {};
+                    $('.shop-form-rating').slideUp();
+                    self.getProducts();
                 }
             });
-        };
+        } else {
+            $rootScope.messages.warnings.push('Rating must be at least 1 star');
+        }
+    };
 
-        self.rateProduct = function (product, rating) {
-            rating._account = AuthService.getUser()._id;
-            if(rating.value >= 1) {
-                ShopService.rateProductCategory(self.categoryId, product, rating, function (error, data) {
-                    if(data) {
-                        self.ratingByAccount = {};
-                        self.ratingEmptyByAccount = {};
-                        $('.shop-form-rating').slideUp();
-                        self.getProducts();
-                    }
-                });
-            } else {
-                $rootScope.messages.warnings.push('Rating must be at least 1 star');
-            }
-        };
+    self.collapseRatingForm = (productIndex) => {
+        let div = $('#shop-form-rating-' + productIndex);
+        if (div.is(':visible')) {
+            $('.shop-form-rating').slideUp();
+        } else {
+            $('.shop-form-rating').slideUp();
+            div.slideDown();
+            div.css('display', 'inline-block');
+        }
+    };
 
-        self.collapseRatingForm = function (productIndex) {
-            let div = $('#shop-form-rating-' + productIndex);
-            if (div.is(':visible')) {
-                $('.shop-form-rating').slideUp();
-            } else {
-                $('.shop-form-rating').slideUp();
-                div.slideDown();
-                div.css('display', 'inline-block');
-            }
-        };
+    self.changeOrientation = (orientation) => {
+        self.productOrientation = orientation;
+    };
 
-        self.changeOrientation = function (orientation) {
-            self.productOrientation = orientation;
-        };
+    $scope.$watch(() => {
+        return ShopService.searchValue;
+    }, (searchValue) => {
+        self.searchValue = searchValue;
+    }, false);
 
-        $scope.$watch(function() {
-            return ShopService.searchValue;
-        }, function(searchValue) {
-            self.searchValue = searchValue;
-        }, false);
+    $scope.$watch(() => {
+        return ShopService.products;
+    }, (products) => {
+        self.products = products;
+    }, false);
 
-        $scope.$watch(function() {
-            return ShopService.products;
-        }, function(products) {
-            self.products = products;
-        }, false);
+    $scope.$watch(() => {
+        return $routeParams.selectedQuantity;
+    }, (selectedQuantity) => {
+        ShopService.selectedQuantity = selectedQuantity;
+    }, true);
 
-        $scope.$watch(function() {
-            return $routeParams.selectedQuantity;
-        }, function(selectedQuantity) {
-            ShopService.selectedQuantity = selectedQuantity;
-        }, true);
-
-        self.getProducts();
-    }]);
+    self.getProducts();
+}]);

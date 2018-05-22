@@ -26,7 +26,7 @@ const config = {
         host: 'localhost',
         port: 27017,
         name: 'webshop',
-        connectionString: function () {
+        connectionString() {
             return 'mongodb://' + this.username + ':' + this.password + '@' + this.host + ':' + this.port + '/' + this.name;
         }
     },

@@ -3,7 +3,7 @@
 appControllers.controller('AlertsController', ['$rootScope', function ($rootScope) {
     const self = this;
 
-    self.clear = function() {
+    self.clear = () => {
         $rootScope.messages = {};
 
         $rootScope.messages.successes = [];

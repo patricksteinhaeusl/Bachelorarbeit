@@ -1,7 +1,6 @@
 'use strict';
 
-appControllers.controller('ShopController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ShopService',
-    function ($rootScope, $scope, $routeParams, AuthService, ShopService) {
+appControllers.controller('ShopController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ShopService', function ($rootScope, $scope, $routeParams, AuthService, ShopService) {
         const self = this;
         self.products = {};
 
@@ -30,8 +29,8 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
         self.selectedSort = self.sort.name.query;
         self.productOrientation = 'wide';
 
-        self.getProducts = function() {
-            ShopService.getProducts(function(error, data) {
+        self.getProducts = () => {
+            ShopService.getProducts((error, data) => {
                 if(data) {
                     let products = data.products;
                     self.products = products;
@@ -39,10 +38,10 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
             });
         };
 
-        self.rateProduct = function (product, rating) {
+        self.rateProduct = (product, rating) => {
             rating._account = AuthService.getUser()._id;
             if(rating.value >= 1) {
-                ShopService.rateProduct(product, rating, function (error, data) {
+                ShopService.rateProduct(product, rating, (error, data) => {
                     if(data) {
                         self.ratingByAccount = {};
                         self.ratingEmptyByAccount = {};
@@ -55,7 +54,7 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
             }
         };
 
-        self.collapseRatingForm = function (productIndex) {
+        self.collapseRatingForm = (productIndex) => {
             let div = $('#shop-form-rating-' + productIndex);
             if (div.is(':visible')) {
                 $('.shop-form-rating').slideUp();
@@ -66,25 +65,25 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
             }
         };
 
-        self.changeOrientation = function (orientation) {
+        self.changeOrientation = (orientation) => {
             self.productOrientation = orientation;
         };
 
-        $scope.$watch(function() {
+        $scope.$watch(() => {
             return ShopService.searchValue;
-        }, function(searchValue) {
+        }, (searchValue) => {
             self.searchValue = searchValue;
         }, false);
 
-        $scope.$watch(function() {
+        $scope.$watch(() => {
             return ShopService.products;
-        }, function(products) {
+        }, (products) => {
             self.products = products;
         }, false);
 
-        $scope.$watch(function() {
+        $scope.$watch(() => {
             return $routeParams.selectedQuantity;
-        }, function(selectedQuantity) {
+        }, (selectedQuantity) => {
             ShopService.selectedQuantity = selectedQuantity;
         }, true);
 

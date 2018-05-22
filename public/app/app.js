@@ -46,7 +46,7 @@ let routes = {
         requireLogin: true
     },
     '/account/:accountId/profile': {
-        templateUrl: function(params) {
+        templateUrl: (params) => {
             let templateUrl = 'assets/profiles/' + params.accountId + '.html';
             let templateNotFound = 'assets/profiles/notFound.html';
             if(templateExists(templateUrl)) {
@@ -122,23 +122,8 @@ angular.module('app', [
     'app.directives',
     'app.filters'
 ])
-.factory('AuthHttpResponseInterceptor', ['$q', '$location', 'localStorageService', function ($q, $location, localStorageService) {
-    return {
-        response: function (response){
-            return response || $q.when(response);
-        },
-        responseError: function (rejection) {
-            if (rejection.status === 401) {
-                localStorageService.remove('token');
-                localStorageService.remove('user');
-                $location.path('/home');
-            }
-            return $q.reject(rejection);
-        }
-    }
-}])
 .config(['$httpProvider', '$locationProvider', '$routeProvider', '$compileProvider', 'localStorageServiceProvider',
-    function ($httpProvider, $locationProvider, $routeProvider, $compileProvider, localStorageServiceProvider) {
+    ($httpProvider, $locationProvider, $routeProvider, $compileProvider, localStorageServiceProvider) => {
         $httpProvider.interceptors.push('AuthInterceptor', 'AlertInterceptor');
         $locationProvider.html5Mode(false).hashPrefix('!');
 
@@ -153,7 +138,7 @@ angular.module('app', [
             .setStorageType('localStorage');
 
         $compileProvider.debugInfoEnabled(true);
-}]).run(['$rootScope', '$http', '$location', 'localStorageService', 'AuthService', function ($rootScope, $http, $location, localStorageService, authService) {
+}]).run(['$rootScope', '$http', '$location', 'localStorageService', 'AuthService', ($rootScope, $http, $location, localStorageService, authService) => {
     if (!localStorageService.get('items')) {
         localStorageService.set('items', '[]');
     }
@@ -162,7 +147,7 @@ angular.module('app', [
         $http.defaults.headers.common.Authorization = 'Bearer ' + localStorageService.get('token');
     }
 
-    $rootScope.$on("$locationChangeStart", function (event, next, current) {
+    $rootScope.$on("$locationChangeStart", (event, next, current) => {
         for (let path in routes) {
             if (next.indexOf(path) !== -1) {
                 if (routes[path].requireLogin && !authService.isAuthenticated()) {

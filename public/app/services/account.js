@@ -2,7 +2,7 @@
 
 appServices.factory('AccountService', ['$http', 'Upload', 'ResponseService', function ($http, Upload, ResponseService) {
     return {
-        get: function (accountId, callback) {
+        get(accountId, callback) {
             $http
                 .get('/api/account/' + accountId)
                 .then(
@@ -10,7 +10,7 @@ appServices.factory('AccountService', ['$http', 'Upload', 'ResponseService', fun
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        update: function (account, callback) {
+        update(account, callback) {
             let data = {account: account};
             $http
                 .put('/api/account', data)
@@ -19,7 +19,7 @@ appServices.factory('AccountService', ['$http', 'Upload', 'ResponseService', fun
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        upload: function (accountId, profile, callback, callbackEvent) {
+        upload(accountId, profile, callback, callbackEvent) {
             let data = {accountId: accountId, profile: profile};
             Upload.upload({
                 url: '/api/account/profile',

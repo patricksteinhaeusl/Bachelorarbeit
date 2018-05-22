@@ -2,7 +2,7 @@
 
 appServices.factory('FaqService', ['$http', 'ResponseService', function ($http, ResponseService) {
     return {
-        getFaq: function (callback) {
+        getFaq(callback) {
             $http
                 .get('/api/faq')
                 .then(
@@ -11,7 +11,7 @@ appServices.factory('FaqService', ['$http', 'ResponseService', function ($http, 
                 );
         },
 
-        getFaqBySearchValue: function (searchValue, callback) {
+        getFaqBySearchValue(searchValue, callback)  {
             let data = {searchValue: searchValue};
             $http
                 .post('/api/faq/searchValue/', data)

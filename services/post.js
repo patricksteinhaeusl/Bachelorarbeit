@@ -13,7 +13,7 @@ function getAll(callback) {
     Post.find({}).populate({
         path: '_account',
         select: '_id username'
-    }).exec(function (error, result) {
+    }).exec((error, result) => {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('No posts found.'));
         result = {'posts': result};
@@ -54,10 +54,10 @@ function insertURL(post, url, callback) {
 }
 
 function remove(postId, callback) {
-    Post.findById(postId, function (error, post) {
+    Post.findById(postId, (error, post) => {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        fs.unlink(GlobalConfig.postImages.directory + post.image, function() {
-            post.remove(function(error) {
+        fs.unlink(GlobalConfig.postImages.directory + post.image, () => {
+            post.remove((error) => {
                 if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
                 return callback(null, ResponseUtil.createSuccessResponse(null, 'Post successfully deleted.'));
             });
@@ -66,9 +66,9 @@ function remove(postId, callback) {
 }
 
 function savePost(postObj, callback) {
-    postObj.validate(function (error) {
+    postObj.validate((error) => {
         if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        postObj.save(function (error, result) {
+        postObj.save((error, result) => {
             if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
             if (!result) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
             result = {'post': result};

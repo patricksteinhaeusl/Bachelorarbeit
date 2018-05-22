@@ -3,23 +3,23 @@ const path = require('path');
 const glob = require("glob");
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('RCE Injection', function () {
+describe('RCE Injection', () => {
 
-    beforeEach(function () {
+    beforeEach(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
-    afterEach(function () {
+    afterEach(() => {
         HelperFunctions.logout(browser);
     });
 
-    describe('Try to run netstat command', function () {
+    describe('Try to run netstat command', () => {
 
-        beforeEach(function() {
+        beforeEach(() => {
             browser.get(browser.params.webshop);
         });
 
-        it('should be successfully', function () {
+        it('should be successfully', () => {
             let fileName = 'rceInjection.txt';
 
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
@@ -34,12 +34,12 @@ describe('RCE Injection', function () {
 
             let filePath = '../../' + fileName;
 
-            browser.driver.wait(function () {
+            browser.driver.wait(() => {
                 let filesArray = glob.sync(path.join(__dirname, filePath));
                 if (typeof filesArray !== 'undefined' && filesArray.length > 0) {
                     return filesArray;
                 }
-            }, 5000).then(function (filesArray) {
+            }, 5000).then((filesArray) => {
                 expect(filesArray[0]).toContain(fileName);
             });
         });

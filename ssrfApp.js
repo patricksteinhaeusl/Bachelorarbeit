@@ -7,7 +7,7 @@ ssrf.use(express.static(__dirname + '/public/ssrf'));
 
 
 // catch 404 and forward to error handler
-ssrf.use(function (req, res, next) {
+ssrf.use((req, res, next) => {
     let err = new Error('Not Found');
     err.status = 404;
 
@@ -19,7 +19,7 @@ ssrf.use(function (req, res, next) {
 });
 
 // error handler
-ssrf.use(function (err, req, res) {
+ssrf.use((err, req, res) => {
     if(process.env.NODE_ENV === 'development') {
         res.locals.message = err.message;
         res.status(err.status || 500);

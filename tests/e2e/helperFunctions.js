@@ -1,7 +1,7 @@
 'use strict';
 
-exports.login = function (browser, username, password) {
-    browser.get(browser.params.webshop + '/').then(function () {
+exports.login = (browser, username, password) => {
+    browser.get(browser.params.webshop + '/').then(() => {
         //Open Auth Menu
         browser.element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
         browser.sleep(250);
@@ -14,8 +14,8 @@ exports.login = function (browser, username, password) {
     });
 };
 
-exports.logout = function logout (browser) {
-    browser.get(browser.params.webshop + '/').then(function () {
+exports.logout = (browser) => {
+    browser.get(browser.params.webshop + '/').then(() => {
         //Open Auth Menu
         browser.element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
         browser.sleep(250);
@@ -26,8 +26,8 @@ exports.logout = function logout (browser) {
     });
 };
 
-exports.selectDropDown = function (element, optionNumber) {
-    element.all(by.tagName('option')).then(function(options){
+exports.selectDropDown = (element, optionNumber) => {
+    element.all(by.tagName('option')).then((options) => {
         options[optionNumber].click();
     });
 };

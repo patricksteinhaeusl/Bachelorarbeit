@@ -2,7 +2,7 @@
 
 appServices.factory('DeliveryAddressesService', ['$http', 'ResponseService', function ($http, ResponseService) {
     return {
-        getAllByAccount: function (account, callback) {
+        getAllByAccount(account, callback) {
             $http
                 .get('/api/deliveryaddress/account/' + account._id)
                 .then(
@@ -10,7 +10,7 @@ appServices.factory('DeliveryAddressesService', ['$http', 'ResponseService', fun
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        remove: function (deliveryAddressId, callback) {
+        remove(deliveryAddressId, callback) {
             $http
                 .delete('/api/deliveryaddress/' + deliveryAddressId)
                 .then(

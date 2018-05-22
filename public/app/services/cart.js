@@ -6,10 +6,10 @@ appServices.service('CartService', ['localStorageService', function (LocalStorag
 
     self.items = JSON.parse(LocalStorageService.get('items'));
 
-    self.calculateTotalPrice = function () {
+    self.calculateTotalPrice = () => {
         let sum = 0;
         if (self.items) {
-            self.items.forEach(function (element) {
+            self.items.forEach((element) => {
                 sum += element.product.price * element.quantity;
             });
         }
@@ -18,15 +18,15 @@ appServices.service('CartService', ['localStorageService', function (LocalStorag
 
     self.totalPrice = self.calculateTotalPrice();
 
-    self.getTotalPrice = function () {
+    self.getTotalPrice = () => {
         return self.calculateTotalPrice();
     };
 
-    self.getItems = function () {
+    self.getItems = () => {
         return self.items;
     };
 
-    self.insert = function (product, quantity, callback) {
+    self.insert = (product, quantity, callback) => {
         if(!quantity) {
             quantity = 1;
         }
@@ -37,7 +37,7 @@ appServices.service('CartService', ['localStorageService', function (LocalStorag
             product: product
         };
 
-        self.items.forEach(function (element) {
+        self.items.forEach((element) => {
             if (element.product._id === item.product._id) {
                 found = true;
                 element.quantity += quantity;
@@ -53,13 +53,13 @@ appServices.service('CartService', ['localStorageService', function (LocalStorag
         return callback(null, 'Item successfully added to cart.');
     };
 
-    self.remove = function (itemIndex, callback) {
+    self.remove = (itemIndex, callback) => {
         self.items.splice(itemIndex, 1);
         LocalStorageService.set('items', JSON.stringify(self.items));
         return callback(null, 'Item successfully removed from cart.');
     };
 
-    self.clear = function () {
+    self.clear = () => {
         self.items = [];
         LocalStorageService.set('items', '[]');
         self.totalPrice = 0;

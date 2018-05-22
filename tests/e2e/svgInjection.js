@@ -2,18 +2,18 @@
 const HelperFunctions = require('./helperFunctions.js');
 const path = require('path');
 
-describe('Post - SVG Injection', function () {
-    beforeAll(function () {
+describe('Post - SVG Injection', () => {
+    beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
-    afterAll(function () {
+    afterAll(() => {
         HelperFunctions.logout(browser);
     });
 
-    describe('Add with data', function () {
-        it('should success', function () {
-            browser.get(browser.params.webshop).then(function () {
+    describe('Add with data', () => {
+        it('should success', () => {
+            browser.get(browser.params.webshop).then(() => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -40,11 +40,11 @@ describe('Post - SVG Injection', function () {
         });
     });
 
-    describe('View', function () {
-        it('should success', function () {
-            browser.get(browser.params.webshop).then(function () {
+    describe('View', () => {
+        it('should success', () => {
+            browser.get(browser.params.webshop).then(() => {
 
-                browser.manage().logs().get('browser').then(function(browserLog) {
+                browser.manage().logs().get('browser').then((browserLog) => {
                     require('util').inspect(browserLog);
                     expect(browserLog[browserLog.length-1].message).toContain('SVG Injection');
                 });
@@ -67,17 +67,17 @@ describe('Post - SVG Injection', function () {
         });
     });
 
-    describe('Delete', function () {
-        it('should success', function () {
-            browser.get(browser.params.webshop).then(function () {
+    describe('Delete', () => {
+        it('should success', () => {
+            browser.get(browser.params.webshop).then(() => {
 
-                browser.manage().logs().get('browser').then(function(browserLog) {
+                browser.manage().logs().get('browser').then((browserLog) => {
                     require('util').inspect(browserLog);
                     expect(browserLog[browserLog.length-1].message).toContain('SVG Injection');
                 });
 
                 let posts = element.all(by.repeater('post in posts.data.posts'));
-                element.all(by.repeater('post in posts.data.posts')).count().then(function (preCount) {
+                element.all(by.repeater('post in posts.data.posts')).count().then((preCount) => {
                     posts.last().all(by.css('.glyphicon-trash')).get(0).click();
                     let postCount = element.all(by.repeater('post in posts.data.posts')).count();
                     //Check

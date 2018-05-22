@@ -1,20 +1,19 @@
 'use strict';
 
-appControllers.controller('CreditCardsController', ['$scope', '$location', 'CreditCardsService', 'AuthService',
-    function ($scope, $location, CreditCardsService, AuthService) {
+appControllers.controller('CreditCardsController', ['$scope', '$location', 'CreditCardsService', 'AuthService', function ($scope, $location, CreditCardsService, AuthService) {
         const self = this;
         self.data = {};
         self.data.account = {};
         self.data.creditCards = {};
 
-        self.init = function () {
+        self.init = () => {
             self.data.account = AuthService.getUser();
             self.getAllByAccount();
         };
 
-        self.getAllByAccount = function () {
+        self.getAllByAccount = () => {
             let account = self.data.account;
-            CreditCardsService.getAllByAccount(account, function (error, data) {
+            CreditCardsService.getAllByAccount(account, (error, data) => {
                 if(data) {
                     let creditCards = data.creditCards;
                     self.data.creditCards = creditCards;
@@ -22,16 +21,16 @@ appControllers.controller('CreditCardsController', ['$scope', '$location', 'Cred
             });
         };
 
-        self.remove = function (index) {
+        self.remove = (index) => {
             let creditCardId = self.data.creditCards[index]._id;
-            CreditCardsService.remove(creditCardId, function (error, data) {
+            CreditCardsService.remove(creditCardId, (error, data) => {
                 if (data) {
                     self.data.creditCards.splice(index, 1);
                 }
             });
         };
 
-        self.goToCreditCardAdd = function () {
+        self.goToCreditCardAdd = () => {
             $location.path('/creditcard');
         };
 

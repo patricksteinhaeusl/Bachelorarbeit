@@ -2,7 +2,7 @@
 
 appServices.factory('OrderService', ['$http', 'ResponseService', function ($http, ResponseService) {
     return {
-        getTemp: function (accountId, callback) {
+        getTemp(accountId, callback) {
             $http
                 .get('/api/order/temp/account/' + accountId)
                 .then(
@@ -10,7 +10,7 @@ appServices.factory('OrderService', ['$http', 'ResponseService', function ($http
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        createTemp: function (items, totalPrice, account, callback) {
+        createTemp(items, totalPrice, account, callback) {
             let data = {items: items, totalPrice: totalPrice, account: account};
             $http
                 .post('/api/order/temp/create', data)
@@ -19,7 +19,7 @@ appServices.factory('OrderService', ['$http', 'ResponseService', function ($http
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        updateTemp: function (order, callback) {
+        updateTemp(order, callback) {
             let data = {'order': order};
             $http
                 .put('/api/order/temp', data)
@@ -28,7 +28,7 @@ appServices.factory('OrderService', ['$http', 'ResponseService', function ($http
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        save: function (order, callback) {
+        save(order, callback) {
             let data = {'order': order};
             $http
                 .post('/api/order', data)

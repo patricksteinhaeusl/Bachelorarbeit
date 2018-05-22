@@ -10,11 +10,11 @@ appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebS
 
     self.selectedUser = null;
 
-    self.selectUser = function (selectedUser) {
+    self.selectUser = (selectedUser) => {
         self.selectedUser = selectedUser;
     };
 
-    self.sendMsg = function () {
+    self.sendMsg = () => {
         WebSocketService.emit('getMsg',{
             to : self.selectedUser._id,
             msg : self.message,
@@ -32,24 +32,24 @@ appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebS
         WebSocketService.reJoin(authUser);
     }
 
-    WebSocketService.on('join', function (user) {
+    WebSocketService.on('join', (user) => {
         self.user = user;
     });
 
-    WebSocketService.on('leave', function () {
+    WebSocketService.on('leave', () => {
         self.user = null;
     });
 
-    WebSocketService.on('userList', function (userList) {
+    WebSocketService.on('userList', (userList) => {
         self.userList = userList;
     });
 
-    WebSocketService.on('sendMsg', function (data) {
+    WebSocketService.on('sendMsg', (data) => {
         self.messages.push(data);
     });
 
-    self.collapseChat = function (elementClassToSlide) {
-        $(function () {
+    self.collapseChat = (elementClassToSlide) => {
+        $(() => {
             if (!$(elementClassToSlide).is(':visible')) {
                 $(elementClassToSlide).fadeIn();
             } else {

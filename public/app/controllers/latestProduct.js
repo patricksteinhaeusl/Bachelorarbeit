@@ -1,17 +1,16 @@
 'use strict';
 
-appControllers.controller('LatestProductController', ['$scope', 'ShopService',
-    function ($scope, ShopService) {
+appControllers.controller('LatestProductController', ['$scope', 'ShopService', function ($scope, ShopService) {
         const self = this;
         self.products = {};
 
-        self.getProducts = function() {
+        self.getProducts = () => {
             ShopService.getProductsLatest(self.updateProducts);
         };
 
-        $scope.$watch(function() {
+        $scope.$watch(() => {
             return ShopService.products;
-        }, function() {
+        }, () => {
             ShopService.getProductsLatest(self.updateProducts);
         }, false);
 

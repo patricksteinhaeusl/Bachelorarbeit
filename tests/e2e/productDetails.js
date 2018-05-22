@@ -1,28 +1,28 @@
 'use strict';
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Product Details', function () {
-    beforeAll(function () {
+describe('Product Details', () => {
+    beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
         element(by.linkText('Shop')).click();
     });
 
-    afterAll(function () {
+    afterAll(() => {
         HelperFunctions.logout(browser);
     });
 
-    describe('Product', function () {
-        it('should have Details View with same attributes in details view as in overview', function () {
-            element.all(by.repeater('product in shop.products')).then(function (products) {
+    describe('Product', () => {
+        it('should have Details View with same attributes in details view as in overview', () => {
+            element.all(by.repeater('product in shop.products')).then((products) => {
                 let firstProduct = products[0];
                 let product1Name = firstProduct.element(by.binding('product.name')).getText();
-                let product1Category = firstProduct.element(by.binding('product.category')).getText().then(function (text) {
+                let product1Category = firstProduct.element(by.binding('product.category')).getText().then((text) => {
                     return "Category: " + text ;
                 });
-                let product1Size = firstProduct.element(by.binding('product.size')).getText().then(function (text) {
+                let product1Size = firstProduct.element(by.binding('product.size')).getText().then((text) => {
                     return "Size: " + text ;
                 });
-                let product1Price = firstProduct.element(by.binding('product.price')).getText().then(function (text) {
+                let product1Price = firstProduct.element(by.binding('product.price')).getText().then((text) => {
                     return "Price: " + text ;
                 });
                 firstProduct.element(by.linkText('Details')).click();
@@ -34,22 +34,22 @@ describe('Product Details', function () {
         });
     });
 
-    describe('Ask Questions', function () {
+    describe('Ask Questions', () => {
         let QuestionString = "To be or not to be that is the question";
-        it('should be able to ask a question', function () {
+        it('should be able to ask a question', () => {
             let QuestionCount = element.all(by.repeater('question in product.data.product.questions')).count();
             //Fill out Input
-            element(by.model('product.data.question.text')).clear().then(function () {
+            element(by.model('product.data.question.text')).clear().then(() => {
                 element(by.model('product.data.question.text')).sendKeys(QuestionString);
             });
             element(by.buttonText('Save')).click();
-            element.all(by.repeater('question in product.data.product.questions')).count().then(function (newCount) {
+            element.all(by.repeater('question in product.data.product.questions')).count().then((newCount) => {
                 expect(QuestionCount).toBe(newCount-1);
             });
         });
 
-        it('asked question should be visible and be on the bottom of all questions', function () {
-            element.all(by.repeater('question in product.data.product.questions')).then(function (question) {
+        it('asked question should be visible and be on the bottom of all questions', () => {
+            element.all(by.repeater('question in product.data.product.questions')).then((question) => {
                 expect(question[question.length-1].element(by.binding('question.text')).getText()).toBe(QuestionString);
             });
         });

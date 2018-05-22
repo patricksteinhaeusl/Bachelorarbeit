@@ -1,7 +1,6 @@
 'use strict';
 
-appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter', 'OrdersService', 'AuthService',
-function ($rootScope, $scope, $filter, OrdersService, AuthService) {
+appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter', 'OrdersService', 'AuthService', function ($rootScope, $scope, $filter, OrdersService, AuthService) {
     const self = this;
 
     self.data = {};
@@ -10,12 +9,12 @@ function ($rootScope, $scope, $filter, OrdersService, AuthService) {
     self.export.from = null;
     self.export.range = null;
 
-    self.init = function () {
+    self.init = () => {
         self.getAllByAccount();
     };
 
-    self.getAllByAccount = function () {
-        OrdersService.getAllByAccount(AuthService.getUser()._id, function (error, data) {
+    self.getAllByAccount = () => {
+        OrdersService.getAllByAccount(AuthService.getUser()._id, (error, data) => {
             if(data) {
                 let orders = data.orders;
                 self.data.orders = orders;
@@ -37,7 +36,7 @@ function ($rootScope, $scope, $filter, OrdersService, AuthService) {
 
         let counter = 1;
         let row;
-        self.data.orders.forEach(function(order) {
+        self.data.orders.forEach((order) => {
             if(counter >= from && counter <= to) {
                 let createdAt = $filter('date')(order.createdAt, 'dd.MM.yyyy HH:mm:ss', '+0200');
                 let totalPrice = order.totalPrice.toFixed(2) + ' CHF';
@@ -50,7 +49,7 @@ function ($rootScope, $scope, $filter, OrdersService, AuthService) {
                 ];
                 body.push(row);
 
-                order.items.forEach(function(item) {
+                order.items.forEach((item) => {
                     let itemName = item.quantity + ' x ' + item.product.name;
                     let itemPrice = (item.quantity * item.product.price).toFixed(2) + ' CHF';
                     row = [
@@ -68,11 +67,11 @@ function ($rootScope, $scope, $filter, OrdersService, AuthService) {
         return body;
     }
 
-    self.downloadPDF = function() {
+    self.downloadPDF = () => {
         if(!self.export.from || !self.export.range) {
             $rootScope.messages.warnings.push('Parameter from or range is missing!');
         } else {
-            OrdersService.getFromTo(self.export.from, self.export.range, function (error, data) {
+            OrdersService.getFromTo(self.export.from, self.export.range, (error, data) => {
                 if(data) {
                     let from = data.from;
                     let to = data.to;
@@ -82,7 +81,7 @@ function ($rootScope, $scope, $filter, OrdersService, AuthService) {
 
                         header: { text: 'Order output as pdf', margin: [25, 10, 25, 10] },
 
-                        footer: function(currentPage, pageCount) {
+                        footer: (currentPage, pageCount) => {
                             return {
                                 margin:10,
                                 columns: [

@@ -5,7 +5,7 @@ const GlobalConfig = require('../configs/index');
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-mongoose.connect(GlobalConfig.mongo.connectionString(), function(error) {
+mongoose.connect(GlobalConfig.mongo.connectionString(), (error) => {
     if(error) {
         LogUtil.writeError(error);
         process.exit(0);
@@ -15,19 +15,19 @@ mongoose.connect(GlobalConfig.mongo.connectionString(), function(error) {
 
 let util = mongoose.connection;
 
-util.on('disconnecting', function () {
+util.on('disconnecting', () => {
     LogUtil.writeError('Database disconnecting...');
 });
 
-util.on('disconnected', function () {
+util.on('disconnected', () => {
     LogUtil.writeError('Database disconnected!');
 });
 
-util.on('connected', function () {
+util.on('connected', () => {
     LogUtil.writeInfo('Database connected!');
 });
 
-util.on('connecting', function () {
+util.on('connecting', () => {
     LogUtil.writeInfo('Database connecting...');
 });
 

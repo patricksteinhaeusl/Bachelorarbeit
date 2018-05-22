@@ -47,7 +47,7 @@ const secureServer = https.createServer(GlobalConfig.sslOptions, app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, host, function() {
+server.listen(port, host, () => {
     let address = server.address();
     let host = address.address;
     let port = address.port;
@@ -57,7 +57,7 @@ server.listen(port, host, function() {
 server.on('error', (error) => onError(error, port));
 server.on('listening', () => onListening(server));
 
-secureServer.listen(sslPort, host, function() {
+secureServer.listen(sslPort, host, () => {
     let address = secureServer.address();
     let host = address.address;
     let port = address.port;
@@ -70,7 +70,7 @@ secureServer.on('listening', () => onListening(secureServer));
 /**
  * Start hidden HTTP Server for SSRF Challenge
  */
-SSRFServer.listen(SSRFPort, host, function() {
+SSRFServer.listen(SSRFPort, host, () => {
     let address = SSRFServer.address();
     let host = address.address;
     let port = address.port;

@@ -1,10 +1,10 @@
-appDirectives.directive('addOptions', ['$routeParams', function($routeParams) {
-    return function (scope, element, attrs) {
-        scope.$watch(function () {
+appDirectives.directive('addOptions', ['$routeParams', function ($routeParams) {
+    return (scope, element, attrs) => {
+        scope.$watch(() => {
             return $routeParams.selectedQuantity;
-        }, function (selectedQuantity) {
+        }, (selectedQuantity) => {
             let options = element.find('option');
-            angular.forEach(options, function (element) {
+            angular.forEach(options, (element) => {
                 if (element.value === selectedQuantity) {
                     element.remove();
                 }

@@ -2,7 +2,7 @@
 
 appServices.factory('OrdersService', ['$http', 'ResponseService', function ($http, ResponseService) {
     return {
-        getAllByAccount: function (accountId, callback) {
+        getAllByAccount(accountId, callback) {
             $http
                 .get('/api/order/account/' + accountId)
                 .then(
@@ -10,7 +10,7 @@ appServices.factory('OrdersService', ['$http', 'ResponseService', function ($htt
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        getFromTo: function (from, range, callback) {
+        getFromTo(from, range, callback) {
             $http
                 .get('/api/order/from/' + from + '/range/' + range)
                 .then(

@@ -19,9 +19,9 @@ exports.config = {
     },
     jasmineNodeOpts: {
         //Don't show protractors . output
-        print: function() {}
+        print: () => {}
     },
-    onPrepare: function () {
+    onPrepare: () => {
         jasmine.getEnv().addReporter(new SpecReporter({
             suite: {
                 displayNumber: true,    // display each suite number (hierarchical)

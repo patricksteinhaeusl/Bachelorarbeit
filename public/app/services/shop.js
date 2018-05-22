@@ -11,7 +11,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
 
     self.selectedQuantity = $routeParams.selectedQuantity;
 
-    self.getProducts = function(callback) {
+    self.getProducts = (callback) => {
         $http
             .get('/api/product')
             .then(
@@ -22,7 +22,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             );
     };
 
-    self.getProductsCategory = function (categoryId, callback) {
+    self.getProductsCategory = (categoryId, callback) => {
         $http
             .get('/api/product/category/' + categoryId)
             .then(
@@ -33,7 +33,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             );
     };
 
-    self.getProductsBySearchValue = function (searchValue, callback) {
+    self.getProductsBySearchValue = (searchValue, callback) => {
         self.searchValue = searchValue;
         let data = {searchValue: searchValue};
         $http
@@ -46,7 +46,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             );
     };
 
-    self.getProductsTopRated = function (callback) {
+    self.getProductsTopRated = (callback) => {
         $http
             .get('/api/product/toprated')
             .then(
@@ -55,7 +55,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             );
     };
 
-    self.getProductsLatest = function (callback) {
+    self.getProductsLatest = (callback) => {
         $http
             .get('/api/product/latest')
             .then(
@@ -64,7 +64,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             );
     };
 
-    self.getProductCategories = function (callback) {
+    self.getProductCategories = (callback) => {
         $http
             .get('/api/product/category')
             .then(
@@ -73,7 +73,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             );
     };
 
-    self.rateProduct = function (product, rating, callback) {
+    self.rateProduct = (product, rating, callback) => {
         let data = {'product': product, 'rating': rating};
         $http
             .post('/api/product/rating', data)
@@ -83,7 +83,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             );
     };
 
-    self.rateProductCategory = function (categoryId, product, rating, callback) {
+    self.rateProductCategory = (categoryId, product, rating, callback) => {
         let data = {'product': product, 'rating': rating};
         $http
             .post('/api/product/rating', data)
@@ -93,7 +93,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             );
     };
 
-    self.addSearchValue = function () {
+    self.addSearchValue = () => {
         let maxSearchValues = 2;
         if (self.searchValue) {
             if ($.inArray(self.searchValue, self.searchValues) === -1) {
@@ -121,7 +121,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
         return response;
     };
 
-    self.getSearchValue = function () {
+    self.getSearchValue = () => {
         return self.searchValue;
     };
 

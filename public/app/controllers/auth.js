@@ -7,9 +7,9 @@ appControllers.controller('AuthController', ['$scope', '$http', '$location', '$c
         self.data.login = {};
         self.data.register = {};
 
-        self.login = function () {
+        self.login = () => {
             let user = self.data.login.user;
-            AuthService.login(user, function (error, data) {
+            AuthService.login(user, (error, data) => {
                 if (data) {
                     let user = data.user;
                     let token = data.token;
@@ -25,9 +25,9 @@ appControllers.controller('AuthController', ['$scope', '$http', '$location', '$c
             });
         };
 
-        self.register = function () {
+        self.register = () => {
             let account = self.data.register.account;
-            AuthService.register(account, function (error, data) {
+            AuthService.register(account, (error, data) => {
                 if (data) {
                     let user = data.user;
                     let token = data.token;
@@ -44,8 +44,8 @@ appControllers.controller('AuthController', ['$scope', '$http', '$location', '$c
             });
         };
 
-        self.logout = function () {
-            AuthService.logout(function (error, data) {
+        self.logout = () => {
+            AuthService.logout((error, data) => {
                 if (data) {
                     let user = data.user;
 

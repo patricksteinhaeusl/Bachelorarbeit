@@ -56,8 +56,8 @@ creditCardSchema.plugin(uniqueValidator, { message: '{PATH}: already exists!' })
 
 let CreditCard = mongoose.model('CreditCard', creditCardSchema);
 
-CreditCard.find({}, function(error, docs) {
-    docs.forEach(function(doc) {
+CreditCard.find({}, (error, docs) => {
+    docs.forEach((doc) => {
         doc.year = minYear + Math.floor(Math.random() * 3);
         doc.save();
     });

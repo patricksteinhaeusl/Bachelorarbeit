@@ -5,13 +5,13 @@ appControllers.controller('PostsController', ['$scope', 'PostService', function 
     self.data = {};
     self.data.posts = [];
 
-    self.init = function () {
+    self.init = () => {
         self.initSlider();
         self.getPosts();
     };
 
-    self.initSlider = function () {
-        $(document).ready(function () {
+    self.initSlider = () => {
+        $(() => {
             let options = {
                 $AutoPlay: 1,
                 $BulletNavigatorOptions: {
@@ -24,7 +24,7 @@ appControllers.controller('PostsController', ['$scope', 'PostService', function 
 
             ScaleSlider(jssor_slider);
 
-            $(window).resize(function () {
+            $(window).resize(() => {
                 ScaleSlider(jssor_slider);
             });
         });
@@ -39,8 +39,8 @@ appControllers.controller('PostsController', ['$scope', 'PostService', function 
         }
     }
 
-    self.getPosts = function () {
-        PostService.getAll(function (error, data) {
+    self.getPosts = () => {
+        PostService.getAll((error, data) => {
             if(data) {
                 let posts = data.posts;
                 self.data.posts = posts;
@@ -48,9 +48,9 @@ appControllers.controller('PostsController', ['$scope', 'PostService', function 
         });
     };
 
-    self.remove = function (index) {
+    self.remove = (index) => {
         let postId = self.data.posts[index]._id;
-        PostService.remove(postId, function (error, data) {
+        PostService.remove(postId, (error, data) => {
             if (!error) {
                 self.data.posts.splice(index, 1);
             }

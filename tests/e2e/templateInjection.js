@@ -2,23 +2,23 @@
 const path = require('path');
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Template Injection', function () {
+describe('Template Injection', () => {
 
-    beforeAll(function () {
+    beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
-    afterAll(function () {
+    afterAll(() => {
         HelperFunctions.logout(browser);
     });
 
-    describe('Update profile', function () {
+    describe('Update profile', () => {
 
-        beforeEach(function () {
+        beforeEach(() => {
             browser.get(browser.params.webshop);
         });
 
-        it('default profile edited', function () {
+        it('default profile edited', () => {
             //Open Auth Menu
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
             browser.sleep(250);
@@ -40,7 +40,7 @@ describe('Template Injection', function () {
             expect(element.all(by.css('.profile-fields p')).get(2).getText()).toBe('Horse');
         });
 
-        it('injected profile edited', function () {
+        it('injected profile edited', () => {
             //Open Auth Menu
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
             browser.sleep(250);
@@ -57,7 +57,7 @@ describe('Template Injection', function () {
             element(by.linkText('My Profile')).click();
             browser.sleep(250);
 
-            browser.manage().logs().get('browser').then(function(browserLog) {
+            browser.manage().logs().get('browser').then((browserLog) => {
                 require('util').inspect(browserLog);
                 expect(browserLog[browserLog.length-1].message).toContain("{" +
                     "\\\"isRetailer\\\":false," +
@@ -70,7 +70,7 @@ describe('Template Injection', function () {
             });
         });
 
-        it('default profile edited', function () {
+        it('default profile edited', () => {
             //Open Auth Menu
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
             browser.sleep(250);

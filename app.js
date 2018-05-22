@@ -48,7 +48,7 @@ app.use('/api/retailer', retailer);
 app.use('/api/faq', faq);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
     let err = new Error('Not Found');
     err.status = 404;
 
@@ -60,7 +60,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res) {
+app.use((err, req, res) => {
     if(process.env.NODE_ENV === 'development') {
         res.locals.message = err.message;
         res.status(err.status || 500);

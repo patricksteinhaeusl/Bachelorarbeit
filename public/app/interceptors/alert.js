@@ -1,6 +1,6 @@
 appInterceptors.factory('AlertInterceptor', ['$q', '$rootScope', function ($q, $rootScope) {
     return {
-        response: function (successResponse) {
+        response: (successResponse) => {
             let statusCode = successResponse.data.statusCode;
             let message = successResponse.data.message;
 
@@ -10,7 +10,7 @@ appInterceptors.factory('AlertInterceptor', ['$q', '$rootScope', function ($q, $
 
             return successResponse || $q.when(successResponse);
         },
-        responseError: function (errorResponse) {
+        responseError: (errorResponse) => {
             let statusCode = errorResponse.data.statusCode;
             let message = errorResponse.data.message;
             let validations = errorResponse.data.validations;

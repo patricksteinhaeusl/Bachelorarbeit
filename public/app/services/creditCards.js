@@ -2,7 +2,7 @@
 
 appServices.factory('CreditCardsService', ['$http', 'ResponseService', function ($http, ResponseService) {
     return {
-        getAllByAccount: function (account, callback) {
+        getAllByAccount(account, callback) {
             $http
                 .get('/api/creditcard/account/' + account._id)
                 .then(
@@ -10,7 +10,7 @@ appServices.factory('CreditCardsService', ['$http', 'ResponseService', function 
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        remove: function (creditCardId, callback) {
+        remove(creditCardId, callback) {
             $http
                 .delete('/api/creditcard/' + creditCardId)
                 .then(

@@ -2,7 +2,7 @@
 
 appServices.factory('CreditCardService', ['$http', 'ResponseService', function ($http, ResponseService) {
     return {
-        getByNumber: function (creditCardNumber, callback) {
+        getByNumber(creditCardNumber, callback) {
             $http
                 .get('/api/creditcard/' + creditCardNumber)
                 .then(
@@ -10,7 +10,7 @@ appServices.factory('CreditCardService', ['$http', 'ResponseService', function (
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        update: function (creditCard, callback) {
+        update(creditCard, callback) {
             let data = {creditCard: creditCard};
             $http
                 .put('/api/creditcard/', data)
@@ -19,7 +19,7 @@ appServices.factory('CreditCardService', ['$http', 'ResponseService', function (
                     (error) => ResponseService.errorCallback(error, callback)
                 );
         },
-        insert: function (creditCard, callback) {
+        insert(creditCard, callback) {
             let data = {creditCard: creditCard};
             $http
                 .post('/api/creditcard/', data)

@@ -11,7 +11,7 @@ const storage = multer.memoryStorage();
 
 const Upload = multer({
     storage: storage,
-    fileFilter: function (req, file, callback) {
+    fileFilter: (req, file, callback) => {
         if (file.mimetype !== 'text/html') {
             return callback('Only html files are allowed!');
         }
@@ -41,7 +41,7 @@ function upload(req, res) {
     let fileName = accountId + '.' + mime.getExtension(profileFile.mimetype);
     let filePath = GlobalConfig.accountProfile.directory + fileName;
 
-    fs.writeFile(filePath, profile, function(error) {
+    fs.writeFile(filePath, profile, (error) => {
         if(error) {
             return res.status(500).json(ResponseUtil.createErrorResponse('Upload failed'));
         }
@@ -53,7 +53,7 @@ function upload(req, res) {
 }
 
 function uploadFile(req, res, callback) {
-    Upload(req, res, function (error) {
+    Upload(req, res, (error) => {
         if(error) {
             const errorResponse = ResponseUtil.createErrorResponse(error);
             return res.status(errorResponse.statusCode).json(errorResponse);

@@ -7,24 +7,24 @@ appControllers.controller('CartController', ['$rootScope', '$scope', 'CartServic
     self.data.items = CartService.getItems();
     self.data.totalPrice = CartService.getTotalPrice();
 
-    self.insert = function (product, quantity) {
+    self.insert = (product, quantity) => {
         let quantityNumber = Number(quantity);
         CartService.insert(product, quantityNumber, self.updateRootScope);
     };
 
-    self.remove = function (itemIndex) {
+    self.remove = (itemIndex) => {
         CartService.remove(itemIndex, self.updateRootScope);
     };
 
-    self.updateRootScope = function(error, message) {
+    self.updateRootScope = (error, message) => {
         if(message) {
             $rootScope.messages.successes.push(message);
         }
     };
 
-    $scope.$watch(function () {
+    $scope.$watch(() => {
         return CartService.getItems()
-    }, function (items) {
+    }, (items) => {
         self.data.items = items;
         self.data.totalPrice = CartService.getTotalPrice();
     }, true);

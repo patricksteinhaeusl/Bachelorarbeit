@@ -2,14 +2,14 @@
 
 const cookie = require('cookie');
 
-module.exports = function(server) {
+module.exports = (server) => {
     const io = require('socket.io')(server, {
         transports: ['websocket']
     });
 
     let users = [];
 
-    io.on('connection', function(socket) {
+    io.on('connection', (socket) => {
 
         let room = null;
         if(socket.request.headers.cookie) {
@@ -20,12 +20,12 @@ module.exports = function(server) {
             }
         }
 
-        socket.on('join', function (user) {
+        socket.on('join', (user) => {
             join(user);
             socket.join(user._id);
         });
 
-        socket.on('reJoin', function (user) {
+        socket.on('reJoin', (user) => {
             let updatedUser = updateUser(user);
 
             if(updatedUser) {
@@ -38,13 +38,13 @@ module.exports = function(server) {
             }
         });
 
-        socket.on('leave', function (data) {
+        socket.on('leave', (data) => {
             deleteUser(data);
             socket.emit('leave');
             io.emit('userList', users);
         });
 
-        socket.on('getMsg', function (data) {
+        socket.on('getMsg', (data) => {
             socket.to(data.to).emit('sendMsg', { msg: data.msg, from: data.from });
         });
 
