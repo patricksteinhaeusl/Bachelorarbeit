@@ -1,4 +1,6 @@
 'use strict';
+const fs = require('fs');
+const path = require('path');
 const HelperFunctions = require('./helperFunctions.js');
 let ccSettings, addressSettings, sumPrice, orderID, product1Name, product1Price, product1PriceReal, product1Quantity, product2Name,
     product2Price, product3Name, product3Price, quantity = 7;
@@ -194,6 +196,47 @@ describe('Order and Cart Processes', function () {
                         sumPrice.then(function (text) {
                             expect(element).toContain(text);
                         });
+                    });
+                });
+            });
+        });
+    });
+
+    describe('Print Orders', function () {
+        const protractorConf = require('../protractorConf.js');
+
+        it('should be able to export order list', function () {
+            browser.get(browser.params.webshop).then(function () {
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Link
+                element(by.linkText('My Orders')).click();
+                browser.sleep(250);
+                //Fill form
+                element(by.model('orders.export.from')).sendKeys("1");
+                element(by.model('orders.export.range')).sendKeys("5");
+                element(by.buttonText('Export pdf')).click();
+                let fileName = 'file.pdf';
+                let filePath = protractorConf.config.capabilities.chromeOptions.prefs.download.default_directory + fileName;
+                browser.wait(function() {
+                    try {
+                        fs.accessSync(filePath, fs.constants.F_OK);
+                        return true;
+                    } catch (error) {
+                        return false;
+                    }
+                }, 5000).then(function(exists) {
+                    expect(exists).toBe(true);
+                }).then(function() {
+                    browser.wait(function() {
+                        try {
+                            fs.unlinkSync(filePath);
+                            return true;
+                        } catch (error) {
+                            return false;
+                        }
+                    }, 5000).then(function(unlinked) {
+                        expect(unlinked).toBe(true);
                     });
                 });
             });
