@@ -19,20 +19,6 @@ function getById(req, res) {
     });
 }
 
-function getTopRated(req, res) {
-    ProductService.getTopRated((error, result) => {
-        if (error) return res.status(error.statusCode).json(error);
-        return res.status(result.statusCode).json(result);
-    });
-}
-
-function getLatest(req, res) {
-    ProductService.getLatest((error, result) => {
-        if (error) return res.status(error.statusCode).json(error);
-        return res.status(result.statusCode).json(result);
-    });
-}
-
 function getByCategoryId(req, res) {
     let categoryId = req.params.categoryId;
     ProductService.getByCategoryId(categoryId, (error, result) => {
@@ -85,8 +71,6 @@ module.exports = {
     getById,
     getByCategoryId,
     getBySearchValue,
-    getTopRated,
-    getLatest,
     updateRatings,
     getCategories,
     insertQuestion

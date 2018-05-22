@@ -6,80 +6,101 @@ const Question = require('../models/question').Question;
 const ResponseUtil = require('../utils/response');
 
 function get(callback) {
-    Product.find({}, (error, result) => handleFindProducts(error, result, callback));
+    // Find all products
+    Product.find({})
+        .then((products) => {
+            if (!products) return callback(ResponseUtil.createNotFoundResponse('No products found.'));
+            let data = {'products': products};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 function getById(productId, callback) {
-    Product.findById(productId).populate({
-        path: 'questions._account',
-        select: '_id username'
-    }).exec((error, result) => {
-        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('No product found.'));
-        result = {'product': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
-    });
-}
-
-function getTopRated(callback) {
-    Product.find({}, (error, result) => handleFindProducts(error, result, callback));
-}
-
-function getLatest(callback) {
-    Product.find({}, (error, result) => handleFindProducts(error, result, callback));
+    // Find product by id and populate questions
+    Product.findById(productId)
+        .populate({
+            path: 'questions._account',
+            select: '_id username'
+        }).exec((product) => {
+            if (!product) return callback(ResponseUtil.createNotFoundResponse('No product found.'));
+            let data = {'product': product};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 function getByCategoryId(categoryId, callback) {
-    Product.find({'category._id': categoryId}, (error, result) => handleFindProducts(error, result, callback));
+    // Find product by category id
+    Product.find({'category._id': categoryId})
+        .then((products) => {
+            if (!products) return callback(ResponseUtil.createNotFoundResponse('No products found.'));
+            let data = {'products': products};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 function getBySearchValue(searchValueObj, callback) {
+    // Find product by search value
     Product.find({
-        $or: [
-            {name: new RegExp(searchValueObj.searchValue, "i")},
-            {'category.name': new RegExp(searchValueObj.searchValue, "i")}
-        ]
-    }, (error, result) => handleFindProducts(error, result, callback));
+            $or: [
+                {name: new RegExp(searchValueObj.searchValue, "i")},
+                {'category.name': new RegExp(searchValueObj.searchValue, "i")}
+            ]
+        }).then((products) => {
+            if (!products) return callback(ResponseUtil.createNotFoundResponse('No products found.'));
+            let data = {'products': products};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 function updateRatings(product, rating, callback) {
     let ratingObj = new Rating(rating);
-    ratingObj.validate((error) => {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-            Product.findOneAndUpdate(
-                {_id: product._id, 'ratings._account': rating._account},
-                {$set: {'ratings.$.comment': rating.comment, 'ratings.$.value': rating.value}},
-                {new: true},
-                (error, result) => {
-                    if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                    if (result) {
-                        result.rating.value = calculateTotalRating(result.ratings);
-                        result.save((error, result) => {
-                            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                            result = {'product': result};
-                            return callback(null, ResponseUtil.createSuccessResponse(result, 'Rating updated successfully.'));
-                        });
-                    } else {
-                        Product.findOneAndUpdate(
-                            {_id: product._id},
-                            {$push: {ratings: rating}},
-                            {new: true},
-                            (error, result) => {
-                                if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                                if (!result) return callback(ResponseUtil.createNotFoundResponse('Rating failed to save.'));
-                                result.rating.value = calculateTotalRating(result.ratings);
-                                result.save((error, result) => {
-                                    if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                                    result = {'product': result};
-                                    return callback(null, ResponseUtil.createSuccessResponse(result, 'Rating saved successfully.'));
-                                });
-                            });
-                    }
-            });
-    });
+
+    // Validate rating
+    let validationError = ratingObj.validateSync();
+    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
+
+    // Update Existing Rating
+    Product.findOneAndUpdate({
+            _id: product._id,
+            'ratings._account': rating._account
+        }, {
+        $set: {
+            'ratings.$': ratingObj }
+        }, {
+            new: true
+        }).then((product) => {
+            // Update total rating
+            if(product) {
+                product.rating.value = calculateTotalRating(product.ratings);
+            }
+            return product;
+        }).then((product) => {
+            // Add new Rating
+            if(!product) {
+                Product.findOneAndUpdate({
+                        _id: product._id
+                    }, {
+                        $push: {ratings: rating}
+                    }, {
+                        new: true
+                    }).then((newProduct) => {
+                        newProduct.rating.value = calculateTotalRating(newProduct.ratings);
+                    }).catch((error) => {
+                        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                    });
+            }
 }
 
 function getCategories(callback) {
+    // Find all categories
     Product.aggregate(
         [{
             $group: {
@@ -90,11 +111,38 @@ function getCategories(callback) {
             $sort: {
                 'name': 1
             }
-        }], (error, result) => {
-            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse('No categories found.'));
-            result = {'categories': result};
-            return callback(null, ResponseUtil.createSuccessResponse(result));
+        }]).then((categories) => {
+            if (!categories) return callback(ResponseUtil.createNotFoundResponse('No categories found.'));
+            let data = {'categories': categories};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
+}
+
+function insertQuestion(productId, question, callback) {
+    let questionObj = new Question(question);
+
+    // Validate question
+    const validationError = questionObj.validateSync();
+    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
+
+    // Find product and update question and populate account
+    Product.findOneAndUpdate({
+            _id: productId
+        }, {
+            $push: {questions: questionObj}
+        }, {
+            new: true
+        }).populate({
+            path: 'questions._account',
+            select: '_id username'
+        }).exec((product) => {
+            if (!product) return callback(ResponseUtil.createNotFoundResponse('Question failed to save.'));
+            const data = {'product': product};
+            return callback(null, ResponseUtil.createSuccessResponse(data, 'Question saved successfully.'));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
 }
 
@@ -110,40 +158,11 @@ function calculateTotalRating(ratings) {
     }
 }
 
-function insertQuestion(productId, question, callback) {
-    let questionObj = new Question(question);
-    questionObj.validate((error) => {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        Product.findOneAndUpdate(
-            {_id: productId},
-            {$push: {questions: questionObj}},
-            {new: true})
-        .populate({
-            path: 'questions._account',
-            select: '_id username'
-        }).exec((error, result) => {
-            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse('Question failed to save.'));
-            result = {'product': result};
-            return callback(null, ResponseUtil.createSuccessResponse(result, 'Question saved successfully.'));
-        });
-    });
-}
-
-function handleFindProducts(error, result, callback) {
-    if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-    if (!result) return callback(ResponseUtil.createNotFoundResponse('No products found.'));
-    result = {'products': result};
-    return callback(null, ResponseUtil.createSuccessResponse(result));
-}
-
 module.exports = {
     get,
     getById,
     getByCategoryId,
     getBySearchValue,
-    getTopRated,
-    getLatest,
     updateRatings,
     getCategories,
     insertQuestion

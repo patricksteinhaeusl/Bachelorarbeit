@@ -8,7 +8,6 @@ function login(req, res) {
 
     AuthService.login(username, password, (error, result) => {
         if (error) return res.status(error.statusCode).json(error);
-        console.log(result);
         return res.status(result.statusCode).json(result);
     });
 }

@@ -4,25 +4,32 @@ const Order = require('../models/order');
 const ResponseUtil = require('../utils/response');
 
 function change(orderId, callback) {
-    Order.findById(orderId, (error, result) => {
-        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
+    // Find order by id
+    Order.findById(orderId)
+        .then((order) => {
+            // Discount on order
+            if (!order) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
 
-        if (result.payment.type === 'bill') {
-            result.totalPrice = (result.totalPrice * 0.5).toFixed(2);
-            result.items.forEach((item) => {
-                item.product.price = (item.product.price * 0.5).toFixed(2);
-            });
-            result.save((error, result) => {
-                if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                if (!result) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
-                result = {'order': result};
-                return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully updated.'));
-            });
-        } else {
+            if (order.payment.type === 'bill') {
+                order.totalPrice = (order.totalPrice * 0.5).toFixed(2);
+                order.items.forEach((item) => {
+                    item.product.price = (item.product.price * 0.5).toFixed(2);
+                });
+                return order;
+            }
             return callback(ResponseUtil.createErrorResponse('Expected payment type: bill'));
-        }
-    });
+        }).then((order) => {
+            // Save Order
+            Order.create(order).then((newOrder) => {
+                if (!newOrder) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
+                let data = {'order': newOrder};
+                return callback(null, ResponseUtil.createSuccessResponse(data, 'Order successfully updated.'));
+            }).catch((error) => {
+                if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            });
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 module.exports = {
