@@ -13,6 +13,12 @@ describe('Deserialization - Deserialization Bug', function () {
         HelperFunctions.logout(browser);
     });
 
+    describe('Environment Variable Check', function () {
+        if(process.env.NODE_RCE_SERIALIZATION !== 'ON' || process.env.NODE_RCE_SERIALIZATION !== 'on') {
+            fail("Environment Variable not set");
+        }
+    });
+
     describe('Try to run netstat command', function () {
 
         beforeEach(function() {
