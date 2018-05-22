@@ -28,7 +28,8 @@ describe('Profile Tests', function () {
             element(by.partialLinkText('#!/account')).getText().then(function (url) {
                 let secondLastSegment = url.split('/').filter(el => !!el);
                 secondLastSegment = secondLastSegment[secondLastSegment.length-2];
-                browser.get(browser.params.webshop + '/#!/account/' + secondLastSegment + '/profile');
+                element(by.linkText('My Profile')).click();
+                browser.sleep(250);
                 browser.getCurrentUrl().then(function (url) {
                     expect(url).toContain("/#!/account/" + secondLastSegment + "/profile");
                 });
@@ -60,7 +61,7 @@ describe('Profile Tests', function () {
     describe('Update profile', function () {
 
         beforeAll(function () {
-            HelperFunctions.registerUser(browser, "Profile","Muster","customer250");
+            HelperFunctions.registerUser("Profile","Muster","customer250");
         });
 
         afterAll(function () {
@@ -88,7 +89,8 @@ describe('Profile Tests', function () {
             element(by.partialLinkText('#!/account')).getText().then(function (url) {
                 let secondLastSegment = url.split('/').filter(el => !!el);
                 secondLastSegment = secondLastSegment[secondLastSegment.length-2];
-                browser.get(browser.params.webshop + '/#!/account/' + secondLastSegment + '/profile');
+                element(by.linkText('My Profile')).click();
+                browser.sleep(250);
                 browser.getCurrentUrl().then(function (url) {
                     expect(url).toContain("/#!/account/" + secondLastSegment + "/profile");
                 });
