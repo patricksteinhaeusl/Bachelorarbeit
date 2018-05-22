@@ -12,9 +12,18 @@ exports.config = {
         'loggingPrefs': {
             'browser': 'INFO'
         },
-        chromeOptions: {
-            args: ['--window-size=1500,1500'],
+        'chromeOptions': {
+            args: ['--window-size=1500,1500','--no-sandbox', '--test-type=browser'],
+            prefs: {
+                'plugins.always_open_pdf_externally': true,
+                'download': {
+                    'prompt_for_download': false,
+                    'default_directory': __dirname + '/assets/downloads/',
+                    'directory_upgrade': true
+                }
+            }
         },
+
     },
     jasmineNodeOpts: {
         //Don't show protractors . output
@@ -36,7 +45,5 @@ exports.config = {
                 displayPending: false,   // display summary of all pending specs after execution
             },
         }));
-        process.env.NODE_RCE_EVAL = "on";
-        process.env.NODE_RCE_SERIALIZATION = "on"
     }
 };
