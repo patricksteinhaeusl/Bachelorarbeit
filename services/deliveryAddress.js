@@ -18,7 +18,7 @@ function getByAccountId(accountId, callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('No delivery address found.'));
         result = {'deliveryAddresses': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Delivery address found.'));
+        return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }
 
@@ -34,7 +34,7 @@ function update(deliveryAddress, callback) {
             if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
             if (!result) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to update.'));
             result = {'deliveryAddress': result};
-            return callback(null, ResponseUtil.createSuccessResponse(result, 'Delivery address successfully updated.'));
+            return callback(null, ResponseUtil.createSuccessResponse(result));
         });
     });
 }
@@ -74,7 +74,7 @@ function insertByAccount(account, deliveryAddress, callback) {
 function remove(deliveryAddressId, callback) {
     DeliveryAddress.findByIdAndRemove(deliveryAddressId, function (error) {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        return callback(null, ResponseUtil.createSuccessResponse(null, 'Deliveryaddress successfully deleted.'));
+        return callback(null, ResponseUtil.createSuccessResponse(null, 'Delivery address successfully deleted.'));
     });
 }
 

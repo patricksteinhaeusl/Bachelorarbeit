@@ -27,14 +27,11 @@ function login(username, password, callback) {
     }
     // Injection Code End
 
-    console.log(usernameObj, hashedPassword);
-
     Account.findOne({
         username: usernameObj,
         password: hashedPassword,
         isRetailer: false,
     }, { password: false, createdAt: false, updatedAt: false, __v: false }, function (error, resAccount) {
-        console.log(resAccount);
         if (error) return callback(ResponseUtil.createErrorResponse(error));
         if (!resAccount) {
             return callback(null, ResponseUtil.createNotFoundResponse('Username or Password incorrect.'));

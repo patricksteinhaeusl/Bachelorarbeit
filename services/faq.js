@@ -8,7 +8,7 @@ function get(callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
         result = {'faq': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Faqs found.'));
+        return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }
 
@@ -20,7 +20,7 @@ function getFaqBySearchValue(searchValueObj, callback) {
         if (error) return callback(ResponseUtil.createErrorResponse('Could not process your input.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
         result = {'faq': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Faqs found.'));
+        return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }
 

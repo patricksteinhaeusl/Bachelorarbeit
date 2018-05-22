@@ -7,16 +7,17 @@ function login(req, res) {
     let password = req.body.password;
 
     AuthService.login(username, password, (error, result) => {
-        if (error) return res.json(error);
-        return res.json(result);
+        if (error) return res.status(error.statusCode).json(error);
+        console.log(result);
+        return res.status(result.statusCode).json(result);
     });
 }
 
 function register(req, res) {
     let account = req.body;
     AuthService.register(account, (error, result) => {
-        if (error) return res.json(error);
-        return res.json(result);
+        if (error) return res.status(error.statusCode).json(error);
+        return res.status(result.statusCode).json(result);
     });
 }
 

@@ -102,6 +102,7 @@ let routes = {
     }
 };
 
+let appInterceptors = angular.module('app.interceptors', []);
 let appControllers = angular.module('app.controllers', []);
 let appServices = angular.module('app.services', []);
 let appDirectives = angular.module('app.directives', []);
@@ -115,6 +116,7 @@ angular.module('app', [
     'ngFileUpload',
     'angular-toArrayFilter',
     'jkAngularRatingStars',
+    'app.interceptors',
     'app.controllers',
     'app.services',
     'app.directives',
@@ -137,7 +139,7 @@ angular.module('app', [
 }])
 .config(['$httpProvider', '$locationProvider', '$routeProvider', '$compileProvider', 'localStorageServiceProvider',
     function ($httpProvider, $locationProvider, $routeProvider, $compileProvider, localStorageServiceProvider) {
-        $httpProvider.interceptors.push('AuthHttpResponseInterceptor');
+        $httpProvider.interceptors.push('AuthInterceptor', 'AlertInterceptor');
         $locationProvider.html5Mode(false).hashPrefix('!');
 
         for (let path in routes) {

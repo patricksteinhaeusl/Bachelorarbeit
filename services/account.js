@@ -10,7 +10,7 @@ function get(accountId, callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error), 'Something went wrong.');
         if (!result) return callback(ResponseUtil.createNotFoundResponse(), 'Account not found.');
         result = {'user': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Account found.'));
+        return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }
 

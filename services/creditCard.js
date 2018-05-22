@@ -9,7 +9,7 @@ function getByNumber(creditCardNumber, callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('No credit card found.'));
         result = {'creditCard': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Credit card found.'));
+        return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }
 
@@ -18,7 +18,7 @@ function getAll(callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('No credit cards found.'));
         result = {'creditCards': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Credit cards found.'));
+        return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }
 
@@ -27,7 +27,7 @@ function getByAccountId(accountId, callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('Credit card not found.'));
         result = {'creditCards': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Credit card found.'));
+        return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }
 

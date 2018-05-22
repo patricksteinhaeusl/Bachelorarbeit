@@ -11,7 +11,7 @@ function get(orderId, callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
         result = {'order': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Order found.'));
+        return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }
 
@@ -23,7 +23,7 @@ function getByAccountId(accountId, callback) {
             if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
             if (!result) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
             result = {'orders': result};
-            return callback(null, ResponseUtil.createSuccessResponse(result, 'Order found.'));
+            return callback(null, ResponseUtil.createSuccessResponse(result));
         });
 }
 
@@ -32,7 +32,7 @@ function getTempByAccountId(accountId, callback) {
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse());
         result = {'order': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully updated'));
+        return callback(null, ResponseUtil.createSuccessResponse(result));
     });
 }
 
@@ -87,7 +87,7 @@ function createTemp(items, totalPrice, account, callback) {
                     if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
                     if (!result) return callback(ResponseUtil.createNotFoundResponse('Order failed to create.'));
                     result = {'order': result};
-                    return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully created.'));
+                    return callback(null, ResponseUtil.createSuccessResponse(result));
                 });
             });
         });
@@ -102,7 +102,7 @@ function updateTemp(order, callback) {
             if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
             if (!result) return callback(ResponseUtil.createNotFoundResponse('Order failed to update.'));
             result = {'order': result};
-            return callback(null, ResponseUtil.createSuccessResponse(result, 'Order successfully updated'));
+            return callback(null, ResponseUtil.createSuccessResponse(result));
         });
     });
 }

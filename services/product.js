@@ -61,7 +61,6 @@ function getBySearchValue(searchValueObj, callback) {
             {'category.name': new RegExp(searchValueObj.searchValue, "i")}
         ]
     }, function (error, result) {
-        console.log("Result", result);
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!result) return callback(ResponseUtil.createNotFoundResponse('No product found.'));
         result = {'products': result};
