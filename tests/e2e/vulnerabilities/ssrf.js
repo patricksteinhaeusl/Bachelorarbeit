@@ -1,47 +1,47 @@
 'use strict';
 const HelperFunctions = require('../helperFunctions.js');
 
-describe('SSRF', function () {
+describe('SSRF', () => {
     let result;
     let resultNormal;
     let pictureURL = browser.params.webshop.toString().replace("https://", "http://") + ":8765/file002.jpg";
     let pictureURLNormal = browser.params.webshop + "/file002.jpg";
 
-    beforeAll(function (done) {
+    beforeAll((done) => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
-        result = HelperFunctions.httpRequest(pictureURL).then(function (result) {
+        result = HelperFunctions.httpRequest(pictureURL).then((result) => {
             done();
             return result;
         });
-        resultNormal = HelperFunctions.httpRequest(pictureURLNormal).then(function (result) {
+        resultNormal = HelperFunctions.httpRequest(pictureURLNormal).then((result) => {
             done();
             return result;
         });
     });
 
-    afterAll(function () {
+    afterAll(() => {
         HelperFunctions.logout(browser);
     });
 
-    it('picture should not be reachable on normal server', function () {
+    it('picture should not be reachable on normal server', () => {
         resultNormal.then((text) => {
             expect(text.statusCode).toBe(404);
         });
     });
 
-    it('picture has to be reachable on seperate server', function () {
+    it('picture has to be reachable on seperate server', () => {
         result.then((text) => {
             expect(text.statusCode).toBe(200);
         });
     });
 
-    it('picture should have right content type', function () {
+    it('picture should have right content type', () => {
         result.then((text) => {
             expect(JSON.stringify(text.headers)).toContain("image/jpeg");
         });
     });
 
-    it('adding hidden Picture as community post should work', function () {
+    it('adding hidden Picture as community post should work', () => {
         //Link
         element(by.linkText('Community')).click();
         browser.sleep(250);
@@ -58,7 +58,7 @@ describe('SSRF', function () {
         expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Post successfully created.\n×");
     });
 
-    it('hidden picture should be visible on home', function () {
+    it('hidden picture should be visible on home', () => {
         element(by.linkText('Home')).click();
         let posts = element.all(by.repeater('post in posts.data.posts'));
         //Check

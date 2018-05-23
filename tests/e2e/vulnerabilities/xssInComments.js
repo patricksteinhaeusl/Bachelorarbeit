@@ -1,20 +1,20 @@
 'use strict';
 const HelperFunctions = require('../helperFunctions.js');
 
-describe('XSS in Comments', function () {
-    beforeAll(function () {
+describe('XSS in Comments', () => {
+    beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
-    afterAll(function () {
+    afterAll(() => {
         HelperFunctions.logout(browser);
     });
 
-    it('comment should be successfully added', function () {
+    it('comment should be successfully added', () => {
         //Add a Comment
         element(by.linkText('Shop')).click();
         //Get first product
-        element.all(by.repeater('product in shop.products')).then(function (products) {
+        element.all(by.repeater('product in shop.products')).then((products) => {
             let thirdProduct = products[3];
             //Open Comment
             thirdProduct.element(by.buttonText('Rate')).click();
@@ -22,7 +22,7 @@ describe('XSS in Comments', function () {
             thirdProduct.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();
             //Fill form
             let commentField = thirdProduct.element(by.model('rating.comment'));
-            commentField.clear().then(function () {
+            commentField.clear().then(() => {
                 commentField.sendKeys("<script>console.log(\"XSS in Comments\");</script>");
                 //Submit form
                 thirdProduct.element(by.buttonText('Save')).click();
@@ -31,8 +31,8 @@ describe('XSS in Comments', function () {
         });
     });
 
-    it('should be successfully executed', function () {
-        HelperFunctions.searchBrowserConsole('XSS in Comments', function(found) {
+    it('should be successfully executed', () => {
+        HelperFunctions.searchBrowserConsole('XSS in Comments', (found) => {
             expect(found).toBe(true);
         });
     });

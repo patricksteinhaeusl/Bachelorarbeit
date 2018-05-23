@@ -3,23 +3,23 @@ const path = require('path');
 const HelperFunctions = require('../helperFunctions.js');
 const glob = require("glob");
 
-describe('Deserialization - Deserialization Bug', function () {
+describe('Deserialization - Deserialization Bug', () => {
 
-    beforeEach(function () {
+    beforeEach(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
-    afterEach(function () {
+    afterEach(() => {
         HelperFunctions.logout(browser);
     });
 
-    describe('Try to run netstat command', function () {
+    describe('Try to run netstat command', () => {
 
         beforeEach(function() {
             browser.get(browser.params.webshop);
         });
 
-        it('should be successfully', function () {
+        it('should be successfully', () => {
             let fileName = 'deserializationBug.txt';
 
             //Fill form

@@ -1,8 +1,8 @@
 'use strict';
 const urlParse = require("url");
 
-exports.login = function (browser, username, password) {
-    browser.get(browser.params.webshop + '/').then(function () {
+exports.login = (browser, username, password) => {
+    browser.get(browser.params.webshop + '/').then(() => {
         //Open Auth Menu
         browser.element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
         browser.sleep(250);
@@ -15,8 +15,8 @@ exports.login = function (browser, username, password) {
     });
 };
 
-exports.logout = function logout(browser) {
-    browser.get(browser.params.webshop + '/').then(function () {
+exports.logout = (browser) => {
+    browser.get(browser.params.webshop + '/').then(() => {
         //Open Auth Menu
         browser.element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
         browser.sleep(250);
@@ -27,14 +27,14 @@ exports.logout = function logout(browser) {
     });
 };
 
-exports.selectDropDown = function (element, optionNumber) {
-    element.all(by.tagName('option')).then(function (options) {
+exports.selectDropDown = (element, optionNumber) => {
+    element.all(by.tagName('option')).then((options) => {
         options[optionNumber].click();
     });
 };
 
-exports.registerUser = function (firstname, lastname, password) {
-    browser.get(browser.params.webshop + '/').then(function () {
+exports.registerUser = (firstname, lastname, password) => {
+    browser.get(browser.params.webshop + '/').then(() => {
         //Open Auth Menu
         element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
         browser.sleep(250);
@@ -55,7 +55,7 @@ exports.registerUser = function (firstname, lastname, password) {
     });
 };
 
-exports.httpRequest = function (siteUrl, postData, isJSON, Method) {
+exports.httpRequest = (siteUrl, postData, isJSON, Method) => {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     let req;
     let https = require('https');
@@ -82,12 +82,12 @@ exports.httpRequest = function (siteUrl, postData, isJSON, Method) {
 
     if (parsedURL.protocol === "https:") {
         req = https.request(options, (response) => handleRequest(response, defer))
-            .on('error', function (e) {
+            .on('error', (e) => {
                 defer.reject("Got http.get error: " + e.message);
             });
     } else {
         req = http.request(options, (response) => handleRequest(response, defer))
-            .on('error', function (e) {
+            .on('error', (e) => {
                 defer.reject("Got https.get error: " + e.message);
             });
     }
@@ -101,7 +101,7 @@ exports.httpRequest = function (siteUrl, postData, isJSON, Method) {
 };
 
 
-exports.searchBrowserConsole = function(searchValue, callback) {
+exports.searchBrowserConsole = (searchValue, callback) => {
     browser.sleep(250);
     browser.manage().logs().get('browser').then((browserLog) => {
         require('util').inspect(browserLog);
@@ -120,11 +120,11 @@ function handleRequest(response, defer) {
 
     response.setEncoding('utf8');
 
-    response.on("data", function (chunk) {
+    response.on("data", (chunk) => {
         bodyString += chunk;
     });
 
-    response.on('end', function () {
+    response.on('end', () => {
         defer.fulfill({
             statusCode: response.statusCode,
             bodyString: bodyString,

@@ -3,23 +3,23 @@ const path = require('path');
 const glob = require("glob");
 const HelperFunctions = require('../helperFunctions.js');
 
-describe('RCE Injection', function () {
+describe('RCE Injection', () => {
 
-    beforeEach(function () {
+    beforeEach(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
-    afterEach(function () {
+    afterEach(() => {
         HelperFunctions.logout(browser);
     });
 
-    describe('Try to run netstat command', function () {
+    describe('Try to run netstat command', () => {
 
-        beforeEach(function() {
+        beforeEach(() => {
             browser.get(browser.params.webshop);
         });
 
-        it('should be successfully', function () {
+        it('should be successfully', () => {
             let fileName = 'rceInjection.txt';
 
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();

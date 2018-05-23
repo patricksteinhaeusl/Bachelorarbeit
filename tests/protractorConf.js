@@ -3,7 +3,7 @@ const SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 exports.config = {
     framework: 'jasmine',
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['./e2e/**/*.js'],
+    specs: ['./e2e/**/cswsh.js'],
     params: {
         webshop: 'https://localhost'
     },

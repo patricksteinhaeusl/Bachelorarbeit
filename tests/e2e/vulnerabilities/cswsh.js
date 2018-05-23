@@ -4,7 +4,7 @@ const HelperFunctions = require('../helperFunctions.js');
 const WebSocket = require('ws');
 const cookies = require('cookie');
 
-describe('CSWSH', function () {
+describe('CSWSH', () => {
 
     let firstBrowser = browser;
     let secondBrowser = browser.forkNewDriverInstance();
@@ -16,7 +16,7 @@ describe('CSWSH', function () {
     let messages = [];
     let expectedResult = "customer1 says: Hello my friend";
 
-    beforeAll(function (done) {
+    beforeAll((done) => {
         HelperFunctions.login(firstBrowser, 'customer1', 'compass1');
         HelperFunctions.login(secondBrowser, 'customer0', 'compass0');
         cookie = secondBrowser.manage().getCookie('chatUser');
@@ -31,18 +31,18 @@ describe('CSWSH', function () {
                     }
                 }
             );
-            socket.onopen = function () {
+            socket.onopen = function() {
                 connected = "connect event did happen";
                 done();
             };
-            socket.onmessage = function (msgEvent) {
+            socket.onmessage = function(msgEvent) {
                 messages.push(msgEvent.data);
                 if (msgEvent.data.toString().indexOf(socketMessage) > -1) {
                     socket.close();
                 }
                 done();
             };
-            socket.onerror = function (errEvent) {
+            socket.onerror = function(errEvent) {
                 event = errEvent;
                 done();
             };
@@ -50,22 +50,22 @@ describe('CSWSH', function () {
         });
     });
 
-    afterAll(function () {
+    afterAll(() => {
         HelperFunctions.logout(firstBrowser);
         HelperFunctions.logout(secondBrowser);
     });
 
-    it("should be able to connect to websocket", function () {
+    it("should be able to connect to websocket", () => {
         if (event !== null) {
             fail(event)
         }
         expect(connected).toBe("connect event did happen");
     });
 
-    it("should be able to send and receive", function () {
+    it("should be able to send and receive", () => {
         firstBrowser.element(by.id('chat-button')).click();
         firstBrowser.sleep(250);
-        firstBrowser.element.all(by.repeater('user in websocket.userList')).then(function (user) {
+        firstBrowser.element.all(by.repeater('user in websocket.userList')).then((user) => {
             user[0].click();
             firstBrowser.element(by.model('websocket.message')).sendKeys(messageFromUser);
             firstBrowser.element(by.buttonText('Send...')).click();
@@ -75,7 +75,7 @@ describe('CSWSH', function () {
         expect(secondBrowser.element.all(by.css('.message-container')).get(0).getText()).toBe(expectedResult);
     });
 
-    it("should be able to eavesdrop socket", function () {
+    it("should be able to eavesdrop socket", () => {
         expect(messages.toString()).toContain(socketMessage);
     });
 });

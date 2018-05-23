@@ -1,15 +1,15 @@
 'use strict';
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Auth', function () {
-    describe('Login', function () {
-        it('should fail with wrong credentials', function () {
+describe('Auth', () => {
+    describe('Login', () => {
+        it('should fail with wrong credentials', () => {
             HelperFunctions.login(browser, 'customer0', 'compass1');
             //Check
             expect(element.all(by.css('.menu-item-username')).count()).toBe(0);
         });
 
-        it('should success with correct credentials', function () {
+        it('should success with correct credentials', () => {
             HelperFunctions.login(browser, 'customer0', 'compass0');
             //Check
             expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Juliane Schulze');
@@ -20,11 +20,11 @@ describe('Auth', function () {
         it('should success', checkLogoutSuccessfully);
     });
 
-    describe('Registration', function () {
-        beforeEach(function() {
+    describe('Registration', () => {
+        beforeEach(() => {
             browser.get(browser.params.webshop);
         });
-        it('should successfully register', function () {
+        it('should successfully register', () => {
             HelperFunctions.registerUser("Hans","Muster","customer250");
             //Check
             expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Registration successfully.\n×");
@@ -33,7 +33,7 @@ describe('Auth', function () {
 
         it('should success', checkLogoutSuccessfully);
 
-        it('with same user should fail', function () {
+        it('with same user should fail', () => {
             HelperFunctions.registerUser("Hans","Muster","customer250");
             expect(element.all(by.className('alert-warning')).last().getText()).toContain("already exists!");
             //Check

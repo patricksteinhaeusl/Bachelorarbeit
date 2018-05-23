@@ -1,23 +1,23 @@
 'use strict';
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Account', function () {
-    beforeAll(function () {
+describe('Account', () => {
+    beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
-    afterAll(function () {
+    afterAll(() => {
         HelperFunctions.logout(browser);
     });
 
-    describe('User Information', function () {
+    describe('User Information', () => {
 
-        beforeEach(function () {
+        beforeEach(() => {
             browser.get(browser.params.webshop);
         });
 
-        describe('view', function () {
-            it('should have correct information', function () {
+        describe('view', () => {
+            it('should have correct information', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -33,18 +33,18 @@ describe('Account', function () {
             });
         });
 
-        describe('update', function () {
-            it('should succesfully update', function () {
+        describe('update', () => {
+            it('should succesfully update', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
                 //Link
                 element(by.linkText('My Account')).click();
                 browser.sleep(250);
-                element(by.model('account.data.account.firstname')).clear().then(function () {
+                element(by.model('account.data.account.firstname')).clear().then(() => {
                     element(by.model('account.data.account.firstname')).sendKeys('Neu').sendKeys(protractor.Key.ENTER);
                 });
-                element(by.model('account.data.account.email')).clear().then(function () {
+                element(by.model('account.data.account.email')).clear().then(() => {
                     element(by.model('account.data.account.email')).sendKeys('juliane.schmitz@gmail.com').sendKeys(protractor.Key.ENTER);
                 });
                 element(by.buttonText('Update')).click();
@@ -56,7 +56,7 @@ describe('Account', function () {
                 expect(element(by.model('account.data.account.username')).getAttribute('value')).toEqual('customer0');
                 expect(element(by.model('account.data.account.username')).isEnabled()).toEqual(false);
                 expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Neu Schulze');
-                element(by.model('account.data.account.firstname')).clear().then(function () {
+                element(by.model('account.data.account.firstname')).clear().then(() => {
                     element(by.model('account.data.account.firstname')).sendKeys('Juliane').sendKeys(protractor.Key.ENTER);
                 });
                 element(by.buttonText('Update')).click();
@@ -68,14 +68,14 @@ describe('Account', function () {
         });
     });
 
-    describe('Credit card', function () {
+    describe('Credit card', () => {
 
-        beforeEach(function() {
+        beforeEach(() => {
             browser.get(browser.params.webshop);
         });
 
-        describe('view', function () {
-            it('should be one credit card', function () {
+        describe('view', () => {
+            it('should be one credit card', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -89,8 +89,8 @@ describe('Account', function () {
             });
         });
 
-        describe('add', function () {
-            it('should be successfully', function () {
+        describe('add', () => {
+            it('should be successfully', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -115,8 +115,8 @@ describe('Account', function () {
             });
         });
 
-        describe('verify add', function () {
-            it('should be two creditcards', function () {
+        describe('verify add', () => {
+            it('should be two creditcards', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -130,8 +130,8 @@ describe('Account', function () {
             });
         });
 
-        describe('delete', function () {
-            it('should be successfully', function () {
+        describe('delete', () => {
+            it('should be successfully', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -145,8 +145,8 @@ describe('Account', function () {
             });
         });
 
-        describe('verify delete', function () {
-            it('should be one credit card', function () {
+        describe('verify delete', () => {
+            it('should be one credit card', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -160,14 +160,14 @@ describe('Account', function () {
         });
     });
 
-    describe('Delivery Address', function () {
+    describe('Delivery Address', () => {
 
-        beforeEach(function() {
+        beforeEach(() => {
             browser.get(browser.params.webshop);
         });
 
-        describe('view', function () {
-            it('should be one delivery address', function () {
+        describe('view', () => {
+            it('should be one delivery address', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -181,8 +181,8 @@ describe('Account', function () {
             });
         });
 
-        describe('add', function () {
-            it('should success', function () {
+        describe('add', () => {
+            it('should success', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -204,8 +204,8 @@ describe('Account', function () {
             });
         });
 
-        describe('verify add', function () {
-            it('should be two creditcards', function () {
+        describe('verify add', () => {
+            it('should be two creditcards', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -219,8 +219,8 @@ describe('Account', function () {
             });
         });
 
-        describe('delete', function () {
-            it('should success', function () {
+        describe('delete', () => {
+            it('should success', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -234,8 +234,8 @@ describe('Account', function () {
             });
         });
 
-        describe('verify delete', function () {
-            it('should be one credit card', function () {
+        describe('verify delete', () => {
+            it('should be one credit card', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
