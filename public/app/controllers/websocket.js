@@ -1,6 +1,6 @@
 'use strict';
 
-appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebSocketService', function ($scope, AuthService, WebSocketService) {
+appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthService', 'WebSocketService', function ($rootScope, $scope, AuthService, WebSocketService) {
     const self = this;
 
     self.user = null;
@@ -15,12 +15,16 @@ appControllers.controller('WebSocketController', ['$scope', 'AuthService', 'WebS
     };
 
     self.sendMsg = () => {
-        WebSocketService.emit('getMsg',{
-            to : self.selectedUser._id,
-            msg : self.message,
-            from : self.user.username
-        });
-        self.message = null;
+        if(self.selectedUser) {
+            WebSocketService.emit('getMsg',{
+                to : self.selectedUser._id,
+                msg : self.message,
+                from : self.user.username
+            });
+            self.message = null;
+        } else {
+            $rootScope.messages.warnings.push('User must be selected.');
+        }
     };
 
     if(AuthService.isAuthenticated()) {

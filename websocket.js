@@ -10,7 +10,6 @@ module.exports = (server) => {
     let users = [];
 
     io.on('connection', (socket) => {
-
         let room = null;
         if(socket.request.headers.cookie) {
             let cookies = cookie.parse(socket.request.headers.cookie);

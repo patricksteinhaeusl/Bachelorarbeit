@@ -35,7 +35,7 @@ describe('Auth', function () {
 
         it('with same user should fail', function () {
             HelperFunctions.registerUser("Hans","Muster","customer250");
-            expect(element.all(by.className('alert')).last().getText()).toContain("already exists!");
+            expect(element.all(by.className('alert-warning')).last().getText()).toContain("already exists!");
             //Check
             expect(element.all(by.css('.menu-item-username')).count()).toBe(0);
         });

@@ -45,11 +45,11 @@ describe('SSRF', function () {
         //Link
         element(by.linkText('Community')).click();
         browser.sleep(250);
-        element.all(by.model('community.type')).get(1).click();
+        element.all(by.model('post.type')).get(1).click();
         //Fill form
-        element(by.model('community.data.post.title')).sendKeys('Hidden Treasure...');
-        element(by.model('community.data.post.text')).sendKeys('...I am going to find you.');
-        element(by.model('community.data.url')).sendKeys(pictureURL);
+        element(by.model('post.data.post.title')).sendKeys('Hidden Treasure...');
+        element(by.model('post.data.post.text')).sendKeys('...I am going to find you.');
+        element(by.model('post.data.url')).sendKeys(pictureURL);
         //Check
         expect(element(by.buttonText('Save')).isEnabled()).toBe(true);
         //Submit form
@@ -60,7 +60,7 @@ describe('SSRF', function () {
 
     it('hidden picture should be visible on home', function () {
         element(by.linkText('Home')).click();
-        let posts = element.all(by.repeater('post in home.data.posts'));
+        let posts = element.all(by.repeater('post in posts.data.posts'));
         //Check
         expect(posts.last().getText()).toContain('Hidden Treasure...');
         expect(posts.last().getText()).toContain('...I am going to find you.');

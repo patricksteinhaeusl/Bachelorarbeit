@@ -1,38 +1,49 @@
 'use strict';
 
-appServices.factory('WebSocketService', ['$rootScope', function ($rootScope) {
+appServices.factory('WebSocketService', ['$rootScope', function($rootScope) {
     let self = this;
     self.socket = io.connect({
         transports: ['websocket']
     });
 
-    return {
-        on(eventName, callback) {
-            self.socket.on(eventName, () => {
-                let args = arguments;
-                $rootScope.$apply(() => {
-                    callback.apply(self.socket, args);
-                });
+    self.on = (eventName, callback) => {
+        self.socket.on(eventName, function () {
+            let args = arguments;
+            $rootScope.$apply(function () {
+                callback.apply(self.socket, args);
             });
-        },
-        emit(eventName, data, callback) {
-            self.socket.emit(eventName, data, () => {
-                let args = arguments;
-                $rootScope.$apply(() => {
-                    if (callback) {
-                        callback.apply(self.socket, args);
-                    }
-                });
-            })
-        },
-        reJoin(user) {
-            this.emit('reJoin', user);
-        },
-        join(user) {
-            this.emit('join', user);
-        },
-        leave(user) {
-            this.emit('leave', user);
-        }
+        });
     };
+
+    self.emit = (eventName, data, callback) => {
+        self.socket.emit(eventName, data, function () {
+            let args = arguments;
+            $rootScope.$apply(function () {
+                if (callback) {
+                    callback.apply(self.socket, args);
+                }
+            });
+        })
+    };
+
+
+    self.reJoin = (user) => {
+        this.emit('reJoin', user);
+    };
+
+    self.join = (user) => {
+        this.emit('join', user);
+    };
+
+    self.leave = (user) => {
+        this.emit('leave', user);
+    };
+
+    return {
+        on: self.on,
+        emit: self.emit,
+        reJoin: self.reJoin,
+        join: self.join,
+        leave: self.leave
+    }
 }]);

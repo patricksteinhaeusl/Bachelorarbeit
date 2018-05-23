@@ -16,7 +16,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             .get('/api/product')
             .then(
                 (response) => {
-                    let updatedResponse = self.addSelectedQuantity(response, null);
+                    let updatedResponse = self.addSelectedQuantity(response);
                     ResponseService.successCallback(updatedResponse, callback);
                 }, (error) => ResponseService.errorCallback(error, callback)
             );
@@ -27,7 +27,7 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             .get('/api/product/category/' + categoryId)
             .then(
                 (response) => {
-                    let updatedResponse = self.addSelectedQuantity(response, null);
+                    let updatedResponse = self.addSelectedQuantity(response);
                     ResponseService.successCallback(updatedResponse, callback);
                 }, (error) => ResponseService.errorCallback(error, callback)
             );
@@ -40,7 +40,8 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
             .post('/api/product/searchValue/', data)
             .then(
                 (response) => {
-                    let updatedResponse = self.addSelectedQuantity(response, null);
+                    self.addSearchValue();
+                    let updatedResponse = self.addSelectedQuantity(response);
                     ResponseService.successCallback(updatedResponse, callback);
                 }, (error) => ResponseService.errorCallback(error, callback)
             );
@@ -97,16 +98,13 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
         }
     };
 
-    self.addSelectedQuantity = (response, searchValue) => {
+    self.addSelectedQuantity = (response) => {
         let products = response.data.data.products;
         if (products) {
             products.forEach((product) => {
                 product.selectedQuantity = $routeParams.selectedQuantity;
             });
             self.products = products;
-            if(searchValue) {
-                self.addSearchValue();
-            }
         }
         return response;
     };
