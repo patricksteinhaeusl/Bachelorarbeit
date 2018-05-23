@@ -8,8 +8,8 @@ const sslCert = fs.readFileSync( 'encryption/cert.pem' );
 const config = {
     server: {
         host: '0.0.0.0',
-        port: '3000',
-        sslPort: '3443',
+        port: '80',
+        sslPort: '443',
         SSRFPort: '8765'
     },
     sslOptions: {

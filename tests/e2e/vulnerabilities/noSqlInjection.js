@@ -1,5 +1,5 @@
 'use strict';
-const HelperFunctions = require('./helperFunctions.js');
+const HelperFunctions = require('../helperFunctions.js');
 
 describe('NoSQL Injection', () => {
     afterEach(() => {

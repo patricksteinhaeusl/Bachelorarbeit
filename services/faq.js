@@ -19,8 +19,6 @@ function getFaqBySearchValue(searchValueObj, callback) {
     let param = searchValueObj.searchValue;
     Faq.find({
             $where: "'"+ param +"'; /" + param + "/i.test(this.question) || /" + param + "/i.test(this.answer);"
-        }, null, {
-            sort: {_id: 1}
         }).then((faq) => {
             if (!faq) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
             const data = {'faq': faq};

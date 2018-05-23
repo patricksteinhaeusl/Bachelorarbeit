@@ -27,6 +27,7 @@ app.use(cors());
 app.use(forceSSL);
 app.use(logger('dev'));
 app.use(bodyParser.json({'strict': true}));
+app.disable('x-powered-by');
 
 app.use(express.static(__dirname + '/public/app'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));

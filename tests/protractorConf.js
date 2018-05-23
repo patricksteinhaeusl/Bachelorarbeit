@@ -1,10 +1,11 @@
-let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
+const SpecReporter = require('jasmine-spec-reporter').SpecReporter;
+
 exports.config = {
     framework: 'jasmine',
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['./e2e/*'],
+    specs: ['./e2e/**/*.js'],
     params: {
-        webshop: 'https://localhost:3443'
+        webshop: 'https://localhost'
     },
     capabilities: {
         'browserName': 'chrome',
@@ -13,9 +14,18 @@ exports.config = {
             'server': 'INFO',
             'browser': 'INFO'
         },
-        chromeOptions: {
-            args: ['--window-size=1500,1500']
+        'chromeOptions': {
+            args: ['--window-size=1500,1500','--no-sandbox', '--test-type=browser'],
+            prefs: {
+                'plugins.always_open_pdf_externally': true,
+                'download': {
+                    'prompt_for_download': false,
+                    'default_directory': __dirname + '/assets/downloads/',
+                    'directory_upgrade': true
+                }
+            }
         },
+
     },
     jasmineNodeOpts: {
         //Don't show protractors . output

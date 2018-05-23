@@ -44,8 +44,15 @@
   "_id": {
     "$oid": "5af3426fe2239856c64c9073"
   },
-  "question": "How much is the fish?",
-  "answer": "Sunshine in the air!"
+  "question": "How can I login if I have no credentials?",
+  "answer": "You can register yourself an account on the start screen."
+},
+{
+  "_id": {
+    "$oid": "5af3426fe2239856c64c9074"
+  },
+  "question": "Do you have demo accounts?",
+  "answer": "Yes. There are 11 demo accounts which you can use. Username: customer0-11 Password: compass0-11"
 },
 {
   "_id": {

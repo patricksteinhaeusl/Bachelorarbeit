@@ -5,14 +5,6 @@ let routes = {
         templateUrl: 'views/home.html',
         requireLogin: false
     },
-    '/aboutus': {
-        templateUrl: 'views/aboutUs.html',
-        requireLogin: false
-    },
-    '/contact': {
-        templateUrl: 'views/contact.html',
-        requireLogin: false
-    },
     '/shop': {
         templateUrl: 'views/shop.html',
         controller: 'ShopController',

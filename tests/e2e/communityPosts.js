@@ -40,6 +40,7 @@ describe('Post', () => {
             //Submit form
             element(by.buttonText('Save')).click();
             browser.sleep(250);
+            expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Post successfully created.\n×");
         });
     });
 
@@ -50,7 +51,7 @@ describe('Post', () => {
             //Check
             expect(posts.last().getText()).toContain('Ganz Toll\n');
             expect(posts.last().getText()).toContain('Ein perfektes Produkt zum verlieben.');
-            let image = posts.all(by.css('.post-image')).get(0);
+            let image = posts.all(by.css('.post-image')).last();
             //Check
             expect(image.isDisplayed()).toBe(true);
         });
@@ -67,6 +68,7 @@ describe('Post', () => {
                 let postCount = element.all(by.repeater('post in posts.data.posts')).count();
                 //Check
                 expect(preCount - 1).toBe(postCount);
+                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Post successfully deleted.\n×");
             });
         });
     });
@@ -92,6 +94,7 @@ describe('Post', () => {
             //Submit form
             element(by.buttonText('Save')).click();
             browser.sleep(250);
+            expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Post successfully created.\n×");
         });
 
         it('should be visible', () => {
@@ -100,7 +103,7 @@ describe('Post', () => {
             //Check
             expect(posts.last().getText()).toContain('Super Bild\n');
             expect(posts.last().getText()).toContain('Ich finde das super.');
-            let image = posts.all(by.css('.post-image')).get(0);
+            let image = posts.all(by.css('.post-image')).last();
             //Check
             expect(image.isDisplayed()).toBe(true);
         });

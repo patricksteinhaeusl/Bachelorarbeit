@@ -19,6 +19,7 @@ function get(accountId, callback) {
 }
 
 function update(account, callback) {
+    delete account.username;
     let accountObj = new Account(account);
 
     // Validate account

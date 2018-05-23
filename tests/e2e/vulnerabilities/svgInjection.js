@@ -1,5 +1,5 @@
 'use strict';
-const HelperFunctions = require('./helperFunctions.js');
+const HelperFunctions = require('../helperFunctions.js');
 const path = require('path');
 
 describe('Post - SVG Injection', () => {
@@ -25,7 +25,7 @@ describe('Post - SVG Injection', () => {
                 //Select Upload
                 element.all(by.model('post.type')).get(0).click();
                 //Fill form
-                let pathToFile = '../assets/default.svg';
+                let pathToFile = '../../assets/default.svg';
                 let absolutePathToFile = path.resolve(__dirname, pathToFile);
                 element(by.model('post.data.post.title')).sendKeys('Ein perfektes Produkt');
                 element(by.model('post.data.post.text')).sendKeys('Ein perfektes Produkt zum verlieben.');

