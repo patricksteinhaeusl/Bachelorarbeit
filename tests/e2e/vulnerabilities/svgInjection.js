@@ -44,9 +44,16 @@ describe('Post - SVG Injection', () => {
         it('should success', () => {
             browser.get(browser.params.webshop).then(() => {
 
+                browser.sleep(250);
                 browser.manage().logs().get('browser').then((browserLog) => {
                     require('util').inspect(browserLog);
-                    expect(browserLog[browserLog.length-1].message).toContain('SVG Injection');
+                    let found = false;
+                    browserLog.forEach((entry) => {
+                        if(entry.message.indexOf('SVG Injection') > -1) {
+                            found = true;
+                        }
+                    });
+                    expect(found).toBe(true);
                 });
 
                 //Open Auth Menu
@@ -71,9 +78,16 @@ describe('Post - SVG Injection', () => {
         it('should success', () => {
             browser.get(browser.params.webshop).then(() => {
 
+                browser.sleep(250);
                 browser.manage().logs().get('browser').then((browserLog) => {
                     require('util').inspect(browserLog);
-                    expect(browserLog[browserLog.length-1].message).toContain('SVG Injection');
+                    let found = false;
+                    browserLog.forEach((entry) => {
+                        if(entry.message.indexOf('SVG Injection') > -1) {
+                            found = true;
+                        }
+                    });
+                    expect(found).toBe(true);
                 });
 
                 let posts = element.all(by.repeater('post in posts.data.posts'));

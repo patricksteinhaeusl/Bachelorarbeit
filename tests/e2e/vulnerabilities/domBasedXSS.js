@@ -15,13 +15,19 @@ describe('DOM Based XSS', () => {
         });
     });
 
-    describe('should throw alert', () => {
+    describe('should execute javascript on console', () => {
         it('should be successfully', () => {
             browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=<script>console.log("DOM Based XSS");</script>').then(() => {
+                browser.sleep(250);
                 browser.manage().logs().get('browser').then((browserLog) => {
                     require('util').inspect(browserLog);
-                    console.log(browserLog);
-                    expect(browserLog[browserLog.length-1].message).toContain('DOM Based XSS');
+                    let found = false;
+                    browserLog.forEach((entry) => {
+                        if(entry.message.indexOf('DOM Based XSS') > -1) {
+                            found = true;
+                        }
+                    });
+                    expect(found).toBe(true);
                 });
             });
         });

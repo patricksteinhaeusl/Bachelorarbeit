@@ -32,9 +32,16 @@ describe('XSS in Comments', function () {
     });
 
     it('should be successfully executed', function () {
-        browser.manage().logs().get('browser').then(function(browserLog) {
+        browser.sleep(250);
+        browser.manage().logs().get('browser').then((browserLog) => {
             require('util').inspect(browserLog);
-            expect(browserLog[browserLog.length-1].message).toContain('XSS in Comments');
+            let found = false;
+            browserLog.forEach((entry) => {
+                if(entry.message.indexOf('XSS in Comments') > -1) {
+                    found = true;
+                }
+            });
+            expect(found).toBe(true);
         });
     });
 });

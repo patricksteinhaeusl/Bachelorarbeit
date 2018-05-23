@@ -42,9 +42,17 @@ describe('Template Injection', function () {
                 expect(url).toContain("/#!/account/" + secondLastSegment + "/profile");
             });
         });
-        browser.manage().logs().get('browser').then(function(browserLog) {
+
+        browser.sleep(250);
+        browser.manage().logs().get('browser').then((browserLog) => {
             require('util').inspect(browserLog);
-            expect(browserLog[browserLog.length-1].message).toContain('Template Injection');
+            let found = false;
+            browserLog.forEach((entry) => {
+                if(entry.message.indexOf('Template Injection') > -1) {
+                    found = true;
+                }
+            });
+            expect(found).toBe(true);
         });
     });
 });

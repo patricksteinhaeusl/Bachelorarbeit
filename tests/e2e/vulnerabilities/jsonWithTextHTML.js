@@ -55,9 +55,17 @@ describe('JSON Response with text/html Content-Type', function () {
     it('should throw alert because of XSS', function () {
         browser.waitForAngularEnabled(false);
         browser.get(browser.params.webshop + "/api/product/" + lastSegment).then(function () {
-            browser.manage().logs().get('browser').then(function (browserLog) {
+
+            browser.sleep(250);
+            browser.manage().logs().get('browser').then((browserLog) => {
                 require('util').inspect(browserLog);
-                expect(browserLog[browserLog.length - 1].message).toContain('JSON with Text/Html');
+                let found = false;
+                browserLog.forEach((entry) => {
+                    if(entry.message.indexOf('JSON with Text/Html') > -1) {
+                        found = true;
+                    }
+                });
+                expect(found).toBe(true);
             });
         });
         browser.waitForAngularEnabled(true);
