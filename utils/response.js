@@ -16,8 +16,9 @@ let util = {
 
         return {statusCode: 405, data: null, message: null, validations: validations};
     },
-    createErrorResponse: (message) => {
-        return {statusCode: 500, data: null, message: message};
+    createErrorResponse: (error, message) => {
+        const errorText = message ? message : error;
+        return {statusCode: 500, data: null, message: errorText};
     }
 };
 

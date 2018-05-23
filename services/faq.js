@@ -4,9 +4,8 @@ const Faq = require('../models/faqQuestion').Faq;
 const ResponseUtil = require('../utils/response');
 
 function get(callback) {
-    Faq.find({}, null, {
-            sort: {_id: 1}
-        }).then((faq) => {
+    Faq.find({})
+        .then((faq) => {
             if (!faq) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
             const data = {'faq': faq};
             return callback(null, ResponseUtil.createSuccessResponse(data));
@@ -24,7 +23,7 @@ function getFaqBySearchValue(searchValueObj, callback) {
             const data = {'faq': faq};
             return callback(null, ResponseUtil.createSuccessResponse(data));
         }).catch((error) => {
-            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            return callback(ResponseUtil.createErrorResponse(error, 'Could not process your input.'));
         });
 }
 

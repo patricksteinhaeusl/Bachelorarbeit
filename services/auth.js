@@ -58,33 +58,25 @@ function register(account, callback) {
     let accountObj = new Account(account);
 
     // Validate account
-    const validationError = accountObj.validateSync();
-    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
-
-    // Save account
-    Account.create(accountObj).then((account) => {
-        if (!account) return callback(ResponseUtil.createNotFoundResponse('Registration failed.'));
-        // Find account
-        // Without password and timestamps
-        Account.findOne(result, {
-                password: false,
-                createdAt: false,
-                updatedAt: false,
-                __v: false
-            }).then((account) => {
-                if (!account) return callback(ResponseUtil.createNotFoundResponse('Registration failed'));
-
-                // Create token
-                CryptoUtil.createToken(account.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token)=> {
-                    if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                    const data = {'user': account, 'token': token};
-                    return callback(null, ResponseUtil.createSuccessResponse(data, 'Registration successfully.'));
+    accountObj.validate((error) => {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        // Save account
+        Account.create(accountObj)
+            .then((account) => {
+                if (!account) return callback(ResponseUtil.createNotFoundResponse('Registration failed.'));
+                // Remove fields
+                Account.findOne({_id : account._id}, {password: false, createdAt: false, updatedAt: false, __v: false}).then((account) => {
+                    if (!account) return callback(ResponseUtil.createNotFoundResponse('Registration failed.'));
+                    // Create token
+                    CryptoUtil.createToken(account.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token)=> {
+                        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                        const data = {'user': account, 'token': token};
+                        return callback(null, ResponseUtil.createSuccessResponse(data, 'Registration successfully.'));
+                    });
                 });
             }).catch((error) => {
                 return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
             });
-    }).catch((error) => {
-        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
 }
 

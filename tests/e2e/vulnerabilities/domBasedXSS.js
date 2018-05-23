@@ -18,7 +18,6 @@ describe('DOM Based XSS', () => {
     describe('should throw alert', () => {
         it('should be successfully', () => {
             browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=<script>console.log("DOM Based XSS");</script>').then(() => {
-                browser.sleep(10000);
                 browser.manage().logs().get('browser').then((browserLog) => {
                     require('util').inspect(browserLog);
                     expect(browserLog[browserLog.length-1].message).toContain('DOM Based XSS');

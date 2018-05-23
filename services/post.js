@@ -26,19 +26,19 @@ function getAll(callback) {
 function insertUpload(post, callback) {
     let postObj = new Post(post);
 
-    // Validate Post
-    const validationError = postObj.validateSync();
-    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
-
-    // Create Post
-    Post.create(postObj)
-        .then((post) => {
-            if (!post) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
-            const data = {'post': post};
-            return callback(null, ResponseUtil.createSuccessResponse(data, 'Post successfully created.'));
-        }).catch((error) => {
+    // Validate post
+    postObj.validate((error) => {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        // Create Post
+        Post.create(postObj)
+            .then((post) => {
+                if (!post) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
+                const data = {'post': post};
+                return callback(null, ResponseUtil.createSuccessResponse(data, 'Post successfully created.'));
+            }).catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
+    });
 }
 
 function insertURL(post, url, callback) {
@@ -64,17 +64,18 @@ function insertURL(post, url, callback) {
             let postObj = new Post(post);
 
             // Validate Post
-            const validationError = postObj.validateSync();
-            if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
-
-            Post.create(postObj)
-                .then((post) => {
-                    if (!post) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
-                    const data = {'post': post};
-                    return callback(null, ResponseUtil.createSuccessResponse(data, 'Post successfully created.'));
-                }).catch((error) => {
-                    return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                 });
+            postObj.validate((error) => {
+                if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+                // Save Post
+                Post.create(postObj)
+                    .then((post) => {
+                        if (!post) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
+                        const data = {'post': post};
+                        return callback(null, ResponseUtil.createSuccessResponse(data, 'Post successfully created.'));
+                    }).catch((error) => {
+                        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                    });
+            });
         }).catch(() => {
             return callback(ResponseUtil.createErrorResponse('Could not fetch image from given URL'));
         });

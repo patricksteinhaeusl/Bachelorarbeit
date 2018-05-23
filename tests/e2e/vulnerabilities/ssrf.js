@@ -55,7 +55,7 @@ describe('SSRF', function () {
         //Submit form
         element(by.buttonText('Save')).click();
         browser.sleep(250);
-        expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Post successfully created.\n×");
+        expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Post successfully created.\n×");
     });
 
     it('hidden picture should be visible on home', function () {

@@ -27,7 +27,7 @@ describe('Comment and Rating', function () {
                     commentField.sendKeys('Nice Product');
                     //Submit form
                     firstProduct.element(by.buttonText('Save')).click();
-                    expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Rating saved successfully.\n×");
+                    expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Rating saved successfully.\n×");
                 });
             });
         });
@@ -75,7 +75,7 @@ describe('Comment and Rating', function () {
                     commentField.sendKeys('Not so nice Product');
                     //Submit form
                     firstProduct.element(by.buttonText('Update')).click();
-                    expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Rating updated successfully.\n×");
+                    expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Rating updated successfully.\n×");
                 });
             });
         });
@@ -134,7 +134,7 @@ describe('Comment and Rating', function () {
                     commentField.sendKeys(messageFromUserB);
                     //Submit form
                     firstProduct.element(by.buttonText('Save')).click();
-                    expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Rating saved successfully.\n×");
+                    expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Rating saved successfully.\n×");
                     expect(firstProduct.element(by.model('rating.comment')).getAttribute('value')).toEqual(messageFromUserB);
                 });
             });

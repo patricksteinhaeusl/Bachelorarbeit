@@ -27,21 +27,15 @@ describe('Auth', function () {
         it('should successfully register', function () {
             HelperFunctions.registerUser("Hans","Muster","customer250");
             //Check
-            expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Registration successfully\n×");
+            expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Registration successfully.\n×");
             expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Hans Muster');
         });
 
         it('should success', checkLogoutSuccessfully);
-        it('logout should success', function () {
-            HelperFunctions.logout(browser);
-            //Check
-            expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Logout successfully\n×");
-            expect(element.all(by.css('.menu-item-username')).count()).toBe(0);
-        });
 
         it('with same user should fail', function () {
             HelperFunctions.registerUser("Hans","Muster","customer250");
-            expect(element.all(by.className('alert')).get(0).getText()).toContain("already exists!");
+            expect(element.all(by.className('alert')).last().getText()).toContain("already exists!");
             //Check
             expect(element.all(by.css('.menu-item-username')).count()).toBe(0);
         });

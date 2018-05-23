@@ -26,7 +26,7 @@ describe('XSS in Comments', function () {
                 commentField.sendKeys("<script>console.log(\"XSS in Comments\");</script>");
                 //Submit form
                 thirdProduct.element(by.buttonText('Save')).click();
-                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Rating saved successfully.\n×");
+                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Rating saved successfully.\n×");
             });
         });
     });

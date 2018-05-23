@@ -49,7 +49,7 @@ describe('Account', function () {
                 });
                 element(by.buttonText('Update')).click();
                 browser.sleep(250);
-                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Account successfully updated.\n×");
+                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Account successfully updated.\n×");
                 expect(element(by.model('account.data.account.firstname')).getAttribute('value')).toEqual('Neu');
                 expect(element(by.model('account.data.account.lastname')).getAttribute('value')).toEqual('Schulze');
                 expect(element(by.model('account.data.account.email')).getAttribute('value')).toEqual('juliane.schmitz@gmail.com');
@@ -61,7 +61,7 @@ describe('Account', function () {
                 });
                 element(by.buttonText('Update')).click();
                 browser.sleep(250);
-                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Account successfully updated.\n×");
+                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Account successfully updated.\n×");
                 expect(element(by.model('account.data.account.firstname')).getAttribute('value')).toEqual('Juliane');
                 expect(element(by.model('account.data.account.lastname')).getAttribute('value')).toEqual('Schulze');
             });
@@ -107,11 +107,11 @@ describe('Account', function () {
                 HelperFunctions.selectDropDown(element(by.model('creditCard.data.creditCard.month')), 2);
                 HelperFunctions.selectDropDown(element(by.model('creditCard.data.creditCard.year')), 2);
 
-                browser.sleep(2000);
+                browser.sleep(250);
                 //Submit form
                 element(by.buttonText('Save')).click();
                 browser.sleep(250);
-                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Credit card successfully created.\n×");
+                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Credit card successfully created.\n×");
             });
         });
 
@@ -140,8 +140,8 @@ describe('Account', function () {
                 browser.sleep(250);
                 //link
                 element(by.buttonText('Remove')).click();
-                browser.sleep(5000);
-                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Creditcard successfully deleted.\n×");
+                browser.sleep(250);
+                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Credit card successfully deleted.\n×");
             });
         });
 
@@ -200,7 +200,7 @@ describe('Account', function () {
                 //Submit form
                 element(by.buttonText('Save')).click();
                 browser.sleep(250);
-                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Delivery address successfully created.\n×");
+                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Delivery address successfully created.\n×");
             });
         });
 
@@ -229,8 +229,8 @@ describe('Account', function () {
                 browser.sleep(250);
                 //link
                 element(by.buttonText('Remove')).click();
-                browser.sleep(5000);
-                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Deliveryaddress successfully deleted.\n×");
+                browser.sleep(250);
+                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Delivery address successfully deleted.\n×");
             });
         });
 

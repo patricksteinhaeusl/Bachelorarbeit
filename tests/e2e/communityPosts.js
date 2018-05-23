@@ -40,7 +40,7 @@ describe('Post', () => {
             //Submit form
             element(by.buttonText('Save')).click();
             browser.sleep(250);
-            expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Post successfully created.\n×");
+            expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Post successfully created.\n×");
         });
     });
 
@@ -68,7 +68,7 @@ describe('Post', () => {
                 let postCount = element.all(by.repeater('post in posts.data.posts')).count();
                 //Check
                 expect(preCount - 1).toBe(postCount);
-                expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Post successfully deleted.\n×");
+                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Post successfully deleted.\n×");
             });
         });
     });
@@ -94,7 +94,7 @@ describe('Post', () => {
             //Submit form
             element(by.buttonText('Save')).click();
             browser.sleep(250);
-            expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Post successfully created.\n×");
+            expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Post successfully created.\n×");
         });
 
         it('should be visible', () => {

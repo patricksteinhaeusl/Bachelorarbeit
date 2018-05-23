@@ -12,7 +12,7 @@ describe('JWT Timing Checking', () => {
         it('should fail', () => {
 
             HelperFunctions.login(browser, 'retailer0', 'SecretRetailer12345');
-            expect(element(by.className('alert')).getText()).toMatch('Warning: Username or Password incorrect')
+            expect(element.all(by.className('alert-info')).last().getText()).toMatch('Warning: Username or Password incorrect')
         });
     });
 });

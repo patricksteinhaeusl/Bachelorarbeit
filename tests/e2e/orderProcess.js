@@ -89,7 +89,7 @@ describe('Order and Cart Processes', function () {
         it('should have the same items in cart as in order overview', function () {
             browser.get(browser.params.webshop).then(function () {
                 element.all(by.css('.glyphicon.glyphicon-shopping-cart')).get(0).click();
-                browser.sleep(500);
+                browser.sleep(250);
                 element.all(by.buttonText('Check out')).get(1).click();
                 orderID = element(by.tagName('h2')).getAttribute('innerText');
                 let orderItems = element.all(by.repeater('item in order.data.order.items')).count();
@@ -175,7 +175,7 @@ describe('Order and Cart Processes', function () {
 
         it('should show correct order after finishing process', function () {
             expect(browser.getCurrentUrl()).toContain('/orders');
-            expect(element.all(by.className('alert')).get(0).getText()).toBe("Success: Order successfully saved.\n×");
+            expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Order successfully saved.\n×");
             element.all(by.repeater('order in orders.data.orders')).then(function (order) {
                 element.all(by.binding('order._id')).get(0).getText().then(function (firstID) {
                     orderID.then(function (secondID) {

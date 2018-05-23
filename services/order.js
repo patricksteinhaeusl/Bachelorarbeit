@@ -101,20 +101,19 @@ function createTemp(items, totalPrice, account, callback) {
             }
             return orderObj;
         }).then((orderObj) => {
-            // Validate OrderObj
-            const validationError = orderObj.validateSync();
-            if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
-            return orderObj;
-        }).then((orderObj) => {
-            // Save order
-            Order.create(orderObj)
-                .then((newOrder) => {
-                    if (!newOrder) return callback(ResponseUtil.createNotFoundResponse('Order failed to create.'));
-                    const data = {'order': newOrder};
-                    return callback(null, ResponseUtil.createSuccessResponse(data));
-                }).catch((error) => {
-                    return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                });
+            // Validate orderObj
+            orderObj.validate((error) => {
+                if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+                // Save order
+                OrderTemp.create(orderObj)
+                    .then((newOrder) => {
+                        if (!newOrder) return callback(ResponseUtil.createNotFoundResponse('Order failed to create.'));
+                        const data = {'order': newOrder};
+                        return callback(null, ResponseUtil.createSuccessResponse(data));
+                    }).catch((error) => {
+                        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                    });
+            });
         }).catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
@@ -126,29 +125,32 @@ function createTemp(items, totalPrice, account, callback) {
 function updateTemp(order, callback) {
     let orderObj = new OrderTemp(order);
 
-    const validationError = orderObj.validateSync();
-    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
-
-    OrderTemp.findByIdAndUpdate(
-        orderObj._id,
-        orderObj, {
-            new: true
-        }).then((order) => {
-            if (!order) return callback(ResponseUtil.createNotFoundResponse('Order failed to update.'));
-            const data = {'order': order};
-            return callback(null, ResponseUtil.createSuccessResponse(data));
-        }).catch((error) => {
-            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        });
+    // Validate Order
+    orderObj.validate((error) => {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        // Find Order and update
+        OrderTemp.findByIdAndUpdate(
+            orderObj._id,
+            orderObj, {
+                new: true
+            }).then((order) => {
+                if (!order) return callback(ResponseUtil.createNotFoundResponse('Order failed to update.'));
+                const data = {'order': order};
+                return callback(null, ResponseUtil.createSuccessResponse(data));
+            }).catch((error) => {
+                return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            });
+    });
 }
 
 function insert(order, callback) {
     let orderObj = new Order(order);
 
-    const validationError = orderObj.validateSync();
-    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
-
-    Order.create(
+    // Validate Order
+    orderObj.validate((error) => {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        // Create Order
+        Order.create(
             orderObj
         ).then((order) => {
             if (!order) return callback(ResponseUtil.createNotFoundResponse('Order failed to create.'));
@@ -157,6 +159,8 @@ function insert(order, callback) {
         }).catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
+    });
+
 }
 
 function remove(orderId, callback) {

@@ -39,10 +39,11 @@ let accountSchema = new Schema({
 
 accountSchema.plugin(uniqueValidator, { message: '{PATH}: already exists!' });
 
-accountSchema.pre('save', (callback) => {
+accountSchema.pre('save', function(callback) {
     let account = this;
-    if (!account.isModified('password')) return callback();
-    account.password = cryptoUtil.hashPwd(account.password);
+    if (account.isModified('password')) {
+        account.password = cryptoUtil.hashPwd(account.password);
+    }
     return callback();
 });
 

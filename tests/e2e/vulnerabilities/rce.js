@@ -13,14 +13,6 @@ describe('RCE Injection', function () {
         HelperFunctions.logout(browser);
     });
 
-    describe('Environment Variable Check', function () {
-        it('should be on', function () {
-            if (process.env.NODE_RCE_EVAL !== 'ON' && process.env.NODE_RCE_EVAL !== 'on') {
-                fail("Environment Variable not set");
-            }
-        });
-    });
-
     describe('Try to run netstat command', function () {
 
         beforeEach(function() {

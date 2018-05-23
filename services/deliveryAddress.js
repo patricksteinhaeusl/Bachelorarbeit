@@ -35,20 +35,20 @@ function update(deliveryAddress, callback) {
     let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
 
     // Validate delivery address
-    const validationError = deliveryAddressObj.validateSync();
-    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
-
-    // Find and Update delivery address by id
-    DeliveryAddress.findByIdAndUpdate(deliveryAddressObj._id, deliveryAddressObj, {
-        new: true,
-        runValidators: true,
-        context: 'query'
-    }).then((deliveryAddress) => {
-        if (!deliveryAddress) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to update.'));
-        const data = {'deliveryAddress': deliveryAddress};
-        return callback(null, ResponseUtil.createSuccessResponse(data, 'Delivery address successfully updated.'));
-    }).catch((error) => {
-        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+    deliveryAddressObj.validate((error) => {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        // Find and Update delivery address by id
+        DeliveryAddress.findByIdAndUpdate(deliveryAddressObj._id, deliveryAddressObj, {
+            new: true,
+            runValidators: true,
+            context: 'query'
+        }).then((deliveryAddress) => {
+            if (!deliveryAddress) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to update.'));
+            const data = {'deliveryAddress': deliveryAddress};
+            return callback(null, ResponseUtil.createSuccessResponse(data, 'Delivery address successfully updated.'));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
     });
 }
 
@@ -56,11 +56,10 @@ function insert(deliveryAddress, callback) {
     let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
 
     // Validate delivery address
-    const validationError = deliveryAddressObj.validateSync();
-    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
-
-    // Save delivery address
-    DeliveryAddress.create(
+    deliveryAddressObj.validate((error) => {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        // Save delivery address
+        DeliveryAddress.create(
             deliveryAddressObj
         ).then((deliveryAddress) => {
             if (!deliveryAddress) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to create.'));
@@ -69,6 +68,7 @@ function insert(deliveryAddress, callback) {
         }).catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
+    });
 }
 
 function insertByAccount(account, deliveryAddress, callback) {
@@ -76,33 +76,33 @@ function insertByAccount(account, deliveryAddress, callback) {
     let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
 
     // Validate account
-    const validationErrorAccount = accountObj.validateSync();
-    if (validationErrorAccount) return callback(ResponseUtil.createValidationResponse(validationErrorAccount));
+    accountObj.validate((error) => {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        // Validate delivery address
+        deliveryAddressObj.validate((error) => {
+            if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+            // Find account by id
+            Account.findById(
+                accountObj._id
+            ).then((account) => {
+                if (!account) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to create.'));
+                deliveryAddressObj.owner = account._id;
 
-    // Validate delivery address
-    const validationErrorDeliveryAddress = deliveryAddressObj.validateSync();
-    if (validationErrorDeliveryAddress) return callback(ResponseUtil.createValidationResponse(validationErrorDeliveryAddress));
-
-    // Find account by id
-    Account.findById(
-        accountObj._id
-    ).then((account) => {
-        if (!account) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to create.'));
-        deliveryAddressObj.owner = account._id;
-
-        // Save delivery address
-        DeliveryAddress.create(
-            deliveryAddressObj
-        ).then((deliveryAddress) => {
-            // Save delivery address
-            if (!deliveryAddress) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to create.'));
-            const data = {'deliveryAddress': deliveryAddress};
-            return callback(null, ResponseUtil.createSuccessResponse(data, 'Delivery address successfully created.'));
-        }).catch((error) => {
-            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                // Save delivery address
+                DeliveryAddress.create(
+                    deliveryAddressObj
+                ).then((deliveryAddress) => {
+                    // Save delivery address
+                    if (!deliveryAddress) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to create.'));
+                    const data = {'deliveryAddress': deliveryAddress};
+                    return callback(null, ResponseUtil.createSuccessResponse(data, 'Delivery address successfully created.'));
+                }).catch((error) => {
+                    return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                });
+            }).catch((error) => {
+                return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            });
         });
-    }).catch((error) => {
-        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
 }
 

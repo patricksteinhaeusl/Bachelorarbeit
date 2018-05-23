@@ -19,12 +19,10 @@ function get(accountId, callback) {
 }
 
 function update(account, callback) {
+    // Remove fields
     delete account.username;
-    let accountObj = new Account(account);
 
-    // Validate account
-    const validationError = accountObj.validateSync();
-    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
+    let accountObj = new Account(account);
 
     // Find account by id and update
     // Without password and timestamps
@@ -33,6 +31,7 @@ function update(account, callback) {
         accountObj, {
             new: true,
             context: 'query',
+            runValidators: true,
             projection: {
                 password: false,
                 createdAt: false,
@@ -40,16 +39,17 @@ function update(account, callback) {
                 __v: false
             }
         }).then((account) => {
-            if (!account) return callback(ResponseUtil.createNotFoundResponse('Account failed to create'));
+            if (!account) return callback(ResponseUtil.createNotFoundResponse('Account failed to update.'));
             // Create Token
             CryptoUtil.createToken(account.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
                 if (error) callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
                 const data = {'user': account, 'token': token};
-                return callback(null, ResponseUtil.createSuccessResponse(data, 'Account successfully created.'));
+                return callback(null, ResponseUtil.createSuccessResponse(data, 'Account successfully updated.'));
             });
-        }).catch((error) => {
-            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        });
+    }).catch((error) => {
+        if (error && error.errors) return callback(ResponseUtil.createValidationResponse(error.errors));
+        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+    });
 }
 
 function upload(accountId, profile, callback) {
