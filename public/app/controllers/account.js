@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('AccountController', ['$scope', '$http', 'AccountService', 'AuthService',
-    function ($scope, $http, AccountService, AuthService) {
+appControllers.controller('AccountController', ['$scope', '$http', 'localStorageService', 'AccountService', 'AuthService',
+    function ($scope, $http, localStorageService, AccountService, AuthService) {
         const self = this;
         self.data = {};
         self.data.account = {};
@@ -18,7 +18,7 @@ appControllers.controller('AccountController', ['$scope', '$http', 'AccountServi
 
         self.update = () => {
             let account = self.data.account;
-            AuthService.update(account, (error, data) => {
+            AccountService.update(account, (error, data) => {
                 if (data) {
                     let user = data.user;
                     let token = data.token;

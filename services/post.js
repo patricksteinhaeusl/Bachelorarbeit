@@ -27,7 +27,7 @@ function insertUpload(post, callback) {
     let postObj = new Post(post);
 
     // Validate Post
-    const validationError = posObj.validateSync();
+    const validationError = postObj.validateSync();
     if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
 
     // Create Post
@@ -59,12 +59,12 @@ function insertURL(post, url, callback) {
         dest: GlobalConfig.postImages.directory + scrambledFileName + extension
     };
     download.image(options)
-        .then(({}) => {
+        .then(() => {
             post.image = scrambledFileName + extension;
             let postObj = new Post(post);
 
             // Validate Post
-            const validationError = posObj.validateSync();
+            const validationError = postObj.validateSync();
             if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
 
             Post.create(postObj)

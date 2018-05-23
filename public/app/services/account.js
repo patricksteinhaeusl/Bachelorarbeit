@@ -29,6 +29,6 @@ appServices.factory('AccountService', ['$http', 'Upload', 'ResponseService', fun
                 (error) => ResponseService.errorCallback(error, callback),
                 (event) => ResponseService.eventCallback(event, callbackEvent)
             );
-        },
+        }
     };
 }]);

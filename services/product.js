@@ -68,35 +68,56 @@ function updateRatings(product, rating, callback) {
     if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
 
     // Update Existing Rating
-    Product.findOneAndUpdate({
+    Product.findOneAndUpdate(
+        {
             _id: product._id,
             'ratings._account': rating._account
-        }, {
-        $set: {
-            'ratings.$': ratingObj }
+        },
+        {
+            $set: {
+                'ratings.$.comment': rating.comment,
+                'ratings.$.value': rating.value
+            }
         }, {
             new: true
-        }).then((product) => {
-            // Update total rating
-            if(product) {
-                product.rating.value = calculateTotalRating(product.ratings);
-            }
-            return product;
-        }).then((product) => {
-            // Add new Rating
-            if(!product) {
-                Product.findOneAndUpdate({
+        }).then((result) => {
+            if (result) {
+                result.rating.value = calculateTotalRating(result.ratings);
+                result.save()
+                    .then((result) => {
+                        if (!result) return callback(ResponseUtil.createNotFoundResponse('Rating failed to save.'));
+                        const data = {'product': result};
+                        return callback(null, ResponseUtil.createSuccessResponse(data, 'Rating updated successfully.'));
+                    }).catch((error) => {
+                        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                    });
+            } else {
+                // Add new Rating
+                Product.findOneAndUpdate(
+                    {
                         _id: product._id
                     }, {
                         $push: {ratings: rating}
                     }, {
                         new: true
-                    }).then((newProduct) => {
-                        newProduct.rating.value = calculateTotalRating(newProduct.ratings);
+                    }).then((result) => {
+                        if (!result) return callback(ResponseUtil.createNotFoundResponse('Rating failed to save.'));
+                        result.rating.value = calculateTotalRating(result.ratings);
+                        result.save()
+                            .then((result) => {
+                                if (!result) return callback(ResponseUtil.createNotFoundResponse('Rating failed to save.'));
+                                const data = {'product': result};
+                                return callback(null, ResponseUtil.createSuccessResponse(data, 'Rating saved successfully.'));
+                            }).catch((error) => {
+                                return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                            });
                     }).catch((error) => {
                         return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
                     });
             }
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 function getCategories(callback) {

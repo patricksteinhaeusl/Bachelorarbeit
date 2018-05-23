@@ -24,7 +24,7 @@ appControllers.controller('CreditCardsController', ['$scope', '$location', 'Cred
         self.remove = (index) => {
             let creditCardId = self.data.creditCards[index]._id;
             CreditCardsService.remove(creditCardId, (error, data) => {
-                if (data) {
+                if (!error) {
                     self.data.creditCards.splice(index, 1);
                 }
             });

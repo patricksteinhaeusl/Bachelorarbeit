@@ -2,6 +2,9 @@
 
 const PostService = require('../services/post');
 const multer = require('multer');
+const mime = require('mime');
+const crypto = require('crypto');
+const GlobalConfig = require('../configs/index');
 const ResponseUtil = require('../utils/response');
 
 const storage = multer.diskStorage({

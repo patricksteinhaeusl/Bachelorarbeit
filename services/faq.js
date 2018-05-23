@@ -4,24 +4,30 @@ const Faq = require('../models/faqQuestion').Faq;
 const ResponseUtil = require('../utils/response');
 
 function get(callback) {
-    Faq.find({}, null, {sort: {_id: 1}}, (error, result) => {
-        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
-        result = {'faq': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
-    });
+    Faq.find({}, null, {
+            sort: {_id: 1}
+        }).then((faq) => {
+            if (!faq) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
+            const data = {'faq': faq};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 function getFaqBySearchValue(searchValueObj, callback) {
     let param = searchValueObj.searchValue;
     Faq.find({
-        $where: "'"+ param +"'; /" + param + "/i.test(this.question) || /" + param + "/i.test(this.answer);"
-    }, null, {sort: {_id: 1}}, (error, result) => {
-        if (error) return callback(ResponseUtil.createErrorResponse('Could not process your input.'));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
-        result = {'faq': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
-    });
+            $where: "'"+ param +"'; /" + param + "/i.test(this.question) || /" + param + "/i.test(this.answer);"
+        }, null, {
+            sort: {_id: 1}
+        }).then((faq) => {
+            if (!faq) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
+            const data = {'faq': faq};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 module.exports = {

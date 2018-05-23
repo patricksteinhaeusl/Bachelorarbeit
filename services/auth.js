@@ -27,41 +27,64 @@ function login(username, password, callback) {
     }
     // Injection Code End
 
+    // Find one user with username and password
+    // Without password and timestamps
     Account.findOne({
-        username: usernameObj,
-        password: hashedPassword,
-        isRetailer: false,
-    }, { password: false, createdAt: false, updatedAt: false, __v: false }, (error, resAccount) => {
-        if (error) return callback(ResponseUtil.createErrorResponse(error));
-        if (!resAccount) {
-            return callback(null, ResponseUtil.createNotFoundResponse('Username or Password incorrect.'));
-        } else {
-            CryptoUtil.createToken(resAccount.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
-                if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                let result = {'user': resAccount, 'token': token};
-                return callback(null, ResponseUtil.createSuccessResponse(result, 'Login successfully.'));
-            });
-        }
-    });
+            username: usernameObj,
+            password: hashedPassword,
+            isRetailer: false,
+        }, {
+            password: false,
+            createdAt: false,
+            updatedAt: false,
+            __v: false
+        }).then((account) => {
+            if (!account) {
+                return callback(null, ResponseUtil.createNotFoundResponse('Username or Password incorrect.'));
+            } else {
+                // Create Token
+                CryptoUtil.createToken(account.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token)=> {
+                    if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                    const data = {'user': account, 'token': token};
+                    return callback(null, ResponseUtil.createSuccessResponse(data, 'Login successfully.'));
+                });
+            }
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 function register(account, callback) {
     let accountObj = new Account(account);
-    accountObj.validate((error) => {
-        if(error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        accountObj.save((error, result) => {
-            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse('Registration failed.'));
-            Account.findOne(result, { password: false, createdAt: false, updatedAt: false, __v: false }, (error, resAccount) => {
-                if (error) return callback(ResponseUtil.createErrorResponse(error));
-                if (!result) return callback(ResponseUtil.createNotFoundResponse('Registration failed'));
-                CryptoUtil.createToken(resAccount.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
+
+    // Validate account
+    const validationError = accountObj.validateSync();
+    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
+
+    // Save account
+    Account.create(accountObj).then((account) => {
+        if (!account) return callback(ResponseUtil.createNotFoundResponse('Registration failed.'));
+        // Find account
+        // Without password and timestamps
+        Account.findOne(result, {
+                password: false,
+                createdAt: false,
+                updatedAt: false,
+                __v: false
+            }).then((account) => {
+                if (!account) return callback(ResponseUtil.createNotFoundResponse('Registration failed'));
+
+                // Create token
+                CryptoUtil.createToken(account.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token)=> {
                     if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                    let result = {'user': resAccount, 'token': token};
-                    return callback(null, ResponseUtil.createSuccessResponse(result, 'Registration successfully'));
+                    const data = {'user': account, 'token': token};
+                    return callback(null, ResponseUtil.createSuccessResponse(data, 'Registration successfully.'));
                 });
+            }).catch((error) => {
+                return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
             });
-        });
+    }).catch((error) => {
+        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
 }
 

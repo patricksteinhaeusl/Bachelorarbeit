@@ -16,7 +16,7 @@ appControllers.controller('DeliveryAddressesController', ['$scope', '$location',
             let account = self.data.account;
             DeliveryAddressesService.getAllByAccount(account, (error, data) => {
                 if(data) {
-                    let deliveryAddresses = data.deliveryAddresses
+                    let deliveryAddresses = data.deliveryAddresses;
                     self.data.deliveryAddresses = deliveryAddresses;
                 }
             });
@@ -25,7 +25,7 @@ appControllers.controller('DeliveryAddressesController', ['$scope', '$location',
         self.remove = (index) => {
             let deliveryAddressId = self.data.deliveryAddresses[index]._id;
             DeliveryAddressesService.remove(deliveryAddressId, (error, data) => {
-                if(data) {
+                if (!error) {
                     self.data.deliveryAddresses.splice(index, 1);
                 }
             });

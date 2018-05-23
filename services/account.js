@@ -6,44 +6,72 @@ const CryptoUtil = require('../utils/crypt');
 const ResponseUtil = require('../utils/response');
 
 function get(accountId, callback) {
-    Account.findById(accountId, (error, result) => {
-        if (error) return callback(ResponseUtil.createErrorResponse(error), 'Something went wrong.');
-        if (!result) return callback(ResponseUtil.createNotFoundResponse(), 'Account not found.');
-        result = {'user': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
-    });
+    // Find account by id
+    Account.findById(
+            accountId
+        ).then((account) => {
+            if (!account) return callback(ResponseUtil.createNotFoundResponse(), 'Account not found.');
+            const data = {'user': account};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 function update(account, callback) {
     let accountObj = new Account(account);
-    Account.findByIdAndUpdate(accountObj._id, accountObj, {
-        new: true,
-        runValidators: true,
-        context: 'query',
-        projection: { password: false, createdAt: false, updatedAt: false, __v: false }
-    }, (error, resAccount) => {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors, 'Something went wrong.'));
-        if (!resAccount) return callback(ResponseUtil.createNotFoundResponse('Account failed to create'));
-        CryptoUtil.createToken(resAccount.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
-            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            let result = {'user': resAccount, 'token': token};
-            return callback(null, ResponseUtil.createSuccessResponse(result, 'Account successfully created.'));
+
+    // Validate account
+    const validationError = accountObj.validateSync();
+    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
+
+    // Find account by id and update
+    // Without password and timestamps
+    Account.findByIdAndUpdate(
+        accountObj._id,
+        accountObj, {
+            new: true,
+            context: 'query',
+            projection: {
+                password: false,
+                createdAt: false,
+                updatedAt: false,
+                __v: false
+            }
+        }).then((account) => {
+            if (!account) return callback(ResponseUtil.createNotFoundResponse('Account failed to create'));
+            // Create Token
+            CryptoUtil.createToken(account.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
+                if (error) callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                const data = {'user': account, 'token': token};
+                return callback(null, ResponseUtil.createSuccessResponse(data, 'Account successfully created.'));
+            });
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
-    });
 }
 
 function upload(accountId, profile, callback) {
-    Account.findOne({_id: accountId}, (error, result) => {
-        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong'));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
-        result.profile = profile;
-        result.save((error, user) => {
-            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
-            result = {'user': user};
-            return callback(null, ResponseUtil.createSuccessResponse(result, 'Profile successfully uploaded.'));
+    // Find account by id
+    Account.findOne({
+            _id: accountId
+        }).then((account) => {
+            if (!account) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
+            // Add profile to account
+            account.profile = profile;
+            return account;
+        }).then((accountObj) => {
+            // Save account
+            Account.create(accountObj).then((updatedAccount) => {
+                if (!updatedAccount) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
+                const data = {'user': updatedAccount};
+                return callback(null, ResponseUtil.createSuccessResponse(data, 'Profile successfully uploaded.'));
+            }).catch((error) => {
+                return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+            });
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
-    });
 }
 
 module.exports = {

@@ -30,7 +30,7 @@
     <div ng-repeat="validations in messages.validations track by $index">
         <div class="alert alert-warning alert-dismissible" role="alert" ng-if="validations">
             <strong>Validation:</strong>
-            <ul ng-repeat="validationMessage in validations">
+            <ul ng-repeat="validationMessage in validations track by $index">
                 <li>- {{validationMessage}}</li>
             </ul>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="alerts.clear()">

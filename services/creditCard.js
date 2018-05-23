@@ -5,79 +5,121 @@ const CreditCard = require('../models/creditCard').CreditCard;
 const ResponseUtil = require('../utils/response');
 
 function getByNumber(creditCardNumber, callback) {
-    CreditCard.findOne({number: creditCardNumber}, (error, result) => {
-        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('No credit card found.'));
-        result = {'creditCard': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
+    // Find one credit card by number
+    CreditCard.findOne({
+        number: creditCardNumber
+    }).then((creditCard) => {
+        if (!creditCard) return callback(ResponseUtil.createNotFoundResponse('No credit card found.'));
+        const data = {'creditCard': creditCard};
+        return callback(null, ResponseUtil.createSuccessResponse(data));
+    }).catch((error) => {
+        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
 }
 
 function getAll(callback) {
-    CreditCard.find({}, (error, result) => {
-        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('No credit cards found.'));
-        result = {'creditCards': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
-    });
+    // Find all credit cards
+    CreditCard.find({
+        }).then((creditCards) => {
+            if (!creditCards) return callback(ResponseUtil.createNotFoundResponse('No credit cards found.'));
+            const data = {'creditCards': creditCards};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 function getByAccountId(accountId, callback) {
-    CreditCard.find({'_account': accountId}, (error, result) => {
-        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('Credit card not found.'));
-        result = {'creditCards': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result));
-    });
+    // Find all credit cards by account id
+    CreditCard.find({
+            '_account': accountId
+        }).then((creditCards) => {
+            if (!creditCards) return callback(ResponseUtil.createNotFoundResponse('No credit cards found.'));
+            const data = {'creditCards': creditCards};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 function update(creditCard, callback) {
+    // Update credit card by id
     let creditCardObj = new CreditCard(creditCard);
+
+    // Validate credit card
+    const validationError = creditCardObj.validateSync();
+    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
+
+    // Find and update credit card by id
     CreditCard.findByIdAndUpdate(creditCardObj._id, creditCardObj, {
         new: true,
-        runValidators: true,
         context: 'query'
-    }, (error, result) => {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to update.'));
-        result = {'creditCard': result};
-        return callback(null, ResponseUtil.createSuccessResponse(result, 'Credit card successfully updated.'));
+    }).then((creditCard) => {
+        if (!creditCard) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to update.'));
+        const data = {'creditCard': creditCard};
+        return callback(null, ResponseUtil.createSuccessResponse(data, 'Credit card successfully updated.'));
+    }).catch((error) => {
+        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
 }
 
 function insert(creditCard, callback) {
     let creditCardObj = new CreditCard(creditCard);
-    insertCreditCard(creditCardObj, callback);
+
+    // Validate credit card
+    const validationError = creditCardObj.validateSync();
+    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
+
+    // Save credit card
+    CreditCard.create(creditCardObj).then((creditCard) => {
+        if (!creditCard) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to create.'));
+        const data = {'creditCard': creditCard};
+        return callback(null, ResponseUtil.createSuccessResponse(data, 'Credit card successfully created.'));
+    }).catch((error) => {
+        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+    });
 }
 
 function insertByAccount(account, creditCard, callback) {
     let accountObj = new Account(account);
     let creditCardObj = new CreditCard(creditCard);
-    Account.findById(accountObj._id, (error, result) => {
-        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        if (!result) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to create.'));
-        creditCardObj.owner = result._id;
-        insertCreditCard(creditCardObj, callback);
+
+    // Validate credit card
+    const validationError = accountObj.validateSync();
+    if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
+
+    // Find Account by id
+    Account.findById(accountObj._id).then((account) => {
+        if (!account) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to create.'));
+
+        creditCardObj.owner = account._id;
+
+        // Validate credit card
+        const validationError = creditCardObj.validateSync();
+        if (validationError) return callback(ResponseUtil.createValidationResponse(validationError));
+
+        // Save credit card
+        CreditCard.create(creditCardObj).then((creditCard) => {
+            if (!creditCard) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to create.'));
+            const data = {'creditCard': creditCard};
+            return callback(null, ResponseUtil.createSuccessResponse(data, 'Credit card successfully created.'));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
+    }).catch((error) => {
+        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
 }
 
 function remove(creditCardId, callback) {
-    CreditCard.findByIdAndRemove(creditCardId, (error) => {
-        if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        return callback(null, ResponseUtil.createSuccessResponse(null, 'Credit card successfully deleted.'));
-    });
-}
-
-function insertCreditCard(creditCardObj, callback) {
-    creditCardObj.validate((error) => {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        creditCardObj.save((error, result) => {
-            if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to create.'));
-            result = {'creditCard': result};
-            return callback(null, ResponseUtil.createSuccessResponse(result, 'Credit card successfully created.'));
+    // Delete credit card by id
+    CreditCard.findByIdAndRemove(
+            creditCardId
+        ).then(() => {
+            return callback(null, ResponseUtil.createSuccessResponse(null, 'Credit card successfully deleted.'));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
-    });
 }
 
 module.exports = {
