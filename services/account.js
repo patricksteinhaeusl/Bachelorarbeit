@@ -15,6 +15,7 @@ function get(accountId, callback) {
 }
 
 function update(account, callback) {
+    delete account.username;
     let accountObj = new Account(account);
     Account.findByIdAndUpdate(accountObj._id, accountObj, {
         new: true,
