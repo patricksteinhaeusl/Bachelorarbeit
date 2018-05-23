@@ -7,15 +7,15 @@ const ratingSchema = require('../models/rating').ratingSchema;
 const questionSchema = require('../models/question').questionSchema;
 
 let productSchema = new Schema({
-    name: {type: String, required: true},
-    category: categorySchema,
-    size: {type: Number, require: true},
-    price: {type: Number, require: true},
-    image: {type: String, require: true},
+    name: {type: String, required: [true, 'Name is required']},
+    category: {type: categorySchema, required: [true, 'Category is required']},
+    size: {type: Number, required: [true, 'Size is required']},
+    price: {type: Number, required: [true, 'Price is required']},
+    image: {type: String, required: [true, 'Image is required']},
     questions: [questionSchema],
     ratings: [ratingSchema],
     rating: {
-        value: {type: Number, default: 0, require: true}
+        value: {type: Number, default: 0, required: [true, 'Rating value is required']}
     }
 }, {
     timestamps: {}

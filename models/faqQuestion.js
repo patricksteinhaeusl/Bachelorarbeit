@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let faqSchema = new Schema({
-    question: {type: String, required: true},
-    answer: {type: String, required: true},
+    question: {type: String, required: [true, 'Question is required']},
+    answer: {type: String, required: [true, 'Answer is required']},
 }, {
     timestamps: {}
 });

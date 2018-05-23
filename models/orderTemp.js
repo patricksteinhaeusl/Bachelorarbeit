@@ -6,12 +6,12 @@ const itemSchema = require('../models/item').itemSchema;
 const paymentSchema = require('../models/payment').paymentSchema;
 
 let orderTempSchema = new Schema({
-    items: {type: [itemSchema]},
+    items: {type: [itemSchema], required: [true, 'Items is required']},
     _deliveryAddress: {type: Schema.Types.ObjectId, ref: 'DeliveryAddress'},
     payment: {type: paymentSchema},
-    status: {type: String, required: true, default: 'processing'},
-    totalPrice: {type: Number, required: true},
-    _account: {type: Schema.Types.ObjectId, ref: 'Account', required: true}
+    status: {type: String, default: 'processing', required: [true, 'Status is required']},
+    totalPrice: {type: Number, required: [true, 'Total price is required']},
+    _account: {type: Schema.Types.ObjectId, ref: 'Account', required: [true, 'Account is required']}
 }, {
     timestamps: {}
 });

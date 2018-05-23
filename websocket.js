@@ -8,6 +8,7 @@ module.exports = (server) => {
     });
 
     let users = [];
+    let messages = [];
 
     io.on('connection', (socket) => {
         let room = null;

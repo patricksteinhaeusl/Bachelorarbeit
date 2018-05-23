@@ -6,7 +6,7 @@ const productSchema = require('../models/product').productSchema;
 
 let itemSchema = new Schema({
     quantity: {type: Number, required: true},
-    product: productSchema
+    product: {type: productSchema, required: true}
 }, {
     timestamps: {}
 });

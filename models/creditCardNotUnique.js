@@ -34,7 +34,7 @@ let creditCardNotUniqueSchema = new Schema({
     cvv: {type: String, required: [true, 'CVV is required'], validate: cvvValidator},
     year: {type: Number, required: [true, 'Year is required']},
     month: {type: Number, required: [true, 'Month is required']},
-    _account: {type: Schema.Types.ObjectId, ref: 'Account'}
+    _account: {type: Schema.Types.ObjectId, ref: 'Account', required: [true, 'Account is required']}
 }, {
     timestamps: {}
 });

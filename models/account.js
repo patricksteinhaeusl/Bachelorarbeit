@@ -32,7 +32,7 @@ let accountSchema = new Schema({
     firstname: {type: String, required: [true, 'Firstname is required']},
     lastname: {type: String, required: [true, 'Lastname is required']},
     email: {type: String, required: [true, 'Email is required'], validate: emailValidator, unique: true},
-    isRetailer: { type: Boolean, required: true, default: false }
+    isRetailer: { type: Boolean, default: false, required: [true, 'Retailer is required'] }
 }, {
     timestamps: {}
 });

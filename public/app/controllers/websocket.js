@@ -50,6 +50,7 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
 
     WebSocketService.on('sendMsg', (data) => {
         self.messages.push(data);
+        console.log(self.messages);
     });
 
     self.collapseChat = (elementClassToSlide) => {
