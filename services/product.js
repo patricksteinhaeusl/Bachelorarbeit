@@ -8,7 +8,7 @@ const ResponseUtil = require('../utils/response');
 function get(callback) {
     // Find all products
     Product.find({})
-        .then((products) => handleFindProducts(products))
+        .then((products) => handleFindProducts(products, callback))
         .catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
@@ -31,7 +31,7 @@ function getById(productId, callback) {
 function getByCategoryId(categoryId, callback) {
     // Find product by category id
     Product.find({'category._id': categoryId})
-        .then((products) => handleFindProducts(products))
+        .then((products) => handleFindProducts(products, callback))
         .catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
@@ -44,7 +44,8 @@ function getBySearchValue(searchValueObj, callback) {
                 {name: new RegExp(searchValueObj.searchValue, "i")},
                 {'category.name': new RegExp(searchValueObj.searchValue, "i")}
             ]
-        .then((products) => handleFindProducts(products))
+        })
+        .then((products) => handleFindProducts(products, callback))
         .catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });

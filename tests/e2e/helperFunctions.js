@@ -81,12 +81,12 @@ exports.httpRequest = function (siteUrl, postData, isJSON, Method) {
     }
 
     if (parsedURL.protocol === "https:") {
-        req = https.request(options, (response) => handleRequest(response))
+        req = https.request(options, (response) => handleRequest(response, defer))
             .on('error', function (e) {
                 defer.reject("Got http.get error: " + e.message);
             });
     } else {
-        req = http.request(options, (response) => handleRequest(response))
+        req = http.request(options, (response) => handleRequest(response, defer))
             .on('error', function (e) {
                 defer.reject("Got https.get error: " + e.message);
             });
@@ -115,7 +115,7 @@ exports.searchBrowserConsole = function(searchValue, callback) {
     });
 };
 
-function handleRequest(response) {
+function handleRequest(response, defer) {
     let bodyString = '';
 
     response.setEncoding('utf8');

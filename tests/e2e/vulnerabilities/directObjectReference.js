@@ -18,10 +18,10 @@ describe('Direct Object Reference', () => {
             });
             creditCards[0].element(by.linkText('Edit')).click();
             expect(browser.getCurrentUrl()).toContain(CCNUmber);
-            let value = element(by.model('creditCard.data.creditCard.number')).getAttribute('value').then((value) => {
-                return (parseInt(value));
+            element(by.model('creditCard.data.creditCard.number')).getAttribute('value').then((value) => {
+                value = (parseInt(value));
+                expect(value).toBe(CCNUmber);
             });
-            expect(value).toBe(CCNUmber);
         });
     });
 
@@ -29,10 +29,10 @@ describe('Direct Object Reference', () => {
         let directAccessedCC = 5404000000000003;
         browser.get(browser.params.webshop + '/#!/creditcard/' + directAccessedCC).then(() => {
             expect(browser.getCurrentUrl()).toContain(directAccessedCC);
-            let value = element(by.model('creditCard.data.creditCard.number')).getAttribute('value').then((value) => {
-                return (parseInt(value));
+            element(by.model('creditCard.data.creditCard.number')).getAttribute('value').then((value) => {
+                value = (parseInt(value));
+                expect(value).toBe(directAccessedCC);
             });
-            expect(value).toBe(directAccessedCC);
         });
     });
 });

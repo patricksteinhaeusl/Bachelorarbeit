@@ -8,9 +8,11 @@ function getByNumber(creditCardNumber, callback) {
     // Find one credit card by number
     CreditCard.findOne({
             number: creditCardNumber
-        })
-        .then(handleGetCreditCard(creditCard, callback))
-        .catch((error) => {
+        }).then((creditCard) => {
+            if (!creditCard) return callback(ResponseUtil.createNotFoundResponse('No credit cards found.'));
+            const data = {'creditCard': creditCard};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
 }
@@ -18,7 +20,7 @@ function getByNumber(creditCardNumber, callback) {
 function getAll(callback) {
     // Find all credit cards
     CreditCard.find({})
-        .then(handleGetCreditCard(creditCard, callback))
+        .then((creditCards) => handleGetCreditCards(creditCards, callback))
         .catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
@@ -28,11 +30,8 @@ function getByAccountId(accountId, callback) {
     // Find all credit cards by account id
     CreditCard.find({
             '_account': accountId
-        }).then((creditCards) => {
-            if (!creditCards) return callback(ResponseUtil.createNotFoundResponse('No credit cards found.'));
-            const data = {'creditCards': creditCards};
-            return callback(null, ResponseUtil.createSuccessResponse(data));
-        }).catch((error) => {
+        }).then((creditCards) => handleGetCreditCards(creditCards, callback))
+        .catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
 }
@@ -99,9 +98,9 @@ function remove(creditCardId, callback) {
         });
 }
 
-function handleGetCreditCard(creditCard, callback) {
-    if (!creditCard) return callback(ResponseUtil.createNotFoundResponse('No credit card found.'));
-    const data = {'creditCard': creditCard};
+function handleGetCreditCards(creditCards, callback) {
+    if (!creditCards) return callback(ResponseUtil.createNotFoundResponse('No credit card found.'));
+    const data = {'creditCards': creditCards};
     return callback(null, ResponseUtil.createSuccessResponse(data));
 }
 
