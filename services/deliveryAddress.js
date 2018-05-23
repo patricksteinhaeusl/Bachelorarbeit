@@ -55,6 +55,41 @@ function update(deliveryAddress, callback) {
 function insert(deliveryAddress, callback) {
     let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
 
+    handleInsertDeliveryAddress(deliveryAddressObj, callback);
+}
+
+function insertByAccount(account, deliveryAddress, callback) {
+    let accountObj = new Account(account);
+    let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
+
+    // Validate account
+    accountObj.validate((error) => {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        // Find account by id
+        Account.findById(
+            accountObj._id
+        ).then((account) => {
+            if (!account) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to create.'));
+            deliveryAddressObj.owner = account._id;
+            handleInsertDeliveryAddress(deliveryAddressObj, callback);
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
+    });
+}
+
+function remove(deliveryAddressId, callback) {
+    // Delete delivery address by id
+    DeliveryAddress.findByIdAndRemove(
+        deliveryAddressId
+    ).then(() => {
+        return callback(null, ResponseUtil.createSuccessResponse(null, 'Delivery address successfully deleted.'));
+    }).catch((error) => {
+        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+    });
+}
+
+function handleInsertDeliveryAddress(deliveryAddressObj, callback) {
     // Validate delivery address
     deliveryAddressObj.validate((error) => {
         if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
@@ -68,52 +103,6 @@ function insert(deliveryAddress, callback) {
         }).catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
-    });
-}
-
-function insertByAccount(account, deliveryAddress, callback) {
-    let accountObj = new Account(account);
-    let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
-
-    // Validate account
-    accountObj.validate((error) => {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        // Validate delivery address
-        deliveryAddressObj.validate((error) => {
-            if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-            // Find account by id
-            Account.findById(
-                accountObj._id
-            ).then((account) => {
-                if (!account) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to create.'));
-                deliveryAddressObj.owner = account._id;
-
-                // Save delivery address
-                DeliveryAddress.create(
-                    deliveryAddressObj
-                ).then((deliveryAddress) => {
-                    // Save delivery address
-                    if (!deliveryAddress) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to create.'));
-                    const data = {'deliveryAddress': deliveryAddress};
-                    return callback(null, ResponseUtil.createSuccessResponse(data, 'Delivery address successfully created.'));
-                }).catch((error) => {
-                    return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                });
-            }).catch((error) => {
-                return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            });
-        });
-    });
-}
-
-function remove(deliveryAddressId, callback) {
-    // Delete delivery address by id
-    DeliveryAddress.findByIdAndRemove(
-        deliveryAddressId
-    ).then(() => {
-        return callback(null, ResponseUtil.createSuccessResponse(null, 'Delivery address successfully deleted.'));
-    }).catch((error) => {
-        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
 }
 

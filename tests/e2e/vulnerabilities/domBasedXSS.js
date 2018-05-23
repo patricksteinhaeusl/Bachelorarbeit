@@ -1,4 +1,5 @@
 'use strict';
+const HelperFunctions = require('../helperFunctions');
 
 describe('DOM Based XSS', () => {
 
@@ -18,15 +19,7 @@ describe('DOM Based XSS', () => {
     describe('should execute javascript on console', () => {
         it('should be successfully', () => {
             browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=<script>console.log("DOM Based XSS");</script>').then(() => {
-                browser.sleep(250);
-                browser.manage().logs().get('browser').then((browserLog) => {
-                    require('util').inspect(browserLog);
-                    let found = false;
-                    browserLog.forEach((entry) => {
-                        if(entry.message.indexOf('DOM Based XSS') > -1) {
-                            found = true;
-                        }
-                    });
+                HelperFunctions.searchBrowserConsole('DOM Based XSS', function(found) {
                     expect(found).toBe(true);
                 });
             });

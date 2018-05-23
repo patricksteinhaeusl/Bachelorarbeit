@@ -44,32 +44,22 @@ describe('Post - SVG Injection', () => {
         it('should success', () => {
             browser.get(browser.params.webshop).then(() => {
 
-                browser.sleep(250);
-                browser.manage().logs().get('browser').then((browserLog) => {
-                    require('util').inspect(browserLog);
-                    let found = false;
-                    browserLog.forEach((entry) => {
-                        if(entry.message.indexOf('SVG Injection') > -1) {
-                            found = true;
-                        }
-                    });
-                    expect(found).toBe(true);
+                HelperFunctions.searchBrowserConsole('SVG Injection', function(found) {
+                    //Open Auth Menu
+                    element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                    browser.sleep(250);
+                    //Link
+                    element(by.linkText('Home')).click();
+                    browser.sleep(250);
+
+                    let posts = element.all(by.repeater('post in posts.data.posts'));
+                    //Check
+                    expect(posts.last().getText()).toContain('Ein perfektes Produkt\n');
+                    expect(posts.last().getText()).toContain('Ein perfektes Produkt zum verlieben.');
+                    let image = posts.all(by.css('.post-image')).get(0);
+                    //Check
+                    expect(image.isDisplayed()).toBe(true);
                 });
-
-                //Open Auth Menu
-                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
-                browser.sleep(250);
-                //Link
-                element(by.linkText('Home')).click();
-                browser.sleep(250);
-
-                let posts = element.all(by.repeater('post in posts.data.posts'));
-                //Check
-                expect(posts.last().getText()).toContain('Ein perfektes Produkt\n');
-                expect(posts.last().getText()).toContain('Ein perfektes Produkt zum verlieben.');
-                let image = posts.all(by.css('.post-image')).get(0);
-                //Check
-                expect(image.isDisplayed()).toBe(true);
             });
         });
     });
@@ -77,25 +67,14 @@ describe('Post - SVG Injection', () => {
     describe('Delete', () => {
         it('should success', () => {
             browser.get(browser.params.webshop).then(() => {
-
-                browser.sleep(250);
-                browser.manage().logs().get('browser').then((browserLog) => {
-                    require('util').inspect(browserLog);
-                    let found = false;
-                    browserLog.forEach((entry) => {
-                        if(entry.message.indexOf('SVG Injection') > -1) {
-                            found = true;
-                        }
+                HelperFunctions.searchBrowserConsole('SVG Injection', function(found) {
+                    let posts = element.all(by.repeater('post in posts.data.posts'));
+                    element.all(by.repeater('post in posts.data.posts')).count().then((preCount) => {
+                        posts.last().all(by.css('.glyphicon-trash')).get(0).click();
+                        let postCount = element.all(by.repeater('post in posts.data.posts')).count();
+                        //Check
+                        expect(preCount - 1).toBe(postCount);
                     });
-                    expect(found).toBe(true);
-                });
-
-                let posts = element.all(by.repeater('post in posts.data.posts'));
-                element.all(by.repeater('post in posts.data.posts')).count().then((preCount) => {
-                    posts.last().all(by.css('.glyphicon-trash')).get(0).click();
-                    let postCount = element.all(by.repeater('post in posts.data.posts')).count();
-                    //Check
-                    expect(preCount - 1).toBe(postCount);
                 });
             });
         });

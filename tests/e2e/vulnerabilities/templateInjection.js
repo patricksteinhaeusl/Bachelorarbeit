@@ -43,15 +43,7 @@ describe('Template Injection', function () {
             });
         });
 
-        browser.sleep(250);
-        browser.manage().logs().get('browser').then((browserLog) => {
-            require('util').inspect(browserLog);
-            let found = false;
-            browserLog.forEach((entry) => {
-                if(entry.message.indexOf('Template Injection') > -1) {
-                    found = true;
-                }
-            });
+        HelperFunctions.searchBrowserConsole('Template Injection', function(found) {
             expect(found).toBe(true);
         });
     });

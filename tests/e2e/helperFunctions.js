@@ -81,47 +81,15 @@ exports.httpRequest = function (siteUrl, postData, isJSON, Method) {
     }
 
     if (parsedURL.protocol === "https:") {
-        req = https.request(options, function (response) {
-
-            let bodyString = '';
-
-            response.setEncoding('utf8');
-
-            response.on("data", function (chunk) {
-                bodyString += chunk;
+        req = https.request(options, (response) => handleRequest(response))
+            .on('error', function (e) {
+                defer.reject("Got http.get error: " + e.message);
             });
-
-            response.on('end', function () {
-                defer.fulfill({
-                    statusCode: response.statusCode,
-                    bodyString: bodyString,
-                    headers: response.headers
-                });
-            });
-        }).on('error', function (e) {
-            defer.reject("Got https.get error: " + e.message);
-        });
     } else {
-        req = http.request(options, function (response) {
-
-            let bodyString = '';
-
-            response.setEncoding('utf8');
-
-            response.on("data", function (chunk) {
-                bodyString += chunk;
+        req = http.request(options, (response) => handleRequest(response))
+            .on('error', function (e) {
+                defer.reject("Got https.get error: " + e.message);
             });
-
-            response.on('end', function () {
-                defer.fulfill({
-                    statusCode: response.statusCode,
-                    bodyString: bodyString,
-                    headers: response.headers
-                });
-            });
-        }).on('error', function (e) {
-            defer.reject("Got http.get error: " + e.message);
-        });
     }
 
     if (isJSON) {
@@ -131,3 +99,36 @@ exports.httpRequest = function (siteUrl, postData, isJSON, Method) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1';
     return defer.promise;
 };
+
+
+exports.searchBrowserConsole = function(searchValue, callback) {
+    browser.sleep(250);
+    browser.manage().logs().get('browser').then((browserLog) => {
+        require('util').inspect(browserLog);
+        let found = false;
+        browserLog.forEach((entry) => {
+            if(entry.message.indexOf(searchValue) > -1) {
+                found = true;
+            }
+        });
+        return callback(found);
+    });
+};
+
+function handleRequest(response) {
+    let bodyString = '';
+
+    response.setEncoding('utf8');
+
+    response.on("data", function (chunk) {
+        bodyString += chunk;
+    });
+
+    response.on('end', function () {
+        defer.fulfill({
+            statusCode: response.statusCode,
+            bodyString: bodyString,
+            headers: response.headers
+        });
+    });
+}

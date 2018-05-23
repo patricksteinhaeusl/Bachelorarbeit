@@ -25,20 +25,7 @@ function getAll(callback) {
 
 function insertUpload(post, callback) {
     let postObj = new Post(post);
-
-    // Validate post
-    postObj.validate((error) => {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        // Create Post
-        Post.create(postObj)
-            .then((post) => {
-                if (!post) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
-                const data = {'post': post};
-                return callback(null, ResponseUtil.createSuccessResponse(data, 'Post successfully created.'));
-            }).catch((error) => {
-            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        });
-    });
+    handleInsertPost(postObj, callback);
 }
 
 function insertURL(post, url, callback) {
@@ -63,19 +50,7 @@ function insertURL(post, url, callback) {
             post.image = scrambledFileName + extension;
             let postObj = new Post(post);
 
-            // Validate Post
-            postObj.validate((error) => {
-                if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-                // Save Post
-                Post.create(postObj)
-                    .then((post) => {
-                        if (!post) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
-                        const data = {'post': post};
-                        return callback(null, ResponseUtil.createSuccessResponse(data, 'Post successfully created.'));
-                    }).catch((error) => {
-                        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                    });
-            });
+            handleInsertPost(postObj, callback);
         }).catch(() => {
             return callback(ResponseUtil.createErrorResponse('Could not fetch image from given URL'));
         });
@@ -95,6 +70,22 @@ function remove(postId, callback) {
         });
     }).catch((error) => {
         return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+    });
+}
+
+function handleInsertPost(postObj, callback) {
+    // Validate Post
+    postObj.validate((error) => {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        // Save Post
+        Post.create(postObj)
+            .then((post) => {
+                if (!post) return callback(ResponseUtil.createNotFoundResponse('Post failed to save.'));
+                const data = {'post': post};
+                return callback(null, ResponseUtil.createSuccessResponse(data, 'Post successfully created.'));
+            }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
     });
 }
 
