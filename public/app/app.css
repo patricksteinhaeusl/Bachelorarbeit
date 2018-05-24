@@ -168,8 +168,11 @@ a:hover {
     display: inline-block;
     word-break: break-all;
     cursor: pointer;
+    text-align: right;
 }
-
+.navbar-menu ul li {
+    vertical-align: middle;
+}
 
 .navbar-menu .menu-item {
     display: inline-block;
