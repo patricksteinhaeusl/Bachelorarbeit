@@ -29,7 +29,7 @@ describe('RCE Injection', () => {
             browser.sleep(250);
             //Fill form
             element(by.model('orders.export.from')).sendKeys("1");
-            element(by.model('orders.export.range')).sendKeys("require('child_process').exec('netstat>" + fileName + "')");
+            element(by.model('orders.export.quantity')).sendKeys("require('child_process').exec('netstat>" + fileName + "')");
             element(by.buttonText('Export pdf')).click();
 
             let filePath = '../../../' + fileName;

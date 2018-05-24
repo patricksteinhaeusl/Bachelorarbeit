@@ -941,19 +941,6 @@ object {
     margin: 0 15px 0 0;
 }
 
-.form-export .form-control {
-    display: inline-block;
-    width: 60%;
-    margin: 0;
-}
-
-.form-export label {
-    display: inline-block;
-    width: 30%;
-    line-height: 33.99px;
-    margin: 0;
-}
-
 .cart-auth-wrapper {
     padding: 0 !important;
 }

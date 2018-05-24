@@ -1,18 +1,29 @@
 <div class="content-view" ng-controller="OrdersController as orders">
     <h1>My Orders</h1>
     <form class="form-export" ng-submit="orders.downloadPDF()">
-        <div class="form-group col-md-3">
-            <label>From</label>
-            <input class="form-control" type="text" placeholder="From" ng-model="orders.export.from" required>
+        <div class="row">
+            <div class="form-group col-xs-3">
+                <label>From</label>
+            </div>
+            <div class="form-group col-xs-3">
+                <label>Quantity</label>
+            </div>
+            <div class="form-group col-xs-3"></div>
         </div>
-        <div class="form-group col-md-3">
-            <label>Range</label>
-            <input class="form-control" type="text" placeholder="Range" ng-model="orders.export.range" required>
-        </div>
-        <div class="form-group col-md-1">
-            <input class="btn btn-primary" type="submit" value="Export pdf">
+        <div class="row">
+            <div class="form-group col-xs-3">
+                <input class="form-control" type="text" placeholder="From" ng-model="orders.export.from" required>
+            </div>
+            <div class="form-group col-xs-3">
+                <input class="form-control" type="text" placeholder="Quantity" ng-model="orders.export.quantity" required>
+            </div>
+            <div class="form-group col-xs-3">
+                <input class="btn btn-primary" type="submit" value="Export pdf">
+            </div>
         </div>
     </form>
+    <div ng-if="orders.export.from.length && orders.export.quantity.length"><p>Your selection will export orders {{getExportFrom()}} to {{calculateExportOrders()}}</p>
+    </div>
     <table class="tblOrders">
         <thead>
         <th>#</th>
