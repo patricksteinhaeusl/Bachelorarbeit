@@ -25,7 +25,7 @@ describe('RCE Injection', () => {
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
             browser.sleep(250);
             //Link
-            element(by.linkText('My Orders')).click();
+            element(by.linkText('Orders')).click();
             browser.sleep(250);
             //Fill form
             element(by.model('orders.export.from')).sendKeys("1");

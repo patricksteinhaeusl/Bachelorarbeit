@@ -28,7 +28,7 @@ describe('Profile Tests', () => {
             element(by.partialLinkText('#!/account')).getText().then((url) => {
                 let secondLastSegment = url.split('/').filter(el => !!el);
                 secondLastSegment = secondLastSegment[secondLastSegment.length-2];
-                element(by.linkText('My Profile')).click();
+                element(by.linkText('Profile')).click();
                 browser.sleep(250);
                 browser.getCurrentUrl().then((url) => {
                     expect(url).toContain("/#!/account/" + secondLastSegment + "/profile");
@@ -88,7 +88,7 @@ describe('Profile Tests', () => {
             element(by.partialLinkText('#!/account')).getText().then((url) => {
                 let secondLastSegment = url.split('/').filter(el => !!el);
                 secondLastSegment = secondLastSegment[secondLastSegment.length-2];
-                element(by.linkText('My Profile')).click();
+                element(by.linkText('Profile')).click();
                 browser.sleep(250);
                 browser.getCurrentUrl().then((url) => {
                     expect(url).toContain("/#!/account/" + secondLastSegment + "/profile");
