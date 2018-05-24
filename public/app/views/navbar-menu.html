@@ -1,7 +1,7 @@
 <div class="navbar-menu" ng-controller="NavController as nav">
     <ul class="list-unstyled">
         <li ng-if="auth.isAuthenticated()" class="menu-item-username" ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')">{{ auth.getUser().firstname + " " +
-            auth.getUser().lastname }}
+            auth.getUser().lastname + " (" + auth.getUser().username + ")"}}
         </li>
         <li ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')" class="menu-item glyphicon glyphicon-user"
             aria-hidden="true"></li>

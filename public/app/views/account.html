@@ -26,13 +26,10 @@
         </button>
     </form>
     <br />
-    <div>
-        <h1>Profile example</h1>
-        <p>View <a href="/assets/profiles/template.html" download>sample template</a></p>
-    </div>
     <br />
     <form ng-submit="account.upload()">
         <h1>Upload your profile</h1>
+        <p>View <a href="/assets/profiles/template.html" download>sample template</a></p>
         <div class="form-group">
             <input id='file-selector' type="file" ng-model="account.data.profile" name="profile"
                    ngf-select=""
@@ -54,6 +51,7 @@
     <br />
     <div>
         <h1>Share your profile</h1>
+        <p>Click the following button to copy the link to your profile to your clipboard.</p>
         <a ng-href="#!/account/{{auth.getUser()._id}}/profile">#!/account/{{auth.getUser()._id}}/profile</a>
     </div>
 </div>
