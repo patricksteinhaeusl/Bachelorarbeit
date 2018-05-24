@@ -201,45 +201,4 @@ describe('Order and Cart Processes', () => {
             });
         });
     });
-
-    describe('Print Orders', () => {
-        const protractorConf = require('../protractorConf.js');
-
-        it('should be able to export order list', () => {
-            browser.get(browser.params.webshop).then(() => {
-                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
-                browser.sleep(250);
-                //Link
-                element(by.linkText('My Orders')).click();
-                browser.sleep(250);
-                //Fill form
-                element(by.model('orders.export.from')).sendKeys("1");
-                element(by.model('orders.export.range')).sendKeys("5");
-                element(by.buttonText('Export pdf')).click();
-                let fileName = 'file.pdf';
-                let filePath = protractorConf.config.capabilities.chromeOptions.prefs.download.default_directory + fileName;
-                browser.wait(() => {
-                    try {
-                        fs.accessSync(filePath, fs.constants.F_OK);
-                        return true;
-                    } catch (error) {
-                        return false;
-                    }
-                }, 5000).then((exists) => {
-                    expect(exists).toBe(true);
-                }).then(() => {
-                    browser.wait(() => {
-                        try {
-                            fs.unlinkSync(filePath);
-                            return true;
-                        } catch (error) {
-                            return false;
-                        }
-                    }, 5000).then(function(unlinked) {
-                        expect(unlinked).toBe(true);
-                    });
-                });
-            });
-        });
-    });
 });
