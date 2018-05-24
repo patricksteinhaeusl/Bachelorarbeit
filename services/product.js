@@ -8,6 +8,10 @@ const ResponseUtil = require('../utils/response');
 function get(callback) {
     // Find all products
     Product.find({})
+        .populate({
+            path: 'ratings._account',
+            select: '_id username'
+        })
         .then((products) => handleFindProducts(products, callback))
         .catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));

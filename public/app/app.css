@@ -308,11 +308,15 @@ table tr td li {
     padding-left: 15px;
 }
 
-.sidebar-right .sidebar-topRatedProduct .rating-wrapper .rating-date {
+.sidebar-right .sidebar-topRatedProduct .rating-wrapper .rating-date-and-name {
     display: inline-block;
     font-size: 12px;
     width: 100%;
     text-align: right;
+}
+
+.sidebar-right .sidebar-topRatedProduct .rating-wrapper .rating-date-and-name a{
+    color: white;
 }
 
 .sidebar-left h1,
