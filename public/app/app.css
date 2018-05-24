@@ -620,6 +620,11 @@ table tr td li {
     font-size: 15px !important;
 }
 
+.glyphicon-comment{
+    cursor: default !important;
+    pointer-events: none;
+}
+
 .glyphicon, .material-icons, a {
     cursor: pointer;
 }
