@@ -843,14 +843,14 @@ object {
 .chat {
     display: none;
     position: fixed;
-    right: 15px;
+    left: 25px;
+    right: 25px;
     bottom: 15px;
-    width: 500px;
-    height: 350px;
+    height: 400px;
 }
 
 .chat .panel {
-    height: 310px;
+    height: 360px;
     margin: 0;
 }
 
@@ -899,14 +899,17 @@ object {
     padding: 10px 5px 10px 5px;
 }
 
-.chat .panel-body .user-list {
-    border-right: solid 1px gray;
+.chat .message-container .list-group-item {
+    display: inline-block;
+    width: 75%;
+    padding: 15px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 
-.chat .panel-body ul {
-    height: 100%;
-    width: 100%;
-    margin: 0;
+.chat .panel-body .user-list {
+    border-right: solid 1px gray;
 }
 
 .chat .panel-body li {
@@ -917,8 +920,8 @@ object {
 
 .chat-button {
     position: fixed;
-    right: 15px;
-    bottom: 15px;
+    right: 25px;
+    bottom: 25px;
 }
 
 .form-export {
@@ -947,4 +950,9 @@ object {
 
 .cart-auth-wrapper {
     padding: 0 !important;
+}
+
+.datetime {
+    float: right;
+    font-size: 0.7em;
 }

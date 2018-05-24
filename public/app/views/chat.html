@@ -27,8 +27,9 @@
                 <div class="col col-xs-9 message-box">
                     <div class="message-container">
                         <ul class="list-group">
-                            <li class="list-group-item" ng-repeat="message in websocket.messages">
-                                {{ message.from }} says: {{ message.msg }}
+                            <li class="list-group-item" ng-class="message.from.id === auth.getUser()._id ? 'pull-right' : 'pull-left'" ng-repeat="message in websocket.messages | orderBy : message : true">
+                                <div>{{ message.text }}</div>
+                                <span class="datetime pull-right">{{ message.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200' }} </span>
                             </li>
                         </ul>
                     </div>
@@ -39,7 +40,7 @@
             <div class="input-group">
                 <input class="form-control" ng-model='websocket.message'>
                 <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ng-click="websocket.sendMsg()">Send...</button>
+                <button class="btn btn-default" type="button" ng-click="websocket.sendMessage()">Send...</button>
             </span>
             </div>
         </div>

@@ -2,56 +2,67 @@
 
 appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthService', 'WebSocketService', function ($rootScope, $scope, AuthService, WebSocketService) {
     const self = this;
-
     self.user = null;
-    self.message = null;
-    self.messages = [];
     self.userList = [];
-
     self.selectedUser = null;
+    self.messages = [];
 
-    self.selectUser = (selectedUser) => {
-        self.selectedUser = selectedUser;
+    self.join = () => {
+        const account = AuthService.getUser();
+        WebSocketService.join(account);
     };
-
-    self.sendMsg = () => {
-        if(self.selectedUser) {
-            WebSocketService.emit('getMsg',{
-                to : self.selectedUser._id,
-                msg : self.message,
-                from : self.user.username
-            });
-            self.message = null;
-        } else {
-            $rootScope.messages.warnings.push('User must be selected.');
-        }
-    };
-
-    if(AuthService.isAuthenticated()) {
-        let authUser = {
-            _id: AuthService.getUser()._id,
-            username: AuthService.getUser().username
-        };
-
-        WebSocketService.reJoin(authUser);
-    }
 
     WebSocketService.on('join', (user) => {
         self.user = user;
     });
 
+    self.leave = () => {
+        const account = AuthService.getUser();
+        WebSocketService.join(account);
+    };
+
     WebSocketService.on('leave', () => {
         self.user = null;
     });
 
-    WebSocketService.on('userList', (userList) => {
+    WebSocketService.on('getMessages', (messages) => {
+        self.messages = messages;
+        self.scrollBottom();
+    });
+
+    WebSocketService.on('getMessagesByFromTo', (messages) => {
+        self.messages = messages;
+        self.scrollBottom();
+    });
+
+    WebSocketService.on('getUserList', (userList) => {
         self.userList = userList;
     });
 
-    WebSocketService.on('sendMsg', (data) => {
-        self.messages.push(data);
-        console.log(self.messages);
-    });
+    self.sendMessage = () => {
+        if(self.selectedUser) {
+            const message = {
+                from: {
+                    id: self.user.socketId,
+                    username: self.user.username
+                },
+                to: {
+                    id: self.selectedUser.socketId,
+                    username: self.selectedUser.username
+                },
+                text: self.message
+            };
+
+            WebSocketService.emit('getMessage', message);
+        } else {
+            $rootScope.messages.warnings.push('User must be selected.');
+        }
+        self.message = null;
+    };
+
+    self.selectUser = (selectedUser) => {
+        self.selectedUser = selectedUser;
+    };
 
     self.collapseChat = (elementClassToSlide) => {
         $(() => {
@@ -62,4 +73,15 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
             }
         });
     };
+
+    self.scrollBottom = () => {
+        $(() => {
+            let messageBox = $('.message-box');
+            messageBox.scrollTop(messageBox.prop("scrollHeight"));
+        });
+    };
+
+    if(AuthService.isAuthenticated()) {
+        self.join();
+    }
 }]);

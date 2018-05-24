@@ -27,9 +27,7 @@ const config = {
         port: 27017,
         name: 'webshop',
         connectionString() {
-            // TODO: CHANGE
-            return 'mongodb://' + this.host + ':' + this.port + '/' + this.name;
-            //return 'mongodb://' + this.username + ':' + this.password + '@' + this.host + ':' + this.port + '/' + this.name;
+            return 'mongodb://' + this.username + ':' + this.password + '@' + this.host + ':' + this.port + '/' + this.name;
         }
     },
     jwt: {

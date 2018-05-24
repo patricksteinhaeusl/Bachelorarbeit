@@ -2,6 +2,7 @@
 
 appServices.factory('WebSocketService', ['$rootScope', function($rootScope) {
     let self = this;
+
     self.socket = io.connect({
         transports: ['websocket']
     });
@@ -26,23 +27,17 @@ appServices.factory('WebSocketService', ['$rootScope', function($rootScope) {
         })
     };
 
-
-    self.reJoin = (user) => {
-        this.emit('reJoin', user);
+    self.join = (account) => {
+        self.emit('join', account);
     };
 
-    self.join = (user) => {
-        this.emit('join', user);
-    };
-
-    self.leave = (user) => {
-        this.emit('leave', user);
+    self.leave = (account) => {
+        self.emit('leave', account);
     };
 
     return {
         on: self.on,
         emit: self.emit,
-        reJoin: self.reJoin,
         join: self.join,
         leave: self.leave
     }
