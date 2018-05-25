@@ -1,15 +1,41 @@
 'use strict';
 
-appControllers.controller('AccountController', ['$scope', '$http', 'localStorageService', 'AccountService', 'AuthService',
-    function ($scope, $http, localStorageService, AccountService, AuthService) {
+appControllers.controller('AccountController', ['$scope', '$timeout', '$http', '$location','localStorageService', 'AccountService', 'AuthService', 'clipboard',
+    function ($scope, $timeout, $http, $location, localStorageService, AccountService, AuthService, clipboard) {
         const self = this;
+        let baseURL;
         self.data = {};
         self.data.account = {};
         self.data.profile = {};
         self.data.progress = 0;
+        self.showMsg = false;
+
+        self.copySuccess = () => {
+            self.showMsg = true;
+            self.copyMessage = "Success";
+            $timeout(() => {self.showMsg = false}, 2000);
+        };
+
+        self.copyFail = (err) => {
+            self.showMsg = true;
+            self.copyMessage = "Failed";
+            $timeout(() => {self.showMsg = false}, 2000);
+        };
 
         self.init = () => {
             self.get(AuthService.getUser()._id);
+
+            if ($location.port() !== 443 && $location.port() !== 80) {
+                baseURL = $location.protocol() + "://" + $location.host() + ":" + $location.port();
+            } else {
+                baseURL = $location.protocol() + "://" + $location.host();
+            }
+            self.textToCopy = baseURL + "/#!/account/"+ AuthService.getUser()._id + "/profile";
+
+            if (!clipboard.supported) {
+                self.showMsg = true;
+                self.copyMessage = "Browser not supported. Copy by hand.";
+            }
         };
 
         self.get = (accountId) => {

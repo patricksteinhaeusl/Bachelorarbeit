@@ -22,7 +22,8 @@
             </div>
         </div>
     </form>
-    <div ng-if="orders.export.from.length && orders.export.quantity.length"><p>Your selection will export orders {{getExportFrom()}} to {{calculateExportOrders()}}</p>
+    <div ng-if="orders.export.from.length && orders.export.quantity.length">
+        <p>Your selection will export orders {{orders.getExportFrom()}} to {{orders.calculateExportOrders()}}</p>
     </div>
     <table class="tblOrders">
         <thead>

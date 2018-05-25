@@ -112,7 +112,8 @@ angular.module('app', [
     'app.controllers',
     'app.services',
     'app.directives',
-    'app.filters'
+    'app.filters',
+    'angular-clipboard'
 ])
 .config(['$httpProvider', '$locationProvider', '$routeProvider', '$compileProvider', 'localStorageServiceProvider',
     ($httpProvider, $locationProvider, $routeProvider, $compileProvider, localStorageServiceProvider) => {

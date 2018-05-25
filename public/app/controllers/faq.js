@@ -4,6 +4,7 @@ appControllers.controller('FaqController', ['$scope', '$routeParams', 'FaqServic
     const self = this;
     self.data = {};
     self.data.searchValue = null;
+    self.spinner = false;
 
     self.init = () => {
         self.getFaq();
@@ -14,6 +15,7 @@ appControllers.controller('FaqController', ['$scope', '$routeParams', 'FaqServic
     };
 
     self.getFaqBySearchValue = () => {
+        self.spinner = true;
         if (self.data.searchValue) {
             FaqService.getFaqBySearchValue(self.data.searchValue, self.updateFaq);
         } else {
@@ -25,7 +27,9 @@ appControllers.controller('FaqController', ['$scope', '$routeParams', 'FaqServic
     self.updateFaq = (error, data) => {
         if (data) {
             self.data.FaqQuestions = data.faq;
+
         }
+        self.spinner = false;
     };
 
     self.init();

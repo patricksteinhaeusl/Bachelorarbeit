@@ -12,7 +12,7 @@ function get(deliveryAddressId, accountId, callback) {
     }).then((deliveryAddress) => {
         if (!deliveryAddress) return callback(ResponseUtil.createNotFoundResponse('No delivery address found.'));
         const data = {'deliveryAddress': deliveryAddress};
-        return callback(null, ResponseUtil.createSuccessResponse(data, 'Delivery address found.'));
+        return callback(null, ResponseUtil.createSuccessResponse(data));
     }).catch((error) => {
         return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
@@ -32,6 +32,7 @@ function getByAccountId(accountId, callback) {
 }
 
 function update(deliveryAddress, callback) {
+    // Update delivery address by id
     let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
 
     // Validate delivery address

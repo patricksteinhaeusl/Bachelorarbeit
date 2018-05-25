@@ -14,13 +14,13 @@ appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter'
             self.getAllByAccount();
         };
 
-        $scope.calculateExportOrders = function(){
+        self.calculateExportOrders = function(){
             if (isNaN($scope.orders.export.quantity)) return "NaN";
             if (isNaN($scope.orders.export.from)) return parseInt($scope.orders.export.quantity);
             return parseInt($scope.orders.export.quantity) + parseInt($scope.orders.export.from);
         };
 
-        $scope.getExportFrom = function(){
+        self.getExportFrom = function(){
             if (isNaN($scope.orders.export.from)) return "NaN";
             return parseInt($scope.orders.export.from);
         };

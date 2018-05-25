@@ -16,8 +16,8 @@ appControllers.controller('DeliveryAddressController', ['$scope', '$location', '
             if (deliveryAddressId) {
                 DeliveryAddressService.getById(deliveryAddressId, accountId, (error, data) => {
                     if(data) {
-                        let deliveyAddress = data.deliveryAddress;
-                        self.data.deliveryAddress = deliveyAddress;
+                        let deliveryAddress = data.deliveryAddress;
+                        self.data.deliveryAddress = deliveryAddress;
                     }
                 });
             }
