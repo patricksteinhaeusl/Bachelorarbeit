@@ -3,7 +3,7 @@
 const Order = require('../models/order');
 const ResponseUtil = require('../utils/response');
 
-function change(orderId, callback) {
+function applyDiscount(orderId, callback) {
     // Find order by id
     Order.findById(orderId)
         .then((order) => {
@@ -33,5 +33,5 @@ function change(orderId, callback) {
 }
 
 module.exports = {
-    change
+    applyDiscount
 };

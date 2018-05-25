@@ -3,8 +3,8 @@ extends layout.pug
 block content
     h1 Retailer
     if feedback.statusCode === 200
-        h2 Order edited successfully
+        h2 Discount successful applied
         p <b>Data:</b> #{JSON.stringify(feedback.data)}
     else
-        h2 #{feedback.statusCode}: Error occured
+        h2 #{feedback.statusCode}: Error occurred
         p <b>Message:</b> #{feedback.message}
