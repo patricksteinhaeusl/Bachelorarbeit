@@ -20,29 +20,14 @@ module.exports = (server) => {
 
         socket.on('join', (account) => {
             let userObj = new ChatUser({ socketId: socket.id, userId: account._id, username: account.username});
-            // Create user
-            ChatUser.create(userObj).then((newUser) => {
-                io.emit('join', newUser);
-                updateUserList();
-            }).catch((error) => {
-                if((error.code === 11000 && error.name === 'BulkWriteError') || error.errors) {
-                    // Update existing User
-                    ChatUser.findOneAndUpdate({
-                        userId: userObj.userId,
-                    }, {
-                        $set: {
-                            socketId: socket.id,
-                            username: userObj.username
-                        }
-                    }, {
-                        new: true
-                    }).then((updatedUser) => {
-                        socket.emit('join', updatedUser);
-                        updateUserList();
-                    }).catch((error) => {
-                        console.log("Update User", error);
-                    });
-                }
+
+            // Create new user
+            ChatUser.findOneAndUpdate({userId: userObj.userId}, userObj, { upsert: true, new: true, setDefaultsOnInsert: true })
+                .then((user) => {
+                    socket.emit('join', user);
+                    io.emit('refreshUserList');
+                }).catch((error) => {
+                socket.emit('error', 'Creating users failed!');
             });
         });
 
@@ -51,70 +36,82 @@ module.exports = (server) => {
             ChatUser.remove({ userId: account._id}).then(() => {
                 socket.emit('leave');
             }).catch((error) => {
-                console.log("ERROR Leave", error);
+                socket.emit('error', 'Leaving chat failed!');
             });
         });
 
         socket.on('disconnect', () => {
             // Remove user
             ChatUser.remove({ socketId: socket.id })
-                .then(() => {
-
-                }).catch((error) => {
-                    console.log("ERROR Disconnect", error);
+                .catch((error) => {
+                    socket.emit('error', 'Disconnecting chat failed!');
                 });
         });
 
-        socket.on('getMessage', (message) => {
+        socket.on('saveMessage', (message) => {
+            // Save messages
             let messageObj = new ChatMessage(message);
 
-            ChatMessage.create(messageObj).then((newMessage) => {
-                ChatMessage.find()
-                    .limit(5)
-                    .sort({ createdAt: -1 }).exec((error, messages) => {
-                        if(!error) {
-                            io.in(newMessage.from.id).emit('getMessages', messages);
-                            io.in(newMessage.to.id).emit('getMessages', messages);
-                        }
+            ChatMessage.create(messageObj)
+                .catch((error) => {
+                    socket.emit('error', 'Creating message failed!');
                 });
-            }).catch((error) => {
-                console.log("ERROR getMessage", error);
-            });
         });
 
-        socket.on('getMessagesByFromTo', (from, to) => {
+        socket.on('sendMessagesToRooms', (data) => {
+            // Send messages
             ChatMessage.find({
                     $or: [{
-                        $and: [
-                            {'from.id': from.id},
-                            {'to.id': to.id},
-                        ]
-                    }, {
-                        $and: [
-                            {'from.id': from.id},
-                            {'to.id': to.id},
-                        ]
+                            'from.userId': data.from.userId,
+                            'to.userId': data.to.userId
+                        }, {
+                            'from.userId': data.to.userId,
+                            'to.userId': data.from.userId
                     }]
                 })
                 .limit(5)
-                .sort({ createdAt: -1 }).exec((error, messages) => {
-                if(!error) {
-                    io.in(newMessage.from.id).emit('getMessagesByFromTo', messages);
-                    io.in(newMessage.to.id).emit('getMessagesByFromTo', messages);
-                }
-            });
+                .sort({ createdAt: -1 })
+                .exec((error, messages) => {
+                    if (error) {
+                        socket.emit('error', 'Finding message failed!');
+                    } else {
+                        io.in(data.from.userId).emit('getMessages', messages);
+                        io.in(data.to.userId).emit('getMessages', messages);
+                    }
+                });
         });
 
-        function updateUserList() {
+        socket.on('sendMessagesToRoom', (data) => {
+            // Send messages
+            ChatMessage.find({
+                    $or: [{
+                        'from.userId': data.from.userId,
+                        'to.userId': data.to.userId
+                    }, {
+                        'from.userId': data.to.userId,
+                        'to.userId': data.from.userId
+                    }]
+                })
+                .limit(5)
+                .sort({ createdAt: -1 })
+                .exec((error, messages) => {
+                    if (error) {
+                        socket.emit('error', 'Finding message failed!');
+                    } else {
+                        io.in(data.from.userId).emit('getMessages', messages);
+                    }
+                });
+        });
+
+        socket.on('sendUserList', () => {
             // Update userList
             ChatUser.find({}).then((users) => {
                 io.emit('getUserList', users);
             }).catch((error) => {
-                console.log("ChatUser.find", error);
+                socket.emit('error', 'Finding users failed!');
             });
-        }
+        });
 
-        updateUserList();
-
+        io.emit('refreshUserList');
     });
 };

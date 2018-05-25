@@ -9,7 +9,8 @@ let chatUserSchema = new Schema({
     userId: {type: Schema.Types.ObjectId, ref: 'Account', required: [true, 'Socket id is required'], unique: true},
     username: {type: String, required: [true, 'Username is required'], unique: true}
 }, {
-    timestamps: {}
+    timestamps: {},
+    _id: false
 });
 
 chatUserSchema.plugin(uniqueValidator, { message: '{PATH}: already exists!' });

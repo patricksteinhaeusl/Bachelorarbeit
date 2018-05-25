@@ -16,18 +16,22 @@
                 <div class="col col-xs-3 user-list">
                     <ul class="list-group">
                         <li class="list-group-item"
-                            ng-repeat="user in websocket.userList | filter: { _id : '!' + websocket.user._id }"
+                            ng-repeat="user in websocket.userList | filter: { userId : '!' + auth.getUser()._id }"
                             ng-class="{ 'active' : user._id === websocket.selectedUser._id}"
                             ng-click="websocket.selectUser(user);"
-                            ng-style="{'cursor': 'pointer'}" id="user.id">
+                            ng-style="{'cursor': 'pointer'}" id="user._id">
                             {{ user.username }}
                         </li>
                     </ul>
                 </div>
                 <div class="col col-xs-9 message-box">
                     <div class="message-container">
-                        <ul class="list-group">
-                            <li class="list-group-item" ng-class="message.from.id === auth.getUser()._id ? 'pull-right' : 'pull-left'" ng-repeat="message in websocket.messages | orderBy : message : true">
+                        <div class="wrapper-loading" ng-if="websocket.isLoadingMessages">
+                            <span class="helper"></span>
+                            <img src="/assets/helper/loading.gif">
+                        </div>
+                        <ul class="list-group" ng-if="websocket.selectedUser && !websocket.isLoadingMessages">
+                            <li class="list-group-item" ng-class="message.from.userId === auth.getUser()._id ? 'pull-right' : 'pull-left'" ng-repeat="message in websocket.messages | orderBy : message : true">
                                 <div>{{ message.text }}</div>
                                 <span class="datetime pull-right">{{ message.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200' }} </span>
                             </li>

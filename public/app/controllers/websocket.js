@@ -6,6 +6,8 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
     self.userList = [];
     self.selectedUser = null;
     self.messages = [];
+    self.isLoadingUserList = false;
+    self.isLoadingMessages = false;
 
     self.join = () => {
         const account = AuthService.getUser();
@@ -28,32 +30,36 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
     WebSocketService.on('getMessages', (messages) => {
         self.messages = messages;
         self.scrollBottom();
+        self.isLoadingMessages = false;
     });
 
-    WebSocketService.on('getMessagesByFromTo', (messages) => {
-        self.messages = messages;
-        self.scrollBottom();
+    WebSocketService.on('refreshUserList', () => {
+        self.isLoadingUserList = true;
+        WebSocketService.emit('sendUserList');
     });
 
     WebSocketService.on('getUserList', (userList) => {
         self.userList = userList;
+        self.isLoadingUserList = false;
     });
 
     self.sendMessage = () => {
+        self.isLoadingMessages = true;
         if(self.selectedUser) {
             const message = {
                 from: {
-                    id: self.user.socketId,
+                    userId: self.user.userId,
                     username: self.user.username
                 },
                 to: {
-                    id: self.selectedUser.socketId,
+                    userId: self.selectedUser.userId,
                     username: self.selectedUser.username
                 },
                 text: self.message
             };
 
-            WebSocketService.emit('getMessage', message);
+            WebSocketService.emit('saveMessage', message);
+            WebSocketService.emit('sendMessagesToRooms', { from: { userId: self.user.userId }, to: { userId: self.selectedUser.userId } } );
         } else {
             $rootScope.messages.warnings.push('User must be selected.');
         }
@@ -61,7 +67,9 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
     };
 
     self.selectUser = (selectedUser) => {
+        self.isLoadingMessages = true;
         self.selectedUser = selectedUser;
+        WebSocketService.emit('sendMessagesToRoom', { from: { userId: self.user.userId }, to: { userId: self.selectedUser.userId } } );
     };
 
     self.collapseChat = (elementClassToSlide) => {
