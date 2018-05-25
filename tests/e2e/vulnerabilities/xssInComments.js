@@ -28,6 +28,10 @@ describe('XSS in Comments', () => {
                 thirdProduct.element(by.buttonText('Save')).click();
                 expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Rating saved successfully.\n×");
             });
+            //Check if Comment in Comment Field
+            thirdProduct.element(by.buttonText('Rate')).click();
+            expect(thirdProduct.element(by.name('comment')).getAttribute('value')).toEqual("<script>console.log(\"XSS in Comments\");</script>");
+
         });
     });
 

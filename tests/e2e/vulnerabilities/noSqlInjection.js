@@ -20,7 +20,7 @@ describe('NoSQL Injection', () => {
         it('should be successfully', () => {
             HelperFunctions.login(browser, 'customer0', '{"$ne": null}');
             //Check
-            expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Juliane Schulze');
+            expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Juliane Schulze\n(customer0)');
         });
     });
 
@@ -28,7 +28,7 @@ describe('NoSQL Injection', () => {
         it('should be successfully', () => {
             HelperFunctions.login(browser, 'customer1', '{"$ne": null}');
             //Check
-            expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Peter Holzmann');
+            expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Peter Holzmann\n(customer1)');
         });
     });
 });

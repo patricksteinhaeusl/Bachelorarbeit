@@ -14,12 +14,8 @@ describe('Deserialization - Deserialization Bug', () => {
     });
 
     describe('Try to run netstat command', () => {
-
-        beforeEach(function() {
-            browser.get(browser.params.webshop);
-        });
-
         it('should be successfully', () => {
+            element(by.linkText('Shop')).click();
             let fileName = 'deserializationBug.txt';
 
             //Fill form

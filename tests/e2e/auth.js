@@ -12,7 +12,7 @@ describe('Auth', () => {
         it('should success with correct credentials', () => {
             HelperFunctions.login(browser, 'customer0', 'compass0');
             //Check
-            expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Juliane Schulze');
+            expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Juliane Schulze\n(customer0)');
         });
     });
 
@@ -28,7 +28,7 @@ describe('Auth', () => {
             HelperFunctions.registerUser("Hans","Muster","customer250");
             //Check
             expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Registration successfully.\n×");
-            expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Hans Muster');
+            expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Hans Muster\n(Hans_Muster)');
         });
 
         it('should success', checkLogoutSuccessfully);

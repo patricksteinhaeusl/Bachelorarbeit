@@ -19,7 +19,7 @@ describe('Template Injection', () => {
         browser.get(browser.params.webshop);
     });
 
-    it('upload an test injected template', () => {
+    it('upload and test injected template', () => {
         //Open Auth Menu
         element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
         browser.sleep(250);
@@ -33,7 +33,7 @@ describe('Template Injection', () => {
         element(by.buttonText('Upload')).click();
         browser.sleep(500);
         //Link
-        element(by.partialLinkText('#!/account')).getText().then((url) => {
+        element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
             let secondLastSegment = url.split('/').filter(el => !!el);
             secondLastSegment = secondLastSegment[secondLastSegment.length-2];
             element(by.linkText('Profile')).click();

@@ -16,7 +16,7 @@ describe('Retailer', function () {
         browser.sleep(250);
         element(by.buttonText('Send request')).click();
         browser.sleep(250);
-        expect(element.all(by.className('alert')).get(0).getText()).toBe("Warning: This function is disabled.\n×");
+        expect(element.all(by.className('alert-info')).last().getText()).toBe("Warning: This function is disabled.\n×");
 
     });
 

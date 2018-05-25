@@ -25,7 +25,7 @@ describe('Profile Tests', () => {
             //Link
             element(by.linkText('My Account')).click();
             browser.sleep(250);
-            element(by.partialLinkText('#!/account')).getText().then((url) => {
+            element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
                 let secondLastSegment = url.split('/').filter(el => !!el);
                 secondLastSegment = secondLastSegment[secondLastSegment.length-2];
                 element(by.linkText('Profile')).click();
@@ -85,7 +85,7 @@ describe('Profile Tests', () => {
             element(by.buttonText('Upload')).click();
             browser.sleep(500);
             //Link
-            element(by.partialLinkText('#!/account')).getText().then((url) => {
+            element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
                 let secondLastSegment = url.split('/').filter(el => !!el);
                 secondLastSegment = secondLastSegment[secondLastSegment.length-2];
                 element(by.linkText('Profile')).click();
