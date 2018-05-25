@@ -14,7 +14,19 @@
             </div>
             <div class="row">
                 <div class="col col-xs-3 user-list">
-                    <ul class="list-group">
+                    <div class="wrapper-loading" ng-if="websocket.isLoadingUserList">
+                        <span class="helper"></span>
+                        <img src="/assets/helper/loading.gif">
+                    </div>
+                    <button type="button" class="btn btn-default"
+                            ng-repeat="user in websocket.userList | filter: { userId : '!' + auth.getUser()._id }"
+                            ng-class="{ 'btn-primary' : user._id === websocket.selectedUser._id}"
+                            ng-click="websocket.selectUser(user);"
+                            ng-if="!websocket.isLoadingUserList">
+                        {{ user.username }}
+                        <span class="glyphicon glyphicon-info-sign text-info" ng-if="websocket.messages.length > 0 && !websocket.selectedUser"></span>
+                    </button>
+                    <!--<ul class="list-group" ng-if="!websocket.isLoadingUserList">
                         <li class="list-group-item"
                             ng-repeat="user in websocket.userList | filter: { userId : '!' + auth.getUser()._id }"
                             ng-class="{ 'active' : user._id === websocket.selectedUser._id}"
@@ -22,7 +34,7 @@
                             ng-style="{'cursor': 'pointer'}" id="user._id">
                             {{ user.username }}
                         </li>
-                    </ul>
+                    </ul>-->
                 </div>
                 <div class="col col-xs-9 message-box">
                     <div class="message-container">

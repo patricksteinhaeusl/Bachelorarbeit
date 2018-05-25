@@ -12,7 +12,7 @@ let chatMessageSchema = new Schema({
         userId: {type: Schema.Types.ObjectId, ref: 'Account', required: [true, 'From id is required']},
         username: {type: String, required: [true, 'From username is required']}
     },
-    text: {type: String, required: [true, 'Text is required']},
+    text: {type: String, required: [true, 'Text is required']}
 }, {
     timestamps: {}
 });

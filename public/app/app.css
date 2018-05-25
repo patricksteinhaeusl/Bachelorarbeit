@@ -912,6 +912,14 @@ object {
     border-right: solid 1px gray;
 }
 
+.chat .user-list .btn {
+    width: 100%;
+}
+
+.chat .user-list .btn .badge {
+    float: right
+}
+
 .chat .panel-body li {
     font-size: small;
     margin-bottom: 5px;
