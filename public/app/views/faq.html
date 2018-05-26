@@ -9,6 +9,6 @@
             <div class="panel-heading"><b>{{ faq.question }}</b></div>
                 <div class="panel-body">{{ faq.answer }}</div>
         </div>
-        <div class="faqNotFound" ng-if="faq.data.FaqQuestions.length == 0">We're sorry, but we couldn't find anything.</div>
+        <div class="faqNotFound" ng-if="!faq.data.FaqQuestions">We're sorry, but we couldn't find anything.</div>
     </form>
 </div>

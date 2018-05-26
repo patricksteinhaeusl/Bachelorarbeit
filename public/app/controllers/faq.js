@@ -27,6 +27,8 @@ appControllers.controller('FaqController', ['$scope', '$routeParams', 'FaqServic
     self.updateFaq = (error, data) => {
         if (data) {
             self.data.FaqQuestions = data.faq;
+        } else {
+            self.data = {};
         }
         self.spinner = false;
     };
