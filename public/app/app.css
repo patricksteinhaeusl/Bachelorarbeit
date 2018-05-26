@@ -68,6 +68,10 @@ table {
     margin-bottom: 25px;
 }
 
+.tableHead {
+    background-color: lightgrey;
+}
+
 table table td {
     font-weight: normal;
 }
