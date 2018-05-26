@@ -72,6 +72,11 @@ table {
     background-color: lightgrey;
 }
 
+.fixedTable {
+    table-layout: fixed;
+}
+
+
 table table td {
     font-weight: normal;
 }

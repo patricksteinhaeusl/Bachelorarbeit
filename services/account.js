@@ -5,6 +5,24 @@ const Account = require('../models/account');
 const CryptoUtil = require('../utils/crypt');
 const ResponseUtil = require('../utils/response');
 
+function getAll(callback) {
+    Account.find({isRetailer: false},{
+        password: false,
+        createdAt: false,
+        updatedAt: false,
+        __v: false,
+        isRetailer: false,
+        email: false
+    }).then((accounts) => {
+            if (!accounts || !accounts.length) return callback(ResponseUtil.createNotFoundResponse('No accounts found.'));
+            let data = {'accounts': accounts};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        })
+        .catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
+}
+
 function get(accountId, callback) {
     // Find account by id
     Account.findById(
@@ -77,6 +95,7 @@ function upload(accountId, profile, callback) {
 
 module.exports = {
     get,
+    getAll,
     update,
     upload
 };

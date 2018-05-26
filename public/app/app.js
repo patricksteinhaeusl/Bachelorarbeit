@@ -91,6 +91,10 @@ let routes = {
     '/faq': {
         templateUrl: 'views/faq.html',
         requireLogin: false
+    },
+    '/profiles': {
+        templateUrl: 'views/profiles.html',
+        requireLogin: true
     }
 };
 

@@ -2,7 +2,7 @@
 const path = require('path');
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Profile Tests', () => {
+describe('User Profile Tests', () => {
 
     describe('Basic Profile Functions', () => {
 

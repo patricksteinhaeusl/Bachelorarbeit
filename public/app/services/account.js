@@ -2,6 +2,14 @@
 
 appServices.factory('AccountService', ['$http', 'Upload', 'ResponseService', function ($http, Upload, ResponseService) {
     return {
+        getAll(callback) {
+            $http
+                .get('/api/account')
+                .then(
+                    (response) => ResponseService.successCallback(response, callback),
+                    (error) => ResponseService.errorCallback(error, callback)
+                );
+        },
         get(accountId, callback) {
             $http
                 .get('/api/account/' + accountId)

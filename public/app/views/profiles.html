@@ -1,0 +1,21 @@
+<div class="content-view" ng-controller="ProfilesController as profile">
+    <h1>User Profile Directory</h1>
+    <table class="table-striped fixedTable">
+        <thead class="tableHead">
+            <tr>
+                <th>Username</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Link to profile</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="profile in profile.accounts | toArray: true | orderBy:'_id'">
+            <td>{{profile.username}}</td>
+            <td>{{profile.firstname}}</td>
+            <td>{{profile.lastname}}</td>
+            <td><a ng-href="#!/account/{{profile._id}}/profile">Click me</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
