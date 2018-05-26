@@ -10,7 +10,7 @@ function get(accountId, callback) {
     Account.findById(
             accountId
         ).then((account) => {
-            if (!account) return callback(ResponseUtil.createNotFoundResponse(), 'Account not found.');
+            if (!account || !account.length) return callback(ResponseUtil.createNotFoundResponse(), 'Account not found.');
             const data = {'user': account};
             return callback(null, ResponseUtil.createSuccessResponse(data));
         }).catch((error) => {
@@ -57,14 +57,14 @@ function upload(accountId, profile, callback) {
     Account.findOne({
             _id: accountId
         }).then((account) => {
-            if (!account) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
+            if (!account || !account.length) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
             // Add profile to account
             account.profile = profile;
             return account;
         }).then((accountObj) => {
             // Save account
             Account.create(accountObj).then((updatedAccount) => {
-                if (!updatedAccount) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
+                if (!updatedAccount || !updatedAccount.length) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
                 const data = {'user': updatedAccount};
                 return callback(null, ResponseUtil.createSuccessResponse(data, 'Profile successfully uploaded.'));
             }).catch((error) => {

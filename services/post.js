@@ -17,7 +17,7 @@ function getAll(callback) {
             select: '_id username'
         }).exec((error, result) => {
             if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            if (!result) return callback(ResponseUtil.createNotFoundResponse('No posts found.'));
+            if (!result || !result.length) return callback(ResponseUtil.createNotFoundResponse('No posts found.'));
             result = {'posts': result};
             return callback(null, ResponseUtil.createSuccessResponse(result));
         });

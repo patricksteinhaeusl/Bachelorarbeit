@@ -26,7 +26,7 @@ function getById(productId, callback) {
             select: '_id username'
         }).exec((error, product) => {
             if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            if (!product) return callback(ResponseUtil.createNotFoundResponse('No product found.'));
+            if (!product || !product.length) return callback(ResponseUtil.createNotFoundResponse('No product found.'));
             let data = {'product': product};
             return callback(null, ResponseUtil.createSuccessResponse(data));
         });
@@ -127,7 +127,7 @@ function getCategories(callback) {
                 'name': 1
             }
         }]).then((categories) => {
-            if (!categories) return callback(ResponseUtil.createNotFoundResponse('No categories found.'));
+            if (!categories || !categories.length) return callback(ResponseUtil.createNotFoundResponse('No categories found.'));
             let data = {'categories': categories};
             return callback(null, ResponseUtil.createSuccessResponse(data));
         }).catch((error) => {
@@ -173,7 +173,7 @@ function calculateTotalRating(ratings) {
 }
 
 function handleFindProducts(products, callback) {
-    if (!products) return callback(ResponseUtil.createNotFoundResponse('No products found.'));
+    if (!products || !products.length) return callback(ResponseUtil.createNotFoundResponse('No products found.'));
     let data = {'products': products};
     return callback(null, ResponseUtil.createSuccessResponse(data));
 }
