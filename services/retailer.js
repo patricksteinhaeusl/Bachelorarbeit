@@ -8,7 +8,7 @@ function applyDiscount(orderId, callback) {
     Order.findById(orderId)
         .then((order) => {
             // Discount on order
-            if (!order || !order.length) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
+            if (!order) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
 
             if (order.payment.type === 'bill') {
                 order.totalPrice = (order.totalPrice * 0.5).toFixed(2);
@@ -21,7 +21,7 @@ function applyDiscount(orderId, callback) {
         }).then((order) => {
             // Save Order
             Order.create(order).then((newOrder) => {
-                if (!newOrder || !newOrder.length) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
+                if (!newOrder) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
                 let data = {'order': newOrder};
                 return callback(null, ResponseUtil.createSuccessResponse(data, 'Order successfully updated.'));
             }).catch((error) => {

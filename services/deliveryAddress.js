@@ -10,7 +10,7 @@ function get(deliveryAddressId, accountId, callback) {
         _id: deliveryAddressId,
         _account: accountId
     }).then((deliveryAddress) => {
-        if (!deliveryAddress || !deliveryAddress.length) return callback(ResponseUtil.createNotFoundResponse('No delivery address found.'));
+        if (!deliveryAddress) return callback(ResponseUtil.createNotFoundResponse('No delivery address found.'));
         const data = {'deliveryAddress': deliveryAddress};
         return callback(null, ResponseUtil.createSuccessResponse(data));
     }).catch((error) => {
@@ -23,7 +23,7 @@ function getByAccountId(accountId, callback) {
     DeliveryAddress.find({
         _account: accountId
     }).then((deliveryAddresses) => {
-        if (!deliveryAddresses || !deliveryAddresses.length) return callback(ResponseUtil.createNotFoundResponse('No delivery address found.'));
+        if (!deliveryAddresses) return callback(ResponseUtil.createNotFoundResponse('No delivery address found.'));
         const data = {'deliveryAddresses': deliveryAddresses};
         return callback(null, ResponseUtil.createSuccessResponse(data));
     }).catch((error) => {

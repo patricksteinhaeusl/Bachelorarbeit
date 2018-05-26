@@ -9,7 +9,7 @@ function getByNumber(creditCardNumber, callback) {
     CreditCard.findOne({
             number: creditCardNumber
         }).then((creditCard) => {
-            if (!creditCard || !creditCard.length) return callback(ResponseUtil.createNotFoundResponse('No credit cards found.'));
+            if (!creditCard) return callback(ResponseUtil.createNotFoundResponse('No credit cards found.'));
             const data = {'creditCard': creditCard};
             return callback(null, ResponseUtil.createSuccessResponse(data));
         }).catch((error) => {
@@ -99,7 +99,7 @@ function remove(creditCardId, callback) {
 }
 
 function handleGetCreditCards(creditCards, callback) {
-    if (!creditCards || !creditCards.length) return callback(ResponseUtil.createNotFoundResponse('No credit card found.'));
+    if (!creditCards) return callback(ResponseUtil.createNotFoundResponse('No credit card found.'));
     const data = {'creditCards': creditCards};
     return callback(null, ResponseUtil.createSuccessResponse(data));
 }
