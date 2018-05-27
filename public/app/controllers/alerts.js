@@ -3,12 +3,16 @@
 appControllers.controller('AlertsController', ['$rootScope', function ($rootScope) {
     const self = this;
 
-    self.clear = () => {
-        $rootScope.messages = {};
-
-        $rootScope.messages.successes = [];
-        $rootScope.messages.warnings = [];
-        $rootScope.messages.validations = [];
-        $rootScope.messages.errors = [];
+    self.clearSuccess = (index) => {
+        $rootScope.messages.successes.splice(index, 1);
+    };
+    self.clearWarning = (index) => {
+        $rootScope.messages.warnings.splice(index, 1);
+    };
+    self.clearValidation = (index) => {
+        $rootScope.messages.validations.splice(index, 1);
+    };
+    self.clearError = (index) => {
+        $rootScope.messages.errors.splice(index, 1);
     }
 }]);

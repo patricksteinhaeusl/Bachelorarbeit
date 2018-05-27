@@ -1,11 +1,16 @@
-appInterceptors.factory('AlertInterceptor', ['$q', '$rootScope', function ($q, $rootScope) {
+appInterceptors.factory('AlertInterceptor', ['$q', '$rootScope', '$timeout', function ($q, $rootScope, $timeout) {
     return {
         response: (successResponse) => {
             let statusCode = successResponse.data.statusCode;
             let message = successResponse.data.message;
 
             if (statusCode === 200) {
-                $rootScope.messages.successes.push(message);
+                if (message) {
+                    let alertIdentifier = uniqueNumber();
+                    $rootScope.messages.successes.push({msg: message, id: alertIdentifier});
+                    deleteAlert("successes", alertIdentifier);
+                }
+
             }
 
             return successResponse || $q.when(successResponse);
@@ -16,14 +21,50 @@ appInterceptors.factory('AlertInterceptor', ['$q', '$rootScope', function ($q, $
             let validations = errorResponse.data.validations;
 
             if (statusCode === 404) {
-                $rootScope.messages.warnings.push(message);
+                if (message) {
+                    let alertIdentifier = uniqueNumber();
+                    $rootScope.messages.warnings.push({msg: message, id: alertIdentifier});
+                    deleteAlert("warnings", alertIdentifier);
+                }
             } else if (statusCode === 405) {
-                $rootScope.messages.validations.push(validations);
+                if (validations) {
+                    let alertIdentifier = uniqueNumber();
+                    $rootScope.messages.validations.push({msg: validations, id: alertIdentifier});
+                    deleteAlert("validations", alertIdentifier);
+                }
             } else if (statusCode === 500) {
-                $rootScope.messages.errors.push(message);
+                if (message) {
+                    let alertIdentifier = uniqueNumber();
+                    $rootScope.messages.errors.push({msg: message, id: alertIdentifier});
+                    deleteAlert("errors", alertIdentifier);
+                }
             }
 
             return $q.reject(errorResponse);
         }
+    };
+
+    function deleteAlert(messageType, alertIdentifier) {
+        $timeout(()=>{
+            for (let index = 0; index < $rootScope.messages[messageType].length; index++){
+                if ($rootScope.messages[messageType][index].id === alertIdentifier) {
+                    $rootScope.messages[messageType].splice(index,1);
+                }
+            }
+        },4000);
     }
 }]);
+
+function uniqueNumber() {
+    let date = Date.now();
+
+    if (date <= uniqueNumber.previous) {
+        date = ++uniqueNumber.previous;
+    } else {
+        uniqueNumber.previous = date;
+    }
+
+    return date;
+}
+
+uniqueNumber.previous = 0;
