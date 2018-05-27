@@ -27,7 +27,7 @@ describe('Order and Cart Processes', () => {
             expect(element.all(by.className('cart-menu')).get(0).getCssValue('display')).toBe('none');
         });
 
-        it('should be possible to add items with correct Properties', () => {
+        it('should be possible to add items with different quantity and correct Properties', () => {
             browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=1').then(() => {
 
                 element.all(by.repeater('product in shop.products')).then((products) => {
