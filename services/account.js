@@ -28,7 +28,7 @@ function get(accountId, callback) {
     Account.findById(
             accountId
         ).then((account) => {
-            if (!account) return callback(ResponseUtil.createNotFoundResponse(), 'Account not found.');
+            if (!account) return callback(ResponseUtil.createNotFoundResponse('Account not found.'));
             const data = {'user': account};
             return callback(null, ResponseUtil.createSuccessResponse(data));
         }).catch((error) => {
