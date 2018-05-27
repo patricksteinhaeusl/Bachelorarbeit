@@ -1,5 +1,4 @@
 <div class="alert-container" ng-controller="AlertsController as alerts">
-{{messages}}
     <div ng-repeat="success in messages.successes track by $index">
         <div class="alert alert-success alert-dismissible" role="alert" ng-if="success.msg">
             <strong>Success:</strong> {{ success.msg }}
