@@ -52,7 +52,7 @@ appControllers.controller('ShopCategoryController', ['$rootScope', '$scope', '$r
                     }
                 });
             } else {
-                $rootScope.messages.warnings.push('Rating must be at least 1 star');
+                $rootScope.messages.warnings.push({msg: 'Rating must be at least 1 star'});
             }
         };
 

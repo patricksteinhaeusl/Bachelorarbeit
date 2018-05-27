@@ -23,7 +23,7 @@ appServices.factory('AuthService', ['$http', '$rootScope', 'localStorageService'
             LocalStorageService.remove('token');
             LocalStorageService.remove('user');
             $http.defaults.headers.common.Authorization = '';
-            $rootScope.messages.successes.push('Logout was successfully');
+            $rootScope.messages.successes.push({msg: 'Logout was successfully'});
             return callback(null, {user: user});
         },
         isAuthenticated() {

@@ -23,7 +23,7 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
             });
             self.message = null;
         } else {
-            $rootScope.messages.warnings.push('User must be selected.');
+            $rootScope.messages.warnings.push({msg: 'User must be selected.'});
         }
     };
 

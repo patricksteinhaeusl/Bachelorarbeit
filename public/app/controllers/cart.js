@@ -18,7 +18,7 @@ appControllers.controller('CartController', ['$rootScope', '$scope', 'CartServic
 
     self.updateRootScope = (error, message) => {
         if(message) {
-            $rootScope.messages.successes.push(message);
+            $rootScope.messages.successes.push({msg: message});
         }
     };
 
