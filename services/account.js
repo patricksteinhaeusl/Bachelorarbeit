@@ -2,6 +2,7 @@
 
 const GlobalConfig = require('../configs/index');
 const Account = require('../models/account');
+const AccountWithoutId = require('../models/accountWithoutId');
 const CryptoUtil = require('../utils/crypt');
 const ResponseUtil = require('../utils/response');
 
@@ -37,10 +38,7 @@ function get(accountId, callback) {
 }
 
 function update(account, callback) {
-    // Remove fields
-    delete account.username;
-
-    let accountObj = new Account(account);
+    let accountObj = new AccountWithoutId(account);
 
     // Validate account
     accountObj.validate((error) => {
@@ -48,7 +46,7 @@ function update(account, callback) {
         // Find account by id and update
         // Without password and timestamps
         Account.findByIdAndUpdate(
-            accountObj._id,
+            account._id,
             accountObj, {
                 new: true,
                 setDefaultsOnInsert: true,
@@ -59,13 +57,13 @@ function update(account, callback) {
                     __v: false
                 }
             }).then((account) => {
-            if (!account) return callback(ResponseUtil.createNotFoundResponse('Account failed to update.'));
-            // Create Token
-            CryptoUtil.createToken(account.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
-                if (error) callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                const data = {'user': account, 'token': token};
-                return callback(null, ResponseUtil.createSuccessResponse(data, 'Account successfully updated.'));
-            });
+                if (!account) return callback(ResponseUtil.createNotFoundResponse('Account failed to update.'));
+                // Create Token
+                CryptoUtil.createToken(account.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
+                    if (error) callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                    const data = {'user': account, 'token': token};
+                    return callback(null, ResponseUtil.createSuccessResponse(data, 'Account successfully updated.'));
+                });
         }).catch((error) => {
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });

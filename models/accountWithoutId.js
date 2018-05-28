@@ -1,0 +1,42 @@
+'use strict';
+
+const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
+const validate = require('mongoose-validator');
+const Schema = mongoose.Schema;
+
+let emailValidator = [
+    validate({
+        validator: 'matches',
+        arguments: ['(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*|"' +
+        '(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])' +
+        '*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25' +
+        '[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*' +
+        '[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\\])'],
+        message: 'Email: {VALUE} is not a valid!'
+    })
+];
+
+let passwordValidator = [
+    validate({
+        validator: 'matches',
+        arguments: ['^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$'],
+        message: 'Password: Require 8 characters, at least one letter and one number!'
+    })
+];
+
+let accountWithoutIdSchema = new Schema({
+    password: {type: String, required: [true, 'Password is required'], validate: passwordValidator},
+    firstname: {type: String, required: [true, 'Firstname is required']},
+    lastname: {type: String, required: [true, 'Lastname is required']},
+    isRetailer: { type: Boolean, default: false, required: [true, 'Retailer is required'] }
+}, {
+    _id: false,
+    timestamps: {}
+});
+
+accountWithoutIdSchema.plugin(uniqueValidator, { message: '{PATH}: already exists!' });
+
+let AccountWithoutId = mongoose.model('AccountWithoutId', accountWithoutIdSchema);
+
+module.exports = AccountWithoutId;

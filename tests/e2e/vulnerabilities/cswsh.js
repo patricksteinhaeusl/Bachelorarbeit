@@ -10,11 +10,9 @@ describe('CSWSH', () => {
     let secondBrowser = browser.forkNewDriverInstance();
     let cookie;
     let messageFromUser = 'Hello my friend';
-    let socketMessage = '"sendMsg",{"msg":"Hello my friend","from":"customer1"}';
     let connected = "connect event did not trigger";
     let event = null;
     let messages = [];
-    let expectedResult = "customer1 says: Hello my friend";
 
     beforeAll((done) => {
         HelperFunctions.login(firstBrowser, 'customer1', 'compass1');
@@ -37,7 +35,7 @@ describe('CSWSH', () => {
             };
             socket.onmessage = function(msgEvent) {
                 messages.push(msgEvent.data);
-                if (msgEvent.data.toString().indexOf(socketMessage) > -1) {
+                if (msgEvent.data.toString().indexOf(messageFromUser) > -1) {
                     socket.close();
                 }
                 done();
@@ -67,15 +65,21 @@ describe('CSWSH', () => {
         firstBrowser.sleep(250);
         firstBrowser.element.all(by.repeater('user in websocket.userList')).then((user) => {
             user[0].click();
+            firstBrowser.sleep(1000);
             firstBrowser.element(by.model('websocket.message')).sendKeys(messageFromUser);
             firstBrowser.element(by.buttonText('Send...')).click();
+
+            secondBrowser.element(by.id('chat-button')).click();
+            secondBrowser.sleep(250);
+            secondBrowser.element.all(by.repeater('user in websocket.userList')).then((user) => {
+                user[0].click();
+                secondBrowser.sleep(1000);
+                expect(secondBrowser.element.all(by.css('.message-container .list-group-item')).last().getText()).toContain(messageFromUser);
+            });
         });
-        secondBrowser.element(by.id('chat-button')).click();
-        secondBrowser.sleep(250);
-        expect(secondBrowser.element.all(by.css('.message-container')).get(0).getText()).toBe(expectedResult);
     });
 
     it("should be able to eavesdrop socket", () => {
-        expect(messages.toString()).toContain(socketMessage);
+        expect(messages.toString()).toContain(messageFromUser);
     });
 });

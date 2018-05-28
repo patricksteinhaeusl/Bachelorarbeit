@@ -13,19 +13,8 @@ module.exports = (server) => {
 
     io.on('connection', (socket) => {
         // Join Room if cookie exists
-        console.log("\n");
-        console.log("\n");
-        console.log("\n");
-        console.log("\n");
-        console.log("Request cookies", socket.request.headers.cookie);
         if(socket.request.headers.cookie) {
             cookies = cookie.parse(socket.request.headers.cookie);
-            console.log("CHATUSER:", cookies.chatUser);
-            console.log("\n");
-            console.log("\n");
-            console.log("\n");
-            console.log("\n");
-            console.log("\n");
             if(cookies.chatUser) {
                 socket.join(cookies.chatUser);
             }
@@ -77,7 +66,6 @@ module.exports = (server) => {
         });
 
         socket.on('sendMessagesToRooms', (data) => {
-            console.log('sendMessagesToRooms', data);
             // Send messages
             ChatMessage.find({
                     $or: [{
@@ -100,7 +88,6 @@ module.exports = (server) => {
         });
 
         socket.on('sendMessagesToRoom', (data) => {
-            console.log('sendMessagesToRoom', data);
             // Send messages
             ChatMessage.find({
                     $or: [{

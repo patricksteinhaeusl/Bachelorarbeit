@@ -29,7 +29,6 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
         });
 
         WebSocketService.on('getMessages', (messages) => {
-            console.log('getMessages');
             self.messages = messages;
             self.scrollBottom();
             self.isLoadingMessages = false;
