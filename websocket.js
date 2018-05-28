@@ -22,11 +22,14 @@ module.exports = (server) => {
             let userObj = new ChatUser({ socketId: socket.id, userId: account._id, username: account.username});
 
             // Create new user
-            ChatUser.findOneAndUpdate({userId: userObj.userId}, userObj, { upsert: true, new: true, setDefaultsOnInsert: true })
-                .then((user) => {
-                    socket.emit('join', user);
-                    io.emit('refreshUserList');
-                }).catch((error) => {
+            ChatUser.findOneAndUpdate({userId: userObj.userId}, userObj, {
+                upsert: true,
+                new: true,
+                setDefaultsOnInsert: true
+            }).then((user) => {
+                socket.emit('join', user);
+                io.emit('refreshUserList');
+            }).catch((error) => {
                 socket.emit('error', 'Creating users failed!');
             });
         });

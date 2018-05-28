@@ -40,8 +40,7 @@ function update(deliveryAddress, callback) {
         // Find and Update delivery address by id
         DeliveryAddress.findByIdAndUpdate(deliveryAddressObj._id, deliveryAddressObj, {
             new: true,
-            runValidators: true,
-            context: 'query'
+            setDefaultsOnInsert: true
         }).then((deliveryAddress) => {
             if (!deliveryAddress) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to update.'));
             const data = {'deliveryAddress': deliveryAddress};

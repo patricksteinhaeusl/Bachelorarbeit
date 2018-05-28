@@ -68,7 +68,9 @@ function updateRatings(productObj, rating, callback) {
                     'ratings.$.value': rating.value
                 }
             }, {
-                new: true
+                new: true,
+                setDefaultsOnInsert: true,
+                context: 'query'
             }).then((product) => {
                 if (product) {
                     product.rating.value = calculateTotalRating(product.ratings);
@@ -88,7 +90,9 @@ function updateRatings(productObj, rating, callback) {
                         }, {
                             $push: {ratings: rating}
                         }, {
-                            new: true
+                            new: true,
+                            setDefaultsOnInsert: true,
+                            context: 'query'
                         }).then((product) => {
                             if (!product) return callback(ResponseUtil.createNotFoundResponse('Rating failed to save.'));
                             product.rating.value = calculateTotalRating(product.ratings);
@@ -143,7 +147,8 @@ function insertQuestion(productId, question, callback) {
         }, {
             $push: {questions: questionObj}
         }, {
-            new: true
+            new: true,
+            setDefaultsOnInsert: true
         }).populate({
             path: 'questions._account',
             select: '_id username'

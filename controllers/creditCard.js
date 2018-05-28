@@ -5,14 +5,14 @@ const CreditCardService = require('../services/creditCard');
 function getByNumber(req, res) {
     let creditCardNumber = req.params.creditCardNumber;
     CreditCardService.getByNumber(creditCardNumber, (error, result) => {
-        if (error) return res.send(error);
+        if (error) return res.status(error.statusCode).json(error);
         return res.status(result.statusCode).json(result);
     });
 }
 
 function getAll(req, res) {
     CreditCardService.getAll((error, result) => {
-        if (error) return res.send(error);
+        if (error) return res.status(error.statusCode).json(error);
         return res.status(result.statusCode).json(result);
     });
 }
@@ -20,7 +20,7 @@ function getAll(req, res) {
 function getByAccountId(req, res) {
     let accountId = req.params.accountId;
     CreditCardService.getByAccountId(accountId, (error, result) => {
-        if (error) return res.send(error);
+        if (error) return res.status(error.statusCode).json(error);
         return res.status(result.statusCode).json(result);
     });
 }
@@ -28,7 +28,7 @@ function getByAccountId(req, res) {
 function update(req, res) {
     let creditCard = req.body.creditCard;
     CreditCardService.update(creditCard, (error, result) => {
-        if (error) return res.send(error);
+        if (error) return res.status(error.statusCode).json(error);
         return res.status(result.statusCode).json(result);
     });
 }

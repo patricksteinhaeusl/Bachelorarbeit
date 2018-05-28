@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 const validate = require('mongoose-validator');
 const Schema = mongoose.Schema;
 
@@ -28,20 +29,35 @@ let cvvValidator = [
     })
 ];
 
-let creditCardNotUniqueSchema = new Schema({
-    number: {type: String, required: [true, 'Number is required'], validate: numberValidator},
+let minYear = new Date().getFullYear();
+let maxYear = minYear + 3;
+
+let creditCardWithoutIdSchema = new Schema({
+    number: {type: String, required: [true, 'Number is required'], validate: numberValidator, unique: true},
     type: {type: String, required: [true, 'Type is required'], validate: typeValidator},
     cvv: {type: String, required: [true, 'CVV is required'], validate: cvvValidator},
-    year: {type: Number, required: [true, 'Year is required']},
-    month: {type: Number, required: [true, 'Month is required']},
+    year: {
+        type: Number,
+        required: [true, 'Year is required'],
+        min: [minYear, 'Year: {VALUE} is not valid. Must be between ' + minYear + ' and ' + maxYear],
+        max: [maxYear, 'Year: {VALUE} is not valid. Must be between ' + minYear + ' and ' + maxYear]
+    },
+    month: {
+        type: Number, required: [true, 'Month is required'],
+        min: [1, 'Month: {VALUE} is not valid. Must be between 1 and 12'],
+        max: [12, 'Month: {VALUE} is not valid. Must be between 1 and 12']
+    },
     _account: {type: Schema.Types.ObjectId, ref: 'Account', required: [true, 'Account is required']}
 }, {
+    _id: false,
     timestamps: {}
 });
 
-let CreditCardNotUnique = mongoose.model('CreditCardNotUnique', creditCardNotUniqueSchema);
+creditCardWithoutIdSchema.plugin(uniqueValidator, { message: '{PATH}: already exists!' });
+
+let CreditCardWithoutId = mongoose.model('CreditCardWithoutId', creditCardWithoutIdSchema);
 
 module.exports = {
-    CreditCardNotUnique,
-    creditCardNotUniqueSchema
+    CreditCardWithoutId,
+    creditCardWithoutIdSchema
 };

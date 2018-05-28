@@ -24,21 +24,23 @@ function update(account, callback) {
 
     let accountObj = new Account(account);
 
-    // Find account by id and update
-    // Without password and timestamps
-    Account.findByIdAndUpdate(
-        accountObj._id,
-        accountObj, {
-            new: true,
-            context: 'query',
-            runValidators: true,
-            projection: {
-                password: false,
-                createdAt: false,
-                updatedAt: false,
-                __v: false
-            }
-        }).then((account) => {
+    // Validate account
+    accountObj.validate((error) => {
+        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
+        // Find account by id and update
+        // Without password and timestamps
+        Account.findByIdAndUpdate(
+            accountObj._id,
+            accountObj, {
+                new: true,
+                setDefaultsOnInsert: true,
+                projection: {
+                    password: false,
+                    createdAt: false,
+                    updatedAt: false,
+                    __v: false
+                }
+            }).then((account) => {
             if (!account) return callback(ResponseUtil.createNotFoundResponse('Account failed to update.'));
             // Create Token
             CryptoUtil.createToken(account.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
@@ -46,9 +48,9 @@ function update(account, callback) {
                 const data = {'user': account, 'token': token};
                 return callback(null, ResponseUtil.createSuccessResponse(data, 'Account successfully updated.'));
             });
-    }).catch((error) => {
-        if (error && error.errors) return callback(ResponseUtil.createValidationResponse(error.errors));
-        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
     });
 }
 

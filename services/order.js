@@ -132,7 +132,9 @@ function updateTemp(order, callback) {
         OrderTemp.findByIdAndUpdate(
             orderObj._id,
             orderObj, {
-                new: true
+                new: true,
+                setDefaultsOnInsert: true,
+                context: 'query'
             }).then((order) => {
                 if (!order) return callback(ResponseUtil.createNotFoundResponse('Order failed to update.'));
                 const data = {'order': order};

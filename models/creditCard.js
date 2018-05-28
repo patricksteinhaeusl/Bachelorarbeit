@@ -47,7 +47,7 @@ let creditCardSchema = new Schema({
         min: [1, 'Month: {VALUE} is not valid. Must be between 1 and 12'],
         max: [12, 'Month: {VALUE} is not valid. Must be between 1 and 12']
     },
-    _account: {type: Schema.Types.ObjectId, ref: 'Account'}
+    _account: {type: Schema.Types.ObjectId, ref: 'Account', required: [true, 'Account is required']}
 }, {
     timestamps: {}
 });

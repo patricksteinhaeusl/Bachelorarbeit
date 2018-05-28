@@ -843,10 +843,10 @@ object {
 .chat {
     display: none;
     position: fixed;
-    left: 25px;
     right: 25px;
     bottom: 15px;
     height: 400px;
+    width: 500px;
 }
 
 .chat .panel {
