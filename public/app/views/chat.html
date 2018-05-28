@@ -16,7 +16,7 @@
                 <div class="col col-xs-3 user-list">
                     <div class="wrapper-loading" ng-if="websocket.isLoadingUserList">
                         <span class="helper"></span>
-                        <img src="/assets/helper/loading.gif">
+                        <img src="/assets/symbols/spinner.gif">
                     </div>
                     <button type="button" class="btn btn-default"
                             ng-repeat="user in websocket.userList | filter: { userId : '!' + auth.getUser()._id }"
@@ -31,7 +31,7 @@
                     <div class="message-container">
                         <div class="wrapper-loading" ng-if="websocket.isLoadingMessages">
                             <span class="helper"></span>
-                            <img src="/assets/helper/loading.gif">
+                            <img src="/assets/symbols/spinner.gif">
                         </div>
                         <ul class="list-group" ng-if="websocket.selectedUser && !websocket.isLoadingMessages">
                             <li class="list-group-item" ng-class="message.from.userId === auth.getUser()._id ? 'pull-right' : 'pull-left'" ng-repeat="message in websocket.messages | orderBy : message : true">
@@ -45,7 +45,7 @@
         </div>
         <div class="panel-footer">
             <div class="input-group">
-                <input class="form-control" ng-model='websocket.message'>
+                <input class="form-control" ng-model='websocket.message' ng-enter="websocket.sendMessage()">
                 <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="websocket.sendMessage()">Send...</button>
             </span>
