@@ -34,12 +34,11 @@ describe('Template Injection', () => {
         browser.sleep(500);
         //Link
         element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
-            let secondLastSegment = url.split('/').filter(el => !!el);
-            secondLastSegment = secondLastSegment[secondLastSegment.length-2];
+            let lastSegment = url.split('/').filter((el) => { return !!el; }).pop();
             element(by.linkText('Profile')).click();
             browser.sleep(250);
             browser.getCurrentUrl().then((url) => {
-                expect(url).toContain("/#!/profiles/" + secondLastSegment );
+                expect(url).toContain("/#!/profiles/" + lastSegment );
             });
         });
 

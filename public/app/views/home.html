@@ -26,7 +26,6 @@
                     <span class="post-createdAt">{{ post.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200' }}</span>
                 </div>
                 <div class="row">
-                    <!-- Injection Code Start - SVG Injection -->
                     <a href="/post-images/{{post.image}}" data-lity>
                         <img class="post-image" ng-src="/post-images/{{post.image}}"
                          ng-if="(post.image | extension) !== 'svg'" alt="Image"/>
@@ -35,7 +34,6 @@
                             ng-attr-data="/post-images/{{post.image}}"
                             type="image/svg+xml"
                             ng-if="(post.image | extension) === 'svg'"></object>
-                    <!-- Injection Code End -->
                 </div>
                 <div class="row">
                     <p>{{ post.text }}</p>

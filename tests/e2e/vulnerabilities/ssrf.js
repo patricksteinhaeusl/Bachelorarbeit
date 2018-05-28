@@ -43,7 +43,7 @@ describe('SSRF', () => {
 
     it('adding hidden Picture as community post should work', () => {
         //Link
-        element(by.linkText('Add Post')).click();
+        element(by.linkText('Community')).click();
         browser.sleep(250);
         element.all(by.model('post.type')).get(1).click();
         //Fill form
