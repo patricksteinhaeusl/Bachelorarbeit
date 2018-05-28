@@ -43,8 +43,10 @@ appServices.factory('ShopService', ['$http', '$routeParams', 'ResponseService', 
                     self.addSearchValue();
                     let updatedResponse = self.addSelectedQuantity(response);
                     ResponseService.successCallback(updatedResponse, callback);
-                }, (error) => ResponseService.errorCallback(error, callback)
-            );
+                }, (error) => {
+                    self.products = {};
+                    ResponseService.errorCallback(error, callback)
+                });
     };
 
     self.getProductsTopRated = (callback) => {
