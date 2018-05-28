@@ -14,7 +14,7 @@ function getAll(callback) {
         isRetailer: false,
         email: false
     }).then((accounts) => {
-            if (!accounts || !accounts.length) return callback(ResponseUtil.createNotFoundResponse('No accounts found.'));
+            if (!accounts.length) return callback(ResponseUtil.createNotFoundResponse('No accounts found.'));
             let data = {'accounts': accounts};
             return callback(null, ResponseUtil.createSuccessResponse(data));
         })

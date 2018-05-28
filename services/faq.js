@@ -23,7 +23,7 @@ function getFaqBySearchValue(searchValueObj, callback) {
 }
 
 function handleGetFaq(faq, callback) {
-    if (!faq || !faq.length) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
+    if (!faq.length) return callback(ResponseUtil.createNotFoundResponse('No faqs found.'));
     const data = {'faq': faq};
     return callback(null, ResponseUtil.createSuccessResponse(data));
 }

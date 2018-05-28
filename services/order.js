@@ -26,7 +26,7 @@ function getByAccountId(accountId, callback) {
             'createdAt': -1
         }).exec((error, order) => {
             if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            if (!order) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
+            if (!order.length) return callback(ResponseUtil.createNotFoundResponse('No order found.'));
             const data = {'orders': order};
             return callback(null, ResponseUtil.createSuccessResponse(data));
         });

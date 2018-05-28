@@ -23,7 +23,7 @@ function getByAccountId(accountId, callback) {
     DeliveryAddress.find({
         _account: accountId
     }).then((deliveryAddresses) => {
-        if (!deliveryAddresses) return callback(ResponseUtil.createNotFoundResponse('No delivery address found.'));
+        if (!deliveryAddresses.length) return callback(ResponseUtil.createNotFoundResponse('No delivery address found.'));
         const data = {'deliveryAddresses': deliveryAddresses};
         return callback(null, ResponseUtil.createSuccessResponse(data));
     }).catch((error) => {
