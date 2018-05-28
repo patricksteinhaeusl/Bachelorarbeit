@@ -101,7 +101,6 @@ module.exports = (server) => {
                 .limit(5)
                 .sort({ createdAt: -1 })
                 .exec((error, messages) => {
-                    console.log(error, messages, data.from.userId);
                     if (error) {
                         return socket.emit('error', 'Finding message failed!');
                     }

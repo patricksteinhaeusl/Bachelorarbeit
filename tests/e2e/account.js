@@ -44,9 +44,6 @@ describe('Account', () => {
                 element(by.model('account.data.account.firstname')).clear().then(() => {
                     element(by.model('account.data.account.firstname')).sendKeys('Neu');
                 });
-                element(by.model('account.data.account.email')).clear().then(() => {
-                    element(by.model('account.data.account.email')).sendKeys('juliane.schmitz@gmail.com');
-                });
                 element(by.buttonText('Update')).click();
                 browser.sleep(250);
                 expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Account successfully updated.\n×");
