@@ -170,7 +170,6 @@ describe('Order and Cart Processes', () => {
             expect(element(by.css(".panel input[value='bill']")).getAttribute('class'))
                 .toContain('ng-valid-parse');
             expect(element.all(by.buttonText('Finish')).get(0).isEnabled()).toBe(true);
-            browser.sleep(10000);
             element.all(by.buttonText('Finish')).get(0).click();
         });
 
