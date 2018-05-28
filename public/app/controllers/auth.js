@@ -21,6 +21,7 @@ appControllers.controller('AuthController', ['$scope', '$http', '$location', '$c
                     $cookies.put('chatUser', user._id);
                     WebSocketService.join(user);
                     self.data.login.user = {};
+                    $location.path('/shop');
                 }
             });
         };

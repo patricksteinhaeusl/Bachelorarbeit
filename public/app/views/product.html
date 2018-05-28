@@ -31,7 +31,7 @@
     <div class="questions" ng-repeat="question in product.data.product.questions">
         <div class="question">
             <p ng-bind-html="question.text" trustAsHtml></p>
-            <span class="question-info pull-right"><a ng-href="#!/account/{{question._account._id}}/profile">{{ question._account.username }}</a> at {{ question.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200'}}</span>
+            <span class="question-info pull-right"><a ng-href="#!/profiles/{{question._account._id}}">{{ question._account.username }}</a> at {{ question.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200'}}</span>
         </div>
     </div>
 </div>

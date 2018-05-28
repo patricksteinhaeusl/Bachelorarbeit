@@ -39,7 +39,7 @@ describe('Template Injection', () => {
             element(by.linkText('Profile')).click();
             browser.sleep(250);
             browser.getCurrentUrl().then((url) => {
-                expect(url).toContain("/#!/account/" + secondLastSegment + "/profile");
+                expect(url).toContain("/#!/profiles/" + secondLastSegment );
             });
         });
 

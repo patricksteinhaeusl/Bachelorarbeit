@@ -37,7 +37,7 @@ let routes = {
         templateUrl: 'views/account.html',
         requireLogin: true
     },
-    '/account/:accountId/profile': {
+    '/profiles/:accountId': {
         templateUrl: (params) => {
             let templateUrl = 'assets/profiles/' + params.accountId + '.html';
             let templateNotFound = 'assets/profiles/notFound.html';
@@ -47,7 +47,7 @@ let routes = {
                 return templateNotFound;
             }
         },
-        requireLogin: true
+        requireLogin: false
     },
     '/creditcards': {
         templateUrl: 'views/creditCards.html',
@@ -94,7 +94,7 @@ let routes = {
     },
     '/profiles': {
         templateUrl: 'views/profiles.html',
-        requireLogin: true
+        requireLogin: false
     }
 };
 

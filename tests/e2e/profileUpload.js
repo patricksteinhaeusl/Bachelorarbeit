@@ -31,7 +31,7 @@ describe('User Profile Tests', () => {
                 element(by.linkText('Profile')).click();
                 browser.sleep(250);
                 browser.getCurrentUrl().then((url) => {
-                    expect(url).toContain("/#!/account/" + secondLastSegment + "/profile");
+                    expect(url).toContain("/#!/profiles/" + secondLastSegment);
                 });
             });
             expect(element(by.tagName('h1')).getAttribute('innerText')).toBe("Welcome to my profile");
@@ -91,7 +91,7 @@ describe('User Profile Tests', () => {
                 element(by.linkText('Profile')).click();
                 browser.sleep(250);
                 browser.getCurrentUrl().then((url) => {
-                    expect(url).toContain("/#!/account/" + secondLastSegment + "/profile");
+                    expect(url).toContain("/#!/profiles/" + secondLastSegment);
                 });
             });
             expect(element.all(by.css('.profile-fields p')).get(0).getText()).toBe('Dancing');

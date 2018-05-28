@@ -30,7 +30,7 @@ appControllers.controller('AccountController', ['$scope', '$timeout', '$http', '
             } else {
                 baseURL = $location.protocol() + "://" + $location.host();
             }
-            self.textToCopy = baseURL + "/#!/account/"+ AuthService.getUser()._id + "/profile";
+            self.textToCopy = baseURL + "/#!/profiles/"+ AuthService.getUser()._id;
 
             if (!clipboard.supported) {
                 self.showMsg = true;
