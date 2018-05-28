@@ -175,7 +175,6 @@ describe('Order and Cart Processes', () => {
         });
 
         it('should show correct order after finishing process', () => {
-            browser.sleep(10000);
             expect(browser.getCurrentUrl()).toContain('/orders');
             expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Order successfully saved.\n×");
             element.all(by.repeater('order in orders.data.orders')).then((order) => {
