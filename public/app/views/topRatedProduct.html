@@ -16,9 +16,7 @@
             <div class="rating-wrapper"
                  ng-repeat="topRatedProductRating in topRatedProduct.ratings | toArray: false | orderBy: '-updatedAt' | limitTo: 1">
                 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                <!-- Injection Code Start - XSS -->
                 <div class="comment-wrapper" ng-bind-html="topRatedProductRating.comment | trustAsHTML"></div>
-                <!-- Injection Code End -->
                 <span class="rating-date-and-name"><a ng-href="#!/profiles/{{topRatedProductRating._account._id}}">{{ topRatedProductRating._account.username }}</a> at<br>{{ topRatedProductRating.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200' }}</span>
             </div>
         </div>
