@@ -847,6 +847,7 @@ object {
     bottom: 15px;
     height: 400px;
     width: 500px;
+    max-width: calc(100% - 50px);
 }
 
 .chat .panel {
