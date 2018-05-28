@@ -10,6 +10,7 @@ describe('Search and Filter', () => {
     describe('Search for products', () => {
         it('should return correct amount of products', () => {
             browser.get(browser.params.webshop).then(() => {
+                element(by.linkText('Shop')).click();
                 //Fill out Input
                 element(by.model('productSearch.searchValue')).sendKeys('treich').sendKeys(protractor.Key.ENTER);
                 browser.sleep(250);

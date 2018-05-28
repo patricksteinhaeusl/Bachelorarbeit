@@ -1,6 +1,7 @@
 'use strict';
 
-appControllers.controller('CreditCardsController', ['$scope', '$location', 'CreditCardsService', 'AuthService', function ($scope, $location, CreditCardsService, AuthService) {
+appControllers.controller('CreditCardsController', ['$scope', '$location', 'CreditCardsService', 'AuthService',
+    function ($scope, $location, CreditCardsService, AuthService) {
         const self = this;
         self.data = {};
         self.data.account = {};

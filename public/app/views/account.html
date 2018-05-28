@@ -21,18 +21,15 @@
             <input class="form-control" type="text" ng-model="account.data.account.username" name="username"
                    placeholder="Username" disabled/>
         </div>
-        <button class="btn btn-outline-primary">
+        <button class="btn btn-primary">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Update
         </button>
     </form>
     <br />
-    <div>
-        <h1>Profile example</h1>
-        <p>View <a href="/assets/profiles/template.html" download>sample template</a></p>
-    </div>
     <br />
     <form ng-submit="account.upload()">
         <h1>Upload your profile</h1>
+        <p>View <a href="/assets/profiles/template.html" download>sample template</a></p>
         <div class="form-group">
             <input id='file-selector' type="file" ng-model="account.data.profile" name="profile"
                    ngf-select=""
@@ -46,7 +43,7 @@
             </div>
         </div>
         <div class="form-group">
-            <button class="btn btn-outline-primary">
+            <button class="btn btn-primary">
                 <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Upload
             </button>
         </div>
@@ -54,6 +51,17 @@
     <br />
     <div>
         <h1>Share your profile</h1>
-        <a ng-href="#!/account/{{auth.getUser()._id}}/profile">#!/account/{{auth.getUser()._id}}/profile</a>
+        <p>Click the following button to copy the link of your profile to your clipboard.</p>
+        <div class="input-group">
+            <div class="copy-success-container">
+                <span ng-if="account.showMsg" class="copy-success-arrow"></span>
+                <span ng-if="account.showMsg" class="copy-success-msg">{{account.copyMessage}}</span>
+            </div>
+            <input type="text" class="form-control" ng-model="account.textToCopy" disabled>
+            <span class="input-group-btn">
+                <button clipboard supported="supported" text="account.textToCopy" on-copied="account.copySuccess()"
+                        on-error="account.copyFail(err)" class="btn btn-primary" type="button">Copy</button>
+            </span>
+        </div>
     </div>
 </div>

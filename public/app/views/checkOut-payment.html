@@ -53,10 +53,10 @@
         </div>
     </div>
 
-    <a type="button" class="btn btn-outline-primary back" href="#!/checkout/address">
+    <a type="button" class="btn btn-primary back" href="#!/checkout/address">
         <span class="glyphicon glyphicon glyphicon-backward" aria-hidden="true"></span> Back
     </a>
-    <button type="button" class="btn btn-outline-primary next" ng-click="order.updateTemp(); order.save()"
+    <button type="button" class="btn btn-primary next" ng-click="order.updateTemp(); order.save()"
         ng-disabled="order.data.order.items.length === 0 || !order.data.order._deliveryAddress || !order.data.order.payment || !(order.data.order.payment.type === 'bill' && !order.data.order.payment._creditCard) && !(order.data.order.payment.type === 'creditCard' && order.data.order.payment._creditCard)">
         <span class="glyphicon glyphicon glyphicon-forward" aria-hidden="true"></span> Finish
     </button>

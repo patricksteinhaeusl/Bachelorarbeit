@@ -1,3 +1,4 @@
+<div ng-include src="'views/product-search.html'"></div>
 <div class="content-view">
     <form class="product-sort-form">
         <div class="col col-xs-6">
@@ -80,7 +81,7 @@
                     </div>
                 </div>
                 <div ng-if="auth.isAuthenticated() === true">
-                    <div ng-repeat="rating in product.ratings | filter : {_account: auth.getUser()._id} track by rating._id">
+                    <div ng-repeat="rating in product.ratings | filter : {_account: {_id: auth.getUser()._id}} track by rating._id">
                         <form ng-attr-id="{{ 'shop-form-rating-' + product._id }}" class="shop-form-rating"
                               ng-submit="shop.rateProduct(product, rating);" ng-if="rating">
                             <div class="form-group">
@@ -96,7 +97,7 @@
                             </div>
                         </form>
                     </div>
-                    <div ng-if="(product.ratings | filter : {_account: auth.getUser()._id}).length === 0" ng-init="rating = {comment: '', value: 1}">
+                    <div ng-if="(product.ratings | filter : {_account: {_id: auth.getUser()._id}}).length === 0" ng-init="rating = {comment: '', value: 1}">
                         <form ng-attr-id="{{ 'shop-form-rating-' + product._id }}" class="shop-form-rating"
                               ng-submit="shop.rateProduct(product, rating); rating = {comment: '', value: 0}">
                             <div class="form-group">

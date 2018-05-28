@@ -37,7 +37,7 @@ let routes = {
         templateUrl: 'views/account.html',
         requireLogin: true
     },
-    '/account/:accountId/profile': {
+    '/profiles/:accountId': {
         templateUrl: (params) => {
             let templateUrl = 'assets/profiles/' + params.accountId + '.html';
             let templateNotFound = 'assets/profiles/notFound.html';
@@ -47,7 +47,7 @@ let routes = {
                 return templateNotFound;
             }
         },
-        requireLogin: true
+        requireLogin: false
     },
     '/creditcards': {
         templateUrl: 'views/creditCards.html',
@@ -91,6 +91,10 @@ let routes = {
     '/faq': {
         templateUrl: 'views/faq.html',
         requireLogin: false
+    },
+    '/profiles': {
+        templateUrl: 'views/profiles.html',
+        requireLogin: false
     }
 };
 
@@ -112,7 +116,8 @@ angular.module('app', [
     'app.controllers',
     'app.services',
     'app.directives',
-    'app.filters'
+    'app.filters',
+    'angular-clipboard'
 ])
 .config(['$httpProvider', '$locationProvider', '$routeProvider', '$compileProvider', 'localStorageServiceProvider',
     ($httpProvider, $locationProvider, $routeProvider, $compileProvider, localStorageServiceProvider) => {

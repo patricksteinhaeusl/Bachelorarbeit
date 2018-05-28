@@ -18,6 +18,13 @@ const Upload = multer({
         return callback(null, true);
     }}).single('profile');
 
+function getAll(req, res) {
+    AccountService.getAll((error, result) => {
+        if (error) return res.status(error.statusCode).json(error);
+        return res.status(result.statusCode).json(result);
+    });
+}
+
 function get(req, res) {
     let accountId = req.params.accountId;
     AccountService.get(accountId, (error, result) => {
@@ -64,6 +71,7 @@ function uploadFile(req, res, callback) {
 
 module.exports = {
     get,
+    getAll,
     update,
     upload,
     uploadFile

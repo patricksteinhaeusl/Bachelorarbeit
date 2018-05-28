@@ -1,6 +1,6 @@
 <div class="content-view" ng-controller="CreditCardsController as creditCards">
     <h1>Your credit cards</h1>
-    <button class="btn btn-outline-primary" ng-disabled="creditCards.data.creditCards.length > 2"
+    <button class="btn btn-primary" ng-disabled="creditCards.data.creditCards.length > 2"
             ng-click="creditCards.goToCreditCardAdd()">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
     </button>
@@ -14,11 +14,11 @@
             <td>{{ creditCard.number }}</td>
             <td>{{ creditCard.type }}</td>
             <td>
-                <button class="btn btn-outline-primary" ng-click="creditCards.remove($index)"
+                <button class="btn btn-primary" ng-click="creditCards.remove($index)"
                         ng-disabled="creditCards.data.creditCards.length <= 1">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Remove
                 </button>
-                <a class="btn btn-outline-primary" ng-href="#!/creditcard/{{ creditCard.number }}">
+                <a class="btn btn-primary" ng-href="#!/creditcard/{{ creditCard.number }}">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
                 </a>
             </td>

@@ -22,7 +22,7 @@
 	},
 	"title": "Just genius",
 	"text": "This bell is genius. My cows love this bell!",
-	"image": "zurfluh-bissen.jpg",
+	"image": "schelbert-froschmaultreicheln.jpg",
 	"_account": {
 		"$oid": "5aa0481e876d9d39d4397859"
 	},
@@ -38,8 +38,8 @@
 	"_id": {
 		"$oid": "5aa0481e876d9d39d4397887"
 	},
-	"title": "Broken bells...",
-	"text": "are sometimes a sign of hidden treasures.",
+	"title": "Awesome product",
+	"text": "This is one of the best bells.",
 	"image": "http://localhost:8765/file001.jpg",
 	"createdAt": {
 		"$date": "2018-03-07T20:14:22.626Z"

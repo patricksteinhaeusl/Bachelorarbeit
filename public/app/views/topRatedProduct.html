@@ -19,7 +19,7 @@
                 <!-- Injection Code Start - XSS -->
                 <div class="comment-wrapper" ng-bind-html="topRatedProductRating.comment | trustAsHTML"></div>
                 <!-- Injection Code End -->
-                <span class="rating-date">{{ topRatedProductRating.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200' }}</span>
+                <span class="rating-date-and-name"><a ng-href="#!/profiles/{{topRatedProductRating._account._id}}">{{ topRatedProductRating._account.username }}</a> at<br>{{ topRatedProductRating.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200' }}</span>
             </div>
         </div>
     </div>

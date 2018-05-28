@@ -5,6 +5,8 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const forceSSL = require('express-force-ssl');
 const cors = require('cors');
+const compression = require('compression');
+
 
 require('./utils/mongo');
 
@@ -23,6 +25,7 @@ const app = express();
 
 app.set('view engine', 'pug');
 
+app.use(compression());
 app.use(cors());
 app.use(forceSSL);
 app.use(logger('dev'));

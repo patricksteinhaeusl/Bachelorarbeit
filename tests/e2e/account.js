@@ -29,7 +29,7 @@ describe('Account', () => {
                 expect(element(by.model('account.data.account.email')).getAttribute('value')).toEqual('Juliane.Schulze@gmail.com');
                 expect(element(by.model('account.data.account.username')).getAttribute('value')).toEqual('customer0');
                 expect(element(by.model('account.data.account.username')).isEnabled()).toEqual(false);
-                expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Juliane Schulze');
+                expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Juliane Schulze\n(customer0)');
             });
         });
 
@@ -55,7 +55,7 @@ describe('Account', () => {
                 expect(element(by.model('account.data.account.email')).getAttribute('value')).toEqual('juliane.schmitz@gmail.com');
                 expect(element(by.model('account.data.account.username')).getAttribute('value')).toEqual('customer0');
                 expect(element(by.model('account.data.account.username')).isEnabled()).toEqual(false);
-                expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Neu Schulze');
+                expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Neu Schulze\n(customer0)');
                 element(by.model('account.data.account.firstname')).clear().then(() => {
                     element(by.model('account.data.account.firstname')).sendKeys('Juliane').sendKeys(protractor.Key.ENTER);
                 });
@@ -158,6 +158,43 @@ describe('Account', () => {
                 expect(creditCards.count()).toBe(1);
             });
         });
+
+        describe('update', () => {
+            it('should be successfully', () => {
+                //Open Auth Menu
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Link
+                element(by.linkText('Credit Cards')).click();
+                browser.sleep(250);
+                //Repeater
+                element.all(by.repeater('creditCard in creditCards.data.creditCards')).then((cc) => {
+                    cc[0].element(by.linkText('Edit')).click();
+                });
+                element(by.model('creditCard.data.creditCard.number')).clear();
+                element(by.model('creditCard.data.creditCard.number')).sendKeys('5404000000000666');
+                browser.sleep(250);
+                //Submit form
+                element(by.buttonText('Update')).click();
+                browser.sleep(250);
+                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Credit card successfully updated.\n×");
+            });
+        });
+
+        describe('verify update', () => {
+            it('should have edited creditcard', () => {
+                //Open Auth Menu
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Link
+                element(by.linkText('Credit Cards')).click();
+                browser.sleep(250);
+                //Repeater
+                let creditCards = element.all(by.repeater('creditCard in creditCards.data.creditCards'));
+                expect(creditCards.count()).toBe(1);
+                expect(creditCards.get(0).getText()).toContain('5404000000000666 Mastercard');
+            });
+        });
     });
 
     describe('Delivery Address', () => {
@@ -245,6 +282,49 @@ describe('Account', () => {
                 //Repeater
                 let deliveryAddresses = element.all(by.repeater('deliveryAddress in deliveryAddresses.data.deliveryAddresses'));
                 expect(deliveryAddresses.count()).toBe(1);
+            });
+        });
+
+        describe('update', () => {
+            it('should be successfully', () => {
+                //Open Auth Menu
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Link
+                element(by.linkText('Delivery Addresses')).click();
+                browser.sleep(250);
+                //Repeater
+                element.all(by.repeater('deliveryAddress in deliveryAddresses.data.deliveryAddresses')).then((address) => {
+                    address[0].element(by.linkText('Edit')).click();
+                });
+                element(by.model('deliveryAddress.data.deliveryAddress.street')).clear();
+                element(by.model('deliveryAddress.data.deliveryAddress.zip')).clear();
+                element(by.model('deliveryAddress.data.deliveryAddress.city')).clear();
+                element(by.model('deliveryAddress.data.deliveryAddress.country')).clear();
+                element(by.model('deliveryAddress.data.deliveryAddress.street')).sendKeys('Promenade 138');
+                element(by.model('deliveryAddress.data.deliveryAddress.zip')).sendKeys('7260');
+                element(by.model('deliveryAddress.data.deliveryAddress.city')).sendKeys('Davos');
+                element(by.model('deliveryAddress.data.deliveryAddress.country')).sendKeys('Schweiz');
+                browser.sleep(250);
+                //Submit form
+                element(by.buttonText('Update')).click();
+                browser.sleep(250);
+                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Delivery address successfully updated.\n×");
+            });
+        });
+
+        describe('verify update', () => {
+            it('should have edited delivery address', () => {
+                //Open Auth Menu
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Link
+                element(by.linkText('Delivery Addresses')).click();
+                browser.sleep(250);
+                //Repeater
+                let deliveryAddresses = element.all(by.repeater('deliveryAddress in deliveryAddresses.data.deliveryAddresses'));
+                expect(deliveryAddresses.count()).toBe(1);
+                expect(deliveryAddresses.get(0).getText()).toContain('Street:Promenade 138\nZip:7260\nCity:Davos\nCountry:Schweiz\n');
             });
         });
     });

@@ -2,7 +2,7 @@
 const path = require('path');
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Profile Tests', () => {
+describe('User Profile Tests', () => {
 
     describe('Basic Profile Functions', () => {
 
@@ -25,13 +25,13 @@ describe('Profile Tests', () => {
             //Link
             element(by.linkText('My Account')).click();
             browser.sleep(250);
-            element(by.partialLinkText('#!/account')).getText().then((url) => {
+            element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
                 let secondLastSegment = url.split('/').filter(el => !!el);
                 secondLastSegment = secondLastSegment[secondLastSegment.length-2];
-                element(by.linkText('My Profile')).click();
+                element(by.linkText('Profile')).click();
                 browser.sleep(250);
                 browser.getCurrentUrl().then((url) => {
-                    expect(url).toContain("/#!/account/" + secondLastSegment + "/profile");
+                    expect(url).toContain("/#!/profiles/" + secondLastSegment);
                 });
             });
             expect(element(by.tagName('h1')).getAttribute('innerText')).toBe("Welcome to my profile");
@@ -85,13 +85,13 @@ describe('Profile Tests', () => {
             element(by.buttonText('Upload')).click();
             browser.sleep(500);
             //Link
-            element(by.partialLinkText('#!/account')).getText().then((url) => {
+            element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
                 let secondLastSegment = url.split('/').filter(el => !!el);
                 secondLastSegment = secondLastSegment[secondLastSegment.length-2];
-                element(by.linkText('My Profile')).click();
+                element(by.linkText('Profile')).click();
                 browser.sleep(250);
                 browser.getCurrentUrl().then((url) => {
-                    expect(url).toContain("/#!/account/" + secondLastSegment + "/profile");
+                    expect(url).toContain("/#!/profiles/" + secondLastSegment);
                 });
             });
             expect(element.all(by.css('.profile-fields p')).get(0).getText()).toBe('Dancing');

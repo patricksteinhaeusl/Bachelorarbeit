@@ -8,17 +8,27 @@ appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter'
         self.data.orders = {};
         self.export = {};
         self.export.from = null;
-        self.export.range = null;
+        self.export.quantity = null;
 
         self.init = () => {
             self.getAllByAccount();
         };
 
+        self.calculateExportOrders = function(){
+            if (isNaN($scope.orders.export.quantity)) return "NaN";
+            if (isNaN($scope.orders.export.from)) return parseInt($scope.orders.export.quantity);
+            return parseInt($scope.orders.export.quantity) + parseInt($scope.orders.export.from);
+        };
+
+        self.getExportFrom = function(){
+            if (isNaN($scope.orders.export.from)) return "NaN";
+            return parseInt($scope.orders.export.from);
+        };
+
         self.getAllByAccount = () => {
             OrdersService.getAllByAccount(AuthService.getUser()._id, (error, data) => {
                 if(data) {
-                    let orders = data.orders;
-                    self.data.orders = orders;
+                    self.data.orders = data.orders;
                 }
             });
         };
@@ -69,10 +79,10 @@ appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter'
         }
 
         self.downloadPDF = () => {
-            if(!self.export.from || !self.export.range) {
-                $rootScope.messages.warnings.push('Parameter from or range is missing!');
+            if(!self.export.from || !self.export.quantity) {
+                $rootScope.messages.warnings.push({msg: 'Parameter from or range is missing!'});
             } else {
-                OrdersService.getFromTo(self.export.from, self.export.range, (error, data) => {
+                OrdersService.getFromTo(self.export.from, self.export.quantity, (error, data) => {
                     if(data) {
                         let from = data.from;
                         let to = data.to;
@@ -107,7 +117,7 @@ appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter'
 
                         pdfMake.createPdf(docDefinition).download();
                         self.export.from = null;
-                        self.export.range = null;
+                        self.export.quantity = null;
                     }
                 });
             }

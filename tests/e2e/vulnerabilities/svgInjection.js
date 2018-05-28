@@ -18,7 +18,7 @@ describe('Post - SVG Injection', () => {
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
                 //Link
-                element(by.linkText('Community')).click();
+                element(by.linkText('Add Post')).click();
                 browser.sleep(250);
                 //Check if Save Button is disabled
                 expect(element(by.buttonText('Save')).isEnabled()).toBe(false);

@@ -2,10 +2,10 @@
 
 const RetailerService = require('../services/retailer');
 
-function change(req, res) {
+function applyDiscount(req, res) {
     if(req.user && req.user.isRetailer) {
         let orderId = req.params.orderId;
-        RetailerService.change(orderId, (error, result) => {
+        RetailerService.applyDiscount(orderId, (error, result) => {
             if (error) return res.render('feedback', { feedback: error });
             return res.render('feedback', {feedback: result });
         });
@@ -15,5 +15,5 @@ function change(req, res) {
 }
 
 module.exports = {
-    change,
+    applyDiscount,
 };

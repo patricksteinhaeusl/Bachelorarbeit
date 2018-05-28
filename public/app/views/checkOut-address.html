@@ -48,10 +48,10 @@
         </div>
     </div>
 
-    <a type="button" class="btn btn-outline-primary back" href="#!/checkout/overview">
+    <a type="button" class="btn btn-primary back" href="#!/checkout/overview">
         <span class="glyphicon glyphicon glyphicon-backward" aria-hidden="true"></span> Back
     </a>
-    <button type="button" class="btn btn-outline-primary next" ng-click="order.updateTemp(); order.goToPayment()"
+    <button type="button" class="btn btn-primary next" ng-click="order.updateTemp(); order.goToPayment()"
             ng-disabled="order.data.order.items.length === 0 || !order.data.order._deliveryAddress">
         <span class="glyphicon glyphicon glyphicon-forward" aria-hidden="true"></span> Next
     </button>

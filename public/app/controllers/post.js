@@ -19,7 +19,7 @@ appControllers.controller('PostController', ['$rootScope', '$scope', '$location'
                     self.insertURL();
                     break;
                 default:
-                    $rootScope.messages.warnings.push('No Type selected');
+                    $rootScope.messages.warnings.push({msg: 'No Type selected'});
                     break;
             }
         };
