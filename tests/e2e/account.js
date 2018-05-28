@@ -42,10 +42,10 @@ describe('Account', () => {
                 element(by.linkText('My Account')).click();
                 browser.sleep(250);
                 element(by.model('account.data.account.firstname')).clear().then(() => {
-                    element(by.model('account.data.account.firstname')).sendKeys('Neu').sendKeys(protractor.Key.ENTER);
+                    element(by.model('account.data.account.firstname')).sendKeys('Neu');
                 });
                 element(by.model('account.data.account.email')).clear().then(() => {
-                    element(by.model('account.data.account.email')).sendKeys('juliane.schmitz@gmail.com').sendKeys(protractor.Key.ENTER);
+                    element(by.model('account.data.account.email')).sendKeys('juliane.schmitz@gmail.com');
                 });
                 element(by.buttonText('Update')).click();
                 browser.sleep(250);
@@ -57,7 +57,7 @@ describe('Account', () => {
                 expect(element(by.model('account.data.account.username')).isEnabled()).toEqual(false);
                 expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Neu Schulze\n(customer0)');
                 element(by.model('account.data.account.firstname')).clear().then(() => {
-                    element(by.model('account.data.account.firstname')).sendKeys('Juliane').sendKeys(protractor.Key.ENTER);
+                    element(by.model('account.data.account.firstname')).sendKeys('Juliane');
                 });
                 element(by.buttonText('Update')).click();
                 browser.sleep(250);

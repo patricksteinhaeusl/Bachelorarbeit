@@ -1,4 +1,4 @@
-appInterceptors.factory('AlertInterceptor', ['$q', '$rootScope', '$timeout', function ($q, $rootScope, $timeout) {
+appInterceptors.factory('AlertInterceptor', ['$q', '$rootScope', '$interval', function ($q, $rootScope, $interval) {
     return {
         response: (successResponse) => {
             let statusCode = successResponse.data.statusCode;
@@ -45,13 +45,13 @@ appInterceptors.factory('AlertInterceptor', ['$q', '$rootScope', '$timeout', fun
     };
 
     function deleteAlert(messageType, alertIdentifier) {
-        $timeout(()=>{
+        $interval(()=>{
             for (let index = 0; index < $rootScope.messages[messageType].length; index++){
                 if ($rootScope.messages[messageType][index].id === alertIdentifier) {
                     $rootScope.messages[messageType].splice(index,1);
                 }
             }
-        },4000);
+        },4000, 1);
     }
 }]);
 

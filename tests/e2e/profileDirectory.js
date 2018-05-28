@@ -13,14 +13,14 @@ describe('User Profile Directory', () => {
 
     it('it should be the right amount of users', () => {
         //Link
-        element(by.linkText('Profile Directory')).click();
+        element(by.linkText('Profiles')).click();
         browser.sleep(250);
-        expect(element.all(by.repeater('profile in profile.accounts')).count()).toBe(12);
+        expect(element.all(by.repeater('profile in profile.accounts')).count()).toBe(13);
     });
 
     it('Users should have right properties', () => {
         //Link
-        element(by.linkText('Profile Directory')).click();
+        element(by.linkText('Profiles')).click();
         browser.sleep(250);
         element.all(by.repeater('profile in profile.accounts')).getText().then((profiles) => {
             expect(profiles[0]).toContain("Juliane Schulze");
@@ -29,7 +29,7 @@ describe('User Profile Directory', () => {
 
     it('Link to Profiles should work', (done) => {
         //Link
-        element(by.linkText('Profile Directory')).click();
+        element(by.linkText('Profiles')).click();
         browser.sleep(250);
         element.all(by.repeater('profile in profile.accounts')).then((profiles) => {
             element(by.linkText('Click me')).getAttribute('href').then((link) => {

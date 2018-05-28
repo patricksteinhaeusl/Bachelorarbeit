@@ -24,16 +24,16 @@ describe('SSJS MongoDB', () => {
 
     });
 
-    it('should return 200', () => {
+    it('should return 404', () => {
         result.then((text) => {
-            expect(text.statusCode).toBe(200);
+            expect(text.statusCode).toBe(404);
         });
     });
 
     it('should return empty array', () => {
         result.then((text) => {
             text = JSON.parse(text.bodyString);
-            expect(text.data.faq.length).toBe(0);
+            expect(text.data).toBe(null);
         });
     });
 });

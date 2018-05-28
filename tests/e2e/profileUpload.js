@@ -2,7 +2,7 @@
 const path = require('path');
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('User Profile Tests', () => {
+describe('Profile Upload', () => {
 
     describe('Basic Profile Functions', () => {
 
@@ -26,12 +26,11 @@ describe('User Profile Tests', () => {
             element(by.linkText('My Account')).click();
             browser.sleep(250);
             element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
-                let secondLastSegment = url.split('/').filter(el => !!el);
-                secondLastSegment = secondLastSegment[secondLastSegment.length-2];
+                let lastSegment = url.split('/').filter((el) => { return !!el; }).pop();
                 element(by.linkText('Profile')).click();
                 browser.sleep(250);
                 browser.getCurrentUrl().then((url) => {
-                    expect(url).toContain("/#!/profiles/" + secondLastSegment);
+                    expect(url).toContain("/#!/profiles/" + lastSegment);
                 });
             });
             expect(element(by.tagName('h1')).getAttribute('innerText')).toBe("Welcome to my profile");
@@ -86,12 +85,11 @@ describe('User Profile Tests', () => {
             browser.sleep(500);
             //Link
             element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
-                let secondLastSegment = url.split('/').filter(el => !!el);
-                secondLastSegment = secondLastSegment[secondLastSegment.length-2];
+                let lastSegment = url.split('/').filter((el) => { return !!el; }).pop();
                 element(by.linkText('Profile')).click();
                 browser.sleep(250);
                 browser.getCurrentUrl().then((url) => {
-                    expect(url).toContain("/#!/profiles/" + secondLastSegment);
+                    expect(url).toContain("/#!/profiles/" + lastSegment);
                 });
             });
             expect(element.all(by.css('.profile-fields p')).get(0).getText()).toBe('Dancing');

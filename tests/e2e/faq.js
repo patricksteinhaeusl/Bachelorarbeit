@@ -26,9 +26,14 @@ describe('FAQ', () => {
                 element(by.model('faq.data.searchValue')).sendKeys(');').sendKeys(protractor.Key.ENTER);
             });
             expect(element.all(by.className('alert-danger')).last().getText()).toBe("Error: Could not process your input.\n×");
+            expect(element(by.className('faqNotFound')).isDisplayed()).toBe(true);
         });
 
         it('should say that nothing can be found if nothing can be found', () => {
+            //Fill out Input
+            element(by.model('faq.data.searchValue')).clear().then(() => {
+                element(by.model('faq.data.searchValue')).sendKeys('chat').sendKeys(protractor.Key.ENTER);
+            });
             expect(element(by.className('faqNotFound')).isPresent()).toBe(false);
             //Fill out Input
             element(by.model('faq.data.searchValue')).clear().then(() => {

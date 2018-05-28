@@ -2,7 +2,7 @@
 const HelperFunctions = require('../helperFunctions.js');
 const path = require('path');
 
-describe('Post - SVG Injection', () => {
+describe('SVG Injection', () => {
     beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
@@ -18,7 +18,7 @@ describe('Post - SVG Injection', () => {
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
                 //Link
-                element(by.linkText('Add Post')).click();
+                element(by.linkText('Community')).click();
                 browser.sleep(250);
                 //Check if Save Button is disabled
                 expect(element(by.buttonText('Save')).isEnabled()).toBe(false);
