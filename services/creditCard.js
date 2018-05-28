@@ -98,7 +98,7 @@ function remove(creditCardId, callback) {
 }
 
 function handleGetCreditCards(creditCards, callback) {
-    if (!creditCards) return callback(ResponseUtil.createNotFoundResponse('No credit card found.'));
+    if (!creditCards.length) return callback(ResponseUtil.createNotFoundResponse('No credit card found.'));
     const data = {'creditCards': creditCards};
     return callback(null, ResponseUtil.createSuccessResponse(data));
 }

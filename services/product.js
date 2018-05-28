@@ -131,7 +131,7 @@ function getCategories(callback) {
                 'name': 1
             }
         }]).then((categories) => {
-            if (!categories) return callback(ResponseUtil.createNotFoundResponse('No categories found.'));
+            if (!categories.length) return callback(ResponseUtil.createNotFoundResponse('No categories found.'));
             let data = {'categories': categories};
             return callback(null, ResponseUtil.createSuccessResponse(data));
         }).catch((error) => {
@@ -178,7 +178,7 @@ function calculateTotalRating(ratings) {
 }
 
 function handleFindProducts(products, callback) {
-    if (!products) return callback(ResponseUtil.createNotFoundResponse('No products found.'));
+    if (!products.length) return callback(ResponseUtil.createNotFoundResponse('No products found.'));
     let data = {'products': products};
     return callback(null, ResponseUtil.createSuccessResponse(data));
 }
