@@ -30,7 +30,7 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
     WebSocketService.on('getMessages', (messages) => {
         self.messages = messages;
         self.scrollBottom();
-        //self.isLoadingMessages = false;
+        self.isLoadingMessages = false;
     });
 
     WebSocketService.on('refreshUserList', () => {
