@@ -1,9 +1,9 @@
 'use strict';
 
-appControllers.controller('RetailerController', ['$rootScope', function ($rootScope) {
+appControllers.controller('RetailerController', ['$rootScope', 'AlertsService', function ($rootScope, AlertsService) {
     const self = this;
 
     self.request = () => {
-        $rootScope.messages.warnings.push({msg: 'This function is disabled.'});
+        AlertsService.addWarning('This function is disabled.');
     }
 }]);

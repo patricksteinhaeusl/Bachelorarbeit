@@ -28,7 +28,7 @@ appServices.factory('AuthService', ['$http', '$rootScope', 'localStorageService'
                 return callback(null, {user: user});
             },
             isAuthenticated() {
-                return (LocalStorageService.get('token') && LocalStorageService.get('user') !== null)
+                return !!(LocalStorageService.get('token') && LocalStorageService.get('user') !== null);
             },
             getUser() {
                 if (LocalStorageService.get('token')) {

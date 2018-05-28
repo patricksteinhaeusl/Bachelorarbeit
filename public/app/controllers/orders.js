@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter', 'OrdersService', 'AuthService',
-    function ($rootScope, $scope, $filter, OrdersService, AuthService) {
+appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter', 'OrdersService', 'AuthService', 'AlertsService',
+    function ($rootScope, $scope, $filter, OrdersService, AuthService, AlertsService) {
         const self = this;
 
         self.data = {};
@@ -80,7 +80,7 @@ appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter'
 
         self.downloadPDF = () => {
             if(!self.export.from || !self.export.quantity) {
-                $rootScope.messages.warnings.push({msg: 'Parameter from or range is missing!'});
+                AlertsService.addWarning('Parameter from or range is missing!');
             } else {
                 OrdersService.getFromTo(self.export.from, self.export.quantity, (error, data) => {
                     if(data) {

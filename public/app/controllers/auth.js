@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('AuthController', ['$scope', '$http', '$location', '$cookies', 'localStorageService', 'AuthService', 'WebSocketService',
-    function ($scope, $http, $location, $cookies, LocalStorageService, AuthService, WebSocketService) {
+appControllers.controller('AuthController', ['$scope', '$http', '$location', '$route', '$cookies', 'localStorageService', 'AuthService', 'WebSocketService',
+    function ($scope, $http, $location, $route, $cookies, LocalStorageService, AuthService, WebSocketService) {
         let self = this;
         self.data = {};
         self.data.login = {};
@@ -14,13 +14,16 @@ appControllers.controller('AuthController', ['$scope', '$http', '$location', '$c
                     let user = data.user;
                     let token = data.token;
 
+                    $cookies.put('chatUser', user._id);
+
                     LocalStorageService.set('user', user);
                     LocalStorageService.set('token', token);
                     $http.defaults.headers.common.Authorization = 'Bearer ' + token;
 
-                    $cookies.put('chatUser', user._id);
+                    WebSocketService.connect();
                     WebSocketService.join(user);
                     self.data.login.user = {};
+                    $route.reload();
                     $location.path('/shop');
                 }
             });

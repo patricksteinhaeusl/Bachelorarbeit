@@ -1,6 +1,7 @@
 'use strict';
 
-appControllers.controller('PostController', ['$rootScope', '$scope', '$location', 'PostService', 'AuthService', function ($rootScope, $scope, $location, PostService, AuthService) {
+appControllers.controller('PostController', ['$rootScope', '$scope', '$location', 'PostService', 'AuthService', 'AlertsService',
+    function ($rootScope, $scope, $location, PostService, AuthService, AlertsService) {
         const self = this;
         self.data = {};
         self.data.post = {};
@@ -19,7 +20,7 @@ appControllers.controller('PostController', ['$rootScope', '$scope', '$location'
                     self.insertURL();
                     break;
                 default:
-                    $rootScope.messages.warnings.push({msg: 'No Type selected'});
+                    AlertsService.addWarning('No Type selected');
                     break;
             }
         };

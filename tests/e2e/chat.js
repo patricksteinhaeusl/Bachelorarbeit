@@ -41,12 +41,17 @@ describe('Chat', () => {
             expect(firstBrowser.element.all(by.css('.chat')).get(0).isDisplayed()).toBe(true);
             firstBrowser.element.all(by.repeater('user in websocket.userList')).then((user) => {
                 user[0].click();
+                firstBrowser.sleep(2000);
                 firstBrowser.element(by.model('websocket.message')).sendKeys('Hallo wie geht es dir?');
                 firstBrowser.element(by.buttonText('Send...')).click();
                 secondBrowser.element(by.id('chat-button')).click();
-                let expectedResult = "customer0 says: Hallo wie geht es dir?";
-                secondBrowser.sleep(2000);
-                expect(secondBrowser.element.all(by.css('.message-container')).get(0).getText()).toBe(expectedResult);
+                secondBrowser.sleep(250);
+                secondBrowser.element.all(by.repeater('user in websocket.userList')).then((user) => {
+                    user[0].click();
+                    secondBrowser.sleep(20000);
+                    let expectedResult = "Hallo wie geht es dir?";
+                    expect(secondBrowser.element.all(by.css('.message-container .list-group-item')).last().getText()).toContain(expectedResult);
+                });
             });
         });
     });

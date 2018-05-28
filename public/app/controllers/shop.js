@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('ShopController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ShopService',
-    function ($rootScope, $scope, $routeParams, AuthService, ShopService) {
+appControllers.controller('ShopController', ['$rootScope', '$scope', '$routeParams', 'AuthService', 'ShopService', 'AlertsService',
+    function ($rootScope, $scope, $routeParams, AuthService, ShopService, AlertsService) {
         const self = this;
         self.products = {};
 
@@ -51,7 +51,7 @@ appControllers.controller('ShopController', ['$rootScope', '$scope', '$routePara
                     }
                 });
             } else {
-                $rootScope.messages.warnings.push({msg: 'Rating must be at least 1 star'});
+                AlertsService.addWarning('Rating must be at least 1 star');
             }
         };
 

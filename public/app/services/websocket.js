@@ -7,6 +7,12 @@ appServices.factory('WebSocketService', ['$rootScope', function($rootScope) {
         transports: ['websocket']
     });
 
+    self.connect = () => {
+        self.socket = io.connect({
+            transports: ['websocket']
+        });
+    };
+
     self.on = (eventName, callback) => {
         self.socket.on(eventName, function () {
             let args = arguments;
@@ -36,6 +42,7 @@ appServices.factory('WebSocketService', ['$rootScope', function($rootScope) {
     };
 
     return {
+        connect: self.connect,
         on: self.on,
         emit: self.emit,
         join: self.join,
