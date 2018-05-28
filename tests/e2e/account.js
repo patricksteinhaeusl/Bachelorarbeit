@@ -44,12 +44,13 @@ describe('Account', () => {
                 element(by.model('account.data.account.firstname')).clear().then(() => {
                     element(by.model('account.data.account.firstname')).sendKeys('Neu');
                 });
+
                 element(by.buttonText('Update')).click();
                 browser.sleep(250);
                 expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Account successfully updated.\n×");
                 expect(element(by.model('account.data.account.firstname')).getAttribute('value')).toEqual('Neu');
                 expect(element(by.model('account.data.account.lastname')).getAttribute('value')).toEqual('Schulze');
-                expect(element(by.model('account.data.account.email')).getAttribute('value')).toEqual('juliane.schmitz@gmail.com');
+                expect(element(by.model('account.data.account.email')).getAttribute('value')).toEqual('Juliane.Schulze@gmail.com');
                 expect(element(by.model('account.data.account.username')).getAttribute('value')).toEqual('customer0');
                 expect(element(by.model('account.data.account.username')).isEnabled()).toEqual(false);
                 expect(element.all(by.css('.menu-item-username')).get(0).getText()).toBe('Neu Schulze\n(customer0)');
