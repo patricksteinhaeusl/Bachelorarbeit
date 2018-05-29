@@ -50,6 +50,11 @@ describe('Product Details', () => {
         });
 
         it('asked question should be visible and be on the bottom of all questions', () => {
+            //Fill out Input
+            element(by.model('product.data.question.text')).clear().then(() => {
+                element(by.model('product.data.question.text')).sendKeys("Frage2");
+            });
+            element(by.buttonText('Save')).click();
             element.all(by.repeater('question in product.data.product.questions')).then((question) => {
                 expect(question[question.length-1].element(by.binding('question.text')).getText()).toBe(QuestionString);
             });
