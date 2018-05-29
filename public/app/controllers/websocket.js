@@ -9,6 +9,7 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
         self.messages = [];
         self.isLoadingUserList = false;
         self.isLoadingMessages = false;
+        self.newMessagesFrom = [];
 
         self.join = () => {
             const account = AuthService.getUser();
@@ -25,21 +26,34 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
         };
 
         WebSocketService.on('leave', () => {
+            // On leave chat
             self.user = null;
         });
 
+        WebSocketService.on('newMessage', (from) => {
+            // On get new message indicator
+            if(!self.selectedUser || (self.selectedUser && self.selectedUser.userId !== from.userId)) {
+                if(!self.containUser(from.userId)) {
+                    self.newMessagesFrom.push(from);
+                }
+            }
+        });
+
         WebSocketService.on('getMessages', (messages) => {
+            // on get room messages
             self.messages = messages;
             self.scrollBottom();
             self.isLoadingMessages = false;
         });
 
         WebSocketService.on('refreshUserList', () => {
+            // on refresh userlist
             self.isLoadingUserList = true;
             WebSocketService.emit('sendUserList');
         });
 
         WebSocketService.on('getUserList', (userList) => {
+            // on get userlist
             self.userList = userList;
             self.isLoadingUserList = false;
         });
@@ -70,6 +84,9 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
         self.selectUser = (selectedUser) => {
             self.isLoadingMessages = true;
             self.selectedUser = selectedUser;
+
+            removeNewMessageFrom();
+
             WebSocketService.emit('sendMessagesToRoom', { from: { userId: self.user.userId }, to: { userId: self.selectedUser.userId } } );
         };
 
@@ -93,5 +110,25 @@ appControllers.controller('WebSocketController', ['$rootScope', '$scope', 'AuthS
 
         if(AuthService.isAuthenticated()) {
             self.join();
+        }
+
+        function removeNewMessageFrom() {
+            let index = 0;
+            self.newMessagesFrom.forEach((from) => {
+                if (from.userId === self.selectedUser.userId) {
+                    self.newMessagesFrom.splice(index, 1);
+                }
+                index++;
+            });
+        }
+
+        self.containUser = (userId) => {
+            let found = false;
+            self.newMessagesFrom.forEach((fromElement) => {
+                if(fromElement.userId === userId) {
+                    found = true;
+                }
+            });
+            return found;
         }
 }]);
