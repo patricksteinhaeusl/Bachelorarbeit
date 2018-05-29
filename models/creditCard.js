@@ -52,7 +52,7 @@ let creditCardSchema = new Schema({
     timestamps: {}
 });
 
-creditCardSchema.plugin(uniqueValidator, { message: '{PATH}: already exists!' });
+creditCardSchema.plugin(uniqueValidator, { message: '{PATH}: already exists in our system. Must be unique!' });
 
 let CreditCard = mongoose.model('CreditCard', creditCardSchema);
 
