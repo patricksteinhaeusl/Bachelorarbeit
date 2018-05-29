@@ -13,8 +13,6 @@ let accountWithoutIdSchema = new Schema({
     timestamps: {}
 });
 
-accountWithoutIdSchema.plugin(uniqueValidator, { message: '{PATH}: already exists!' });
-
 let AccountWithoutId = mongoose.model('AccountWithoutId', accountWithoutIdSchema);
 
 module.exports = AccountWithoutId;
