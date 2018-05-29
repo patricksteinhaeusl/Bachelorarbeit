@@ -1,5 +1,8 @@
 'use strict';
 
+const log = require('../utils/log');
+
+
 let util = {
     createSuccessResponse: (data, message = null) => {
         return {statusCode: 200, data: data, message: message};
@@ -17,6 +20,7 @@ let util = {
         return {statusCode: 405, data: null, message: null, validations: validations};
     },
     createErrorResponse: (error, message) => {
+        log.writeError(error);
         const errorText = message ? message : error;
         return {statusCode: 500, data: null, message: errorText};
     }
