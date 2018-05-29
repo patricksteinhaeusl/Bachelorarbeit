@@ -579,6 +579,8 @@ table tr td li {
     -moz-border-radius: 5px;
     border-radius: 5px;
     margin-bottom: 7px;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .question-info {
@@ -728,11 +730,14 @@ table tr td li {
 .posts-container {
     display: table;
     width: 100%;
+
 }
 
 .posts {
     min-height: 100%;
     padding: 5px;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .post-element {
@@ -979,6 +984,7 @@ object {
 
 .chat .user-list .btn {
     width: 100%;
+    margin-bottom: 5px;
 }
 
 .chat .user-list .btn .badge {
