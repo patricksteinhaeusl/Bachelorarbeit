@@ -20,11 +20,11 @@
                     </div>
                     <button type="button" class="btn btn-default"
                             ng-repeat="user in websocket.userList | filter: { userId : '!' + auth.getUser()._id }"
-                            ng-class="{ 'btn-primary' : user._id === websocket.selectedUser._id}"
+                            ng-class="{ 'btn-primary' : user._id === websocket.selectedUser._id, 'flash' : websocket.messages.length > 0 && !websocket.selectedUser}"
+                            ng-class=""
                             ng-click="websocket.selectUser(user);"
                             ng-if="!websocket.isLoadingUserList">
                         {{ user.username }}
-                        <span class="glyphicon glyphicon-info-sign text-info" ng-if="websocket.messages.length > 0 && !websocket.selectedUser"></span>
                     </button>
                 </div>
                 <div class="col col-xs-9 message-box">
@@ -34,7 +34,7 @@
                             <img src="/assets/symbols/spinner.gif">
                         </div>
                         <ul class="list-group" ng-if="websocket.selectedUser && !websocket.isLoadingMessages">
-                            <li class="list-group-item" ng-class="message.from.userId === auth.getUser()._id ? 'pull-right' : 'pull-left'" ng-repeat="message in websocket.messages | orderBy : message : true">
+                            <li class="list-group-item" ng-class="message.from.userId === auth.getUser()._id ? 'pull-right arrow-right' : 'pull-left arrow-left'" ng-repeat="message in websocket.messages | orderBy : message : true">
                                 <div>{{ message.text }}</div>
                                 <span class="datetime pull-right">{{ message.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200' }} </span>
                             </li>

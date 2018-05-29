@@ -69,7 +69,8 @@ table {
 }
 
 .tableHead {
-    background-color: lightgrey;
+    background-color: #4d91ff;
+    color: white;
 }
 
 .fixedTable {
@@ -860,6 +861,50 @@ object {
 .jssorb031 .i.idn {
     opacity: .3;
 }
+.flash {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        background-color: #337ab7;
+        color: white;
+    }
+}
+
+.arrow-left{
+    background: #ececec;
+    position: relative;
+    border: none;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+.arrow-left:before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    width: 0;
+    border-right: 12px solid #ececec;
+    border-bottom: 12px solid transparent;
+}
+
+.arrow-right{
+    background: #cae7f9;
+    position: relative;
+    border: none;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+.arrow-right:before {
+    content: "";
+    position: absolute;
+    left: 100%;
+    width: 0;
+    border-left: 12px solid #cae7f9;
+    border-bottom: 12px solid transparent;
+}
 
 .chat {
     display: none;
@@ -872,7 +917,7 @@ object {
 }
 
 .chat .panel {
-    height: 360px;
+    height: 355px;
     margin: 0;
 }
 
@@ -882,7 +927,7 @@ object {
 }
 
 .chat .panel-body {
-    height: 70%;
+    height: 260px;
     padding: 0;
 }
 
@@ -907,6 +952,7 @@ object {
 .chat .user-list,
 .chat .message-container {
     height: 100%;
+    padding: 10px 5px 10px 5px;
 }
 
 .chat .user-list,
@@ -914,17 +960,14 @@ object {
     overflow: auto;
     height: 100%;
     padding-bottom: 5px;
-}
-
-.chat .user-list,
-.chat .message-container {
-    padding: 10px 5px 10px 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .chat .message-container .list-group-item {
     display: inline-block;
     width: 75%;
-    padding: 15px;
+    padding: 8px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
@@ -952,6 +995,12 @@ object {
     position: fixed;
     right: 25px;
     bottom: 25px;
+}
+
+.button-shadow {
+    -webkit-box-shadow: 0px 0px 11px 2px rgba(181,181,181,1);
+    -moz-box-shadow: 0px 0px 11px 2px rgba(181,181,181,1);
+    box-shadow: 0px 0px 11px 2px rgba(181,181,181,1);
 }
 
 .form-export {
@@ -1000,6 +1049,7 @@ object {
     top: 35px;
     right: 67px;
 }
+
 .copy-success-arrow{
     position: absolute;
     left:35px;
