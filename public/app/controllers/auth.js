@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('AuthController', ['$scope', '$http', '$location', '$route', '$cookies', 'localStorageService', 'AuthService', 'WebSocketService',
-    function ($scope, $http, $location, $route, $cookies, LocalStorageService, AuthService, WebSocketService) {
+appControllers.controller('AuthController', ['$window','$scope', '$http', '$location', '$route', '$cookies', 'localStorageService', 'AuthService', 'WebSocketService',
+    function ($window, $scope, $http, $location, $route, $cookies, LocalStorageService, AuthService, WebSocketService) {
         let self = this;
         self.data = {};
         self.data.login = {};
@@ -23,8 +23,7 @@ appControllers.controller('AuthController', ['$scope', '$http', '$location', '$r
                     WebSocketService.connect();
                     WebSocketService.join(user);
                     self.data.login.user = {};
-                    $route.reload();
-                    $location.path('/shop');
+                    $window.location.href = '#!/shop?selectedQuantity=1';
                 }
             });
         };
@@ -43,7 +42,7 @@ appControllers.controller('AuthController', ['$scope', '$http', '$location', '$r
                     $cookies.put('chatUser', user._id);
                     WebSocketService.join(user);
                     self.data.register.account = {};
-                    $location.path('/shop');
+                    $window.location.href = '#!/shop?selectedQuantity=1';
                 }
             });
         };
