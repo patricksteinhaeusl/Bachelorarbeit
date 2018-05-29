@@ -23,7 +23,7 @@
         <div class="panel-heading">
             <h3 class="panel-title">Delivery Address</h3>
         </div>
-        <div class="panel-body" ng-if="deliveryAddresses.data.deliveryAddresses.length === 0">
+        <div class="panel-body" ng-if="!deliveryAddresses.data.deliveryAddresses.length">
             <h1>No delivery address found</h1>
             <p>Please follow this <a href="#!/deliveryaddresses">link</a> to add a delivery address.</p>
         </div>

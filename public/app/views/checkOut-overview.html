@@ -35,7 +35,7 @@
                 <td>{{ item.product.name }}</td>
                 <td>{{ item.product.category.name }}</td>
                 <td>{{ item.quantity }}</td>
-                <td>{{ item.product.price * item.quantity }} CHF</td>
+                <td>{{ (item.product.price * item.quantity).toFixed(2) }} CHF</td>
                 </tbody>
                 <tbody ng-show="order.data.order.items.length === 0">
                 <td colspan="4">No items in cart</td>
@@ -44,7 +44,7 @@
                 <td>Sum:</td>
                 <td></td>
                 <td></td>
-                <td>{{ order.data.order.totalPrice }} CHF</td>
+                <td>{{ order.data.order.totalPrice.toFixed(2) }} CHF</td>
                 </tfoot>
             </table>
         </div>
