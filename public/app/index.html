@@ -58,11 +58,10 @@
 
             <div ng-controller="WebSocketController as websocket" ng-if="auth.isAuthenticated()">
                 <div ng-include src="'views/chat.html'"></div>
-
                 <div class="chat-button">
-                    <button id="chat-button" type="button" class="btn btn-default" aria-label="Left Align" ng-click="websocket.collapseChat('.chat')">
+                    <button id="chat-button" type="button" class="btn btn-default button-shadow" aria-label="Left Align"
+                            ng-class="websocket.newMessagesFrom.length > 0 ? 'flash' : ''" ng-click="websocket.collapseChat('.chat')">
                         <span class="glyphicon glyphicon glyphicon-modal-window" aria-hidden="true"></span> Community Chat
-                        <span class="glyphicon glyphicon-info-sign text-info" ng-if="websocket.newMessagesFrom.length > 0"></span>
                     </button>
                 </div>
             </div>

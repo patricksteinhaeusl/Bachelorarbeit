@@ -17,7 +17,7 @@
                  ng-repeat="latestProductRating in latestProduct.ratings | toArray: false | orderBy: '-createdAt' | limitTo: 1">
                 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                 <div class="comment-wrapper" ng-bind-html="latestProductRating.comment | trustAsHTML"></div>
-                <span class="rating-date-and-name"><a ng-href="#!/account/{{latestProductRating._account._id}}/profile">{{ latestProductRating._account.username }}</a> at<br>{{ latestProductRating.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200' }}</span>
+                <span class="rating-date-and-name"><a ng-href="#!/profiles/{{latestProductRating._account._id}}">{{ latestProductRating._account.username }}</a> at<br>{{ latestProductRating.createdAt | date : 'dd.MM.yyyy HH:mm:ss' : '+0200' }}</span>
             </div>
         </div>
     </div>

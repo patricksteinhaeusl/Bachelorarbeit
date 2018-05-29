@@ -29,7 +29,7 @@
             <input type="radio" name="type" ng-model="order.data.order.payment.type" value="creditCard" ng-if="creditCards.data.creditCards.length > 0">
             <h3 class="panel-title">Credit card</h3>
         </div>
-        <div class="panel-body" ng-if="creditCards.data.creditCards.length === 0">
+        <div class="panel-body" ng-if="!creditCards.data.creditCards.length">
             <h1>No credit card found</h1>
             <p>Please follow this <a href="#!/creditcards">link</a> to add a credit card.</p>
         </div>
