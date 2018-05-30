@@ -15,7 +15,7 @@ describe('User Profile Directory', () => {
         //Link
         element(by.linkText('Profiles')).click();
         browser.sleep(250);
-        expect(element.all(by.repeater('profile in profile.accounts')).count()).toBe(13);
+        expect(element.all(by.repeater('profile in profile.accounts')).count()).not.toBeLessThan(12);
     });
 
     it('Users should have right properties', () => {

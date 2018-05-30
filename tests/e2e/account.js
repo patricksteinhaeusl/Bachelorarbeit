@@ -128,6 +128,31 @@ describe('Account', () => {
             });
         });
 
+        describe('add existing cc Number', () => {
+            it('should fail with an alert', () => {
+                //Open Auth Menu
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Link
+                element(by.linkText('Credit Cards')).click();
+                browser.sleep(250);
+                //link
+                element(by.buttonText('Add')).click();
+                browser.sleep(250);
+                //Fill form
+                element(by.model('creditCard.data.creditCard.number')).sendKeys('5404000000000033');
+                element(by.model('creditCard.data.creditCard.type')).sendKeys('Mastercard');
+                element(by.model('creditCard.data.creditCard.cvv')).sendKeys('999');
+                HelperFunctions.selectDropDown(element(by.model('creditCard.data.creditCard.month')), 2);
+                HelperFunctions.selectDropDown(element(by.model('creditCard.data.creditCard.year')), 2);
+                browser.sleep(250);
+                //Submit form
+                element(by.buttonText('Save')).click();
+                browser.sleep(250);
+                expect(element.all(by.className('alert-warning')).last().getText()).toBe("- number: already exists in our system. Must be unique!\n×");
+            });
+        });
+
         describe('update', () => {
             it('should be successfully with new ccNumber', () => {
                 //Open Auth Menu
@@ -160,7 +185,7 @@ describe('Account', () => {
                 browser.sleep(250);
                 //Repeater
                 let creditCards = element.all(by.repeater('creditCard in creditCards.data.creditCards'));
-                expect(creditCards.count()).toBe(1);
+                expect(creditCards.count()).toBe(2);
                 expect(creditCards.get(0).getText()).toContain('5404000000000666 Mastercard');
             });
         });

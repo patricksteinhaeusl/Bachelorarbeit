@@ -34,7 +34,10 @@ describe('FAQ', () => {
             element(by.model('faq.data.searchValue')).clear().then(() => {
                 element(by.model('faq.data.searchValue')).sendKeys('chat').sendKeys(protractor.Key.ENTER);
             });
-            expect(element(by.className('faqNotFound')).isDisplayed()).toBe(false);
+            //Nothing can be found should not be displayed already
+            element.all(by.className('faqNotFound')).then(function(items) {
+                expect(items.length).toBe(0);
+            });
             //Fill out Input
             element(by.model('faq.data.searchValue')).clear().then(() => {
                 element(by.model('faq.data.searchValue')).sendKeys('adadasdadsfwdarefwdas').sendKeys(protractor.Key.ENTER);
