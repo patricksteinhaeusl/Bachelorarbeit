@@ -1,3 +1,5 @@
+'use strict';
+
 appInterceptors.factory('AuthInterceptor', ['$q', '$location', 'localStorageService', function ($q, $location, localStorageService) {
     return {
         response: (response) => {

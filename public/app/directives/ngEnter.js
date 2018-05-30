@@ -1,3 +1,5 @@
+'use strict';
+
 appDirectives.directive('ngEnter', function() {
     return (scope, element, attrs) => {
         element.bind("keydown keypress", (event) => {
