@@ -36,7 +36,18 @@ describe('Profile Upload', () => {
             expect(element(by.tagName('h1')).getAttribute('innerText')).toBe("Welcome to my profile");
         });
 
-        it('Test example Template reachable', (done) => {
+        it('Test Copy Button', () => {
+            //Open Auth Menu
+            element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+            browser.sleep(250);
+            //Link
+            element(by.linkText('My Account')).click();
+            browser.sleep(250);
+            element(by.buttonText('Copy')).click();
+            expect(element(by.className('copy-success-msg')).isDisplayed()).toBe(true);
+        });
+
+        it('Test if example Template reachable', (done) => {
             //Open Auth Menu
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
             browser.sleep(250);
@@ -70,7 +81,17 @@ describe('Profile Upload', () => {
             browser.get(browser.params.webshop);
         });
 
-        it('default profile edited', () => {
+        it('new user should not have a profile', () => {
+            //Open Auth Menu
+            element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+            browser.sleep(250);
+            //Link
+            element(by.linkText('Profile')).click();
+            browser.sleep(250);
+            expect(element(by.tagName('h1')).getAttribute('innerText')).toBe("Profile not found");
+        });
+
+        it('should be able to upload and save profile', () => {
             //Open Auth Menu
             element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
             browser.sleep(250);
