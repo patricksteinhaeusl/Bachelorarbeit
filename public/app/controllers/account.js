@@ -13,7 +13,7 @@ appControllers.controller('AccountController', ['$scope', '$interval', '$http', 
         self.copySuccess = () => {
             self.showMsg = true;
             self.copyMessage = "Success";
-            $interval(() => {self.showMsg = false; console.log(1)}, 2000, 1);
+            $interval(() => {self.showMsg = false;}, 2000, 1);
         };
 
         self.copyFail = (err) => {
