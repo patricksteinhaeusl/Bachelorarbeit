@@ -34,7 +34,7 @@ describe('FAQ', () => {
             element(by.model('faq.data.searchValue')).clear().then(() => {
                 element(by.model('faq.data.searchValue')).sendKeys('chat').sendKeys(protractor.Key.ENTER);
             });
-            expect(element(by.className('faqNotFound')).isPresent()).toBe(false);
+            expect(element(by.className('faqNotFound')).isDisplayed()).toBe(false);
             //Fill out Input
             element(by.model('faq.data.searchValue')).clear().then(() => {
                 element(by.model('faq.data.searchValue')).sendKeys('adadasdadsfwdarefwdas').sendKeys(protractor.Key.ENTER);

@@ -128,6 +128,48 @@ describe('Account', () => {
             });
         });
 
+        describe('update', () => {
+            it('should be successfully', () => {
+                //Open Auth Menu
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Link
+                element(by.linkText('Credit Cards')).click();
+                browser.sleep(250);
+                //Repeater
+                element.all(by.repeater('creditCard in creditCards.data.creditCards')).then((cc) => {
+                    cc[0].element(by.linkText('Edit')).click();
+                });
+                element(by.model('creditCard.data.creditCard.number')).clear();
+                element(by.model('creditCard.data.creditCard.number')).sendKeys('5404000000000666');
+                browser.sleep(10000);
+                //Submit form
+                element(by.buttonText('Update')).click();
+                browser.sleep(250);
+                expect(element.all(by.className('alert')).last().getText()).toBe("Success: Credit card successfully updated.\n×");
+            });
+
+            it('should fail if creditcard number is reused', () => {
+                //Open Auth Menu
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Link
+                element(by.linkText('Credit Cards')).click();
+                browser.sleep(250);
+                //Repeater
+                element.all(by.repeater('creditCard in creditCards.data.creditCards')).then((cc) => {
+                    cc[0].element(by.linkText('Edit')).click();
+                });
+                element(by.model('creditCard.data.creditCard.number')).clear();
+                element(by.model('creditCard.data.creditCard.number')).sendKeys('5404000000000033');
+                browser.sleep(250);
+                //Submit form
+                element(by.buttonText('Update')).click();
+                browser.sleep(250);
+                expect(element.all(by.className('alert')).last().getText()).toBe("Success: Credit card successfully updated.\n×");
+            });
+        });
+
         describe('delete', () => {
             it('should be successfully', () => {
                 //Open Auth Menu
@@ -154,28 +196,6 @@ describe('Account', () => {
                 //Repeater
                 let creditCards = element.all(by.repeater('creditCard in creditCards.data.creditCards'));
                 expect(creditCards.count()).toBe(1);
-            });
-        });
-
-        describe('update', () => {
-            it('should be successfully', () => {
-                //Open Auth Menu
-                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
-                browser.sleep(250);
-                //Link
-                element(by.linkText('Credit Cards')).click();
-                browser.sleep(250);
-                //Repeater
-                element.all(by.repeater('creditCard in creditCards.data.creditCards')).then((cc) => {
-                    cc[0].element(by.linkText('Edit')).click();
-                });
-                element(by.model('creditCard.data.creditCard.number')).clear();
-                element(by.model('creditCard.data.creditCard.number')).sendKeys('5404000000000666');
-                browser.sleep(250);
-                //Submit form
-                element(by.buttonText('Update')).click();
-                browser.sleep(250);
-                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Credit card successfully updated.\n×");
             });
         });
 

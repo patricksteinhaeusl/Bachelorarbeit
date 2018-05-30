@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('AccountController', ['$scope', '$timeout', '$http', '$location','localStorageService', 'AccountService', 'AuthService', 'clipboard',
-    function ($scope, $timeout, $http, $location, localStorageService, AccountService, AuthService, clipboard) {
+appControllers.controller('AccountController', ['$scope', '$interval', '$http', '$location','localStorageService', 'AccountService', 'AuthService', 'clipboard',
+    function ($scope, $interval, $http, $location, localStorageService, AccountService, AuthService, clipboard) {
         const self = this;
         let baseURL;
         self.data = {};
@@ -13,13 +13,13 @@ appControllers.controller('AccountController', ['$scope', '$timeout', '$http', '
         self.copySuccess = () => {
             self.showMsg = true;
             self.copyMessage = "Success";
-            $timeout(() => {self.showMsg = false}, 2000);
+            $interval(() => {self.showMsg = false; console.log(1)}, 2000, 1);
         };
 
         self.copyFail = (err) => {
             self.showMsg = true;
             self.copyMessage = "Failed";
-            $timeout(() => {self.showMsg = false}, 2000);
+            $interval(() => {self.showMsg = false}, 2000, 1);
         };
 
         self.init = () => {

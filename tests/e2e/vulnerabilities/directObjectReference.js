@@ -10,7 +10,7 @@ describe('Direct Object Reference', () => {
         HelperFunctions.logout(browser);
     });
 
-    it('other creditcard should be accessable', () => {
+    it('own creditcard should be accessable', () => {
         element(by.linkText('Credit Cards')).click();
         element.all(by.repeater('creditCard in creditCards.data.creditCards')).then((creditCards) => {
             let CCNUmber = element(by.binding('creditCard.number')).getText().then((number) => {

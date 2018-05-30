@@ -49,14 +49,26 @@ describe('Product Details', () => {
             });
         });
 
-        it('asked question should be visible and be on the bottom of all questions', () => {
+        it('asked question should be visible and be the first of all questions', () => {
             //Fill out Input
             element(by.model('product.data.question.text')).clear().then(() => {
                 element(by.model('product.data.question.text')).sendKeys("Frage2");
             });
             element(by.buttonText('Save')).click();
-            element.all(by.repeater('question in product.data.product.questions')).then((question) => {
-                expect(question[question.length-1].element(by.binding('question.text')).getText()).toBe(QuestionString);
+            element.all(by.repeater('question in product.data.product.questions')).then((questions) => {
+                expect(questions[0].element(by.binding('question.text')).getText()).toBe(QuestionString);
+            });
+        });
+
+        it('question should have working link to user profile', () => {
+            element.all(by.repeater('question in product.data.product.questions')).then((questions) => {
+                questions[0].element(by.className('question-info')).element(by.binding('question._account.username')).getAttribute('href').then((link) => {
+                    let lastSegment = link.split('/').filter((el) => {return !!el;}).pop();
+                    element(by.binding('question._account.username')).click();
+                    browser.getCurrentUrl().then((url) => {
+                        expect(url).toContain(lastSegment);
+                    });
+                });
             });
         });
     });

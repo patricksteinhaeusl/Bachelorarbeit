@@ -139,12 +139,60 @@ describe('Comment and Rating', () => {
                 });
             });
         });
+
+        it('multiple ratings on one product should have right average ', () => {
+            element.all(by.repeater('topRatedProduct in topRated.products')).then((topRated) => {
+                let topRatedValue = topRated[0].element(by.binding('topRatedProduct.rating.value'));
+                expect(topRatedValue.getText()).toBe('∅ 4');
+            });
+        });
     });
 
-    it('multiple ratings on one product should have right average ', () => {
-        element.all(by.repeater('topRatedProduct in topRated.products')).then((topRated) => {
-            let topRatedValue = topRated[0].element(by.binding('topRatedProduct.rating.value'));
-            expect(topRatedValue.getText()).toBe('∅ 4');
+    describe('TopRated and Latest Product Profile Link', () => {
+
+        it('topRated products should have working link to user profile', () => {
+            element(by.className('sidebar-right')).element(by.binding('topRatedProductRating._account.username')).getAttribute('href').then((link) => {
+                let lastSegment = link.split('/').filter((el) => {
+                    return !!el;
+                }).pop();
+                element(by.binding('topRatedProductRating._account.username')).click();
+                browser.getCurrentUrl().then((url) => {
+                    expect(url).toContain(lastSegment);
+                });
+            });
+        });
+
+        it('latestProducts should have working link to user profile', () => {
+            //Add a Comment
+            element(by.linkText('Shop')).click();
+            element(by.binding('latestProduct.name')).getText().then((latestProductName) => {
+                element.all(by.repeater('product in shop.products')).then((products) => {
+                    for (let product of products) {
+                        product.element(by.binding('product.name')).getText().then((productName) => {
+                            if (latestProductName.indexOf(productName) > -1) {
+                                //Open Comment
+                                product.element(by.buttonText('Rate')).click();
+                                browser.sleep(250);
+                                product.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();
+                                //Fill form
+                                let commentField = product.element(by.model('rating.comment'));
+                                commentField.clear().then(() => {
+                                    commentField.sendKeys('latest product');
+                                    //Submit form
+                                    product.element(by.buttonText('Save')).click();
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+            element(by.className('sidebar-right')).element(by.binding('latestProductRating._account.username')).getAttribute('href').then((link) => {
+                let lastSegment = link.split('/').filter((el) => {return !!el;}).pop();
+                element(by.binding('latestProductRating._account.username')).click();
+                browser.getCurrentUrl().then((url) => {
+                    expect(url).toContain(lastSegment);
+                });
+            });
         });
     });
 });
