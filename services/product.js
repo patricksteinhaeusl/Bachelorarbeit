@@ -56,8 +56,6 @@ function getBySearchValue(searchValueObj, callback) {
 }
 
 function updateRatings(productObj, rating, callback) {
-    let ratingObj = new Rating(rating);
-
     // Update Existing Rating
     Product.findOneAndUpdate(
         {
@@ -110,13 +108,13 @@ function updateRatings(productObj, rating, callback) {
                             });
                     }).catch((error) => {
                         // Validate
-                        if (error.errors) return callback(ResponseUtil.createValidationResponse(error.errors));
+                        if (error && error.hasOwnProperty('errors')) return callback(ResponseUtil.createValidationResponse(error.errors));
                         return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
                     });
             }
         }).catch((error) => {
             // Validate
-            if (error.errors) return callback(ResponseUtil.createValidationResponse(error.errors));
+            if (error && error.hasOwnProperty('errors')) return callback(ResponseUtil.createValidationResponse(error.errors));
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
 }
@@ -159,7 +157,7 @@ function insertQuestion(productId, question, callback) {
         path: 'questions._account',
         select: '_id username'
     }).exec((error, product) => {
-        if (error.errors) return callback(ResponseUtil.createValidationResponse(error.errors));
+        if (error && error.hasOwnProperty('errors')) return callback(ResponseUtil.createValidationResponse(error.errors));
         if (error) return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         if (!product) return callback(ResponseUtil.createNotFoundResponse('Question failed to save.'));
         const data = {'product': product};

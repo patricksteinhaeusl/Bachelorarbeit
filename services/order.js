@@ -138,7 +138,7 @@ function updateTemp(order, callback) {
             const data = {'order': order};
             return callback(null, ResponseUtil.createSuccessResponse(data));
         }).catch((error) => {
-            if (error.errors) return callback(ResponseUtil.createValidationResponse(error.errors));
+            if (error && error.hasOwnProperty('errors')) return callback(ResponseUtil.createValidationResponse(error.errors));
             return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
         });
 }

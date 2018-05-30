@@ -25,14 +25,7 @@ describe('Profile Upload', () => {
             //Link
             element(by.linkText('My Account')).click();
             browser.sleep(250);
-            element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
-                let lastSegment = url.split('/').filter((el) => { return !!el; }).pop();
-                element(by.linkText('Profile')).click();
-                browser.sleep(250);
-                browser.getCurrentUrl().then((url) => {
-                    expect(url).toContain("/#!/profiles/" + lastSegment);
-                });
-            });
+            accountTextToCopy();
             expect(element(by.tagName('h1')).getAttribute('innerText')).toBe("Welcome to my profile");
         });
 
@@ -84,17 +77,21 @@ describe('Profile Upload', () => {
             element(by.buttonText('Upload')).click();
             browser.sleep(500);
             //Link
-            element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
-                let lastSegment = url.split('/').filter((el) => { return !!el; }).pop();
-                element(by.linkText('Profile')).click();
-                browser.sleep(250);
-                browser.getCurrentUrl().then((url) => {
-                    expect(url).toContain("/#!/profiles/" + lastSegment);
-                });
-            });
+            accountTextToCopy();
             expect(element.all(by.css('.profile-fields p')).get(0).getText()).toBe('Dancing');
             expect(element.all(by.css('.profile-fields p')).get(1).getText()).toBe('Pizza');
             expect(element.all(by.css('.profile-fields p')).get(2).getText()).toBe('Duck');
         });
     });
 });
+
+function accountTextToCopy() {
+    element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
+        let lastSegment = url.split('/').filter((el) => { return !!el; }).pop();
+        element(by.linkText('Profile')).click();
+        browser.sleep(250);
+        browser.getCurrentUrl().then((url) => {
+            expect(url).toContain("/#!/profiles/" + lastSegment);
+        });
+    });
+}

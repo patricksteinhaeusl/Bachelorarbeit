@@ -47,7 +47,7 @@ function update(deliveryAddress, callback) {
         return callback(null, ResponseUtil.createSuccessResponse(data, 'Delivery address successfully updated.'));
     }).catch((error) => {
         // Validate delivery address
-        if (error.errors) return callback(ResponseUtil.createValidationResponse(error.errors));
+        if (error && error.hasOwnProperty('errors')) return callback(ResponseUtil.createValidationResponse(error.errors));
         return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
 }

@@ -36,6 +36,7 @@ describe('Product Details', () => {
 
     describe('Ask Questions', () => {
         let QuestionString = "To be or not to be that is the question";
+
         it('should be able to ask a question', () => {
             let QuestionCount = element.all(by.repeater('question in product.data.product.questions')).count();
             //Fill out Input
