@@ -129,7 +129,7 @@ describe('Account', () => {
         });
 
         describe('update', () => {
-            it('should be successfully', () => {
+            it('should be successfully with new ccNumber', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -142,14 +142,31 @@ describe('Account', () => {
                 });
                 element(by.model('creditCard.data.creditCard.number')).clear();
                 element(by.model('creditCard.data.creditCard.number')).sendKeys('5404000000000666');
-                browser.sleep(10000);
+                browser.sleep(250);
                 //Submit form
                 element(by.buttonText('Update')).click();
                 browser.sleep(250);
-                expect(element.all(by.className('alert')).last().getText()).toBe("Success: Credit card successfully updated.\n×");
+                expect(element.all(by.className('alert-success')).last().getText()).toBe("Success: Credit card successfully updated.\n×");
             });
+        });
 
-            it('should fail if creditcard number is reused', () => {
+        describe('verify update', () => {
+            it('should have edited creditcard', () => {
+                //Open Auth Menu
+                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
+                browser.sleep(250);
+                //Link
+                element(by.linkText('Credit Cards')).click();
+                browser.sleep(250);
+                //Repeater
+                let creditCards = element.all(by.repeater('creditCard in creditCards.data.creditCards'));
+                expect(creditCards.count()).toBe(1);
+                expect(creditCards.get(0).getText()).toContain('5404000000000666 Mastercard');
+            });
+        });
+
+        describe('update with a existing cc Number', () => {
+            it('should fail if existing number is reused for updating', () => {
                 //Open Auth Menu
                 element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
                 browser.sleep(250);
@@ -166,7 +183,7 @@ describe('Account', () => {
                 //Submit form
                 element(by.buttonText('Update')).click();
                 browser.sleep(250);
-                expect(element.all(by.className('alert')).last().getText()).toBe("Success: Credit card successfully updated.\n×");
+                expect(element.all(by.className('alert-danger')).last().getText()).toBe("Error: Something went wrong.\n×");
             });
         });
 
@@ -196,21 +213,6 @@ describe('Account', () => {
                 //Repeater
                 let creditCards = element.all(by.repeater('creditCard in creditCards.data.creditCards'));
                 expect(creditCards.count()).toBe(1);
-            });
-        });
-
-        describe('verify update', () => {
-            it('should have edited creditcard', () => {
-                //Open Auth Menu
-                element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
-                browser.sleep(250);
-                //Link
-                element(by.linkText('Credit Cards')).click();
-                browser.sleep(250);
-                //Repeater
-                let creditCards = element.all(by.repeater('creditCard in creditCards.data.creditCards'));
-                expect(creditCards.count()).toBe(1);
-                expect(creditCards.get(0).getText()).toContain('5404000000000666 Mastercard');
             });
         });
     });
