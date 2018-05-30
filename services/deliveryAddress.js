@@ -35,20 +35,20 @@ function update(deliveryAddress, callback) {
     // Update delivery address by id
     let deliveryAddressObj = new DeliveryAddress(deliveryAddress);
 
-    // Validate delivery address
-    deliveryAddressObj.validate((error) => {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        // Find and Update delivery address by id
-        DeliveryAddress.findByIdAndUpdate(deliveryAddressObj._id, deliveryAddressObj, {
-            new: true,
-            setDefaultsOnInsert: true
-        }).then((deliveryAddress) => {
-            if (!deliveryAddress) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to update.'));
-            const data = {'deliveryAddress': deliveryAddress};
-            return callback(null, ResponseUtil.createSuccessResponse(data, 'Delivery address successfully updated.'));
-        }).catch((error) => {
-            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        });
+    // Find and Update delivery address by id
+    DeliveryAddress.findByIdAndUpdate(deliveryAddressObj._id, deliveryAddressObj, {
+        new: true,
+        setDefaultsOnInsert: true,
+        runValidators: true,
+        context: 'query'
+    }).then((deliveryAddress) => {
+        if (!deliveryAddress) return callback(ResponseUtil.createNotFoundResponse('Delivery address failed to update.'));
+        const data = {'deliveryAddress': deliveryAddress};
+        return callback(null, ResponseUtil.createSuccessResponse(data, 'Delivery address successfully updated.'));
+    }).catch((error) => {
+        // Validate delivery address
+        if (error.errors) return callback(ResponseUtil.createValidationResponse(error.errors));
+        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
 }
 
