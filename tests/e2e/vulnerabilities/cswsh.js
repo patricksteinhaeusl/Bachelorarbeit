@@ -65,7 +65,7 @@ describe('CSWSH', () => {
         firstBrowser.sleep(250);
         firstBrowser.element.all(by.repeater('user in websocket.userList')).then((user) => {
             user[0].click();
-            firstBrowser.sleep(2000);
+            firstBrowser.sleep(2500);
             firstBrowser.element(by.model('websocket.message')).sendKeys(messageFromUser);
             firstBrowser.element(by.buttonText('Send...')).click();
 
@@ -73,7 +73,7 @@ describe('CSWSH', () => {
             secondBrowser.sleep(250);
             secondBrowser.element.all(by.repeater('user in websocket.userList')).then((user) => {
                 user[0].click();
-                secondBrowser.sleep(2000);
+                secondBrowser.sleep(2500);
                 expect(secondBrowser.element.all(by.css('.message-container .list-group-item')).last().getText()).toContain(messageFromUser);
             });
         });

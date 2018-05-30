@@ -149,7 +149,7 @@ describe('Account', () => {
                 //Submit form
                 element(by.buttonText('Save')).click();
                 browser.sleep(250);
-                expect(element.all(by.className('alert-warning')).last().getText()).toBe("- number: already exists in our system. Must be unique!\n×");
+                expect(element.all(by.className('alert-warning')).last().getText()).toBe("Validation:\n- number: already exists in our system. Must be unique!\n×");
             });
         });
 
@@ -208,7 +208,7 @@ describe('Account', () => {
                 //Submit form
                 element(by.buttonText('Update')).click();
                 browser.sleep(250);
-                expect(element.all(by.className('alert-danger')).last().getText()).toBe("Error: Something went wrong.\n×");
+                expect(element.all(by.className('alert-warning')).last().getText()).toBe("Validation:\n- number: already exists in our system. Must be unique!\n×");
             });
         });
 

@@ -124,7 +124,7 @@ describe('Comment and Rating', () => {
                 let firstProduct = products[0];
                 //Open Comment
                 firstProduct.element(by.buttonText('Rate')).click();
-                browser.sleep(250);
+                browser.sleep(500);
                 //Check if Comment is empty
                 expect(firstProduct.element(by.model('rating.comment')).getAttribute('value').getText()).toEqual('');
                 firstProduct.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();

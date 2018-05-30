@@ -1,8 +1,7 @@
 'use strict';
-const fs = require('fs');
-const path = require('path');
 const HelperFunctions = require('./helperFunctions.js');
-let ccSettings, addressSettings, sumPrice, orderID, product1Name, product1Price, product1PriceReal, product1Quantity, product2Name,
+let ccSettings, addressSettings, sumPrice, orderID, product1Name, product1Price, product1PriceReal, product1Quantity,
+    product2Name,
     product2Price, product3Name, product3Price, quantity = 7;
 
 describe('Order and Cart Processes', () => {
@@ -22,7 +21,7 @@ describe('Order and Cart Processes', () => {
         HelperFunctions.logout(browser);
     });
 
-   describe('Cart Operations', () => {
+    describe('Cart Operations', () => {
         it('cart should be invisible before any operation', () => {
             expect(element.all(by.className('cart-menu')).get(0).getCssValue('display')).toBe('none');
         });
@@ -220,41 +219,47 @@ describe('Order and Cart Processes', () => {
         });
     });
 
-    describe('Order Process without CreditCard and Address', () => {
+    describe('Order Process without existing CreditCard and Address', () => {
 
         beforeAll(() => {
             HelperFunctions.logout(browser);
-            HelperFunctions.registerUser("Order","Muster","customer250");
+            HelperFunctions.registerUser("Order", "Muster", "customer250");
         });
 
         it('should display message with link if no Address is present', () => {
             browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=1').then(() => {
                 element.all(by.repeater('product in shop.products')).then((products) => {
-                    products[0].element(by.css('.glyphicon.glyphicon-shopping-cart')).click();
+                    products[0].element(by.buttonText('Add to cart')).click();
                 });
+            });
+            browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=1').then(() => {
+                element.all(by.css('.glyphicon.glyphicon-shopping-cart')).get(0).click();
+                browser.sleep(250);
                 element.all(by.buttonText('Check out')).get(1).click();
                 element.all(by.buttonText('Next')).click();
                 element(by.linkText('link')).getAttribute('href').then((link) => {
-                    expect(link).toContain("/#!/deliveryaddresses/");
+                    expect(link).toContain("/#!/deliveryaddresses");
                 });
                 element(by.linkText('link')).click();
                 browser.getCurrentUrl().then((url) => {
-                    expect(url).toContain("/#!/deliveryaddresses/");
+                    expect(url).toContain("/#!/deliveryaddresses");
                 });
             });
         });
 
         it('should display message with link if no CC is present', () => {
             browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=1').then(() => {
-                browser.get(browser.params.webshop).then(() => {
-                    element.all(by.repeater('product in shop.products')).then((products) => {
-                        products[0].element(by.css('.glyphicon.glyphicon-shopping-cart')).click();
-                    });
+                element.all(by.repeater('product in shop.products')).then((products) => {
+                    products[0].element(by.css('.glyphicon.glyphicon-shopping-cart')).click();
+                });
+                browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=1').then(() => {
+                    element.all(by.css('.glyphicon.glyphicon-shopping-cart')).get(0).click();
+                    browser.sleep(250);
                     element.all(by.buttonText('Check out')).get(1).click();
                     element.all(by.buttonText('Next')).click();
                     element(by.linkText('link')).click();
                     browser.getCurrentUrl().then((url) => {
-                        expect(url).toContain("/#!/deliveryaddresses/");
+                        expect(url).toContain("/#!/deliveryaddresses");
                         //link
                         element(by.buttonText('Add')).click();
                         browser.sleep(250);
@@ -266,17 +271,19 @@ describe('Order and Cart Processes', () => {
                         //Submit form
                         element(by.buttonText('Save')).click();
                     });
-                    element.all(by.css('.glyphicon.glyphicon-shopping-cart')).get(0).click();
-                    browser.sleep(250);
-                    element.all(by.buttonText('Check out')).click();
-                    element.all(by.buttonText('Next')).click();
-                    element.all(by.buttonText('Next')).click();
-                    element(by.linkText('link')).getAttribute('href').then((link) => {
-                        expect(link).toContain("/#!/creditcards/");
-                    });
-                    element(by.linkText('link')).click();
-                    browser.getCurrentUrl().then((url) => {
-                        expect(url).toContain("/#!/creditcards/");
+                    browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=1').then(() => {
+                        element.all(by.css('.glyphicon.glyphicon-shopping-cart')).get(0).click();
+                        browser.sleep(250);
+                        element.all(by.buttonText('Check out')).get(1).click();
+                        element.all(by.buttonText('Next')).click();
+                        element.all(by.buttonText('Next')).click();
+                        element(by.linkText('link')).getAttribute('href').then((link) => {
+                            expect(link).toContain("/#!/creditcards");
+                        });
+                        element(by.linkText('link')).click();
+                        browser.getCurrentUrl().then((url) => {
+                            expect(url).toContain("/#!/creditcards");
+                        });
                     });
                 });
             });

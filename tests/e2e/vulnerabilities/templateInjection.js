@@ -35,7 +35,7 @@ describe('Template Injection', () => {
         //Link
         element(by.model('account.textToCopy')).getAttribute('value').then((url) => {
             let lastSegment = url.split('/').filter((el) => { return !!el; }).pop();
-            element(by.linkText('Profile')).click();
+            element(by.linkText('View Profile')).click();
             browser.sleep(250);
             browser.getCurrentUrl().then((url) => {
                 expect(url).toContain("/#!/profiles/" + lastSegment );

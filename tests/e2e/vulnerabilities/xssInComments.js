@@ -36,8 +36,10 @@ describe('XSS in Comments', () => {
     });
 
     it('should be successfully executed', () => {
-        HelperFunctions.searchBrowserConsole('XSS in Comments', (found) => {
-            expect(found).toBe(true);
+        browser.get(browser.params.webshop + '/#!/shop?selectedQuantity=1').then(() => {
+            HelperFunctions.searchBrowserConsole('XSS in Comments', (found) => {
+                expect(found).toBe(true);
+            });
         });
     });
 });
