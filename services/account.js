@@ -2,7 +2,6 @@
 
 const GlobalConfig = require('../configs/index');
 const Account = require('../models/account');
-const AccountWithoutId = require('../models/accountWithoutId');
 const CryptoUtil = require('../utils/crypt');
 const ResponseUtil = require('../utils/response');
 
@@ -38,35 +37,40 @@ function get(accountId, callback) {
 }
 
 function update(account, callback) {
-    let accountObj = new AccountWithoutId(account);
+    let accountObj = new Account(account);
 
-    // Validate account
-    accountObj.validate((error) => {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        // Find account by id and update
-        // Without password and timestamps
-        Account.findByIdAndUpdate(
-            account._id,
-            accountObj, {
-                new: true,
-                setDefaultsOnInsert: true,
-                projection: {
-                    password: false,
-                    createdAt: false,
-                    updatedAt: false,
-                    __v: false
-                }
-            }).then((account) => {
-                if (!account) return callback(ResponseUtil.createNotFoundResponse('Account failed to update.'));
-                // Create Token
-                CryptoUtil.createToken(account.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
-                    if (error) callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-                    const data = {'user': account, 'token': token};
-                    return callback(null, ResponseUtil.createSuccessResponse(data, 'Account successfully updated.'));
-                });
-        }).catch((error) => {
-            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        });
+    // Find account by id and update
+    // Without password and timestamps
+    Account.findByIdAndUpdate(
+        account._id,
+        {
+            $set: {
+                firstname: accountObj.firstname,
+                lastname: accountObj.lastname
+            }
+        }, {
+            new: true,
+            setDefaultsOnInsert: true,
+            runValidators: true,
+            context: 'query',
+            projection: {
+                password: false,
+                createdAt: false,
+                updatedAt: false,
+                __v: false
+            }
+        }).then((account) => {
+            if (!account) return callback(ResponseUtil.createNotFoundResponse('Account failed to update.'));
+            // Create Token
+            CryptoUtil.createToken(account.toObject(), GlobalConfig.jwt.secret, GlobalConfig.auth.signOptions, (error, token) => {
+                if (error) callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+                const data = {'user': account, 'token': token};
+                return callback(null, ResponseUtil.createSuccessResponse(data, 'Account successfully updated.'));
+            });
+    }).catch((error) => {
+        // Validate account
+        if (error && error.hasOwnProperty('errors')) return callback(ResponseUtil.createValidationResponse(error.errors));
+        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
 }
 

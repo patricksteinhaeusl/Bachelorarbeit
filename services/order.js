@@ -125,24 +125,22 @@ function createTemp(items, totalPrice, account, callback) {
 function updateTemp(order, callback) {
     let orderObj = new OrderTemp(order);
 
-    // Validate Order
-    orderObj.validate((error) => {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        // Find Order and update
-        OrderTemp.findByIdAndUpdate(
-            orderObj._id,
-            orderObj, {
-                new: true,
-                setDefaultsOnInsert: true,
-                context: 'query'
-            }).then((order) => {
-                if (!order) return callback(ResponseUtil.createNotFoundResponse('Order failed to update.'));
-                const data = {'order': order};
-                return callback(null, ResponseUtil.createSuccessResponse(data));
-            }).catch((error) => {
-                return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-            });
-    });
+    // Find Order and update
+    OrderTemp.findByIdAndUpdate(
+        orderObj._id,
+        orderObj, {
+            new: true,
+            setDefaultsOnInsert: true,
+            runValidators: true,
+            context: 'query'
+        }).then((order) => {
+            if (!order) return callback(ResponseUtil.createNotFoundResponse('Order failed to update.'));
+            const data = {'order': order};
+            return callback(null, ResponseUtil.createSuccessResponse(data));
+        }).catch((error) => {
+            if (error && error.hasOwnProperty('errors')) return callback(ResponseUtil.createValidationResponse(error.errors));
+            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
+        });
 }
 
 function insert(order, callback) {

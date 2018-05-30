@@ -27,7 +27,9 @@ module.exports = (server) => {
             ChatUser.findOneAndUpdate({userId: userObj.userId}, userObj, {
                 upsert: true,
                 new: true,
-                setDefaultsOnInsert: true
+                setDefaultsOnInsert: true,
+                runValidators: true,
+                context: 'query'
             }).then((user) => {
                 socket.emit('join', user);
                 io.emit('refreshUserList');

@@ -1,7 +1,6 @@
 'use strict';
 
 const Account = require('../models/account');
-const CreditCardWithoutId = require('../models/creditCardWithoutId').CreditCardWithoutId;
 const CreditCard = require('../models/creditCard').CreditCard;
 const ResponseUtil = require('../utils/response');
 
@@ -39,20 +38,20 @@ function getByAccountId(accountId, callback) {
 
 function update(creditCard, callback) {
     // Update credit card by id
-    let creditCardObj = new CreditCardWithoutId(creditCard);
+    let creditCardObj = new CreditCard(creditCard);
 
-    // Validate credit card
-    creditCardObj.validate((error) => {
-        if (error) return callback(ResponseUtil.createValidationResponse(error.errors));
-        CreditCard.findByIdAndUpdate(creditCard._id, creditCardObj, {
-            new: true
-        }).then((creditCard) => {
-            if (!creditCard) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to update.'));
-            const data = {'creditCard': creditCard};
-            return callback(null, ResponseUtil.createSuccessResponse(data, 'Credit card successfully updated.'));
-        }).catch((error) => {
-            return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
-        });
+    CreditCard.findByIdAndUpdate(creditCard._id, creditCardObj, {
+        new: true,
+        runValidators: true,
+        context: 'query'
+    }).then((creditCard) => {
+        if (!creditCard) return callback(ResponseUtil.createNotFoundResponse('Credit card failed to update.'));
+        const data = {'creditCard': creditCard};
+        return callback(null, ResponseUtil.createSuccessResponse(data, 'Credit card successfully updated.'));
+    }).catch((error) => {
+        // Validate credit card
+        if (error && error.hasOwnProperty('errors')) return callback(ResponseUtil.createValidationResponse(error.errors));
+        return callback(ResponseUtil.createErrorResponse(error, 'Something went wrong.'));
     });
 }
 
