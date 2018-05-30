@@ -1,3 +1,5 @@
+'use strict';
+
 appInterceptors.factory('AlertInterceptor', ['$q', '$rootScope', 'AlertsService', function ($q, $rootScope, AlertsService) {
     return {
         response: (successResponse) => {

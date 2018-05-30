@@ -60,7 +60,7 @@
                 <div ng-include src="'views/chat.html'"></div>
                 <div class="chat-button">
                     <button id="chat-button" type="button" class="btn btn-default button-shadow" aria-label="Left Align"
-                            ng-class="websocket.messages.length > 0 && !websocket.selectedUser ? 'flash' : ''" ng-click="websocket.collapseChat('.chat')">
+                            ng-class="websocket.newMessagesFrom.length > 0 ? 'flash' : ''" ng-click="websocket.collapseChat('.chat')">
                         <span class="glyphicon glyphicon glyphicon-modal-window" aria-hidden="true"></span> Community Chat
                     </button>
                 </div>

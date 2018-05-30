@@ -59,10 +59,12 @@ module.exports = (server) => {
             // Save messages
             let messageObj = new ChatMessage(message);
 
-            ChatMessage.create(messageObj)
-                .catch((error) => {
-                    socket.emit('error', 'Creating message failed!');
-                });
+            ChatMessage.create(messageObj).then((message) => {
+                io.in(message.to.userId).emit('newMessage', message.from);
+            })
+            .catch((error) => {
+                socket.emit('error', 'Creating message failed!');
+            });
         });
 
         socket.on('sendMessagesToRooms', (data) => {

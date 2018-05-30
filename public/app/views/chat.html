@@ -20,8 +20,7 @@
                     </div>
                     <button type="button" class="btn btn-default"
                             ng-repeat="user in websocket.userList | filter: { userId : '!' + auth.getUser()._id }"
-                            ng-class="{ 'btn-primary' : user._id === websocket.selectedUser._id, 'flash' : websocket.messages.length > 0 && !websocket.selectedUser}"
-                            ng-class=""
+                            ng-class="{ 'btn-primary' : user._id === websocket.selectedUser._id, 'flash' : websocket.newMessagesFrom.length > 0 && websocket.containUser(user.userId)}"
                             ng-click="websocket.selectUser(user);"
                             ng-if="!websocket.isLoadingUserList">
                         {{ user.username }}

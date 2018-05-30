@@ -1,3 +1,5 @@
+'use strict';
+
 appDirectives.directive('addOptions', ['$routeParams', function ($routeParams) {
     return (scope, element, attrs) => {
         scope.$watch(() => {

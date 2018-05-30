@@ -29,8 +29,8 @@ let cvvValidator = [
     })
 ];
 
-let minYear = new Date().getFullYear();
-let maxYear = minYear + 3;
+const minYear = new Date().getFullYear();
+const maxYear = minYear + 3;
 
 let creditCardSchema = new Schema({
     number: {type: String, required: [true, 'Number is required'], validate: numberValidator, unique: true},
@@ -55,13 +55,6 @@ let creditCardSchema = new Schema({
 creditCardSchema.plugin(uniqueValidator, { message: '{PATH}: already exists in our system. Must be unique!' });
 
 let CreditCard = mongoose.model('CreditCard', creditCardSchema);
-
-CreditCard.find({}, (error, docs) => {
-    docs.forEach((doc) => {
-        doc.year = minYear + Math.floor(Math.random() * 3);
-        doc.save();
-    });
-});
 
 module.exports = {
     CreditCard,
