@@ -173,7 +173,7 @@ describe('Comment and Rating', () => {
                                 //Open Comment
                                 product.element(by.buttonText('Rate')).click();
                                 browser.sleep(250);
-                                product.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(4).click();
+                                product.all(by.css('.form-group .jk-rating-stars-container .button.star-button')).get(1).click();
                                 //Fill form
                                 let commentField = product.element(by.model('rating.comment'));
                                 commentField.clear().then(() => {

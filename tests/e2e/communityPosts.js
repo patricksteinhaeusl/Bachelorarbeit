@@ -59,7 +59,7 @@ describe('Post', () => {
         it('should have working link to user profile', () => {
             element(by.binding('post._account.username')).getAttribute('href').then((link) =>{
                 let lastSegment = link.split('/').filter((el) => { return !!el; }).pop();
-                element(by.binding('post._account.username')).getText().then((text)=>{console.log(text)});
+                element(by.binding('post._account.username')).click();
                 browser.getCurrentUrl().then((url) => {
                     expect(url).toContain(lastSegment);
                 });
