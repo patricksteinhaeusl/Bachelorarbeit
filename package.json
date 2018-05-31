@@ -16,6 +16,7 @@
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
     "compression": "^1.7.2",
+    "concurrently": "^3.5.1",
     "cookie": "^0.3.1",
     "cors": "^2.8.4",
     "express": "^4.16.2",
@@ -45,12 +46,16 @@
     "jasmine": "^3.1.0",
     "jasmine-spec-reporter": "^4.2.1",
     "protractor": "^5.3.2",
-    "webdriver-manager": "^12.0.6"
+    "webdriver-manager": "^12.0.6",
+    "ws": "^5.2.0"
   },
   "scripts": {
     "prestart": "yarn install",
-    "test": "protractor tests/protractorConf.js",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "pretest": "webdriver-manager update && webdriver-manager start --detach",
+    "test": "concurrently \"node ./bin/www\" \"protractor tests/protractorConf.js\"",
+    "posttest": "webdriver-manager shutdown && killall -INT node && ./tests/cleanUp.sh",
+    "stop": "killall -INT node mongod"
   },
   "jshintConfig": {
     "esversion": 6,
