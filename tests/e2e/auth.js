@@ -1,7 +1,7 @@
 'use strict';
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Auth', () => {
+describe('Auth:', () => {
     describe('Login', () => {
         it('should fail with wrong credentials', () => {
             HelperFunctions.login(browser, 'customer0', 'compass1');

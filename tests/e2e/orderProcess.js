@@ -4,7 +4,7 @@ let ccSettings, addressSettings, sumPrice, orderID, product1Name, product1Price,
     product2Name,
     product2Price, product3Name, product3Price, quantity = 7;
 
-describe('Order and Cart Processes', () => {
+describe('Order and Cart Processes:', () => {
     beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
         //Save Address for later
@@ -21,7 +21,7 @@ describe('Order and Cart Processes', () => {
         HelperFunctions.logout(browser);
     });
 
-    describe('Cart Operations', () => {
+    describe('Cart Operations:', () => {
         it('cart should be invisible before any operation', () => {
             expect(element.all(by.className('cart-menu')).get(0).getCssValue('display')).toBe('none');
         });

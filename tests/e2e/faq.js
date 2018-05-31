@@ -1,7 +1,7 @@
 'use strict';
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('FAQ', () => {
+describe('FAQ:', () => {
     beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
         element(by.linkText('FAQ')).click();
@@ -17,7 +17,7 @@ describe('FAQ', () => {
             element(by.model('faq.data.searchValue')).clear().then(() => {
                 element(by.model('faq.data.searchValue')).sendKeys('chat').sendKeys(protractor.Key.ENTER);
             });
-            expect(element.all(by.repeater('faq in faq.data.FaqQuestions')).count()).toBe(2);
+            expect(element.all(by.repeater('faq in faq.data.FaqQuestions')).count()).toBe(1);
         });
 
         it('should return error if something goes wrong', () => {

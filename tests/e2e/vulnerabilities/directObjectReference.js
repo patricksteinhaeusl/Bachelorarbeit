@@ -1,7 +1,7 @@
 'use strict';
 const HelperFunctions = require('../helperFunctions.js');
 
-describe('Direct Object Reference', () => {
+describe('Direct Object Reference:', () => {
     beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });

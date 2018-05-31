@@ -1,6 +1,33 @@
+# General Project Exclusions
 .git
 .gitignore
 .travis.yml
 README.MD
 sonar-project.properties
 node_modules
+
+# Don't include these temp testing files in final image if present
+deserializationBug.txt
+rceInjection.txt
+/logs/log.txt
+/assets/post-images/*
+/public/app/assets/profiles/*
+
+# Exclude the default assets for the webshop from exclusions
+!/assets/post-images/schelbert-froschmaultreicheln.jpg
+!/assets/post-images/steiner-innenschweiz.jpg
+!/public/app/assets/profiles/5aa0481e876d9d39d439785c.html
+!/public/app/assets/profiles/5aa0481e876d9d39d439785f.html
+!/public/app/assets/profiles/5aa0481e876d9d39d439786b.html
+!/public/app/assets/profiles/5aa0481e876d9d39d439786e.html
+!/public/app/assets/profiles/5aa0481e876d9d39d439787a.html
+!/public/app/assets/profiles/5aa0481e876d9d39d4397859.html
+!/public/app/assets/profiles/5aa0481e876d9d39d4397862.html
+!/public/app/assets/profiles/5aa0481e876d9d39d4397865.html
+!/public/app/assets/profiles/5aa0481e876d9d39d4397868.html
+!/public/app/assets/profiles/5aa0481e876d9d39d4397871.html
+!/public/app/assets/profiles/5aa0481e876d9d39d4397874.html
+!/public/app/assets/profiles/5aa0481e876d9d39d4397877.html
+!/public/app/assets/profiles/5acc851fc8bc262214c01ee5.html
+!/public/app/assets/profiles/notFound.html
+!/public/app/assets/profiles/template.html

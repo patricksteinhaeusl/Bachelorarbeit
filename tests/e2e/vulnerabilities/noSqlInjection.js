@@ -1,13 +1,13 @@
 'use strict';
 const HelperFunctions = require('../helperFunctions.js');
 
-describe('NoSQL Injection', () => {
+describe('NoSQL Injection:', () => {
     afterEach(() => {
         HelperFunctions.logout(browser);
     });
 
     describe('Login with username and password as NoSQL Query', () => {
-        it('should be successfully', () => {
+        it('should be successful', () => {
             HelperFunctions.login(browser, '{"$ne": null}', '{"$ne": null}');
             //Check
             element(by.css('.menu-item-username')).getText().then((username) => {
@@ -16,7 +16,7 @@ describe('NoSQL Injection', () => {
         });
     });
 
-    describe('Login with username as Value and password as NoSQL Query', () => {
+    describe('Login with username as Value and password as NoSQL Query: User1', () => {
         it('should be successfully', () => {
             HelperFunctions.login(browser, 'customer0', '{"$ne": null}');
             //Check
@@ -24,7 +24,7 @@ describe('NoSQL Injection', () => {
         });
     });
 
-    describe('Login with username as Value and password as NoSQL Query', () => {
+    describe('Login with username as Value and password as NoSQL Query: User2', () => {
         it('should be successfully', () => {
             HelperFunctions.login(browser, 'customer1', '{"$ne": null}');
             //Check

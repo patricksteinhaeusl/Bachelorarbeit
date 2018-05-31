@@ -1,7 +1,7 @@
 'use strict';
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Comment and Rating', () => {
+describe('Comment and Rating:', () => {
     beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });

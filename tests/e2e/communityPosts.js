@@ -2,7 +2,7 @@
 const HelperFunctions = require('./helperFunctions.js');
 const path = require('path');
 
-describe('Post', () => {
+describe('Posts:', () => {
     beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });
@@ -57,9 +57,9 @@ describe('Post', () => {
         });
 
         it('should have working link to user profile', () => {
-            element(by.binding('post._account.username')).getAttribute('href').then((link) =>{
+            element.all(by.binding('post._account.username')).last().getAttribute('href').then((link) =>{
                 let lastSegment = link.split('/').filter((el) => { return !!el; }).pop();
-                element(by.binding('post._account.username')).click();
+                element.all(by.binding('post._account.username')).last().click();
                 browser.getCurrentUrl().then((url) => {
                     expect(url).toContain(lastSegment);
                 });

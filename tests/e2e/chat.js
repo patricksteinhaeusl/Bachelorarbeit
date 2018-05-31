@@ -2,7 +2,7 @@
 
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Chat', () => {
+describe('Chat:', () => {
 
     let firstBrowser = browser;
     let secondBrowser = browser.forkNewDriverInstance();

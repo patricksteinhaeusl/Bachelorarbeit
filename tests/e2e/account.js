@@ -1,7 +1,7 @@
 'use strict';
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Account', () => {
+describe('Account:', () => {
     beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });

@@ -19,7 +19,7 @@ describe('Template Injection', () => {
         browser.get(browser.params.webshop);
     });
 
-    it('upload and test injected template', () => {
+    it('upload and test injected template should be successful', () => {
         //Open Auth Menu
         element.all(by.css('.glyphicon.glyphicon-user')).get(0).click();
         browser.sleep(250);

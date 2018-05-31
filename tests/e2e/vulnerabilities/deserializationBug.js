@@ -3,7 +3,7 @@ const path = require('path');
 const HelperFunctions = require('../helperFunctions.js');
 const glob = require("glob");
 
-describe('Deserialization - Deserialization Bug', () => {
+describe('Deserialization Bug:', () => {
 
     beforeEach(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');

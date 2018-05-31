@@ -2,13 +2,16 @@
 const HelperFunctions = require('../helperFunctions.js');
 
 describe('JWT Timing Checking', () => {
+    afterAll(() => {
+        HelperFunctions.logout(browser);
+    });
 
     it('should fail to login as retailer0', () => {
         HelperFunctions.login(browser, 'retailer0', 'SecretRetailer12345');
         expect(element.all(by.className('alert-info')).last().getText()).toMatch('Warning: Username or Password incorrect')
     });
 
-    it('/api site should be reachable', () => {
+    it('should be able to reach /api site', () => {
         browser.waitForAngularEnabled(false);
         browser.get(browser.params.webshop + "/api").then(() => {
             expect(browser.driver.findElement(by.tagName('h1')).getAttribute('innerText')).toBe("Welcome to the API");

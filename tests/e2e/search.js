@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Search and Filter', () => {
+describe('Search and Filter:', () => {
     function checkSortedArray(unSorted) {
         let sorted = unSorted.slice();
         sorted.sort();
