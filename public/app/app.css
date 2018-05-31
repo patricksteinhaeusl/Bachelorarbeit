@@ -176,7 +176,7 @@ a:hover {
 
 .navbar-menu .menu-item-username {
     display: inline-block;
-    word-break: break-all;
+    overflow-wrap: break-word;
     cursor: pointer;
     text-align: right;
 }
@@ -526,7 +526,7 @@ table tr td li {
 .product-name {
     font-weight: bold;
     font-size: 20px;
-    word-break: break-all;
+    overflow-wrap: break-word;
 }
 
 .product-category {
@@ -580,7 +580,6 @@ table tr td li {
     border-radius: 5px;
     margin-bottom: 7px;
     overflow-wrap: break-word;
-    word-break: break-all;
 }
 
 .question-info {
@@ -736,7 +735,6 @@ table tr td li {
     min-height: 100%;
     padding: 5px;
     overflow-wrap: break-word;
-    word-break: break-all;
 }
 
 .post-element {
@@ -884,7 +882,6 @@ object {
     position: relative;
     border: none;
     overflow-wrap: break-word;
-    word-break: break-all;
 }
 
 .arrow-left:before {
@@ -901,7 +898,6 @@ object {
     position: relative;
     border: none;
     overflow-wrap: break-word;
-    word-break: break-all;
 }
 
 .arrow-right:before {
