@@ -15,45 +15,23 @@ block content
                 td orderId
                 td As a retailer, you can apply a 50% discount to any order which is paid by bill.
         br
-        h4 Example of an HTTP request for discount
-        table(class='table')
-            tbody
-                td <b>GET:</b>
-                td /api/retailer/order/5dead5beef5c0ffee5babe5/applyDiscount HTTP/1.1
-            tr
-                td <b>Host:</b>
-                td glockenshop.glocken-cdn.ch
-            tr
-                td <b>Connection:</b>
-                td close
-            tr
-                td <b>Authorization:</b>
-                td(style='word-break: break-all') Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc1JldGFpbGVyIjp0cnVlLCJfaWQiOiI1YWNjODUxZmM4YmMyNjIyMTRjMDFlZTUiLCJ1c2VybmFtZSI6InJldGFpbGVyMCIsImZpcnN0bmFtZSI6IkphY2tvYiIsImxhc3RuYW1lIjoiTcO8bGxlciIsImVtYWlsIjoiSmFja29iLk11ZWxsZXJAZ21haWwuY29tIiwiaWF0IjoxNTIzMzU0NjIyLCJhdWQiOiJzZWxmIiwiaXNzIjoid2Vic2hvcCJ9.7eDbsqhJ0jyXdKWsjyVgpT5ZL6JIWlBMH8laQ6XYghQ
+        h4 Example of an HTTP request
+        div(style='font-family:Courier New;')
+            div GET /api/retailer/order/5dead5beef5c0ffee5babe5/applyDiscount HTTP/1.1
+            div Host: glockenshop.glocken-cdn.ch
+            div Connection: Close
+            div(style='word-break: break-all;') Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc1JldGFpbGVyIjp0cnVlLCJfaWQiOiI1YWNjODUxZmM4YmMyNjIyMTRjMDFlZTUiLCJ1c2VybmFtZSI6InJldGFpbGVyMCIsImZpcnN0bmFtZSI6IkphY2tvYiIsImxhc3RuYW1lIjoiTcO8bGxlciIsImVtYWlsIjoiSmFja29iLk11ZWxsZXJAZ21haWwuY29tIiwiaWF0IjoxNTIzMzU0NjIyLCJhdWQiOiJzZWxmIiwiaXNzIjoid2Vic2hvcCJ9.7eDbsqhJ0jyXdKWsjyVgpT5ZL6JIWlBMH8laQ6XYghQ
+
         br
-        h4 Example of a response with successful applied discount
-        h5 Response header
-        table(class='table')
-            tbody
-                td <b>HTTP/1.1:</b>
-                td 200 OK
-            tr
-                td <b>Access-Control-Allow-Origin:</b>
-                td *
-            tr
-                td <b>Content-Type:</b>
-                td text/html; charset=utf-8
-            tr
-                td <b>Content-Length:</b>
-                td 2836
-            tr
-                td <b>ETag:</b>
-                td W/"1194a-161aecc4775"
-            tr
-                td <b>Date:</b>
-                td Fri, 25 May 2018 19:58:04 GMT
-            tr
-                td <b>Connection:</b>
-                td close
-        h5 Response body
-        p(style='word-break: break-all') &lt;html&gt;&lt;head&gt;&lt;title&gt;API - WebShop&lt;/title&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;/node_modules/bootstrap/dist/css/bootstrap.min.css&quot;/&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;container&quot; style=&quot;margin-top: 15px&quot;&gt;&lt;div class=&quot;jumbotron&quot; style=&quot;display: inline-block; width: 100%; background-color: #4d91ff; color: white&quot;&gt;&lt;div class=&quot;col-lg-2&quot;&gt;&lt;span class=&quot;logo-item glyphicon glyphicon-bell&quot; style=&quot;font-size: 44px&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;col-lg-10&quot;&gt;&lt;h1&gt;Welcome to the API&lt;/h1&gt;&lt;/div&gt;&lt;/div&gt;&lt;h1&gt;Retailer&lt;/h1&gt;&lt;h2&gt;<i><b>Discount successful applied</b></i>&lt;/h2&gt;&lt;p&gt;&lt;b&gt;Data:&lt;/b&gt; {&quot;order&quot;:{&quot;items&quot;:[{&quot;_id&quot;:&quot;5b08778c03d674755bfd9be6&quot;,&quot;quantity&quot;:1,&quot;product&quot;:{&quot;rating&quot;:{&quot;value&quot;:0},&quot;_id&quot;:&quot;5aa0481e876d9d39d4397885&quot;,&quot;questions&quot;:[],&quot;ratings&quot;:[],&quot;name&quot;:&quot;Berner Treicheln&quot;,&quot;category&quot;:{&quot;_id&quot;:&quot;5aa0481e876d9d39d4397884&quot;,&quot;name&quot;:&quot;Steiner, Wynigen&quot;,&quot;createdAt&quot;:&quot;2018-03-07T20:14:22.622Z&quot;,&quot;updatedAt&quot;:&quot;2018-03-07T20:14:22.622Z&quot;,&quot;__v&quot;:0},&quot;size&quot;:10,&quot;price&quot;:62.63,&quot;image&quot;:&quot;steiner-treicheln.jpg&quot;,&quot;createdAt&quot;:&quot;2018-03-07T20:14:22.623Z&quot;,&quot;updatedAt&quot;:&quot;2018-05-25T21:14:59.015Z&quot;,&quot;__v&quot;:0},&quot;createdAt&quot;:&quot;2018-05-25T20:52:28.710Z&quot;,&quot;updatedAt&quot;:&quot;2018-05-25T21:14:59.015Z&quot;},{&quot;_id&quot;:&quot;5b08778c03d674755bfd9be3&quot;,&quot;quantity&quot;:1,&quot;product&quot;:{&quot;rating&quot;:{&quot;value&quot;:0},&quot;_id&quot;:&quot;5aa0481e876d9d39d4397883&quot;,&quot;questions&quot;:[],&quot;ratings&quot;:[],&quot;name&quot;:&quot;Bissen&quot;,&quot;category&quot;:{&quot;_id&quot;:&quot;5aa0481e876d9d39d4397881&quot;,&quot;name&quot;:&quot;Zurfluh&quot;,&quot;createdAt&quot;:&quot;2018-03-07T20:14:22.619Z&quot;,&quot;updatedAt&quot;:&quot;2018-03-07T20:14:22.619Z&quot;,&quot;__v&quot;:0},&quot;size&quot;:15,&quot;price&quot;:117.5,&quot;image&quot;:&quot;zurfluh-bissen.jpg&quot;,&quot;createdAt&quot;:&quot;2018-03-07T20:14:22.621Z&quot;,&quot;updatedAt&quot;:&quot;2018-05-25T21:14:59.015Z&quot;,&quot;__v&quot;:0},&quot;createdAt&quot;:&quot;2018-05-25T20:52:28.710Z&quot;,&quot;updatedAt&quot;:&quot;2018-05-25T21:14:59.015Z&quot;}],&quot;_id&quot;:&quot;5b08778c03d674755bfd9be2&quot;,&quot;status&quot;:&quot;ready for payment&quot;,&quot;totalPrice&quot;:180.13,&quot;_account&quot;:&quot;5aa0481e876d9d39d4397859&quot;,&quot;_deliveryAddress&quot;:&quot;5aa0481e876d9d39d439785b&quot;,&quot;payment&quot;:{&quot;_id&quot;:&quot;5b08778c03d674755bfd9be9&quot;,&quot;type&quot;:&quot;bill&quot;},&quot;createdAt&quot;:&quot;2018-05-25T20:52:28.711Z&quot;,&quot;updatedAt&quot;:&quot;2018-05-25T21:14:59.016Z&quot;,&quot;__v&quot;:0}}&lt;/p&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;
+        h4 Example of a successful response
+        div(style='font-family:Courier New;')
+            div HTTP/1.1 200 OK
+            div Access-Control-Allow-Origin: *
+            div Content-Type: text/html; charset=utf-8
+            div Content-Length: 2836
+            div ETag: W/"1194a-161aecc4775"
+            div Date: Fri, 25 May 2018 19:58:04 GMT
+            div Connection: close
+            br
+            div(style='word-break: break-all') &lt;html&gt;&lt;head&gt;&lt;title&gt;API - WebShop&lt;/title&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;/node_modules/bootstrap/dist/css/bootstrap.min.css&quot;/&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;container&quot; style=&quot;margin-top: 15px&quot;&gt;&lt;div class=&quot;jumbotron&quot; style=&quot;display: inline-block; width: 100%; background-color: #4d91ff; color: white&quot;&gt;&lt;div class=&quot;col-lg-2&quot;&gt;&lt;span class=&quot;logo-item glyphicon glyphicon-bell&quot; style=&quot;font-size: 44px&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;col-lg-10&quot;&gt;&lt;h1&gt;Welcome to the API&lt;/h1&gt;&lt;/div&gt;&lt;/div&gt;&lt;h1&gt;Retailer&lt;/h1&gt;&lt;h2&gt;<i><b>Discount successful applied</b></i>&lt;/h2&gt;&lt;p&gt;&lt;b&gt;Data:&lt;/b&gt; {&quot;order&quot;:{&quot;items&quot;:[{&quot;_id&quot;:&quot;5b08778c03d674755bfd9be6&quot;,&quot;quantity&quot;:1,&quot;product&quot;:{&quot;rating&quot;:{&quot;value&quot;:0},&quot;_id&quot;:&quot;5aa0481e876d9d39d4397885&quot;,&quot;questions&quot;:[],&quot;ratings&quot;:[],&quot;name&quot;:&quot;Berner Treicheln&quot;,&quot;category&quot;:{&quot;_id&quot;:&quot;5aa0481e876d9d39d4397884&quot;,&quot;name&quot;:&quot;Steiner, Wynigen&quot;,&quot;createdAt&quot;:&quot;2018-03-07T20:14:22.622Z&quot;,&quot;updatedAt&quot;:&quot;2018-03-07T20:14:22.622Z&quot;,&quot;__v&quot;:0},&quot;size&quot;:10,&quot;price&quot;:62.63,&quot;image&quot;:&quot;steiner-treicheln.jpg&quot;,&quot;createdAt&quot;:&quot;2018-03-07T20:14:22.623Z&quot;,&quot;updatedAt&quot;:&quot;2018-05-25T21:14:59.015Z&quot;,&quot;__v&quot;:0},&quot;createdAt&quot;:&quot;2018-05-25T20:52:28.710Z&quot;,&quot;updatedAt&quot;:&quot;2018-05-25T21:14:59.015Z&quot;},{&quot;_id&quot;:&quot;5b08778c03d674755bfd9be3&quot;,&quot;quantity&quot;:1,&quot;product&quot;:{&quot;rating&quot;:{&quot;value&quot;:0},&quot;_id&quot;:&quot;5aa0481e876d9d39d4397883&quot;,&quot;questions&quot;:[],&quot;ratings&quot;:[],&quot;name&quot;:&quot;Bissen&quot;,&quot;category&quot;:{&quot;_id&quot;:&quot;5aa0481e876d9d39d4397881&quot;,&quot;name&quot;:&quot;Zurfluh&quot;,&quot;createdAt&quot;:&quot;2018-03-07T20:14:22.619Z&quot;,&quot;updatedAt&quot;:&quot;2018-03-07T20:14:22.619Z&quot;,&quot;__v&quot;:0},&quot;size&quot;:15,&quot;price&quot;:117.5,&quot;image&quot;:&quot;zurfluh-bissen.jpg&quot;,&quot;createdAt&quot;:&quot;2018-03-07T20:14:22.621Z&quot;,&quot;updatedAt&quot;:&quot;2018-05-25T21:14:59.015Z&quot;,&quot;__v&quot;:0},&quot;createdAt&quot;:&quot;2018-05-25T20:52:28.710Z&quot;,&quot;updatedAt&quot;:&quot;2018-05-25T21:14:59.015Z&quot;}],&quot;_id&quot;:&quot;5b08778c03d674755bfd9be2&quot;,&quot;status&quot;:&quot;ready for payment&quot;,&quot;totalPrice&quot;:180.13,&quot;_account&quot;:&quot;5aa0481e876d9d39d4397859&quot;,&quot;_deliveryAddress&quot;:&quot;5aa0481e876d9d39d439785b&quot;,&quot;payment&quot;:{&quot;_id&quot;:&quot;5b08778c03d674755bfd9be9&quot;,&quot;type&quot;:&quot;bill&quot;},&quot;createdAt&quot;:&quot;2018-05-25T20:52:28.711Z&quot;,&quot;updatedAt&quot;:&quot;2018-05-25T21:14:59.016Z&quot;,&quot;__v&quot;:0}}&lt;/p&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;
 
