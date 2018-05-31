@@ -1,7 +1,7 @@
 'use strict';
 
-appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter', 'OrdersService', 'AuthService', 'AlertsService',
-    function ($rootScope, $scope, $filter, OrdersService, AuthService, AlertsService) {
+appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter', '$route', 'OrdersService', 'AuthService', 'AlertsService',
+    function ($rootScope, $scope, $filter, $route, OrdersService, AuthService, AlertsService) {
         const self = this;
 
         self.data = {};
@@ -116,8 +116,7 @@ appControllers.controller('OrdersController', ['$rootScope', '$scope', '$filter'
                         };
 
                         pdfMake.createPdf(docDefinition).download();
-                        self.export.from = null;
-                        self.export.quantity = null;
+                        $route.reload();
                     }
                 });
             }
