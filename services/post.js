@@ -51,8 +51,8 @@ function insertURL(post, url, callback) {
             let postObj = new Post(post);
 
             handleInsertPost(postObj, callback);
-        }).catch(() => {
-            return callback(ResponseUtil.createErrorResponse('Could not fetch image from given URL'));
+        }).catch((error) => {
+            return callback(ResponseUtil.createErrorResponse(error, 'Could not fetch image from given URL'));
         });
 }
 
