@@ -593,6 +593,7 @@ table tr td li {
 .add-cart-container {
     display: inline-block;
     padding: 0;
+    width: min-content;
 }
 
 .shop-form-rating {
