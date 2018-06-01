@@ -246,11 +246,11 @@ table tr td li {
 }
 
 .sidebar-left {
-    padding: 15px 0 15px 0;
+    padding: 0 0 15px 0;
 }
 
 .sidebar-right {
-    padding: 15px 0;
+    padding: 0 0 15px;
 }
 
 .sidebar-right > div > div > div {
@@ -277,8 +277,12 @@ table tr td li {
     border-radius: 5px;
 }
 
+.sidebar-topRatedProduct h3 {
+    margin-top: 0;
+}
 .sidebar-right .topRatedProduct-wrapper h4 {
     overflow-wrap: break-word;
+    margin-top: 0;
 }
 
 .sidebar-right .sidebar-topRatedProduct .image-wrapper {
@@ -389,7 +393,7 @@ table tr td li {
     border-radius: 10px;
     border: solid 1px lightgray;
     box-shadow: 2px 2px 2px lightgray;
-    margin: 0 15px;
+    margin: 15px 15px 0;
 }
 
 .auth-menu .btn-outline-primary,
@@ -734,10 +738,11 @@ table tr td li {
 .posts {
     min-height: 100%;
     padding: 5px;
-    overflow-wrap: break-word;
 }
 
 .post-element {
+    overflow-wrap: break-word;
+    overflow: hidden;
     display: inline-block;
     min-height: 400px;
     width: 100%;
