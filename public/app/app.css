@@ -365,6 +365,7 @@ table tr td li {
 
 .sidebar-menu .sidebar-item a {
     display: inline-block;
+    overflow: hidden;
     text-decoration: none;
     padding: 5px 25px 5px 25px;
     width: 100%;
