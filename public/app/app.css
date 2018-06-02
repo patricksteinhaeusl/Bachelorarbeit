@@ -475,7 +475,10 @@ table tr td li {
 }
 
 .small {
-    width: 50% !important;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 49%;
+    flex: 0 49%;
+    min-width: 145px;
 }
 
 .small .product-menu .btn,
@@ -487,14 +490,10 @@ table tr td li {
 
 .products {
     display: inline-block;
-    width: 100%;
+    padding-bottom: 10px;
 }
 
-.product-container {
-    padding: 5px;
-}
-
-.product {
+.product-element {
     display: inline-block;
     width: 100%;
     padding: 15px 15px 10px 15px;
@@ -505,20 +504,35 @@ table tr td li {
     box-shadow: 2px 2px 2px lightgray;
 }
 
-.product .col {
+.product-element .col {
     padding: 0;
 }
 
-.product .col.col-xs-4 {
+.product-element .col.col-xs-4 {
     padding-left: 15px;
 }
 
-.product p {
+.product-element p {
     padding-left: 5px;
 }
 
-.small .product {
+.small .product-element {
     min-height: 215px;
+    height: 100%;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.products-container {
+    width: 100%;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .product-image {

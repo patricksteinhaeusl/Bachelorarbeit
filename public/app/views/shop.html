@@ -23,95 +23,109 @@
             </button>
         </div>
     </form>
-    <div class="products"
-         ng-repeat="product in shop.products | toArray: false | orderBy: shop.selectedSort track by product._id"
-         ng-class="shop.productOrientation">
-        <div class="product-container">
-            <div class="product">
-                <div class="row">
-                    <div class="col col-xs-12">
-                        <div class="product-rating">
-                            <span class="rating-average">&empty; {{ product.rating.value }}</span>
-                            <jk-rating-stars max-rating="5" rating="product.rating.value"
-                                             read-only="true"></jk-rating-stars>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-xs-4">
-                        <a href="/product-images/{{ product.image }}" data-lity="">
-                            <img class="product-image" alt="Product Image" ng-src="/product-images/{{ product.image }}"/>
-                        </a>
-                    </div>
-                    <div class="col col-xs-8">
-                        <p class="product-name">{{ product.name }}</p>
-                        <p class="product-category">{{ product.category.name }}</p>
-                        <p class="product-value">{{ product.size }} cm</p>
-                        <p class="product-price">{{ product.price.toFixed(2) }} CHF</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="product-menu">
-                        <button class="btn btn-primary" ng-click="shop.collapseRatingForm(product._id)" ng-if="auth.isAuthenticated() === true">
-                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            Rate
-                        </button>
-
-                        <a class="btn btn-primary" ng-href="#!/product/{{product._id}}">
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                            Details
-                        </a>
-
-                        <div class="add-cart-container" ng-controller="CartController as cart">
-                            <select add-options class="quantity form-control" ng-model="product.selectedQuantity">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-
-                            <div ng-controller="NavController as nav">
-                                <button class="btn btn-primary" ng-click="cart.insert(product, product.selectedQuantity); nav.collapseCartNavigation('.cart-menu', '.auth-menu');">
-                                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                                    Add to cart
-                                </button><br>
+    <div class="products-container">
+        <div class="products"
+             ng-repeat="product in shop.products | toArray: false | orderBy: shop.selectedSort track by product._id"
+             ng-class="shop.productOrientation">
+            <div class="product-element">
+                <div class="product-description">
+                    <div class="row">
+                        <div class="col col-xs-12">
+                            <div class="product-rating">
+                                <span class="rating-average">&empty; {{ product.rating.value }}</span>
+                                <jk-rating-stars max-rating="5" rating="product.rating.value"
+                                                 read-only="true"></jk-rating-stars>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col col-xs-4">
+                            <a href="/product-images/{{ product.image }}" data-lity="">
+                                <img class="product-image" alt="Product Image"
+                                     ng-src="/product-images/{{ product.image }}"/>
+                            </a>
+                        </div>
+                        <div class="col col-xs-8">
+                            <p class="product-name">{{ product.name }}</p>
+                            <p class="product-category">{{ product.category.name }}</p>
+                            <p class="product-value">{{ product.size }} cm</p>
+                            <p class="product-price">{{ product.price.toFixed(2) }} CHF</p>
+                        </div>
+                    </div>
                 </div>
-                <div ng-if="auth.isAuthenticated() === true">
-                    <div ng-repeat="rating in product.ratings | filter : {_account: {_id: auth.getUser()._id}} track by rating._id">
-                        <form ng-attr-id="{{ 'shop-form-rating-' + product._id }}" class="shop-form-rating"
-                              ng-submit="shop.rateProduct(product, rating);" ng-if="rating">
-                            <div class="form-group">
-                                <jk-rating-stars class="no-zero" max-rating="5" rating="rating.value" read-only="false"></jk-rating-stars>
+                <div class="product-rating-menu-wrapper">
+                    <div class="row">
+                        <div class="product-menu">
+                            <button class="btn btn-primary" ng-click="shop.collapseRatingForm(product._id)"
+                                    ng-if="auth.isAuthenticated() === true">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                Rate
+                            </button>
+
+                            <a class="btn btn-primary" ng-href="#!/product/{{product._id}}">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                Details
+                            </a>
+
+                            <div class="add-cart-container" ng-controller="CartController as cart">
+                                <select add-options class="quantity form-control" ng-model="product.selectedQuantity">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+
+                                <div ng-controller="NavController as nav">
+                                    <button class="btn btn-primary"
+                                            ng-click="cart.insert(product, product.selectedQuantity); nav.collapseCartNavigation('.cart-menu', '.auth-menu');">
+                                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                        Add to cart
+                                    </button>
+                                    <br>
+                                </div>
                             </div>
-                            <input class="form-control" type="hidden" min="0" max="5" value="0" name="value" ng-model="rating.value" required>
-                            <div class="form-group">
+                        </div>
+                    </div>
+
+                    <div ng-if="auth.isAuthenticated() === true">
+                        <div ng-repeat="rating in product.ratings | filter : {_account: {_id: auth.getUser()._id}} track by rating._id">
+                            <form ng-attr-id="{{ 'shop-form-rating-' + product._id }}" class="shop-form-rating"
+                                  ng-submit="shop.rateProduct(product, rating);" ng-if="rating">
+                                <div class="form-group">
+                                    <jk-rating-stars class="no-zero" max-rating="5" rating="rating.value"
+                                                     read-only="false"></jk-rating-stars>
+                                </div>
+                                <input class="form-control" type="hidden" min="0" max="5" value="0" name="value"
+                                       ng-model="rating.value" required>
+                                <div class="form-group">
                                 <textarea class="form-control" name="comment" ng-model="rating.comment"
                                           placeholder="Comment" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-outline-primary">Update</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div ng-if="(product.ratings | filter : {_account: {_id: auth.getUser()._id}}).length === 0" ng-init="rating = {comment: '', value: 1}">
-                        <form ng-attr-id="{{ 'shop-form-rating-' + product._id }}" class="shop-form-rating"
-                              ng-submit="shop.rateProduct(product, rating); rating = {comment: '', value: 0}">
-                            <div class="form-group">
-                                <jk-rating-stars class="no-zero" max-rating="5" rating="rating.value" read-only="false"></jk-rating-stars>
-                            </div>
-                            <input class="form-control" type="hidden" min="0" max="5" value="0" name="value" ng-model="rating.value" required>
-                            <div class="form-group">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-outline-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div ng-if="(product.ratings | filter : {_account: {_id: auth.getUser()._id}}).length === 0"
+                             ng-init="rating = {comment: '', value: 1}">
+                            <form ng-attr-id="{{ 'shop-form-rating-' + product._id }}" class="shop-form-rating"
+                                  ng-submit="shop.rateProduct(product, rating); rating = {comment: '', value: 0}">
+                                <div class="form-group">
+                                    <jk-rating-stars class="no-zero" max-rating="5" rating="rating.value"
+                                                     read-only="false"></jk-rating-stars>
+                                </div>
+                                <input class="form-control" type="hidden" min="0" max="5" value="0" name="value"
+                                       ng-model="rating.value" required>
+                                <div class="form-group">
                             <textarea class="form-control" name="comment" ng-model="rating.comment"
                                       placeholder="Comment" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-outline-primary">Save</button>
-                            </div>
-                        </form>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-outline-primary">Save</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
