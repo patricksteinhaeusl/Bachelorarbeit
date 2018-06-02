@@ -771,7 +771,7 @@ table tr td li {
     -ms-flex: 0 49%;
     flex: 0 49%;
     padding-bottom: 10px;
-    min-width: 150px;
+    min-width: 145px;
 }
 
 .post-element {
