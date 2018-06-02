@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" ng-controller="NavController as nav">
+<nav class="navbar navbar-expand-md navbar-default" ng-controller="NavController as nav">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">
@@ -19,15 +19,14 @@
             </ul>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li ng-if="auth.isAuthenticated()" ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')">
-                <a>{{ auth.getUser().firstname + " " + auth.getUser().lastname + " (" + auth.getUser().username + ")"}}</a>
+            <li ng-click="nav.collapseNavigation('.cart-menu', '.auth-menu')">
+                <a><span class="glyphicon glyphicon-shopping-cart"></span></a>
             </li>
             <li ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')">
                 <a><span class="glyphicon glyphicon-user"></span></a>
             </li>
-
-            <li ng-click="nav.collapseNavigation('.cart-menu', '.auth-menu')">
-                <a><span class="glyphicon glyphicon-shopping-cart"></span></a>
+            <li ng-if="auth.isAuthenticated()" ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')">
+                <a>{{ auth.getUser().firstname + " " + auth.getUser().lastname  }} <br> {{ "(" + auth.getUser().username + ")" }}</a>
             </li>
         </ul>
     </div>

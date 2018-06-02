@@ -149,6 +149,7 @@ table tfoot td:last-child {
 
 .navbar-header {
     height: 100px;
+    width: 100%;
 }
 
 .navbar-toggle {
@@ -185,11 +186,46 @@ table tfoot td:last-child {
     border-bottom: solid 1px white;
 }
 
-@media only screen and (min-width : 768px) {
+.navbar-right {
+    float: right;
+    margin-right: 0;
+}
+
+.navbar.navbar-default .nav.navbar-nav.navbar-right {
+    width: 25%;
+}
+
+.navbar.navbar-default .nav.navbar-nav.navbar-right li {
+    float: right;
+}
+
+.navbar.navbar-default .nav.navbar-nav.navbar-right li a {
+    line-height: 16px;
+    font-size: 12px;
+}
+
+.navbar.navbar-default .nav.navbar-nav.navbar-right {
+    width: 100%;
+}
+
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+    margin: 0;
+}
+
+.navbar.navbar-default .nav.navbar-nav.navbar-right .glyphicon {
+    font-size: 20px;
+}
+
+@media only screen and (min-width : 992px) {
+
+    .navbar-header {
+        height: 100px;
+        width: 16.66667%;
+    }
 
     .collapse.navbar-collapse {
         display: inline-block !important;
-        width: 500px;
+        width: 57%;
     }
 
     .navbar-collapse {
@@ -204,6 +240,10 @@ table tfoot td:last-child {
         border-right: solid 1px white;
     }
 
+    .navbar.navbar-default .nav.navbar-nav.navbar-right {
+        width: 25%;
+    }
+
     .navbar.navbar-default .nav.navbar-nav li {
         margin: 15px 0 15px 0;
     }
@@ -212,12 +252,8 @@ table tfoot td:last-child {
         line-height: 30px;
     }
 
-    .navbar.navbar-default .nav.navbar-nav.navbar-left {
-        margin-left: calc(16.66% - 40px);
-    }
-
     .navbar.navbar-default .nav.navbar-nav.navbar-right .glyphicon {
-        font-size: 25px;
+        font-size: 23px;
     }
 }
 
