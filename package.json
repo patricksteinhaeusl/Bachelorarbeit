@@ -53,7 +53,8 @@
   "scripts": {
     "prestart": "yarn install",
     "start": "node ./bin/www",
-    "test": "yarn run build && protractor tests/protractorConf.js && ./tests/cleanUp.sh",
+    "test": "yarn run build && protractor tests/protractorConf.js",
+    "posttest": "./tests/cleanUp.sh",
     "clean-build": "rm -rf ./public/app/dist",
     "build": "yarn run clean-build && babel ./public/app/src -d ./public/app/dist"
   },
