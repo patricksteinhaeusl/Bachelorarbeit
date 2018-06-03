@@ -28,7 +28,7 @@
             <li ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')">
                 <a><span class="glyphicon glyphicon-user"></span></a>
             </li>
-            <li ng-if="auth.isAuthenticated()" ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')">
+            <li class="menu-item-username" ng-if="auth.isAuthenticated()" ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')">
                 <a>{{ auth.getUser().firstname + " " + auth.getUser().lastname  }}<br> {{ "(" + auth.getUser().username + ")" }}</a>
             </li>
         </ul>
