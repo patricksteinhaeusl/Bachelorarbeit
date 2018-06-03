@@ -139,7 +139,7 @@ table tfoot td:last-child {
 
 .navbar.navbar-default .glyphicon.glyphicon-bell {
     font-size: 45px;
-    margin-top: 10px;
+    margin-top: 3px;
 }
 
 .navbar.navbar-default .glyphicon {
@@ -148,7 +148,7 @@ table tfoot td:last-child {
 }
 
 .navbar-header {
-    height: 100px;
+    height: 82px;
     width: 100%;
 }
 
@@ -159,7 +159,7 @@ table tfoot td:last-child {
 
 .navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle:hover {
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -167,15 +167,17 @@ table tfoot td:last-child {
 }
 
 .navbar.navbar-default .nav.navbar-nav a {
+    font-size: 15px;
     color: white;
 }
 
 .navbar.navbar-default .nav.navbar-nav li.active {
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .navbar.navbar-default .nav.navbar-nav li.active a {
     color: black;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .collapse.navbar-collapse .collapse {
@@ -192,16 +194,18 @@ table tfoot td:last-child {
 }
 
 .navbar.navbar-default .nav.navbar-nav.navbar-right {
-    width: 25%;
+    width: 26%;
 }
 
 .navbar.navbar-default .nav.navbar-nav.navbar-right li {
     float: right;
+    text-align: right;
 }
 
 .navbar.navbar-default .nav.navbar-nav.navbar-right li a {
     line-height: 16px;
-    font-size: 12px;
+    font-size: 15px;
+    padding-top: 13px;
 }
 
 .navbar.navbar-default .nav.navbar-nav.navbar-right {
@@ -213,19 +217,24 @@ table tfoot td:last-child {
 }
 
 .navbar.navbar-default .nav.navbar-nav.navbar-right .glyphicon {
-    font-size: 20px;
+    font-size: 25px;
+}
+
+.navbar-nav a:hover {
+    opacity: 0.8;
 }
 
 @media only screen and (min-width : 992px) {
 
     .navbar-header {
-        height: 100px;
+        height: 82px;
         width: 16.66667%;
     }
 
     .collapse.navbar-collapse {
         display: inline-block !important;
         width: 57%;
+        margin-top: -4px;
     }
 
     .navbar-collapse {
@@ -237,15 +246,16 @@ table tfoot td:last-child {
     }
 
     .navbar.navbar-default .nav.navbar-nav.navbar-left li {
+        font-size: 15px;
         border-right: solid 1px white;
     }
 
     .navbar.navbar-default .nav.navbar-nav.navbar-right {
-        width: 25%;
+        width: 26%;
     }
 
     .navbar.navbar-default .nav.navbar-nav li {
-        margin: 15px 0 15px 0;
+        margin: 15px 0 0 0;
     }
 
     .navbar.navbar-default .nav.navbar-nav a {
@@ -253,7 +263,7 @@ table tfoot td:last-child {
     }
 
     .navbar.navbar-default .nav.navbar-nav.navbar-right .glyphicon {
-        font-size: 23px;
+        font-size: 25px;
     }
 }
 
