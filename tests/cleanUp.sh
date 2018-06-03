@@ -9,3 +9,4 @@ find ./public/app/assets/profiles -type f -not -name 'notFound.html' -not -name 
 -not -name '5aa0481e876d9d39d4397874.html' -not -name '5aa0481e876d9d39d4397877.html' \
 -not -name '5acc851fc8bc262214c01ee5.html' -delete
 rm -f ./deserializationBug.txt ./rceInjection.txt
+echo -n > ./logs/log.txt
