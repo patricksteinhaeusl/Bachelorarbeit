@@ -1,8 +1,33 @@
-<div class="navbar-navigation">
-    <ul>
-        <li class="navigation-item"><a href="#!/home">Home</a></li>
-        <li class="navigation-item"><a href="#!/shop?selectedQuantity=1" ng-click="shop.getProducts()">Shop</a></li>
-        <li class="navigation-item"><a href="#!/faq">FAQ</a></li>
-        <li class="navigation-item"><a href="#!/profiles" >Profiles</a></li>
-    </ul>
-</div>
+<nav class="navbar navbar-expand-md navbar-default" ng-controller="NavController as nav">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#!/home"><span class="glyphicon glyphicon-bell"></span></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left" active-link>
+                <li><a href="#!/home">Home</a></li>
+                <li><a href="#!/shop?selectedQuantity=1" ng-click="shop.getProducts()">Shop</a></li>
+                <li><a href="#!/faq">FAQ</a></li>
+                <li><a href="#!/profiles">Profiles</a></li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li ng-click="nav.collapseNavigation('.cart-menu', '.auth-menu')">
+                <a><span class="glyphicon glyphicon-shopping-cart"></span></a>
+            </li>
+            <li ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')">
+                <a><span class="glyphicon glyphicon-user"></span></a>
+            </li>
+            <li ng-if="auth.isAuthenticated()" ng-click="nav.collapseNavigation('.auth-menu', '.cart-menu')">
+                <a>{{ auth.getUser().firstname + " " + auth.getUser().lastname  }} <br> {{ "(" + auth.getUser().username + ")" }}</a>
+            </li>
+        </ul>
+    </div>
+</nav>
