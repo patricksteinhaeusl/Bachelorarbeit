@@ -22,5 +22,7 @@ addons:
 script:
   - webdriver-manager update && webdriver-manager start &
   - sleep 5
+  - exec node /app/bin/www
+  - sleep 5
   - yarn test
   - sonar-scanner
