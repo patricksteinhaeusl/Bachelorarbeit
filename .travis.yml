@@ -6,6 +6,7 @@ branches:
   only:
   - master
   - dev
+  - feature-travisTest
 
 dist: trusty
 sudo: required
@@ -16,6 +17,8 @@ addons:
     branches:
       - master
       - dev
+  chrome: stable
 
 script:
+  - yarn test
   - sonar-scanner
