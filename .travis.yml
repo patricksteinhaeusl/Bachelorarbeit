@@ -23,7 +23,7 @@ before_script:
   - webdriver-manager update && webdriver-manager start &
   - sleep 5
   - ls -la
-  - node /app/bin/www
+  - node bin/www
   - sleep 5
   - yarn test
 
