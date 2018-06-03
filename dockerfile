@@ -4,13 +4,11 @@ FROM node:alpine as base
 #Define where our app lives
 WORKDIR /app
 
-# Set variables for production/development mode and turning on/off RCE and Serialization Bugs
+# Install app dependencies and transpile ES6 to ES5 for older browsers
 ENV NODE_ENV production
-ENV NODE_RCE_EVAL on
-ENV NODE_RCE_SERIALIZATION on
-
-# Install app dependencies
+COPY ./public/app/ ./public/app
 COPY package.json yarn.*lock ./
+RUN yarn global add babel-cli && babel ./public/app -d dist
 RUN yarn install --non-interactive
 
 #Install MongoDB, create Data Directory and set Permissions for User Node
@@ -35,16 +33,23 @@ FROM node:alpine AS final
 #Define where our app lives
 WORKDIR /app
 
+# Set variables for production/development mode and turning on/off RCE and Serialization Bugs
+ENV NODE_ENV production
+ENV NODE_RCE_EVAL off
+ENV NODE_RCE_SERIALIZATION off
+
 # Install MongoDB
 RUN apk --no-cache add mongodb
+
+# Bundle app source code
+COPY . .
 
 # Copy node_modules, db and scripts to final image
 COPY --from=base /app/node_modules ./node_modules
 COPY --from=base /data/db /data/db
 COPY --from=base /utils /utils
+RUN cp -r ./dist/* ./public/app && rm -rf ./dist
 
-# Bundle app source code
-COPY . .
 
 # Expose this Docker on following port to the outside world
 EXPOSE 3000
