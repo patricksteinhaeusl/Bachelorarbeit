@@ -193,6 +193,12 @@ table tfoot td:last-child {
     margin-right: 0;
 }
 
+.menu-hamburger {
+    float: right;
+    padding-top: 3px;
+    padding-left: 8px;
+}
+
 .navbar.navbar-default .nav.navbar-nav.navbar-right {
     width: 26%;
 }
