@@ -19,11 +19,16 @@ addons:
       - dev
   chrome: stable
 
+services:
+  - mongodb
+
 before_script:
+  - sleep 15
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - webdriver-manager update && webdriver-manager start &
   - sleep 5
   - ls -la
-  - sudo 'node bin/www'
+  sudo node bin/www
   - sleep 5
   - yarn test
 
