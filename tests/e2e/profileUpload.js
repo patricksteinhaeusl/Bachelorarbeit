@@ -2,7 +2,7 @@
 const path = require('path');
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Profile Upload', () => {
+describe('Profile Upload:', () => {
 
     describe('Basic Profile Functions', () => {
 

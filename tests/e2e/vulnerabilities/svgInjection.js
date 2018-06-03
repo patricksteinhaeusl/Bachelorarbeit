@@ -2,7 +2,7 @@
 const HelperFunctions = require('../helperFunctions.js');
 const path = require('path');
 
-describe('SVG Injection', () => {
+describe('SVG Injection:', () => {
     beforeAll(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');
     });

@@ -10,7 +10,7 @@ describe('XSS in Comments', () => {
         HelperFunctions.logout(browser);
     });
 
-    it('comment should be successfully added', () => {
+    it('should be successfully added', () => {
         //Add a Comment
         element(by.linkText('Shop')).click();
         //Get first product

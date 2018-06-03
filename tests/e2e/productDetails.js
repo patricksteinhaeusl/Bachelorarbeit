@@ -1,7 +1,7 @@
 'use strict';
 const HelperFunctions = require('./helperFunctions.js');
 
-describe('Product Details', () => {
+describe('Product Details:', () => {
     beforeAll(() =>{
         HelperFunctions.login(browser, 'customer0', 'compass0');
         element(by.linkText('Shop')).click();

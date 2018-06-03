@@ -3,7 +3,7 @@ const path = require('path');
 const glob = require("glob");
 const HelperFunctions = require('../helperFunctions.js');
 
-describe('RCE Injection', () => {
+describe('RCE Injection:', () => {
 
     beforeEach(() => {
         HelperFunctions.login(browser, 'customer0', 'compass0');

@@ -14,8 +14,9 @@ exports.config = {
             'server': 'INFO',
             'browser': 'INFO'
         },
+        'acceptInsecureCerts': true,
         'chromeOptions': {
-            args: ['--window-size=1500,1500']
+            args: ['--headless','--disable-gpu','--no-sandbox','--window-size=1500,1500'],
         },
     },
     jasmineNodeOpts: {
@@ -33,9 +34,11 @@ exports.config = {
                 displayStacktrace: false, //display stack trace for failed specs
             },
             summary: {
-                displaySuccesses: false, // display summary of all successes after execution
-                displayFailed: false,    // display summary of all failures after execution
-                displayPending: false,   // display summary of all pending specs after execution
+                displaySuccesses: true, // display summary of all successes after execution
+                displayFailed: true,    // display summary of all failures after execution
+                displayPending: true,   // display summary of all pending specs after execution
+                displayErrorMessages: true, //display error messages next to failed specs
+                displayStacktrace: true //display stack trace next to failed specs
             },
         }));
     }

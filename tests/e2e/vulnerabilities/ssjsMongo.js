@@ -9,7 +9,7 @@ describe('SSJS MongoDB', () => {
 
     beforeAll((done) => {
         start = new Date();
-        result = HelperFunctions.httpRequest('https://localhost/api/faq/searchValue/', searchValue, true).then((result) => {
+        result = HelperFunctions.httpRequest(browser.params.webshop +'/api/faq/searchValue/', searchValue, true).then((result) => {
             done();
             return result;
         });

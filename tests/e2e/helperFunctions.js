@@ -55,7 +55,7 @@ exports.registerUser = (firstname, lastname, password) => {
     });
 };
 
-exports.httpRequest = (siteUrl, postData, isJSON, Method) => {
+exports.httpRequest = (siteUrl, postData, isJSON, method, bearerToken) => {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     let req;
     let https = require('https');
@@ -68,8 +68,8 @@ exports.httpRequest = (siteUrl, postData, isJSON, Method) => {
         host: parsedURL.hostname,
         path: parsedURL.path,
     };
-    if (Method) {
-        options.method = Method;
+    if (method) {
+        options.method = method;
     }
     if (isJSON) {
         postData = JSON.stringify(postData);
@@ -77,6 +77,11 @@ exports.httpRequest = (siteUrl, postData, isJSON, Method) => {
         options.headers = {
             'Content-Type': 'application/json',
             'Content-Length': Buffer.byteLength(postData)
+        };
+    }
+    if (bearerToken) {
+        options.headers = {
+            'Authorization': bearerToken
         };
     }
 
@@ -95,6 +100,7 @@ exports.httpRequest = (siteUrl, postData, isJSON, Method) => {
     if (isJSON) {
         req.write(postData);
     }
+
     req.end();
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1';
     return defer.promise;

@@ -11,7 +11,7 @@ describe('User Profile Directory', () => {
         HelperFunctions.logout(browser);
     });
 
-    it('it should be the right amount of users', () => {
+    it('should have the right amount of users', () => {
         //Link
         element(by.linkText('Profiles')).click();
         browser.sleep(250);
@@ -27,7 +27,7 @@ describe('User Profile Directory', () => {
         });
     });
 
-    it('Link to Profiles should work', (done) => {
+    it('links to Profiles should work', (done) => {
         //Link
         element(by.linkText('Profiles')).click();
         browser.sleep(250);

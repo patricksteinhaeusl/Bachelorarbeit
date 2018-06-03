@@ -6,7 +6,7 @@
                    placeholder="{{!faq.spinner ? 'Search within the FAQ': 'Loading...'}}">
         </div>
         <div class="panel panel-default" ng-repeat="faq in faq.data.FaqQuestions">
-            <div class="panel-heading"><b>{{ faq.question }}</b></div>
+            <div class="panel-heading"><strong>{{ faq.question }}</strong></div>
                 <div class="panel-body">{{ faq.answer }}</div>
         </div>
         <div class="faqNotFound" ng-if="!faq.data.FaqQuestions">We're sorry, but we couldn't find anything.</div>

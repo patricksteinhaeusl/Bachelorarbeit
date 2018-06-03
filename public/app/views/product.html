@@ -6,11 +6,11 @@
         </a>
     </div>
     <div class="product-detail col col-xs-7">
-        <p><b>Category:</b> {{ product.data.product.category.name }}</p>
-        <p><b>Size:</b> {{ product.data.product.size }} cm</p>
-        <p><b>Price:</b> {{ product.data.product.price.toFixed(2) }} CHF</p>
-        <p><b>In stock:</b> Yes</p>
-        <p><b>Current rating:</b>
+        <p><strong>Category:</strong> {{ product.data.product.category.name }}</p>
+        <p><strong>Size:</strong> {{ product.data.product.size }} cm</p>
+        <p><strong>Price:</strong> {{ product.data.product.price.toFixed(2) }} CHF</p>
+        <p><strong>In stock:</strong> Yes</p>
+        <p><strong>Current rating:</strong>
             <jk-rating-stars max-rating="5" rating="product.data.product.rating.value"
                 read-only="true"></jk-rating-stars>
         </p>

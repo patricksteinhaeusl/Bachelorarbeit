@@ -1,10 +1,12 @@
 'use strict';
 const HelperFunctions = require('../helperFunctions.js');
+const urlParse = require("url");
 
 describe('SSRF', () => {
     let result;
     let resultNormal;
-    let pictureURL = browser.params.webshop.toString().replace("https://", "http://") + ":8765/file002.jpg";
+    let parsedUrl = urlParse.parse(browser.params.webshop);
+    let pictureURL = "http://" + parsedUrl.hostname + ":8765/file002.jpg";
     let pictureURLNormal = browser.params.webshop + "/file002.jpg";
 
     beforeAll((done) => {
