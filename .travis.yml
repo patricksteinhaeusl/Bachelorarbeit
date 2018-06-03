@@ -19,10 +19,13 @@ addons:
       - dev
   chrome: stable
 
-script:
+before_script:
   - webdriver-manager update && webdriver-manager start &
   - sleep 5
-  - exec node /app/bin/www
+  - ls -la
+  - node /app/bin/www
   - sleep 5
   - yarn test
+
+script:
   - sonar-scanner
