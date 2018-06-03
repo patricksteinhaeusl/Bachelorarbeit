@@ -6,6 +6,9 @@ README.MD
 sonar-project.properties
 node_modules
 
+#Don't copy original ES6 sources
+/public/app/src
+
 # Don't include these temp testing files in final image if present
 deserializationBug.txt
 rceInjection.txt
