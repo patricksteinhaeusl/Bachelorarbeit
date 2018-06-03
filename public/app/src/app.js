@@ -2,39 +2,39 @@
 
 let routes = {
     '/home': {
-        templateUrl: 'views/home.html',
+        templateUrl: '../views/home.html',
         requireLogin: false
     },
     '/shop': {
-        templateUrl: 'views/shop.html',
+        templateUrl: '../views/shop.html',
         controller: 'ShopController',
         controllerAs: 'shop',
         requireLogin: false
     },
     '/shop/category/:categoryId': {
-        templateUrl: 'views/shop.html',
+        templateUrl: '../views/shop.html',
         controller: 'ShopCategoryController',
         controllerAs: 'shop',
         requireLogin: false
     },
     '/auth/register': {
-        templateUrl: 'views/register.html',
+        templateUrl: '../views/register.html',
         requireLogin: false
     },
     '/checkout/overview': {
-        templateUrl: 'views/checkOut-overview.html',
+        templateUrl: '../views/checkOut-overview.html',
         requireLogin: true
     },
     '/checkout/address': {
-        templateUrl: 'views/checkOut-address.html',
+        templateUrl: '../views/checkOut-address.html',
         requireLogin: true
     },
     '/checkout/payment': {
-        templateUrl: 'views/checkOut-payment.html',
+        templateUrl: '../views/checkOut-payment.html',
         requireLogin: true
     },
     '/account': {
-        templateUrl: 'views/account.html',
+        templateUrl: '../views/account.html',
         requireLogin: true
     },
     '/profiles/:accountId': {
@@ -50,50 +50,50 @@ let routes = {
         requireLogin: false
     },
     '/creditcards': {
-        templateUrl: 'views/creditCards.html',
+        templateUrl: '../views/creditCards.html',
         requireLogin: true
     },
     '/creditcard/': {
-        templateUrl: 'views/creditCard-add.html',
+        templateUrl: '../views/creditCard-add.html',
         requireLogin: true
     },
     '/creditcard/:creditCardNumber': {
-        templateUrl: 'views/creditCard-edit.html',
+        templateUrl: '../views/creditCard-edit.html',
         requireLogin: true
     },
     '/deliveryaddresses': {
-        templateUrl: 'views/deliveryAddresses.html',
+        templateUrl: '../views/deliveryAddresses.html',
         requireLogin: true
     },
     '/deliveryaddress': {
-        templateUrl: 'views/deliveryAddress-add.html',
+        templateUrl: '../views/deliveryAddress-add.html',
         requireLogin: true
     },
     '/deliveryaddress/:deliveryAddressId': {
-        templateUrl: 'views/deliveryAddress-edit.html',
+        templateUrl: '../views/deliveryAddress-edit.html',
         requireLogin: true
     },
     '/orders': {
-        templateUrl: 'views/orders.html',
+        templateUrl: '../views/orders.html',
         requireLogin: true
     },
     '/community': {
-        templateUrl: 'views/community.html',
+        templateUrl: '../views/community.html',
         requireLogin: true
     },
     '/product/:productId': {
-        templateUrl: 'views/product.html'
+        templateUrl: '../views/product.html'
     },
     '/retailer': {
-        templateUrl: 'views/retailer.html',
+        templateUrl: '../views/retailer.html',
         requireLogin: true
     },
     '/faq': {
-        templateUrl: 'views/faq.html',
+        templateUrl: '../views/faq.html',
         requireLogin: false
     },
     '/profiles': {
-        templateUrl: 'views/profiles.html',
+        templateUrl: '../views/profiles.html',
         requireLogin: false
     }
 };
