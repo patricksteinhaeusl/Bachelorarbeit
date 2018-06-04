@@ -637,6 +637,7 @@ table tr td li {
     font-weight: bold;
     font-size: 20px;
     overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .product-category {
@@ -864,6 +865,7 @@ table tr td li {
     height: 100%;
     width: 100%;
     overflow-wrap: break-word;
+    word-break: break-all;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
