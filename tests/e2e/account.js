@@ -240,6 +240,14 @@ describe('Account:', () => {
                 expect(creditCards.count()).toBe(1);
             });
         });
+
+        describe('Accessing unavailable card', () => {
+            it('should return error', () => {
+                browser.get(browser.params.webshop + '#!/creditcard/123456').then(() => {
+                    expect(element(by.className('content-view')).element(by.tagName('h1')).getAttribute('innerText')).toContain("Error");
+                });
+            });
+        });
     });
 
     describe('Delivery Address', () => {
@@ -370,6 +378,14 @@ describe('Account:', () => {
                 let deliveryAddresses = element.all(by.repeater('deliveryAddress in deliveryAddresses.data.deliveryAddresses'));
                 expect(deliveryAddresses.count()).toBe(1);
                 expect(deliveryAddresses.get(0).getText()).toContain('Street:Promenade 138\nZip:7260\nCity:Davos\nCountry:Schweiz\n');
+            });
+        });
+
+        describe('Accessing unavailable address', () => {
+            it('should return error', () => {
+                browser.get(browser.params.webshop + '#!/deliveryaddress/5aa0481e876d9d39d4397').then(() => {
+                    expect(element(by.className('content-view')).element(by.tagName('h1')).getAttribute('innerText')).toContain("Error");
+                });
             });
         });
     });

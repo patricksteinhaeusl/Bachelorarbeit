@@ -42,6 +42,8 @@ appControllers.controller('CreditCardController', ['$scope', '$location', '$rout
                     if(data) {
                         let creditCard = data.creditCard;
                         self.data.creditCard = creditCard;
+                    } else {
+                        self.data.creditCard = null
                     }
                 });
             }

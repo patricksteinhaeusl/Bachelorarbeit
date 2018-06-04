@@ -18,6 +18,8 @@ appControllers.controller('DeliveryAddressController', ['$scope', '$location', '
                     if(data) {
                         let deliveryAddress = data.deliveryAddress;
                         self.data.deliveryAddress = deliveryAddress;
+                    } else {
+                        self.data.deliveryAddress = null
                     }
                 });
             }
