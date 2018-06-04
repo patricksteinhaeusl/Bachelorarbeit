@@ -52,9 +52,14 @@
   "scripts": {
     "prestart": "yarn install",
     "start": "node ./bin/www",
-    "test": "yarn run build && protractor tests/protractorConf.js",
-    "posttest": "./tests/cleanUp.sh",
-    "clean-build": "rm -rf ./public/app/dist",
+    "start:withMongo": "yarn run startmongo && sleep 5 && yarn start",
+    "stop": "pkill -f mongod node",
+    "startmongo": "yarn stop && sleep 5 && ./tests/mongoImport.sh",
+    "pretest": "yarn run startmongo && webdriver-manager update && yarn run pretest:webdriver",
+    "pretest:webdriver": "webdriver-manager start & sleep 10",
+    "test": "yarn run build && yarn start 2>&1 > /dev/null 2>&1 & sleep 10 && protractor tests/protractorConf.js",
+    "posttest": "./tests/cleanUp.sh && yarn stop",
+    "clean-build": "rm -rf ./public/app/dist/*",
     "build": "yarn run clean-build && babel ./public/app/src -d ./public/app/dist"
   },
   "jshintConfig": {

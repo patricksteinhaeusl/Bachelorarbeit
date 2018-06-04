@@ -4,20 +4,16 @@ FROM node:alpine as base
 #Define where our app lives
 WORKDIR /app
 
-# Set variables for production/development mode and turning on/off RCE and Serialization Bugs
+# Install production node_modules
 ENV NODE_ENV production
-ENV NODE_RCE_EVAL on
-ENV NODE_RCE_SERIALIZATION on
-
-# Install app dependencies
 COPY package.json yarn.*lock ./
 RUN yarn install --non-interactive
 
 #Install MongoDB, create Data Directory and set Permissions for User Node
 RUN apk --no-cache add \
-	mongodb \
-	mongodb-tools && \ 
-	mkdir -p /data/db 
+    mongodb \
+    mongodb-tools && \
+    mkdir -p /data/db
 
 # Add necessary docker assets and import DB
 COPY data ./data
@@ -35,6 +31,11 @@ FROM node:alpine AS final
 #Define where our app lives
 WORKDIR /app
 
+# Set variables for production/development mode and turning on/off RCE and Serialization Bugs
+ENV NODE_ENV production
+ENV NODE_RCE_EVAL off
+ENV NODE_RCE_SERIALIZATION off
+
 # Install MongoDB
 RUN apk --no-cache add mongodb
 
@@ -46,8 +47,8 @@ COPY --from=base /utils /utils
 # Bundle app source code
 COPY . .
 
-# Expose this Docker on following port to the outside world
-EXPOSE 3000
+# Expose this Docker on following ports to the outside world
+EXPOSE 80 443
 
 # Set our run_all script as entrypoint
 ENTRYPOINT ["/utils/scripts/run_all"]
