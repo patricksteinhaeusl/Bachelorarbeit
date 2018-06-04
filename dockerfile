@@ -45,7 +45,7 @@ COPY --from=base /utils /utils
 
 # Bundle app source code and delete not needed docker assets
 COPY . .
-RUN rm -rf ./dockerfile  ./docker_config
+RUN rm -rf ./dockerfile  ./docker_config ./data
 
 # Expose this Docker on following ports to the outside world
 EXPOSE 80 443
