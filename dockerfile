@@ -4,10 +4,9 @@ FROM node:alpine as base
 #Define where our app lives
 WORKDIR /app
 
-# Install production node_modules
-ENV NODE_ENV production
+# Install node_modules
 COPY package.json yarn.*lock ./
-RUN yarn install --non-interactive
+RUN yarn install --production=true --non-interactive
 
 #Install MongoDB, create Data Directory and set Permissions for User Node
 RUN apk --no-cache add \
@@ -15,7 +14,7 @@ RUN apk --no-cache add \
     mongodb-tools && \
     mkdir -p /data/db
 
-# Add necessary docker assets and import DB
+# Add temporary necessary docker assets and import DB
 COPY data ./data
 COPY docker_config/configure.js .
 COPY docker_config/run_all /utils/scripts/
@@ -44,8 +43,9 @@ COPY --from=base /app/node_modules ./node_modules
 COPY --from=base /data/db /data/db
 COPY --from=base /utils /utils
 
-# Bundle app source code
+# Bundle app source code and delete not needed docker assets
 COPY . .
+RUN rm -rf ./dockerfile  ./docker_config
 
 # Expose this Docker on following ports to the outside world
 EXPOSE 80 443

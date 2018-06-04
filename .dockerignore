@@ -1,13 +1,21 @@
 # General Project Exclusions
+.idea
 .git
 .gitignore
 .travis.yml
-README.MD
+.babelrc
+.dockerignore
+.scannerwork
+**/.DS_Store
+**/.gitkeep
+README.md
 sonar-project.properties
 node_modules
+yarn-error.log
 
-#Don't copy original ES6 sources
+# Don't copy not needed source files into docker
 /public/app/src
+/tests
 
 # Don't include these temp testing files in final image if present
 deserializationBug.txt
