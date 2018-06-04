@@ -2,7 +2,7 @@
 
 appDirectives.directive('addOptions', ['$routeParams', function ($routeParams) {
     //Polyfill becuse IE doesnt know element.remove() method
-    ((arr => {
+    (arr => {
         arr.forEach(item => {
             if (item.hasOwnProperty('remove')) {
                 return;
@@ -17,7 +17,7 @@ appDirectives.directive('addOptions', ['$routeParams', function ($routeParams) {
                 }
             });
         });
-    }))([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
+    })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
 
     return (scope, element, attrs) => {
         scope.$watch(() => {
