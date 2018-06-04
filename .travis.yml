@@ -12,10 +12,48 @@ sudo: required
 
 addons:
   sonarcloud:
-    organization: "rustaska-github"
+    organization: $SONAR_ORGANIZATION
     branches:
       - master
       - dev
+  chrome: stable
+
+services:
+  - docker
+
+env:
+  global:
+    - NODE_RCE_SERIALIZATION=on
+    - NODE_RCE_EVAL=on
+
+before_script:
+#Setting up MongoDB
+  - mkdir -p /tmp/db
+  - mongod --dbpath /tmp/db --fork --logpath /dev/null --noauth
+  - mongo < ./docker_config/configure.js
+  - ls -1 data/*.json | xargs -n1 basename | sed 's/.json$//' | while read col; do mongoimport -d webshop -c $col < data/$col.json --jsonArray; done
+  - mongod --dbpath /tmp/db --shutdown
+  - mongod --dbpath /tmp/db --fork --logpath /dev/null --auth
+  - sleep 5
+#Setting up Selenium
+  - webdriver-manager update
+  - webdriver-manager start &
+  - sleep 10
+#Starting node and tests with hack for running node as root
+  - n=$(which node)
+  - n=${n%/bin/node}
+  - chmod -R 755 $n/bin/*
+  - sudo cp -r $n/{bin,lib,share} /usr/local
+  - sudo bin/www 2>&1 > /dev/null 2>&1 &
+  - sleep 10
+  - protractor tests/protractorConf.js
+  - sudo ./tests/cleanUp.sh
 
 script:
   - sonar-scanner
+
+after_success:
+#Build and deploy docker
+  - docker build -t $DOCKER_REPO .
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+  - docker push $DOCKER_REPO
