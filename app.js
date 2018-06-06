@@ -34,6 +34,8 @@ app.disable('x-powered-by');
 
 app.use(express.static(__dirname + '/public/app'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
+app.use('/styles', express.static(__dirname + '/assets/styles'));
+app.use('/fonts', express.static(__dirname + '/assets/fonts'));
 app.use('/product-images', express.static(__dirname + '/assets/product-images'));
 app.use('/profile-images', express.static(__dirname + '/assets/profile-images'));
 app.use('/post-images', express.static(__dirname + '/assets/post-images'));
