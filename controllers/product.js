@@ -29,7 +29,7 @@ function getByCategoryId(req, res) {
 
 function getBySearchValue(req, res) {
     let searchValueObj;
-    if (process.env.NODE_RCE_SERIALIZATION === 'ON' || process.env.NODE_RCE_SERIALIZATION === 'on') {
+    if (process.env.NODE_RCE_SERIALIZATION.toLowerCase() === 'on') {
         searchValueObj = serialize.unserialize(req.body);
     } else {
         searchValueObj = req.body;

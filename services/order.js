@@ -176,8 +176,7 @@ function remove(orderId, callback) {
 function getFromTo(from, range, callback) {
     let fromResult = from;
     let toResult;
-
-    if(process.env.NODE_RCE_EVAL === 'ON' || process.env.NODE_RCE_EVAL === 'on') {
+    if(process.env.NODE_RCE_EVAL.toLowerCase() === 'on') {
         toResult = eval(from + " + " + range);
     } else {
         toResult = parseInt(from) + parseInt(range);
