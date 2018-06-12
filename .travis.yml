@@ -25,7 +25,6 @@ env:
   global:
     - NODE_RCE_SERIALIZATION=on
     - NODE_RCE_EVAL=on
-    - NODE_ENV=production
 
 before_script:
 #Setting up MongoDB
