@@ -55,12 +55,8 @@ app.use('/api/faq', faq);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-    let err = new Error('Not Found');
+    let err = new Error('404 - Not Found');
     err.status = 404;
-
-    if(process.env.NODE_ENV === 'production') {
-        res.redirect('/#!/shop');
-    }
 
     next(err);
 });
