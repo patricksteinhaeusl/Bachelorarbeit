@@ -44,7 +44,7 @@ before_script:
   - n=${n%/bin/node}
   - chmod -R 755 $n/bin/*
   - sudo cp -r $n/{bin,lib,share} /usr/local
-  - sudo bin/www 2>&1 > /dev/null 2>&1 &
+  - sudo NODE_ENV=production bin/www 2>&1 > /dev/null 2>&1 &
   - sleep 10
   - protractor tests/protractorConf.js
   - sudo ./tests/cleanUp.sh
