@@ -22,7 +22,7 @@ describe('JWT Timing Checking', () => {
     it('should fail to apply with no token at all', () => {
         browser.waitForAngularEnabled(false);
         browser.get(browser.params.webshop + '/api/retailer/order/5acb4be9d9520729d8638c9a/applyDiscount/').then(() => {
-            expect(browser.driver.findElement(by.tagName('pre')).getAttribute('innerText')).toContain("UnauthorizedError");
+            expect(browser.driver.findElement(by.tagName('pre')).getAttribute('innerText')).toContain("Unauthorized");
         });
         browser.waitForAngularEnabled(true);
     });
