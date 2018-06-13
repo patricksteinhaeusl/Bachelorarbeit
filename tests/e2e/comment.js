@@ -156,6 +156,7 @@ describe('Comment and Rating:', () => {
                     return !!el;
                 }).pop();
                 element(by.binding('topRatedProductRating._account.username')).click();
+                browser.sleep(500);
                 browser.getCurrentUrl().then((url) => {
                     expect(url).toContain(lastSegment);
                 });
